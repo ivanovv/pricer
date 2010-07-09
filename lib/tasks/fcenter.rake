@@ -1,0 +1,90 @@
+require 'price_parser'
+require 'nokogiri'
+
+class FCenterParser < PriceParser
+
+  class FCenterPriceDocument < Nokogiri::XML::SAX::Document
+
+    attr_accessor :company, :price_parser
+
+    CATEGORIES= [
+      'Процессоры', 'Охлаждающие устройства',
+      'Материнские платы', 'Модули памяти',
+      'Модули памяти для ноутбуков', 'Накопители на жестких дисках',
+      'Контейнеры для жестких дисков, CD-ROM', 'Дисководы',
+      'Видеокарты', 'Приводы CD, DVD, BD',
+      'Аудиокарты', 'Контроллеры',
+      'ТВ-тюнеры, устройства видеозахвата', 'Устройства для ноутбуков и КПК',
+      'Корпуса', 'Блоки питания'
+    ]
+    def start_document
+      @in_good_category = true
+    end
+
+    def start_element(element, attributes)
+      case element
+      when 'tr' then
+        @is_category_row = attributes[0] == 'class' && attributes[1] == 'e'
+        @td_index = 0
+        @row_data = {}
+      when 'td'
+        @in_td = true
+        @td_index += 1
+      end
+    end
+
+    def characters(data)
+      unless @in_good_category
+        return unless @is_category_row
+      end
+      @row_data[@td_index] = data if @in_td and @td_index < 7
+    end
+
+    def end_element(element)
+      case element
+      when 'td' then @in_td = false
+      when 'tr'
+        case @td_index
+        when 2 then @in_good_category = CATEGORIES.include? @row_data[2]
+        when 13 then  make_price_record(@row_data) if @in_good_category
+        end
+      end
+    end
+
+    def make_price_record(row)
+      original_desc = row[2]
+      desc = @price_parser.normalize_description(original_desc)
+      warehouse_code = row[1]
+      price = row[6].gsub(/[^\d|^\.]/ui, '')
+      Price.create(
+        :company_id => @company.id,
+        :warehouse_code => warehouse_code,
+        :description => desc,
+        :original_description => original_desc,
+        :price => price
+      )
+    end
+  end
+
+  def self.company_name
+    "F-Center"
+  end
+
+  def self.parse_price(path)
+    document = FCenterPriceDocument.new
+    document.company = find_company
+    document.price_parser = self
+    parser = Nokogiri::HTML::SAX::Parser.new(document, 'windows-1251')
+    parser.parse_file(path, 'windows-1251')
+  end
+
+end
+
+namespace :app do
+
+  desc "Parse #{FCenterParser.company_name} price list"
+  task :fcenter => :environment do
+    FCenterParser.parse_price '/home/vic/tmp/price.html'
+  end
+end
+
