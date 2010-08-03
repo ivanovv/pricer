@@ -1,0 +1,20 @@
+%h3 #{@price.original_description}
+
+Цена: #{@price.price}
+
+- if @price.cross_prices.count > 0
+  %table{:style => "width:80%"}
+    %tr
+      %th Складской код
+      %th Наименование
+      %th Цена
+    - @price.cross_prices.each do |cross|
+      = render :partial => "price", :locals => {:price => cross}
+
+
+%br
+
+= link_to 'Edit', [:edit, @company, @price]
+|
+= link_to 'Back', company_prices_path(@company)
+

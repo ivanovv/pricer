@@ -1,0 +1,6 @@
+%p
+  Сейчас в системе #{@price_count} прайс
+  - @companies.each do |c|
+    = c.name
+    = c.prices.count
+    %br

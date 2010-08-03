@@ -1,0 +1,56 @@
+!!!
+
+%html{html_attrs('ru-ru')}
+  %head
+    %link(rel="shortcut icon" href="/favicon.ico")
+    %meta{'http-equiv' => 'Content-Type', :content => 'application/xhtml+xml;charset=utf-8'}
+    -#%title=@html_title
+    -#= auto_discovery_link_tag :rss, rss_url, :title => "Последние материалы сайта"
+
+
+    = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'print.css', :media => 'print'
+    /[if lt IE 8]
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'
+
+    = stylesheet_link_tag 'blueprint_public/plugins/fancy-type/screen'
+
+
+    -# SCRIPTS
+      -------------------------------------------------------------------------------------/
+    = javascript_include_tag 'jquery-1.4.1.min', 'plugins/ui/jquery-ui.min', 'plugins/ui/jquery.ui.tabs.min', 'jrails', 'rails'
+
+    = javascript_include_tag 'plugins/jquery.hoverIntent.minified'
+    = javascript_include_tag 'plugins/swfobject'
+    = javascript_include_tag 'public/general'
+    = javascript_include_tag 'public/application'
+    -#= csrf_meta_tag
+
+    - if Rails.env.development?
+      = javascript_include_tag 'public/development'
+
+    /[if IE6]
+      =# javascript_include_tag 'plugins/jquery.ifixpng.js'
+      = javascript_include_tag 'hack/ie6.js'
+
+    - javascript_tag do
+      = yield(:jstemplates)
+
+    = yield(:head)
+
+  %body.bp
+    #header
+      %h1 This is the Header
+    #sidebar
+      %ul
+        %li
+          %a(href="#") Nav #1
+        %li
+          %a(href="#") Nav #2
+        %li
+          %a(href="#") Nav #3
+    #content
+      = yield
+    #footer
+      This is the footer.
+

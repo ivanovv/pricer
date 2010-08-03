@@ -1,0 +1,28 @@
+%h1 Найденные товары
+
+- form_tag(searches_path, :method => 'get') do
+  %p
+    = text_field_tag :q, params[:q]
+    = submit_tag t(:search), :name => nil
+
+Записей: #{@prices.total_entries}
+
+%table{:style => "width:80%"}
+  %tr
+    %th Компания
+    %th Складской код
+    %th Наименование
+    %th Цена
+
+  - @prices.each do |price|
+    %tr
+      %td= price.company.name
+      %td= price.warehouse_code
+      %td= price.original_description
+      %td= price.price
+      %td= link_to 'Подробно', [price.company, price]
+
+= will_paginate @prices
+
+%br
+

@@ -1,0 +1,17 @@
+%h1 Прайс лист компании "#{@company.name}"
+
+Записей: #{@prices.total_entries}
+
+%table{:style => "width:80%"}
+  %tr
+    %th Складской код
+    %th Наименование
+    %th Цена
+
+  - @prices.each do |price|
+    = render :partial => "price", :locals => {:price => price}
+
+= will_paginate @prices
+
+%br
+
