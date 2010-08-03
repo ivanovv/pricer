@@ -37,7 +37,20 @@ class FCenterParser < PriceParser
       unless @in_good_category
         return unless @is_category_row
       end
-      @row_data[@td_index] = data if @in_td and @td_index < 7
+      if @in_td
+        case @td_index
+        when 1..2
+          @row_data[@td_index] = data
+        when 6
+          if data =~ /[\d\.]+/
+            if @row_data[@td_index]
+              @row_data[@td_index] += data
+            else
+              @row_data[@td_index] = data
+            end
+          end
+        end
+      end
     end
 
     def end_element(element)
