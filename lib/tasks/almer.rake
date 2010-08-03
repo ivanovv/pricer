@@ -1,28 +1,30 @@
 require 'xls_parser'
 
+COMPANY_NAME = "Almer"
+
 class AlmerXLSParser < XLSParser
 
-  def self.rows_to_skip
+  def rows_to_skip
     117
   end
 
-  def self.should_parse_row(row)
+  def should_parse_row(row)
     row[0].blank?
   end
 
-  def self.indexes
+  def indexes
     { :warehouse => 1, :description => 2, :vendor => nil, :price => 4 }
   end
 
-  def self.company_name
-    "Almer"
+  def company_name
+    COMPANY_NAME
   end
 
 end
 
 namespace :app do
 
-  desc "Parse #{AlmerXLSParser.company_name} price list"
+  desc "Parse #{COMPANY_NAME} price list"
   task :almer => :environment do
     AlmerXLSParser.parse_price '/home/vic/tmp/almer.xls', 'windows-1251'
   end

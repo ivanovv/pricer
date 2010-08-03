@@ -1,13 +1,15 @@
 require 'price_parser'
 require 'nokogiri'
 
+COMPANY_NAME = "F-Center"
+
 class FCenterParser < PriceParser
 
   class FCenterPriceDocument < Nokogiri::XML::SAX::Document
 
-    attr_accessor :company, :price_parser
+    attr_accessor :price_parser
 
-    CATEGORIES= [
+    CATEGORIES = [
       'Процессоры', 'Охлаждающие устройства',
       'Материнские платы', 'Модули памяти',
       'Модули памяти для ноутбуков', 'Накопители на жестких дисках',
@@ -68,9 +70,9 @@ class FCenterParser < PriceParser
       original_desc = row[2]
       desc = @price_parser.normalize_description(original_desc)
       warehouse_code = row[1]
-      price = row[6].gsub(/[^\d|^\.]/ui, '')
-      Price.create(
-        :company_id => @company.id,
+      price = row[6]
+       @price_parser.create_price(
+        :company_id => @price_parser.company.id,
         :warehouse_code => warehouse_code,
         :description => desc,
         :original_description => original_desc,
@@ -79,14 +81,13 @@ class FCenterParser < PriceParser
     end
   end
 
-  def self.company_name
-    "F-Center"
+  def company_name
+    COMPANY_NAME
   end
 
   def self.parse_price(path)
     document = FCenterPriceDocument.new
-    document.company = find_company
-    document.price_parser = self
+    document.price_parser = new
     parser = Nokogiri::HTML::SAX::Parser.new(document, 'windows-1251')
     parser.parse_file(path, 'windows-1251')
   end
@@ -95,7 +96,7 @@ end
 
 namespace :app do
 
-  desc "Parse #{FCenterParser.company_name} price list"
+  desc "Parse #{COMPANY_NAME} price list"
   task :fcenter => :environment do
     FCenterParser.parse_price '/home/vic/tmp/price.html'
   end
