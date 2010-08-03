@@ -1,11 +1,6 @@
 cd ~/tmp
-wget "http://www.fcenter.ru/products/price/price.zip"
-wget "http://www.oldi.ru/price/oldiprr.zip"
-wget "http://www.citilink.ru/price/"
-wget "http://www.almer.ru/files_price/almer.zip"
-unzip -o almer
-unzip -o oldiprr.zip
-unzip -o price
-mv index.html index.zip
-unzip -o index
+wget -O - -o /dev/null "http://www.fcenter.ru/products/price/price.zip" | funzip > price.html
+wget -O - -o /dev/null "http://www.oldi.ru/price/oldiprr.zip" | funzip > oldiprr.xls
+wget -O - -o /dev/null "http://www.citilink.ru/price/" | funzip > CitilinkPrice_1.xls
+wget -O - -o /dev/null "http://www.almer.ru/files_price/almer.zip" | funzip > almer.xls
 
