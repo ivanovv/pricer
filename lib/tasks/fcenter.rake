@@ -1,9 +1,11 @@
 require 'price_parser'
 require 'nokogiri'
 
-COMPANY_NAME = "F-Center"
+
 
 class FCenterParser < PriceParser
+
+  COMPANY_NAME = "F-Center"
 
   class FCenterPriceDocument < Nokogiri::XML::SAX::Document
 
@@ -68,7 +70,7 @@ class FCenterParser < PriceParser
 
     def make_price_record(row)
       original_desc = row[2]
-      desc = @price_parser.normalize_description(original_desc)
+      desc = PriceDescriptionNormalizer.normalize_description(original_desc)
       warehouse_code = row[1]
       price = row[6]
        @price_parser.create_price(
@@ -79,10 +81,6 @@ class FCenterParser < PriceParser
         :price => price
       )
     end
-  end
-
-  def company_name
-    COMPANY_NAME
   end
 
   def self.parse_price(path)
@@ -96,7 +94,7 @@ end
 
 namespace :app do
 
-  desc "Parse #{COMPANY_NAME} price list"
+  desc "Parse #{FCenterParser::COMPANY_NAME} price list"
   task :fcenter => :environment do
     FCenterParser.parse_price '/home/vic/tmp/price.html'
   end

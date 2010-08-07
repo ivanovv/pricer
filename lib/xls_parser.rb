@@ -13,7 +13,7 @@ class XLSParser < PriceParser
     sheet =  book.worksheet 0
     sheet.each rows_to_skip do |row|
       next if row[ indexes[:description] ].blank?
-      desc = normalize_description(row[ indexes[:description] ])
+      desc = PriceDescriptionNormalizer.normalize_description(row[ indexes[:description] ])
       create_price(
         :company_id => company.id,
         :warehouse_code => row[ indexes[:warehouse] ],

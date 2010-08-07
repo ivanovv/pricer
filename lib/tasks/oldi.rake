@@ -1,8 +1,8 @@
 require 'xls_parser'
 
-COMPANY_NAME = "Oldi"
-
 class OldiXLSParser < XLSParser
+
+  COMPANY_NAME = "Oldi"
 
   def rows_to_skip
     800
@@ -17,15 +17,11 @@ class OldiXLSParser < XLSParser
     { :warehouse => 0, :description => 1, :vendor => 15, :price => 5 }
   end
 
-  def company_name
-    COMPANY_NAME
-  end
-
 end
 
 namespace :app do
 
-  desc "Parse #{COMPANY_NAME} price list"
+  desc "Parse #{OldiXLSParser::COMPANY_NAME} price list"
   task :oldi => :environment do
     OldiXLSParser.parse_price '/home/vic/tmp/oldiprr.xls'
   end
