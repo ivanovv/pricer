@@ -18,13 +18,6 @@ Rails::Initializer.run do |config|
   # config.gem "bj"
   # config.gem "sqlite3-ruby", :lib => "sqlite3"
   # config.gem "aws-s3", :lib => "aws/s3"
-  config.gem 'spreadsheet'
-  config.gem 'mysql'
-  config.gem 'thinking-sphinx', :lib => 'thinking_sphinx'
-  config.gem 'mechanize'
-  config.gem "compass", :version => ">= 0.10.2"
-  config.gem "will_paginate"
-
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named
