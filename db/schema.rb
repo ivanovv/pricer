@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100619205100) do
+ActiveRecord::Schema.define(:version => 20100803082038) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -28,13 +28,16 @@ ActiveRecord::Schema.define(:version => 20100619205100) do
     t.integer  "company_id"
     t.string   "warehouse_code"
     t.string   "description"
-    t.integer  "price",                :limit => 10, :precision => 10, :scale => 0
+    t.integer  "price"
     t.string   "original_description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "vendor_code"
   end
 
+  add_index "prices", ["company_id", "original_description"], :name => "company_original_description_index"
+  add_index "prices", ["company_id", "warehouse_code"], :name => "company_warehouse_code_index"
+  add_index "prices", ["original_description"], :name => "original_description_index"
   add_index "prices", ["warehouse_code"], :name => "warehouse_code_index"
 
 end
