@@ -21,7 +21,6 @@ namespace :scrape do
       part_links.each do |part_link|
         puts "\t" + part_link.text
         if part_link.text =~ /(\d+)\s.+/
-          puts "warehouse_code #{$1}"
           price = company.prices.find_by_warehouse_code($1)
           if price
             puts "item :: #{price.original_description} price :: #{price.price}"
