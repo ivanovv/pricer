@@ -1,0 +1,15 @@
+/almer
+/city
+/fcenter
+/oldi
+/cross
+log/*
+nbproject/*
+db/sphinx/*
+/words3*.yml
+/words4*.yml
+/config/s
+/config/s2
+tmp/**
+.sass-cache
+
