@@ -26,8 +26,18 @@ class Price < ActiveRecord::Base
     price = Price.find_by_company_id_and_warehouse_code(company_id, warehouse_code)
     if price
       price.cross_prices
-
     end
   end
+
+  def price_difference(alternative)
+    (alternative.price.to_f - price.to_f) / price.to_f * 100
+  end
+
+  def add_alternative(alternative)
+    if !cross_prices.include?(alternative) && price_difference(alternative).abs < 33
+      self.cross_prices << alternative
+    end
+  end
+
 end
 

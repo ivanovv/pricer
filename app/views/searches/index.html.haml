@@ -13,6 +13,7 @@
     %th Складской код
     %th Наименование
     %th Цена
+    %th Альтернатив
 
   - @prices.each do |price|
     %tr
@@ -20,6 +21,7 @@
       %td= price.warehouse_code
       %td= price.original_description
       %td= price.price
+      %td= price.cross_prices.count
       %td= link_to 'Подробно', [price.company, price]
 
 = will_paginate @prices

@@ -1,0 +1,12 @@
+%h1 Editing price
+
+= form_for(@price) do |f|
+  = f.error_messages
+
+  %p
+    = f.submit 'Update'
+
+
+<%= link_to 'Show', @price %> |
+<%= link_to 'Back', prices_path %>
+
