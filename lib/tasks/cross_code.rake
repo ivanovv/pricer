@@ -1,6 +1,6 @@
+# encoding: UTF-8
+
 require "ap"
-
-
 
 namespace :app do
 

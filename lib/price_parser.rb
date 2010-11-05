@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class PriceParser
 
   def company_name

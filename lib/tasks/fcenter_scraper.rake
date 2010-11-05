@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 namespace :scrape do
 
   desc "Scrape F-Center config"

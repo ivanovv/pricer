@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'xls_parser'
 
 class CityLinkXLSParser < XLSParser

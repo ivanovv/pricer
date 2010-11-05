@@ -1,3 +1,4 @@
+# encoding: UTF-8
 require 'price_parser'
 
 class XLSParser < PriceParser

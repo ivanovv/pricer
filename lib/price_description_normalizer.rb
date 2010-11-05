@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 class PriceDescriptionNormalizer
 
   RETAIL = [ 'retail>', '(retail)', 'ret', '(ret)' ]
