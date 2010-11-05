@@ -1,8 +1,8 @@
 source :gemcutter
 
-gem "rails", "3.0.0"
+gem "rails", "3.0.1"
 gem 'spreadsheet'
-gem 'mysql'
+gem 'mysql2'
 gem "haml"
 
 gem 'thinking-sphinx',
