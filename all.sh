@@ -1,5 +1,5 @@
 rvm ree
-#rake db:reset
+
 rake app:fcenter > fcenter &
 rake app:oldi > oldi &
 rake app:almer > almer
