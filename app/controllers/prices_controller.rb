@@ -75,7 +75,7 @@ class PricesController < ApplicationController
   private
 
   def get_company
-    @company = Company.find params[:company_id]
+    @company = Company.find params[:company_id] || Company.first
   end
 end
 

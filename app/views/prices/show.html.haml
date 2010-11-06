@@ -1,3 +1,4 @@
+%h2 Компания: #{@price.company.name}
 %h3 #{@price.original_description}
 
 Цена: #{@price.price}
@@ -6,15 +7,16 @@
 %br
 
 - if @price.cross_prices.count > 0
-  %table{:style => "width:80%"}
+  %table{:style => "width:100%"}
     %tr
       %th Складской код
       %th Наименование
       %th Цена
     - @price.cross_prices.each do |cross|
       %tr
-        %td(colspan="3")
-          = cross.company.name
+        %td(colspan="3" style="text-align:center")
+          %strong
+            = cross.company.name
       = render :partial => "price", :locals => {:price => cross}
 
 
