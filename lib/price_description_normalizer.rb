@@ -19,8 +19,8 @@ class PriceDescriptionNormalizer
     WORD_COUNT.each do |count|
       should_break = false
       WORDS[count].each do |word|
-        if (should_break = desc.starts_with?(word+" "))
-          desc.sub!(word+" ", '')
+        if (should_break = desc.starts_with?(word + " "))
+          desc.sub!(word + " ", '')
           break
         end
       end

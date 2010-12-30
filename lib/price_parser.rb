@@ -10,16 +10,12 @@ class PriceParser
   end
 
   def create_price(price_attributes)
-    wh_code = price_attributes[:warehouse]
-    if valid_warehouse_code? wh_code
+    if valid_warehouse_code? price_attributes[:warehouse]
       find_or_create_by_warehouse_code price_attributes
     else
       find_or_create_by_original_description price_attributes
     end
   end
-
-
-
 
   private
 
