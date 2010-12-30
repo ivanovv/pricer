@@ -7,9 +7,6 @@ namespace :app do
   desc "cross code prices"
   task :cross => :environment do
 
-    #words = YAML.load_file 'words.yml'
-    #word_count = [6,5,4,3,2,1]
-
     client = Riddle::Client.new
 
     Company.find_each do |company|
@@ -28,28 +25,28 @@ namespace :app do
         end
 
         keywords = client.keywords desc, "price_core", true
-        keywords = keywords.sort {|x, y| x[:docs] <=> y[:docs]}.first 3
+        keywords = keywords.sort {|x, y| x[:docs] <=> y[:docs]}.first
 
-        if cross_prices.empty? && keywords && keywords[0]
-          if keywords[0][:docs] > 1 and keywords[0][:docs] < 12
-            cross_prices = Price.search keywords[0][:tokenised], :without => {:company_id => company.id, :id => existing_alternatives}
+        if cross_prices.empty? && keywords
+          if keywords[:docs] > 1 and keywords[:docs] < 12
+            cross_prices = Price.search keywords[:tokenised], :without => {:company_id => company.id, :id => existing_alternatives}
           end
         end
 
         if cross_prices.size > 0
 
           comp_count = Hash.new(0)
-          cross_prices.map(&:company_id).each {|company_id| comp_count[company_id] += 1 }
+          cross_prices.map(&:company_id).each { |company_id| comp_count[company_id] += 1 }
 
           comp_count.each do |company_id, found_results_count|
             puts "Comp:#{company.name} multiple variants (#{found_results_count}) found for ::: #{search_term} :: in company id #{company_id}  " if found_results_count > 1
             case found_results_count
             when 0
-              if keywords[0][:docs] > 1 and keywords[0][:docs] < 12
-                cross_prices = Price.search keywords[0][:tokenised], :with => {:company_id => company_id}
+              if keywords[:docs] > 1 and keywords[:docs] < 12
+                cross_prices = Price.search keywords[:tokenised], :with => {:company_id => company_id}
                 price.add_alternative(cross_prices[0]) if cross_prices.size == 1
                 if cross_prices.size > 1
-                  cross_prices = Price.search keywords[0][:tokenised] + "oem" , :with => {:company_id => company_id}
+                  cross_prices = Price.search keywords[:tokenised] + "oem" , :with => {:company_id => company_id}
                   price.add_alternative(cross_prices[0]) if cross_prices.size == 1
                 end
               end
@@ -64,8 +61,8 @@ namespace :app do
 
               cross_price2[1] = Price.search desc, :with => {:company_id => company_id}
 
-              if keywords[0][:docs] > 1 and  keywords[0][:docs] < 12
-                cross_price2[2] = Price.search keywords[0][:tokenised] + " oem | bulk" , :with => {:company_id => company_id}, :match_mode => :boolean
+              if keywords[:docs] > 1 and  keywords[:docs] < 12
+                cross_price2[2] = Price.search keywords[:tokenised] + " oem | bulk" , :with => {:company_id => company_id}, :match_mode => :boolean
               end
 
 
