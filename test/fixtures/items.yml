@@ -1,0 +1,9 @@
+one:
+  description: MyString
+  original_description: MyString
+  vendor_code: MyString
+
+two:
+  description: MyString
+  original_description: MyString
+  vendor_code: MyString

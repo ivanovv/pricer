@@ -1,0 +1,16 @@
+= form_for item do |f|
+  = f.error_messages
+  %p
+    = f.label :description
+    %br
+    = f.text_field :description
+  %p
+    = f.label :original_description
+    %br
+    = f.text_field :original_description
+  %p
+    = f.label :vendor_code
+    %br
+    = f.text_field :vendor_code
+  %p
+    = f.submit

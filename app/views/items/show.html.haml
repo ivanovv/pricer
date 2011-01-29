@@ -1,0 +1,18 @@
+- title "Item"
+
+%p
+  %strong Description:
+  = @item.description
+%p
+  %strong Original Description:
+  = @item.original_description
+%p
+  %strong Vendor Code:
+  = @item.vendor_code
+
+%p
+  = link_to "Edit", edit_item_path(@item)
+  |
+  = link_to "Destroy", @item, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", items_path
