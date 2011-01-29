@@ -10,4 +10,6 @@ gem "awesome_print", :require => "ap"
 gem 'mechanize'
 gem "compass", ">= 0.10.2"
 gem "russian"
+gem "nifty-generators"
 
+gem "mocha", :group => :test
