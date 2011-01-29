@@ -3,12 +3,12 @@ require 'price_parser'
 
 class XLSParser < PriceParser
 
-  def self.parse_price(book_path, encoding=nil)
+  def self.parse_price(book_path, encoding = nil)
     parser = new
     parser.parse_price(book_path, encoding)
   end
 
-  def parse_price(book_path, encoding=nil)
+  def parse_price(book_path, encoding = nil)
     book = Spreadsheet.open book_path
     book.encoding = encoding if encoding
     sheet =  book.worksheet 0
