@@ -1,0 +1,12 @@
+= form_for price_history do |f|
+  = f.error_messages
+  %p
+    = f.label :price_id
+    %br
+    = f.text_field :price_id
+  %p
+    = f.label :price
+    %br
+    = f.text_field :price
+  %p
+    = f.submit

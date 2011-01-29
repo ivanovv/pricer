@@ -1,0 +1,15 @@
+- title "Price Histories"
+
+%table
+  %tr
+    %th Price
+    %th Price
+  - for price_history in @price_histories
+    %tr
+      %td= price_history.price_id
+      %td= price_history.price
+      %td= link_to 'Show', price_history
+      %td= link_to 'Edit', edit_price_history_path(price_history)
+      %td= link_to 'Destroy', price_history, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Price History", new_price_history_path(price_history)

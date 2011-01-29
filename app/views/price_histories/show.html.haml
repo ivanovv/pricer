@@ -1,0 +1,15 @@
+- title "Price History"
+
+%p
+  %strong Price:
+  = @price_history.price_id
+%p
+  %strong Price:
+  = @price_history.price
+
+%p
+  = link_to "Edit", edit_price_history_path(@price_history)
+  |
+  = link_to "Destroy", @price_history, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", price_histories_path
