@@ -8,6 +8,8 @@ class Price < ActiveRecord::Base
   :foreign_key => "price_id",
   :association_foreign_key => "cross_price_id"
 
+  has_many :price_histories
+
   define_index do
     # fields
     indexes description
@@ -19,7 +21,7 @@ class Price < ActiveRecord::Base
     #set_property :min_infix_len => 3
 
     # attributes
-    has company_id, warehouse_code
+    has company_id, warehouse_code, id
   end
 
   def self.find_alternatives(company_id, warehouse_code)
@@ -36,6 +38,7 @@ class Price < ActiveRecord::Base
   def add_alternative(alternative)
     if !cross_prices.include?(alternative) && price_difference(alternative).abs < 33
       self.cross_prices << alternative
+      Rails.logger.debug("Added alternative")
     end
   end
 

@@ -11,7 +11,7 @@ namespace :app do
 
     Company.find_each do |company|
       ap company
-      Price.find_each(:conditions => {:company_id => company.id}) do |price|
+      Price.find_each(:conditions => ['company_id = ? and updated_at > ?', company.id, 10.minutes.ago ]) do |price|
         existing_alternatives = price.cross_price_ids
 
         search_term = price.vendor_code ? price.vendor_code.dup : nil
@@ -19,9 +19,9 @@ namespace :app do
 
         search_term ||= desc
 
-        cross_prices = Price.search search_term, :without => {:company_id => company.id, :id => existing_alternatives}
+        cross_prices = Price.search  Riddle.escape(search_term), :without => {:company_id => company.id, :id => existing_alternatives}
         if cross_prices.size == 0 && search_term != desc
-          cross_prices = Price.search desc, :without => {:company_id => company.id, :id => existing_alternatives}
+          cross_prices = Price.search  Riddle.escape(desc), :without => {:company_id => company.id, :id => existing_alternatives}
         end
 
         keywords = client.keywords desc, "price_core", true
@@ -29,7 +29,7 @@ namespace :app do
 
         if cross_prices.empty? && keywords
           if keywords[:docs] > 1 and keywords[:docs] < 12
-            cross_prices = Price.search keywords[:tokenised], :without => {:company_id => company.id, :id => existing_alternatives}
+            cross_prices = Price.search  Riddle.escape(keywords[:tokenised]), :without => {:company_id => company.id, :id => existing_alternatives}
           end
         end
 
@@ -43,10 +43,10 @@ namespace :app do
             case found_results_count
             when 0
               if keywords[:docs] > 1 and keywords[:docs] < 12
-                cross_prices = Price.search keywords[:tokenised], :with => {:company_id => company_id}
+                cross_prices = Price.search  Riddle.escape(keywords[:tokenised]), :with => {:company_id => company_id}
                 price.add_alternative(cross_prices[0]) if cross_prices.size == 1
                 if cross_prices.size > 1
-                  cross_prices = Price.search keywords[:tokenised] + "oem" , :with => {:company_id => company_id}
+                  cross_prices = Price.search  Riddle.escape(keywords[:tokenised]) + " oem" , :with => {:company_id => company_id}
                   price.add_alternative(cross_prices[0]) if cross_prices.size == 1
                 end
               end
@@ -57,14 +57,13 @@ namespace :app do
             else
 
               cross_price2 = []
-              cross_price2[0] = Price.search search_term + " oem | bulk ", :with => {:company_id => company_id}, :match_mode => :boolean
 
-              cross_price2[1] = Price.search desc, :with => {:company_id => company_id}
+              cross_price2[0] = Price.search(  Riddle.escape(search_term) + " oem | bulk", :with => {:company_id => company_id}, :match_mode => :boolean)
 
+              cross_price2[1] = Price.search(Riddle.escape(desc), :with => {:company_id => company_id})
               if keywords[:docs] > 1 and  keywords[:docs] < 12
-                cross_price2[2] = Price.search keywords[:tokenised] + " oem | bulk" , :with => {:company_id => company_id}, :match_mode => :boolean
+                cross_price2[2] = Price.search( Riddle.escape(keywords[:tokenised]) + " oem | bulk" , :with => {:company_id => company_id}, :match_mode => :boolean)
               end
-
 
               cross_price2 = cross_price2.compact.reject {|a| a.empty?}
               if cross_price2.size == 2
