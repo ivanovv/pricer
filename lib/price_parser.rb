@@ -10,7 +10,7 @@ class PriceParser
   end
 
   def create_price(price_attributes)
-    search_term = valid_warehouse_code?(price_attributes[:warehouse]) ?  :warehouse : :original_description
+    search_term = valid_warehouse_code?(price_attributes[:warehouse_code]) ?  :warehouse_code : :original_description
     create_or_update_price_history(search_term, price_attributes)
   end
 
@@ -21,24 +21,24 @@ class PriceParser
     end
 
     def create_or_update_price_history(search_term, price_attributes)
-      price = company.prices.where(search_term => price_attributes[search_term])
-      if price.count > 0
-        price.each do |p|
-          last_price_history = p.price_histories.order(:created_at).last
-          if !last_price_history ||
-              (last_price_history.value != price_attributes[:price].to_i && last_price_history.created_at < 10.minutes.ago)  then
-            price_history = p.price_histories.create(:value => price_attributes[:price])
-          end
-        end
+      prices = company.prices.where(search_term => price_attributes[search_term])
+      if prices.count > 0
+        update_price_history(prices, price_attributes[:price].to_i)
       else
         company.prices.create(price_attributes)
       end
     end
 
-    def find_or_create_by_original_description(price_attributes)
-      unless company.prices.find_by_original_description(price_attributes[:original_description])
-        company.prices.create(price_attributes)
+
+    def update_price_history(prices, price_value)
+      prices.each do |p|
+        last_price_history = p.price_histories.order(:created_at).last
+        if !last_price_history ||
+          (last_price_history.value != price_value && last_price_history.created_at < 10.minutes.ago) then
+          price_history = p.price_histories.create(:value => price_value)
+        end
       end
     end
+
 end
 
