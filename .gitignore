@@ -12,4 +12,5 @@ db/sphinx/*
 /config/s2
 tmp/**
 .sass-cache
+.idea
 
