@@ -11,5 +11,6 @@ gem 'mechanize'
 gem "compass", ">= 0.10.2"
 gem "russian"
 gem "nifty-generators"
+gem "jquery-rails"
 
 gem "mocha", :group => :test
