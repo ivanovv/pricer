@@ -9,6 +9,7 @@ class Price < ActiveRecord::Base
   :association_foreign_key => "cross_price_id"
 
   has_many :price_histories
+  has_many :links
 
   define_index do
     # fields
