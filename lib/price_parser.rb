@@ -35,7 +35,7 @@ class PriceParser
         last_price_history = p.price_histories.order(:created_at).last
         if !last_price_history ||
           (last_price_history.value != price_value && last_price_history.created_at < 10.minutes.ago) then
-          price_history = p.price_histories.create(:value => price_value)
+          p.price_histories.create(:value => price_value)
         end
       end
     end

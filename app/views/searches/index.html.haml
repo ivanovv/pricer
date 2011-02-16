@@ -9,7 +9,7 @@
     = text_field_tag :q, params[:q]
     = submit_tag t(:search), :name => nil
 
-
+- if @prices
   %table
     %tr
       %th Компания
@@ -17,6 +17,7 @@
       %th Наименование
       %th Цена
       %th Альтернатив
+
 
     - @prices.each do |price|
       %tr
