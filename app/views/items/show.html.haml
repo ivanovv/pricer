@@ -1,14 +1,24 @@
 - title "Item"
 
 %p
-  %strong Description:
-  = @item.description
-%p
   %strong Original Description:
   = @item.original_description
 %p
+  %strong Description:
+  = @item.description
+%p
   %strong Vendor Code:
   = @item.vendor_code
+
+- unless @item.prices.empty?
+  %h3 Связанные элементы
+  %table{:style => "width:100%"}
+    %tr
+      %th Складской код
+      %th Наименование
+      %th Цена
+    - @item.prices.each do |price|
+      = render 'prices/price', :price => price
 
 %p
   = link_to "Edit", edit_item_path(@item)
