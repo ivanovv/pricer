@@ -1,12 +1,9 @@
 %h1 Editing price
 
-= form_for(@price) do |f|
-  = f.error_messages
+= semantic_form_for([@company, @price]) do |f|
+  = f.inputs
+  = f.buttons
 
-  %p
-    = f.submit 'Update'
-
-
-<%= link_to 'Show', @price %> |
-<%= link_to 'Back', prices_path %>
+= link_to 'Show',[@company, @price]
+= link_to 'Back', company_prices_path(@company)
 
