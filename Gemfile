@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "rails", "3.0.3"
+gem "rails", "3.0.4"
 gem 'spreadsheet'
 gem 'mysql2'
 gem "haml"
