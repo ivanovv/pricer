@@ -1,0 +1,11 @@
+one:
+  item_id: 1
+  price_id: 1
+  human: false
+  score: 1
+
+two:
+  item_id: 1
+  price_id: 1
+  human: false
+  score: 1

@@ -1,0 +1,19 @@
+- title "Links"
+
+%table
+  %tr
+    %th Item
+    %th Price
+    %th Human
+    %th Score
+  - for link in @links
+    %tr
+      %td= link.item_id
+      %td= link.price_id
+      %td= link.human
+      %td= link.score
+      %td= link_to 'Show', link
+      %td= link_to 'Edit', edit_link_path(link)
+      %td= link_to 'Destroy', link, :confirm => 'Are you sure?', :method => :delete
+
+%p= link_to "New Link", new_link_path()
