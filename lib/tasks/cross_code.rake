@@ -2,16 +2,22 @@
 
 require "ap"
 
+def without_hash(company_id, existing_alternatives)
+  { :without => {:company_id => company_id}.merge(existing_alternatives.empty? ? {} : {:id => existing_alternatives}) }
+end
+
 namespace :app do
 
   desc "cross code prices"
   task :cross => :environment do
 
     client = Riddle::Client.new
+    force = ENV.include?("force")
+    time_since_last_update = force ? 10.year.ago : 10.minutes.ago
 
     Company.find_each do |company|
       ap company
-      Price.find_each(:conditions => ['company_id = ? and updated_at > ?', company.id, 10.minutes.ago ]) do |price|
+      Price.find_each(:conditions => ['company_id = ? and updated_at > ?', company.id, time_since_last_update ]) do |price|
         existing_alternatives = price.cross_price_ids
 
         search_term = price.vendor_code ? price.vendor_code.dup : nil
@@ -19,9 +25,9 @@ namespace :app do
 
         search_term ||= desc
 
-        cross_prices = Price.search  Riddle.escape(search_term), :without => {:company_id => company.id, :id => existing_alternatives}
+        cross_prices = Price.search  Riddle.escape(search_term), without_hash(company.id, existing_alternatives)
         if cross_prices.size == 0 && search_term != desc
-          cross_prices = Price.search  Riddle.escape(desc), :without => {:company_id => company.id, :id => existing_alternatives}
+          cross_prices = Price.search  Riddle.escape(desc), without_hash(company.id, existing_alternatives)
         end
 
         keywords = client.keywords desc, "price_core", true
@@ -29,7 +35,7 @@ namespace :app do
 
         if cross_prices.empty? && keywords
           if keywords[:docs] > 1 and keywords[:docs] < 12
-            cross_prices = Price.search  Riddle.escape(keywords[:tokenised]), :without => {:company_id => company.id, :id => existing_alternatives}
+            cross_prices = Price.search  Riddle.escape(keywords[:tokenised]), without_hash(company.id, existing_alternatives)
           end
         end
 
