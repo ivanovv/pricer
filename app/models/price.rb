@@ -10,6 +10,9 @@ class Price < ActiveRecord::Base
 
   has_many :price_histories
   has_many :links
+  has_many :items, :through => :links
+
+
 
   define_index do
     # fields
@@ -41,6 +44,17 @@ class Price < ActiveRecord::Base
       self.cross_prices << alternative
       Rails.logger.debug("Added alternative")
     end
+  end
+
+  def set_reference_item(new_item)
+    if item || item != new_item
+      self.item = new_item
+      Rails.logger.debug("Added to items")
+    end
+  end
+
+  def to_s
+    original_description
   end
 
 end

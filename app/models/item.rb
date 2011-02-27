@@ -24,6 +24,18 @@ class Item < ActiveRecord::Base
     has id
   end
 
+  def to_s
+    original_description
+  end
+
+  def add_price(price, human = false, score = 0)
+    if !prices.include?(price)
+      self.links.build(:price_id => price.id, :human => human, :score => score)
+      save
+      Rails.logger.debug("Added price #{price} to item #{self}")
+    end
+  end
+
 
 end
 
