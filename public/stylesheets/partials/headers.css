@@ -1,14 +1,20 @@
 /*
-Syntax error: Undefined mixin 'font-size'.
-        on line 22 of /home/vic/ruby/pricer/src/partials/_page.scss, in `font-size'
-        from line 22 of /home/vic/ruby/pricer/src/partials/_page.scss
-        from line 11 of /home/vic/ruby/pricer/src/screen.scss
+Syntax error: Undefined variable: "$font-color".
+        on line 42 of /home/vic/ruby/pricer/src/partials/headers.scss
+
+37:   line-height: 1;
+38:   margin-bottom: .8em;
+39:   }
+40: 
+41: h1, h2, h3, h4, h5, h6{
+42:   color: $font-color;
+43:   }
 
 Backtrace:
-/home/vic/ruby/pricer/src/partials/_page.scss:22:in `font-size'
-/home/vic/ruby/pricer/src/partials/_page.scss:22
-/home/vic/ruby/pricer/src/screen.scss:11
-/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/mixin_node.rb:62:in `perform!'
+/home/vic/ruby/pricer/src/partials/headers.scss:42
+/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/script/variable.rb:39:in `_perform'
+/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/script/node.rb:61:in `perform'
+/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/prop_node.rb:132:in `perform!'
 /home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:305:in `_perform'
 /home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:213:in `perform'
 /home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:327:in `block in perform_children'
@@ -18,14 +24,6 @@ Backtrace:
 /home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/rule_node.rb:191:in `perform!'
 /home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:305:in `_perform'
 /home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:213:in `perform'
-/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:327:in `block in perform_children'
-/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:327:in `map'
-/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:327:in `perform_children'
-/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/import_node.rb:78:in `perform!'
-/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:305:in `_perform'
-/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/import_node.rb:64:in `_perform'
-/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:213:in `perform'
-/home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/root_node.rb:37:in `perform'
 /home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:327:in `block in perform_children'
 /home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:327:in `map'
 /home/vic/.rvm/gems/ruby-1.9.2-p136/gems/haml-3.0.25/lib/sass/tree/node.rb:327:in `perform_children'
@@ -97,4 +95,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Syntax error: Undefined mixin 'font-size'.\A         on line 22 of /home/vic/ruby/pricer/src/partials/_page.scss, in `font-size'\A         from line 22 of /home/vic/ruby/pricer/src/partials/_page.scss\A         from line 11 of /home/vic/ruby/pricer/src/screen.scss"; }
+  content: "Syntax error: Undefined variable: \"$font-color\".\A         on line 42 of /home/vic/ruby/pricer/src/partials/headers.scss\A \A 37:   line-height: 1;\A 38:   margin-bottom: .8em;\A 39:   }\A 40: \A 41: h1, h2, h3, h4, h5, h6{\A 42:   color: $font-color;\A 43:   }"; }

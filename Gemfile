@@ -14,5 +14,6 @@ gem "nifty-generators"
 gem "jquery-rails"
 gem "formtastic"
 gem 'kaminari'
+gem 'html5-boilerplate'
 
 gem "mocha", :group => :test
