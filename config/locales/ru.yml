@@ -1,3 +1,27 @@
 ru:
   search: Искать!
+  in_detail: "Подробно"
+  company: "Компания"
+  price: "Цена"
+  warehouse_code: "Складской код"
+  name: "Наименование"
+  price: Цена
+  
+  views:
+    pagination:
+      previous: "&lt;&lt;"
+      next: "&gt;&gt;"
+      truncate: ...
 
+  prices:
+    index:
+      title: "Прайс лист компании %{company_name}"
+      warehouse_code: "Складской код"
+      name: "Наименование"
+      price: Цена
+
+
+
+    show:
+      item_record_title: "Запись из справочника:"
+      pricehistory_title: "История цен"

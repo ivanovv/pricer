@@ -33,3 +33,26 @@
 
   %br
 
+    %h1(style="display:inline") Найденные items
+
+    -# if @items
+      (#{@items.total_entries})
+
+    %br
+    %br
+
+    - if @items
+      %table
+        %tr
+          %th Наименование
+          %th Прайсов
+
+        - @items.each do |item|
+          %tr
+            %td= item.original_description
+            %td= item.prices.count
+            %td= link_to 'Подробно', [item]
+
+      -#= paginate @items
+
+      %br

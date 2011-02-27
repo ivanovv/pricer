@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "rails", "3.0.4"
+gem "rails", "3.0.5"
 gem 'spreadsheet'
 gem 'mysql2'
 gem "haml"
@@ -16,4 +16,7 @@ gem "formtastic"
 gem 'kaminari'
 gem 'html5-boilerplate'
 
+
 gem "mocha", :group => :test
+gem "hirb", :group => :development
+

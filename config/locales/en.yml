@@ -3,3 +3,5 @@
 
 en:
   hello: "Hello world"
+  warehouse_code: "warehouse_code"
+  in_detail: "Подробно"

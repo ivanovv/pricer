@@ -1,12 +1,13 @@
-%h1 Прайс лист компании "#{@company.name}"
+- title(t('.title', :company_name => @company.name))
+%h1= t('.title', :company_name => @company.name)
 
 -#Записей: #{@prices.total_entries}
 
 %table
   %tr
-    %th Складской код
-    %th Наименование
-    %th Цена
+    %th= t('.warehouse_code')
+    %th= t('.name')
+    %th= t('.price')
 
   - @prices.each do |price|
     = render :partial => "price", :locals => {:price => price}

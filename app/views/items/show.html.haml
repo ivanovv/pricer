@@ -1,14 +1,12 @@
 - title "Item"
 
 %p
-  %strong Original Description:
   = @item.original_description
-%p
-  %strong Description:
-  = @item.description
-%p
-  %strong Vendor Code:
-  = @item.vendor_code
+
+- if @item.vendor_code
+  %p
+    %strong Vendor Code:
+    = @item.vendor_code
 
 - unless @item.prices.empty?
   %h3 Связанные элементы

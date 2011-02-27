@@ -1,7 +1,10 @@
-%h2 Компания: #{@price.company.name}
-%h3 #{@price.original_description}
-
-Цена: #{@price.price}
+%h4= t(:company) + ": #{@price.company.name}"
+#{@price.original_description}
+%br
+= t(:price) + ": #{@price.price}"
+%br
+-if @price.vendor_code
+  = t(:warehouse_code) + ": #{@price.vendor_code}"
 
 %br
 %br
@@ -9,9 +12,9 @@
 - if @price.cross_prices.count > 0
   %table{:style => "width:100%"}
     %tr
-      %th Складской код
-      %th Наименование
-      %th Цена
+      %th= t(:warehouse_code)
+      %th= t(:name)
+      %th.numeric= t(:price)
     - @price.cross_prices.each do |cross|
       %tr
         %td(colspan="3" style="text-align:center")
@@ -19,9 +22,28 @@
             = cross.company.name
       = render :partial => "price", :locals => {:price => cross}
 
+%br
+-if @price.items.count > 0
+  %strong
+    =t('.item_record_title')
+  %br
+  = @price.items[0]
+  %br
+  %br
+
+- if !@price.price_histories.empty?
+  %strong
+    = t('.pricehistory_title')
+  %table{:style => "width:50%"}
+    %tr
+      %th Дата
+      %th= t(:price)
+    - @price.price_histories.each do |history|
+      %tr
+        %td= history.created_at
+        %td.numeric= history.value
 
 %br
-
 = link_to 'Edit', [:edit, @company, @price]
 |
 = link_to 'Back', company_prices_path(@company)
