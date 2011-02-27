@@ -3,7 +3,7 @@ class PricesController < ApplicationController
   before_filter :get_company
 
   def index
-    @prices = @company.prices.paginate(:page => params[:page])
+    @prices = @company.prices.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

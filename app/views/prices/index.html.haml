@@ -1,6 +1,6 @@
 %h1 Прайс лист компании "#{@company.name}"
 
-Записей: #{@prices.total_entries}
+-#Записей: #{@prices.total_entries}
 
 %table
   %tr
@@ -11,7 +11,7 @@
   - @prices.each do |price|
     = render :partial => "price", :locals => {:price => price}
 
-= will_paginate @prices
+= paginate @prices
 
 %br
 

@@ -1,5 +1,6 @@
 %h1(style="display:inline") Найденные товары
-- if @prices
+
+-# if @prices
   (#{@prices.total_entries})
 
 %br
@@ -28,7 +29,7 @@
         %td= price.cross_prices.count
         %td= link_to 'Подробно', [price.company, price]
 
-  = will_paginate @prices
+  -#= paginate @prices
 
   %br
 
