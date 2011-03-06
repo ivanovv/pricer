@@ -10,12 +10,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110206104110) do
+ActiveRecord::Schema.define(:version => 20110306150347) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "base_product_link"
+    t.string   "home_link"
   end
 
   create_table "cross_prices", :id => false, :force => true do |t|
@@ -31,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20110206104110) do
     t.string   "vendor_code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "web_link"
   end
 
   create_table "links", :force => true do |t|
@@ -41,6 +44,8 @@ ActiveRecord::Schema.define(:version => 20110206104110) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "links", ["price_id", "item_id"], :name => "index_links_on_price_id_and_item_id", :unique => true
 
   create_table "price_histories", :force => true do |t|
     t.integer  "price_id"
@@ -58,6 +63,8 @@ ActiveRecord::Schema.define(:version => 20110206104110) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "vendor_code"
+    t.boolean  "many_items_found"
+    t.string   "web_link"
   end
 
   add_index "prices", ["company_id", "original_description"], :name => "company_original_description_index"
