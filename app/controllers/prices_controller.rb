@@ -3,7 +3,13 @@ class PricesController < ApplicationController
   before_filter :get_company
 
   def index
-    @prices = @company.prices.page(params[:page])
+    sort = case params['sort']
+              when "name"  then "original_description"
+              when "recent" then "created_at"
+           end
+    sort ||= "original_description"
+
+    @prices = @company.prices.order(sort).page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -77,5 +83,16 @@ class PricesController < ApplicationController
   def get_company
     @company = Company.find params[:company_id] || Company.first
   end
+
+
+
+  def sort_column
+    Price.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
+
 end
 
