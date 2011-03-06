@@ -52,7 +52,10 @@ body {
     color: #222222;
 }
 
-#container {background-color: white;}
+#container {
+    background-color: white;
+    padding: 5px;
+}
 
 header {
     padding-top:10px;
@@ -67,7 +70,12 @@ footer {
 
 }
 
-table {@include table-scaffolding;}
+table {
+    @include table-scaffolding;
+}
+table tr:hover {
+    background-color: #DDDDDD;
+}
 
 
 
