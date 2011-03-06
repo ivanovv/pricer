@@ -11,7 +11,7 @@ class XLSParser < PriceParser
   def parse_price(book_path, encoding = nil)
     book = Spreadsheet.open book_path
     book.encoding = encoding if encoding
-    sheet =  book.worksheet 0
+    sheet = book.worksheet 0
     sheet.each rows_to_skip do |row|
       next if row[ indexes[:description] ].blank?
       desc = PriceDescriptionNormalizer.normalize_description(row[ indexes[:description] ])
@@ -21,7 +21,8 @@ class XLSParser < PriceParser
         :description => desc,
         :price => row[ indexes[:price] ],
         :original_description => row[ indexes[:description] ],
-        :vendor_code => indexes[:vendor] ? row[ indexes[:vendor] ] : nil
+        :vendor_code => indexes[:vendor] ? row[ indexes[:vendor] ] : nil,
+        :web_link => indexes[:web_link] ? row[ indexes[:web_link] ] : nil
         ) if should_parse_row(row)
     end
   end

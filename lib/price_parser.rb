@@ -11,6 +11,7 @@ class PriceParser
 
   def create_price(price_attributes)
     search_term = valid_warehouse_code?(price_attributes[:warehouse_code]) ?  :warehouse_code : :original_description
+    price_attributes[:web_link] = @company.make_short_link(price_attributes[:web_link])
     create_or_update_price_history(search_term, price_attributes)
   end
 

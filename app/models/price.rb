@@ -47,14 +47,18 @@ class Price < ActiveRecord::Base
   end
 
   def set_reference_item(new_item)
-    if item || item != new_item
-      self.item = new_item
+    if items.count == 0  || items.first != new_item
+      self.items << new_item
       Rails.logger.debug("Added to items")
     end
   end
 
   def to_s
     original_description
+  end
+
+  def product_web_link
+    company.base_product_link + web_link
   end
 
 end
