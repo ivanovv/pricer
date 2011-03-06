@@ -3,4 +3,6 @@
   %td= price.original_description
   %td= price.price
   %td= link_to t(:in_detail), [price.company, price]
-
+  -if price.many_items_found
+    %td= link_to "disambiguate", new_link_path(:price_id => price.id)
+    

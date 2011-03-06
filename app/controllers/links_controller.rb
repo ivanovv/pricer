@@ -8,7 +8,10 @@ class LinksController < ApplicationController
   end
 
   def new    
-    @link = Link.new(:price_id => params[:price_id])
+    @link = Link.new(:price_id => params[:price_id], :human=> true, :score => 10)
+    if params[:price_id]
+      @price = Price.find params[:price_id]
+    end
   end
 
   def create

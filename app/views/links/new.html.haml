@@ -1,5 +1,18 @@
 - title "New Link"
 
-= render 'form'
+-if @price
+  = render 'disambiguation_form'
+-else
+  = render 'form'
 
+= form_tag(searches_path, :method => 'get', :id => "items_search") do
+  %p
+    = text_field_tag :q, params[:q] || @price
+    = submit_tag t(:search), :name => nil
+
+%br
+
+#items_list
+
+%br
 %p= link_to "Back to List", links_path

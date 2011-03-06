@@ -1,0 +1,8 @@
+= semantic_form_for @link do |f|
+  = f.inputs do
+    = f.input :price, :input_html=>{:disabled => true}, :collection => [@price]
+    = f.input :item_id, :as => :hidden
+    = f.input :price_id, :as => :hidden
+    = f.input :human
+    = f.input :score, :as => :numeric
+  = f.buttons

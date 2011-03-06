@@ -15,6 +15,11 @@ class SearchesController < ApplicationController
         end
       end
     end
+    
+    respond_to do |format|
+      format.html 
+      format.js  { render :xml => @price }
+    end
   end
 
 end

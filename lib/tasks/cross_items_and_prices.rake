@@ -23,7 +23,7 @@ namespace :app do
     Company.find_each(company_conditions) do |company|
       ap company
       Price.find_each(:conditions => ['company_id = ? and updated_at > ?', company.id, time_since_last_update ]) do |price|
-        existing_alternatives = price.item ? price.item.id  : []
+        existing_alternatives = price.items.count>0 ? [price.items.first.id] : []
         search_term = price.vendor_code ? price.vendor_code.dup : nil
         desc = price.description.dup
         search_term ||= desc
@@ -63,6 +63,9 @@ namespace :app do
             if items2 && items2.size == 1
               puts "\t disambiguished with #{items2[0].description}"
               items2[0].add_price(price)
+            else
+              price.many_items_found = true
+              price.save
             end
           end
         end
