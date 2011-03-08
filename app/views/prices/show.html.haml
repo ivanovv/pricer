@@ -9,6 +9,7 @@
 -if @price.web_link
   %br
   %a{:href=>"#{@price.product_web_link}"}
+  %a{:href=>"#{@price.product_web_link}", :class => "colorbox"}
     = t('.web_link')
 
 %br

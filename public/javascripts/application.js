@@ -10,4 +10,7 @@
          $("#link_item_id").val($(this).attr('id').replace("item-", ""));
      });
 
+
+     $(".colorbox").colorbox({width:"80%", height:"80%", iframe:true});
+
  });
