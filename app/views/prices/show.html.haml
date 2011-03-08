@@ -8,7 +8,6 @@
 
 -if @price.web_link
   %br
-  %a{:href=>"#{@price.product_web_link}"}
   %a{:href=>"#{@price.product_web_link}", :class => "colorbox"}
     = t('.web_link')
 
@@ -40,14 +39,18 @@
 - if !@price.price_histories.empty?
   %strong
     = t('.pricehistory_title')
-  %table{:style => "width:50%"}
-    %tr
-      %th Дата
-      %th= t(:price)
-    - @price.price_histories.each do |history|
+  #tabledata{:style => "display:none;"}
+    %table{:style => "width:50%"}
       %tr
-        %td= history.created_at
-        %td.numeric= history.value
+        %th Дата
+        %th= t(:price)
+      - @price.price_histories.each do |history|
+        %tr
+          %td= history.created_at
+          %td.numeric= history.value
+  #flot_placeholder{:style => "width:600px;height:300px;display:block;"}
+  :javascript
+    var historyData = #{@price.get_history_data_for_javascript};
 
 %br
 = link_to 'Edit', [:edit, @company, @price]

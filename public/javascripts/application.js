@@ -13,4 +13,19 @@
 
      $(".colorbox").colorbox({width:"80%", height:"80%", iframe:true});
 
+     if (typeof historyData != 'undefined')
+        $.plot($("#flot_placeholder"), [historyData], {
+            series: {
+                   lines: { show: true },
+                   points: { show: true }
+            },
+            xaxis: {
+                mode: "time"
+            },
+            yaxis: {
+                ticks: 10, min: 0
+            }
+        });
+
  });
+

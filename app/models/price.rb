@@ -61,5 +61,13 @@ class Price < ActiveRecord::Base
     company.base_product_link + web_link
   end
 
+  def get_history_data_for_javascript
+    js_data = ""
+    price_histories.each do |history_record|
+      js_data << "[#{history_record.js_date}, #{history_record.value}],"
+    end
+    "["<< js_data.chop << "]"
+  end
+
 end
 
