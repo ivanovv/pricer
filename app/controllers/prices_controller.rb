@@ -5,7 +5,7 @@ class PricesController < ApplicationController
   def index
     sort = case params['sort']
               when "name"  then "original_description"
-              when "recent" then "created_at"
+              when "recent" then "created_at desc"
            end
     sort ||= "original_description"
 
@@ -84,10 +84,8 @@ class PricesController < ApplicationController
     @company = Company.find params[:company_id] || Company.first
   end
 
-
-
   def sort_column
-    Price.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    Price.column_names.include?(params[:sort]) ? params[:sort] : "original_description"
   end
 
   def sort_direction

@@ -22,8 +22,9 @@ ru:
 
 
 
+      sort_by_name: "по названию A-Z"
+      sort_by_date: "по дате (свежие вперед)"
     show:
       item_record_title: "Запись из справочника:"
       pricehistory_title: "История цен"
-      web_link: "Ссылка на товар"
       web_link: "Посмотреть страничку товара на сайте компании"

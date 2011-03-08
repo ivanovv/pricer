@@ -3,6 +3,12 @@
 
 -#Записей: #{@prices.total_entries}
 
+Сортировать
+=link_to t('.sort_by_date'), params.merge(:sort=>'recent', :page=> nil)
+|
+=link_to t('.sort_by_name'), params.merge(:sort=>'name', :page=> nil)
+%br
+
 %table
   %tr
     %th= t('.warehouse_code')
