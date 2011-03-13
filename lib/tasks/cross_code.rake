@@ -13,7 +13,7 @@ namespace :app do
 
     client = Riddle::Client.new
     force = ENV.include?("force")
-    time_since_last_update = force ? 10.year.ago : 10.minutes.ago
+    time_since_last_update = force ? 10.year.ago : 15.minutes.ago
 
     Company.find_each do |company|
       ap company
