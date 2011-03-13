@@ -1,7 +1,9 @@
 - title "Item"
 
 %p
-  = @item.original_description
+  %h3= @item.original_description
+
+%br
 
 - if @item.vendor_code
   %p
@@ -9,7 +11,7 @@
     = @item.vendor_code
 
 - unless @item.prices.empty?
-  %h3 Связанные элементы
+  %h4 Связанные элементы
   %table{:style => "width:100%"}
     %tr
       %th Складской код
@@ -17,6 +19,12 @@
       %th Цена
     - @item.prices.each do |price|
       = render 'prices/price', :price => price
+
+  %strong
+    = t('.pricehistory_title')
+  #flot_placeholder{:style => "width:600px;height:300px;display:block;"}
+  :javascript
+    var historyData = [#{@item.get_history_data_for_javascript}];
 
 %p
   = link_to "Edit", edit_item_path(@item)

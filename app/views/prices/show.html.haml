@@ -35,6 +35,10 @@
   = @price.items[0]
   %br
   %br
+-else
+  =link_to("Со справочником не связан, создать связь", new_link_path(:price_id=>@price.id))
+  %br
+  %br
 
 - if !@price.price_histories.empty?
   %strong
@@ -50,7 +54,7 @@
           %td.numeric= history.value
   #flot_placeholder{:style => "width:600px;height:300px;display:block;"}
   :javascript
-    var historyData = #{@price.get_history_data_for_javascript};
+    var historyData = [#{@price.get_history_data_for_javascript}];
 
 %br
 = link_to 'Edit', [:edit, @company, @price]

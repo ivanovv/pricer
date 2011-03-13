@@ -63,11 +63,13 @@ class Price < ActiveRecord::Base
 
   def get_history_data_for_javascript
     js_data = ""
+    last_history_record = nil
     price_histories.each do |history_record|
       js_data << "[#{history_record.js_date}, #{history_record.value}],"
+      last_history_record = history_record
     end
-    "["<< js_data.chop << "]"
-  end
-
+    js_data << "[#{Time.now.utc.to_i * 1000}, #{last_history_record.value}],"
+    "{data: [#{js_data.chop}], label: '#{original_description} (#{company.name})'}"
+  end  
 end
 
