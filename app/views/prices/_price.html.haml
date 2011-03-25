@@ -1,8 +1,6 @@
 %tr
   %td= price.warehouse_code
-  %td= price.original_description
+  %td= link_to(price.original_description, [price.company, price])
   %td= price.price
-  %td= link_to t(:in_detail), [price.company, price]
-  -if price.many_items_found
-    %td= link_to "disambiguate", new_link_path(:price_id => price.id)
+  %td= link_to "Link", new_link_path(:price_id => price.id)
     

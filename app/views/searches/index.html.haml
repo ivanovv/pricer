@@ -1,3 +1,7 @@
+=content_for :javascripts do
+  :javascript
+    $("#q").focus();
+
 %h1(style="display:inline") Найденные товары
 
 -# if @prices
@@ -21,13 +25,13 @@
 
 
     - @prices.each do |price|
-      %tr
-        %td= price.company.name
-        %td= price.warehouse_code
-        %td= price.original_description
-        %td= price.price
-        %td= price.cross_prices.count
-        %td= link_to 'Подробно', [price.company, price]
+      - if price
+        %tr
+          %td=link_to(price.company.name, company_prices_path(price.company))
+          %td= price.warehouse_code
+          %td= link_to(price.original_description, [price.company, price])
+          %td= price.price
+          %td= price.cross_prices.count
 
   -#= paginate @prices
 
@@ -48,10 +52,10 @@
           %th Прайсов
 
         - @items.each do |item|
-          %tr
-            %td= item.original_description
-            %td= item.prices.count
-            %td= link_to 'Подробно', [item]
+          - if item
+            %tr
+              %td= link_to(item.original_description, item)
+              %td= item.prices.count
 
       -#= paginate @items
 

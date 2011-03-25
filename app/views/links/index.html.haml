@@ -10,8 +10,8 @@
     %th Score
   - for link in @links
     %tr
-      %td= link.item
-      %td= link.price
+      %td= link_to link.item, link.item
+      %td= link_to link.price, [link.price.company, link.price]
       %td= link.human
       %td= link.score
       %td= link_to 'Show', link
