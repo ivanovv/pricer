@@ -33,6 +33,7 @@ GEM
     builder (2.1.2)
     compass (0.10.6)
       haml (>= 3.0.4)
+    differ (0.1.2)
     erubis (2.6.6)
       abstract (>= 1.0.0)
     formtastic (1.2.3)
@@ -62,8 +63,8 @@ GEM
     nifty-generators (0.4.5)
     nokogiri (1.4.4)
     polyglot (0.3.1)
-    rack (1.2.1)
-    rack-mount (0.6.13)
+    rack (1.2.2)
+    rack-mount (0.6.14)
       rack (>= 1.0.0)
     rack-test (0.5.7)
       rack (>= 1.0)
@@ -84,7 +85,7 @@ GEM
     riddle (1.2.2)
     ruby-ole (1.2.11.1)
     russian (0.2.7)
-    spreadsheet (0.6.5.2)
+    spreadsheet (0.6.5.3)
       ruby-ole (>= 1.0)
     thinking-sphinx (2.0.2)
       activerecord (>= 3.0.3)
@@ -92,7 +93,7 @@ GEM
     thor (0.14.6)
     treetop (1.4.9)
       polyglot (>= 0.3.1)
-    tzinfo (0.3.24)
+    tzinfo (0.3.25)
 
 PLATFORMS
   ruby
@@ -100,6 +101,7 @@ PLATFORMS
 DEPENDENCIES
   awesome_print
   compass (>= 0.10.2)
+  differ
   formtastic
   haml
   hirb

@@ -15,6 +15,7 @@ gem "jquery-rails"
 gem "formtastic"
 gem 'kaminari'
 gem 'html5-boilerplate'
+gem 'differ'
 
 
 gem "mocha", :group => :test
