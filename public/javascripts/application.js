@@ -13,8 +13,9 @@
 
      $(".colorbox").colorbox({width:"80%", height:"80%", iframe:true});
 
-     if (typeof historyData != 'undefined') {
-        $.plot($("#flot_placeholder"), historyData, {
+     var $flot_placeholder = $("#flot_placeholder");
+     if ($flot_placeholder.length == 1) {
+        $.plot($flot_placeholder, $flot_placeholder.data("graph"), {
             series: {
                    lines: { show: true },
                    points: { show: true }
@@ -25,7 +26,7 @@
             },
             yaxis: {
                 //ticks: 10,
-                autoscaleMargin: 1
+                autoscaleMargin: 0.8
 
             },
              grid: {
@@ -57,8 +58,7 @@
 
                     showTooltip(item.pageX, item.pageY - 40, y + " р.");
                 }
-            }
-            else {
+            } else {
                 $("#tooltip").remove();
                 previousPoint = null;
             }

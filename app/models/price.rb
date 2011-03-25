@@ -68,8 +68,9 @@ class Price < ActiveRecord::Base
       js_data << "[#{history_record.js_date}, #{history_record.value}],"
       last_history_record = history_record
     end
-    js_data << "[#{Time.now.utc.to_i * 1000}, #{last_history_record.value}],"
-    "{data: [#{js_data.chop}], label: '#{original_description} (#{company.name})'}"
-  end  
+    label = "#{original_description} (#{company.name})"
+    js_data << "[#{Time.now.utc.to_i * 1000}, #{last_history_record.value}]," if last_history_record
+    "{\"data\": [#{js_data.chop}], \"label\": #{label.to_json}}"
+  end
 end
 

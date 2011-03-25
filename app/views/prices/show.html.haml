@@ -52,9 +52,8 @@
         %tr
           %td= history.created_at
           %td.numeric= history.value
-  #flot_placeholder{:style => "width:600px;height:300px;display:block;"}
-  :javascript
-    var historyData = [#{@price.get_history_data_for_javascript}];
+  #flot_placeholder{:style => "width:800px;height:300px;display:block;", "data-graph" => "[#{@price.get_history_data_for_javascript}]" }
+
 
 %br
 = link_to 'Edit', [:edit, @company, @price]

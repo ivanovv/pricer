@@ -1,6 +1,6 @@
 class Item < ActiveRecord::Base
 
-  attr_accessible :description, :original_description, :vendor_code
+  attr_accessible :description, :original_description, :vendor_code, :fcenter_code
 
   has_many :links
   
@@ -42,6 +42,15 @@ class Item < ActiveRecord::Base
       js_data << price.get_history_data_for_javascript << ","
     end
     js_data.chop
+  end
+
+  def self.create_from_price(price)
+    create(
+        :original_description => price.original_description,
+        :description =>price.description,
+        :fcenter_code => price.warehouse_code,
+        :web_link => price.web_link
+    )
   end
 end
 
