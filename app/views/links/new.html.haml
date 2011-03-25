@@ -1,5 +1,22 @@
 - title "New Link"
 
+=content_for :javascripts do
+  :javascript
+    var search_terms = #{@price.sphinx_keywords_for_javascript(10)};
+    $(function() {
+        $( "#slider" ).slider({
+          value:1,
+          min: 1,
+          max: 10,
+          step: 1,
+          slide: function( event, ui ) {
+            $( "#q" ).val(search_terms.slice(0, ui.value).join(" ") );
+          }
+        });
+        $( "#q" ).val(search_terms.slice(0, $( "#slider" ).slider( "value" )).join(" "));
+      });
+    
+
 -if @price
   = render 'disambiguation_form'
 -else
@@ -7,8 +24,11 @@
 
 = form_tag(searches_path, :method => 'get', :id => "items_search") do
   %p
-    = text_field_tag :q, params[:q] || @price
+    = text_field_tag :q, params[:q] || @price.most_likely_search
     = submit_tag t(:search), :name => nil
+
+%br
+#slider
 
 %br
 

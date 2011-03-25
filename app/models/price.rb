@@ -58,7 +58,7 @@ class Price < ActiveRecord::Base
   end
 
   def product_web_link
-    company.base_product_link + web_link
+    company.base_product_link + web_link if web_link
   end
 
   def get_history_data_for_javascript
@@ -72,5 +72,35 @@ class Price < ActiveRecord::Base
     js_data << "[#{Time.now.utc.to_i * 1000}, #{last_history_record.value}]," if last_history_record
     "{\"data\": [#{js_data.chop}], \"label\": #{label.to_json}}"
   end
+
+  def most_likely_search
+    keywords = pretty_keywords(4)
+    result = ""
+    keywords.each do |k|
+      result << k << " "
+    end
+    result
+  end
+
+  def most_unlikely_search(n = 1)
+    pretty_keywords(100).reverse.first n
+  end
+
+  def sphinx_keywords(n = 3)
+    client = Riddle::Client.new
+    keywords = client.keywords description, "item_core", true
+    keywords = keywords.sort {|x, y| y[:docs] <=> x[:docs]}
+    keywords = keywords.select{|k| k[:docs] > 0}.first n
+    keywords
+  end
+
+  def sphinx_keywords_for_javascript(n = 3)
+    pretty_keywords(n)
+  end
+
+  def pretty_keywords(n = 3)
+    sphinx_keywords(n).map { |k| k[:tokenised].force_encoding("UTF-8")}
+  end
+
 end
 

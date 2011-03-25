@@ -372,6 +372,16 @@ table tr:hover {
   background-color: #DDDDDD;
 }
 
+/* line 81, ../../src/partials/_page.scss */
+#selectable .ui-selecting {
+  background: #FECA40;
+}
+/* line 82, ../../src/partials/_page.scss */
+#selectable .ui-selected {
+  background: #F39814;
+  color: white;
+}
+
 /* line 25, ../../src/partials/_two_col.scss */
 body.two-col #container {
   width: 950px;
