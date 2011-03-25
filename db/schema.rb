@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110306150347) do
+ActiveRecord::Schema.define(:version => 20110321224357) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -34,7 +34,10 @@ ActiveRecord::Schema.define(:version => 20110306150347) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "web_link"
+    t.string   "fcenter_code"
   end
+
+  add_index "items", ["fcenter_code"], :name => "index_items_on_fcenter_code"
 
   create_table "links", :force => true do |t|
     t.integer  "item_id"
@@ -53,6 +56,8 @@ ActiveRecord::Schema.define(:version => 20110306150347) do
     t.datetime "updated_at"
     t.integer  "value"
   end
+
+  add_index "price_histories", ["price_id", "created_at"], :name => "index_price_histories_on_price_id_and_created_at"
 
   create_table "prices", :force => true do |t|
     t.integer  "company_id"
