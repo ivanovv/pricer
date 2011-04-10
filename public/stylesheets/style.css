@@ -373,11 +373,11 @@ table tr:hover {
 }
 
 /* line 81, ../../src/partials/_page.scss */
-#selectable .ui-selecting {
+#selectable .ui-selecting, .selectable .ui-selecting {
   background: #FECA40;
 }
 /* line 82, ../../src/partials/_page.scss */
-#selectable .ui-selected {
+#selectable .ui-selected, .selectable .ui-selected {
   background: #F39814;
   color: white;
 }
