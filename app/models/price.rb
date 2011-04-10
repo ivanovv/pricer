@@ -102,5 +102,26 @@ class Price < ActiveRecord::Base
     sphinx_keywords(n).map { |k| k[:tokenised].force_encoding("UTF-8")}
   end
 
+  def update_price_history(price_value)
+    last_price_history = price_histories.order(:created_at).last
+#      last_price_history = @price_histories.select do |price_history|
+#        price_history.price_id == price.id
+#      end.max {|a, b| a.created_at <=> b.created_at}
+      if !last_price_history ||
+        (last_price_history.value != price_value && last_price_history.created_at < 10.minutes.ago) then
+        price_histories.create(:value => price_value)
+      end
+  end
+
+  def update_original_description(original_desc)
+    if original_description != original_desc
+      old_original_description = original_description
+      self.description = PriceDescriptionNormalizer.normalize_description(original_desc)
+      self.original_description = original_desc
+      save
+      Rails.logger.debug("update original description:: old #{old_original_description} new #{original_desc}")
+    end
+  end
+
 end
 

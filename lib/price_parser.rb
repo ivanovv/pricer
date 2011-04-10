@@ -1,7 +1,6 @@
 # encoding: UTF-8
 class PriceParser
 
-
   def initialize
     @created_prices = 0
     @updated_prices = 0
@@ -40,21 +39,11 @@ class PriceParser
 #        price[search_term] == price_attributes[search_term]
 #      }
       if price
-        update_price_history(price, price_attributes[:price].to_i)
+        price.update_price_history(price_attributes[:price].to_i)
+        price.update_original_description(price_attributes[:original_description].to_s)
         @updated_prices += 1
       else
         company.prices.create(price_attributes)
-      end
-    end
-
-    def update_price_history(price, price_value)
-      last_price_history = price.price_histories.order(:created_at).last
-#      last_price_history = @price_histories.select do |price_history|
-#        price_history.price_id == price.id
-#      end.max {|a, b| a.created_at <=> b.created_at}
-      if !last_price_history ||
-        (last_price_history.value != price_value && last_price_history.created_at < 10.minutes.ago) then
-        price.price_histories.create(:value => price_value)
         @created_prices += 1
       end
     end
