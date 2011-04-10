@@ -1,7 +1,8 @@
 $('#items_list').html('<%= escape_javascript(render("items")) %>');
 $('#selectable').selectable({
-        stop: function() {
-            var $td = $(".ui-selected .found_item");
+    filter: 'td',
+    stop: function() {
+            var $td = $(".ui-selected.found_item");
             $("#link_item_id").val($td.attr('id').replace("item-", ""));
             }
 });

@@ -1,13 +1,13 @@
 class LinksController < ApplicationController
   def index
-    @links = Link.page(params[:page])
+    @links = Link.includes(:price, :item).page(params[:page])
   end
 
   def show
     @link = Link.find(params[:id])
   end
 
-  def new    
+  def new
     @link = Link.new(:price_id => params[:price_id], :human=> true, :score => 10)
     if params[:price_id]
       @price = Price.find params[:price_id]
@@ -18,6 +18,14 @@ class LinksController < ApplicationController
     @link = Link.new(params[:link])
     if @link.save
       flash[:notice] = "Successfully created link."
+      if params[:link][:other_prices]
+        other_prices = params[:link][:other_prices]
+        other_prices.split(",").each do |price_id|
+          Link.create(:price_id => price_id, :item_id => params[:link][:item_id], :human => true, :score => 10)
+        end
+        flash[:notice] = "Successfully created links."
+      end
+
       redirect_to @link
     else
       render :action => 'new'
