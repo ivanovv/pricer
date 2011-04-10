@@ -17,9 +17,10 @@ gem 'kaminari'
 gem 'html5-boilerplate'
 gem 'differ'
 gem "whenever"
-gem "capistrano"
+
 
 
 gem "mocha", :group => :test
 gem "hirb", :group => :development
+gem "capistrano", :group => :development
 
