@@ -4,7 +4,7 @@
 
 %h1(style="display:inline") Найденные товары
 
--# if @prices
+- if @prices
   (#{@prices.total_entries})
 
 %br
@@ -33,13 +33,13 @@
           %td= price.price
           %td= price.cross_prices.count
 
-  -#= paginate @prices
+  = paginate @prices
 
   %br
 
     %h1(style="display:inline") Найденные items
 
-    -# if @items
+    - if @items
       (#{@items.total_entries})
 
     %br
@@ -57,6 +57,6 @@
               %td= link_to(item.original_description, item)
               %td= item.prices.count
 
-      -#= paginate @items
+      = paginate @items
 
       %br
