@@ -13,7 +13,7 @@ class CityLinkXLSParser < XLSParser
 
   def should_parse_row(row)
     return false unless row[0]
-    row[0].starts_with? 'Компьютеры и комплекту'
+    row[0].starts_with? 'Компьютеры и комплекту' && !row[1].starts_with?("Компьютеры")
   end
 
   def indexes
