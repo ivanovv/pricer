@@ -74,12 +74,19 @@ class Price < ActiveRecord::Base
   end
 
   def most_likely_search
-    keywords = pretty_keywords(4)
-    result = ""
-    keywords.each do |k|
-      result << k << " "
-    end
-    result
+    pretty_keywords(4).join(" ")
+  end
+
+  def most_likely_search_tokenised
+    i=1
+    keywords = pretty_keywords(4).map{ |k| i += 1; {:id => i, :name => k}}
+    keywords.to_json
+  end
+
+  def most_unlikely_search_tokenised
+    i=1
+    keywords = most_unlikely_search(10).map{ |k| i += 1; {:id => i, :name => k}}
+    keywords.to_json
   end
 
   def most_unlikely_search(n = 1)
@@ -90,12 +97,13 @@ class Price < ActiveRecord::Base
     client = Riddle::Client.new
     keywords = client.keywords description, "item_core", true
     keywords = keywords.sort {|x, y| y[:docs] <=> x[:docs]}
-    keywords = keywords.select{|k| k[:docs] > 0}.first n
+    keywords = keywords.first n
     keywords
   end
 
   def sphinx_keywords_for_javascript(n = 3)
-    pretty_keywords(n)
+    #pretty_keywords(n)
+    {:likely => pretty_keywords(n), :unlikely => most_unlikely_search(n)}.to_json
   end
 
   def pretty_keywords(n = 3)

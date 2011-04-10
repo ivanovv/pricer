@@ -4,16 +4,23 @@
   :javascript
     var search_terms = #{@price.sphinx_keywords_for_javascript(10)};
     $(function() {
-        $( "#slider" ).slider({
-          value:1,
-          min: 1,
-          max: 10,
-          step: 1,
+        var $q = $("#q");
+        $( "#most_likely_slider" ).slider({
+          value:1, min: 1, max: 10, step: 1,
           slide: function( event, ui ) {
-            $( "#q" ).val(search_terms.slice(0, ui.value).join(" ") );
+            $q.val($q.data("sphinx").likely.slice(0, ui.value).join(" ") );
           }
         });
-        $( "#q" ).val(search_terms.slice(0, $( "#slider" ).slider( "value" )).join(" "));
+
+        $( "#most_unlikely_slider" ).slider({
+          value:1, min: 1, max: 10, step: 1,
+          slide: function( event, ui ) {
+            $q.val($q.data("sphinx").unlikely.slice(0, ui.value).join(" ") );
+          }
+        });
+
+        //$q.val(search_terms.slice(0, $( "#slider" ).slider( "value" )).join(" "));
+      
         $('.selectable').selectable({
           filter: 'tr',
           stop: function() {
@@ -21,6 +28,10 @@
               return $(this).data("price_id")}).get().join(","));
           }
         });
+        /*$("#q").tokenInput(#{@price.most_likely_search_tokenised}, {
+          theme: "facebook",
+          tokenDelimiter: " "
+        });*/
       });
     
 
@@ -37,11 +48,14 @@
 
 = form_tag(searches_path, :method => 'get', :id => "items_search") do
   %p
-    = text_field_tag :q, params[:q] || @price.most_likely_search
+    = text_field_tag :q, params[:q] || @price.most_likely_search, {:size =>100, "data-pre" => @price.most_likely_search_tokenised, "data-sphinx"=> @price.sphinx_keywords_for_javascript(10)}
     = submit_tag t(:search), :name => nil
 
 %br
-#slider
+#most_likely_slider
+
+%br
+#most_unlikely_slider
 
 %br
 
