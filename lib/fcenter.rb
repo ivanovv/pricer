@@ -45,7 +45,7 @@ class FCenterParser < PriceParser
       end
       if @in_td
         case @td_index
-        when 1..2
+        when 1..3
           @row_data[@td_index] = data
         when 6
           if data =~ /[\d\.]+/
@@ -71,7 +71,7 @@ class FCenterParser < PriceParser
     end
 
     def make_price_record(row)
-      original_desc = row[2]
+      original_desc = row[2] + " " + row[3]
       desc = PriceDescriptionNormalizer.normalize_description(original_desc)
       warehouse_code = row[1]
       price = row[6]
