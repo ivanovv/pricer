@@ -26,7 +26,7 @@
             },
             yaxis: {
                 //ticks: 10,
-                autoscaleMargin: 0.8
+                autoscaleMargin: 0.4
 
             },
              grid: {
