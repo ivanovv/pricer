@@ -3,7 +3,9 @@ class PriceParser
 
 
   def initialize
-
+    @created_prices = 0
+    @updated_prices = 0
+    @total_prices = 0
   end
 
   def company_name
@@ -20,6 +22,7 @@ class PriceParser
   end
 
   def create_price(price_attributes)
+    @total_prices += 1
     search_term = valid_warehouse_code?(price_attributes[:warehouse_code]) ?  :warehouse_code : :original_description
     price_attributes[:web_link] = @company.make_short_link(price_attributes[:web_link])
     create_or_update_price_history(search_term, price_attributes)
@@ -38,6 +41,7 @@ class PriceParser
 #      }
       if price
         update_price_history(price, price_attributes[:price].to_i)
+        @updated_prices += 1
       else
         company.prices.create(price_attributes)
       end
@@ -51,6 +55,7 @@ class PriceParser
       if !last_price_history ||
         (last_price_history.value != price_value && last_price_history.created_at < 10.minutes.ago) then
         price.price_histories.create(:value => price_value)
+        @created_prices += 1
       end
     end
 
