@@ -34,6 +34,7 @@
   %br
   = @price.items[0]
   %br
+  =link_to("Link", @price.links[0])
   %br
 -else
   =link_to("Со справочником не связан, создать связь", new_link_path(:price_id=>@price.id))

@@ -4,21 +4,26 @@
   %h3= @item.original_description
 
 %br
+%p
+  F-Center code:
+  #{@item.fcenter_code}
+
+%br
 
 - if @item.vendor_code
   %p
     %strong Vendor Code:
     = @item.vendor_code
 
-- unless @item.prices.empty?
+- unless @prices_links.empty?
   %h4 Связанные элементы
   %table{:style => "width:100%"}
     %tr
       %th Складской код
       %th Наименование
       %th Цена
-    - @item.prices.each do |price|
-      = render 'prices/price', :price => price
+    - @prices_links.each do |price_link_pair|
+      = render 'prices/price', :price => price_link_pair[:price], :link => price_link_pair[:link]
 
   %strong
     = t('.pricehistory_title')

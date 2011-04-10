@@ -5,6 +5,11 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @prices_links = []
+    @item.prices.each do |price|
+      link = Link.find_by_item_id_and_price_id(@item.id, price.id)
+      @prices_links << {:price => price, :link => link}
+    end
   end
 
   def new
