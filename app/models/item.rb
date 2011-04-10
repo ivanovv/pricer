@@ -3,7 +3,7 @@ class Item < ActiveRecord::Base
   attr_accessible :description, :original_description, :vendor_code, :fcenter_code
 
   has_many :links
-  
+
   has_many :prices, :through => :links do
     def average_price
       all.average(:price)
@@ -45,12 +45,13 @@ class Item < ActiveRecord::Base
   end
 
   def self.create_from_price(price)
-    create(
+    item = create(
         :original_description => price.original_description,
-        :description =>price.description,
+        :description => price.description,
         :fcenter_code => price.warehouse_code,
         :web_link => price.web_link
     )
+    item.add_price(price)
   end
 end
 
