@@ -7,14 +7,17 @@
 set :application, "pricer"
 set :repository,  "git://github.com/ivanovv/pricer.git"
 
-set :bundle_dir, "~/projects/pricer/shared/bundle"
-set :whenever_command, "bundle exec whenever"
 
 dpath = "/home/hosting_vivanov2/projects/pricer"
 
 set :user, "hosting_vivanov2"
 set :use_sudo, false
 set :deploy_to, dpath
+
+set :bundle_dir, "~/projects/pricer/shared/bundle"
+set :bundle_cmd, "/var/lib/gems/1.8/bin/bundle"
+
+set :whenever_command, "/var/lib/gems/1.8/bin/bundle exec whenever"
 
 set :scm, :git
 
