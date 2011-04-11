@@ -4,17 +4,11 @@
 # set :repository - Установить расположение вашего репозитория
 # У вас должна быть настроена авторизация ssh по сертификатам
 
-
-set :bundle_dir, File.join("#{shared_path}", 'bundle')
-require "bundler/capistrano"
-
-require "thinking_sphinx/deploy/capistrano"
-
-set :whenever_command, "bundle exec whenever"
-require "whenever/capistrano"
-
 set :application, "pricer"
 set :repository,  "git://github.com/ivanovv/pricer.git"
+
+set :bundle_dir, File.join("#{shared_path}", 'bundle')
+set :whenever_command, "bundle exec whenever"
 
 dpath = "/home/hosting_vivanov2/projects/pricer"
 
@@ -27,6 +21,10 @@ set :scm, :git
 role :web, "lithium.locum.ru"                          # Your HTTP server, Apache/etc
 role :app, "lithium.locum.ru"                          # This may be the same as your `Web` server
 role :db,  "lithium.locum.ru", :primary => true # This is where Rails migrations will run
+
+require "bundler/capistrano"
+require "thinking_sphinx/deploy/capistrano"
+require "whenever/capistrano"
 
 after "deploy:update_code", :copy_database_config
 
