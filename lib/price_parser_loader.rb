@@ -2,7 +2,9 @@
 class PriceParserLoader
   def self.load_parser(file)
     
-    require_relative "../lib/#{file}.rb"
+    #require_relative "../lib/#{file}.rb"
+    require File.join(File.dirname(__FILE__), "../lib/#{file}.rb")
+
 
     ObjectSpace.each_object(Class) do |excel_parser|
       next unless [PriceParser, XLSParser].include?(excel_parser.superclass)
