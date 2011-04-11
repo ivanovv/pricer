@@ -17,6 +17,7 @@ gem 'kaminari'
 gem 'html5-boilerplate'
 gem 'differ'
 gem "whenever"
+gem "unicorn"
 
 
 
