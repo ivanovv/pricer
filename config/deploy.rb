@@ -7,7 +7,7 @@
 set :application, "pricer"
 set :repository,  "git://github.com/ivanovv/pricer.git"
 
-set :bundle_dir, File.join("#{shared_path}", 'bundle')
+set :bundle_dir, "~/projects/pricer/shared/bundle"
 set :whenever_command, "bundle exec whenever"
 
 dpath = "/home/hosting_vivanov2/projects/pricer"
