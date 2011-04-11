@@ -4,7 +4,14 @@
 # set :repository - Установить расположение вашего репозитория
 # У вас должна быть настроена авторизация ssh по сертификатам
 
+
+set :bundle_dir, File.join("#{shared_path}", 'bundle')
 require "bundler/capistrano"
+
+require "thinking_sphinx/deploy/capistrano"
+
+set :whenever_command, "bundle exec whenever"
+require "whenever/capistrano"
 
 set :application, "pricer"
 set :repository,  "git://github.com/ivanovv/pricer.git"
@@ -14,8 +21,6 @@ dpath = "/home/hosting_vivanov2/projects/pricer"
 set :user, "hosting_vivanov2"
 set :use_sudo, false
 set :deploy_to, dpath
-
-set :rake, "~/.gem/ruby/1.8/bin/rake"
 
 set :scm, :git
 
@@ -49,5 +54,8 @@ namespace :deploy do
   desc "Restart Application"
   task :restart, :roles => :app do
     run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_rails} -Dc #{unicorn_conf}"
+    thinking_sphinx.rebuild
   end
 end
+
+after "deploy:setup", "thinking_sphinx:shared_sphinx_folder"
