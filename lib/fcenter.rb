@@ -7,7 +7,7 @@ require 'nokogiri'
 class FCenterParser < PriceParser
 
   COMPANY_NAME = "F-Center"
-  DEFAULT_FILE_PATH = '/home/vic/tmp/price.html'
+  DEFAULT_FILE_PATH = '~/tmp/price.html'
 
   class FCenterPriceDocument < Nokogiri::XML::SAX::Document
 

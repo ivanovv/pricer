@@ -4,7 +4,7 @@ require 'xls_parser'
 class AlmerXLSParser < XLSParser
 
   COMPANY_NAME = "Almer"
-  DEFAULT_FILE_PATH = '/home/vic/tmp/almer.xls'
+  DEFAULT_FILE_PATH = '~/tmp/almer.xls'
   DEFAULT_ENCODING = 'windows-1251'
 
 

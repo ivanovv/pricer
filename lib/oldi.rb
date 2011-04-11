@@ -5,7 +5,7 @@ require 'xls_parser'
 class OldiXLSParser < XLSParser
 
   COMPANY_NAME = "Oldi"
-  DEFAULT_FILE_PATH = '/home/vic/tmp/oldiprr.xls'
+  DEFAULT_FILE_PATH = '~/tmp/oldiprr.xls'
 
   def rows_to_skip
     800

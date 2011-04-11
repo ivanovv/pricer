@@ -5,7 +5,7 @@ require 'xls_parser'
 class CityLinkXLSParser < XLSParser
 
   COMPANY_NAME = "CityLink"
-  DEFAULT_FILE_PATH = '/home/vic/tmp/CitilinkPrice_1.xls'
+  DEFAULT_FILE_PATH = '~/tmp/CitilinkPrice_1.xls'
 
   def rows_to_skip
     200
