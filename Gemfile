@@ -16,6 +16,7 @@ gem 'html5-boilerplate'
 gem 'differ'
 gem "whenever"
 gem 'hoptoad_notifier'
+gem "awesome_print", :require => "ap"
 
 group :production do
   gem "unicorn"
@@ -25,7 +26,6 @@ group :development do
   gem "nifty-generators"
   gem "hirb"
   gem "capistrano"
-  gem "awesome_print", :require => "ap"
 end
 
 gem "mocha", :group => :test
