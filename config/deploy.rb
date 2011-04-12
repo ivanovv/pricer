@@ -55,8 +55,11 @@ namespace :deploy do
   desc "Restart Application"
   task :restart, :roles => :app do
     run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_rails} -Dc #{unicorn_conf}"
-    thinking_sphinx.rebuild
+    thinking_sphinx.configure
   end
 end
 
 after "deploy:setup", "thinking_sphinx:shared_sphinx_folder"
+
+        require './config/boot'
+        require 'hoptoad_notifier/capistrano'
