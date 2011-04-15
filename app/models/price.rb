@@ -94,7 +94,7 @@ class Price < ActiveRecord::Base
   end
 
   def sphinx_keywords(n = 3)
-    client = Riddle::Client.new
+    client = Riddle::Client.new "localhost", 33444
     keywords = client.keywords description, "item_core", true
     keywords = keywords.sort {|x, y| y[:docs] <=> x[:docs]}
     keywords = keywords.first n
@@ -107,7 +107,11 @@ class Price < ActiveRecord::Base
   end
 
   def pretty_keywords(n = 3)
-    sphinx_keywords(n).map { |k| k[:tokenised].force_encoding("UTF-8")}
+    sphinx_keywords(n).map do |k|
+      pretty_key = k[:tokenised]
+      pretty_key = pretty_key.force_encoding("UTF-8") if "".respond_to?(:force_encoding)
+      pretty_key
+    end
   end
 
   def update_price_history(price_value)
