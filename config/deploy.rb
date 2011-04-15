@@ -37,6 +37,7 @@ task :copy_database_config, roles => :app do
 end
 
 set :unicorn_rails, "/var/lib/gems/1.8/bin/unicorn_rails"
+#set :unicorn_rails, "unicorn_rails"
 set :unicorn_conf, "/etc/unicorn/pricer.vivanov2.rb"
 set :unicorn_pid, "/var/run/unicorn/pricer.vivanov2.pid"
 
@@ -44,7 +45,7 @@ set :unicorn_pid, "/var/run/unicorn/pricer.vivanov2.pid"
 namespace :deploy do
   desc "Start application"
   task :start, :roles => :app do
-    run "#{unicorn_rails} -Dc #{unicorn_conf}"
+    run "/var/lib/gems/1.8/bin/bundle exec #{unicorn_rails} -Dc #{unicorn_conf}"
   end
 
   desc "Stop application"
@@ -54,12 +55,13 @@ namespace :deploy do
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_rails} -Dc #{unicorn_conf}"
+    run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || /var/lib/gems/1.8/bin/bundle exec #{unicorn_rails} -Dc #{unicorn_conf}"
     thinking_sphinx.configure
   end
 end
 
 after "deploy:setup", "thinking_sphinx:shared_sphinx_folder"
 
-        require './config/boot'
-        require 'hoptoad_notifier/capistrano'
+#require './config/boot'
+#require 'hoptoad_notifier/capistrano'
+
