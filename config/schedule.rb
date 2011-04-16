@@ -16,11 +16,11 @@
 
 
 every 1.day, :at => '4:30 am' do
-  command File.join(Rails.root, "dl.sh")
+  command "#{RAILS_ROOT}/dl.sh"
 end
 
 every 1.day, :at => '5:00 am' do
-  command File.join(Rails.root,"all.sh")
+  command "#{RAILS_ROOT}/all.sh"
 end
 
 every 1.day, :at => '6:00 am' do
