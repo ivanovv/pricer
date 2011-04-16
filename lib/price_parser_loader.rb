@@ -17,11 +17,9 @@ class PriceParserLoader
 
       desc "Parse #{excel_parser::COMPANY_NAME} price list"      
       task name => :environment do
-        if defined?(excel_parser::DEFAULT_ENCODING)
-          excel_parser.parse_price(excel_parser::DEFAULT_FILE_PATH, excel_parser::DEFAULT_ENCODING)
-        else
-          excel_parser.parse_price(excel_parser::DEFAULT_FILE_PATH)
-        end
+        file_name = File.expand_path(excel_parser::DEFAULT_FILE_PATH)
+        encoding = excel_parser::DEFAULT_ENCODING if defined?(excel_parser::DEFAULT_ENCODING)
+        excel_parser.parse_price(file_name, encoding)
       end
     end    
   end
