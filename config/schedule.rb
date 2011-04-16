@@ -1,7 +1,4 @@
 # Use this file to easily define all of your cron jobs.
-#
-# It's helpful, but not entirely necessary to understand cron before proceeding.
-# http://en.wikipedia.org/wiki/Cron
 
 # Example:
 #
@@ -17,10 +14,20 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-# Learn more: http://github.com/javan/whenever
 
 every 1.day, :at => '4:30 am' do
-  command "./dl.sh"
-  command "./all.sh"
+  command File.join(Rails.root, "dl.sh")
+end
+
+every 1.day, :at => '5:00 am' do
+  command File.join(Rails.root,"all.sh")
+end
+
+every 1.day, :at => '6:00 am' do
+rake "log:clear"
+end
+
+every 6.hours do
+  rake "thinking_sphinx:index"
 end
 
