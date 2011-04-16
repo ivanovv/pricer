@@ -16,11 +16,11 @@
 
 
 every 1.day, :at => '4:30 am' do
-  command "#{RAILS_ROOT}/dl.sh"
+  command "#{path}/dl.sh"
 end
 
 every 1.day, :at => '5:00 am' do
-  command "#{RAILS_ROOT}/all.sh"
+  command "#{path}/all.sh"
 end
 
 every 1.day, :at => '6:00 am' do
