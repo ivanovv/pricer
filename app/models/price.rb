@@ -3,15 +3,14 @@ class Price < ActiveRecord::Base
   belongs_to :company
 
   has_and_belongs_to_many :cross_prices,
-  :class_name => "Price",
-  :join_table => "cross_prices",
-  :foreign_key => "price_id",
-  :association_foreign_key => "cross_price_id"
+                          :class_name => "Price",
+                          :join_table => "cross_prices",
+                          :foreign_key => "price_id",
+                          :association_foreign_key => "cross_price_id"
 
   has_many :price_histories
   has_many :links
   has_many :items, :through => :links
-
 
 
   define_index do
@@ -47,7 +46,7 @@ class Price < ActiveRecord::Base
   end
 
   def set_reference_item(new_item)
-    if items.count == 0  || items.first != new_item
+    if items.count == 0 || items.first != new_item
       self.items << new_item
       Rails.logger.debug("Added to items")
     end
@@ -61,16 +60,16 @@ class Price < ActiveRecord::Base
     company.base_product_link + web_link if web_link
   end
 
-  def get_history_data_for_javascript
+  def as_flot_data
     js_data = ""
     last_history_record = nil
     price_histories.each do |history_record|
-      js_data << "[#{history_record.js_date}, #{history_record.value}],"
+      js_data << history_record.as_flot_data << ","
       last_history_record = history_record
     end
     label = "#{original_description} (#{company.name})"
     js_data << "[#{Time.now.utc.to_i * 1000}, #{last_history_record.value}]," if last_history_record
-    "{\"data\": [#{js_data.chop}], \"label\": #{label.to_json}}"
+    "{\"data\": [#{js_data.chop}], \"label\": #{label.to_json}, \"color\":#{company_id}}"
   end
 
   def most_likely_search
@@ -78,14 +77,14 @@ class Price < ActiveRecord::Base
   end
 
   def most_likely_search_tokenised
-    i=1
-    keywords = pretty_keywords(4).map{ |k| i += 1; {:id => i, :name => k}}
+    i = 1
+    keywords = pretty_keywords(4).map { |k| i += 1; {:id => i, :name => k} }
     keywords.to_json
   end
 
   def most_unlikely_search_tokenised
     i=1
-    keywords = most_unlikely_search(10).map{ |k| i += 1; {:id => i, :name => k}}
+    keywords = most_unlikely_search(10).map { |k| i += 1; {:id => i, :name => k} }
     keywords.to_json
   end
 
@@ -96,7 +95,7 @@ class Price < ActiveRecord::Base
   def sphinx_keywords(n = 3)
     client = Riddle::Client.new "localhost", 33444
     keywords = client.keywords description, "item_core", true
-    keywords = keywords.sort {|x, y| y[:docs] <=> x[:docs]}
+    keywords = keywords.sort { |x, y| y[:docs] <=> x[:docs] }
     keywords = keywords.first n
     keywords
   end
@@ -119,10 +118,10 @@ class Price < ActiveRecord::Base
 #      last_price_history = @price_histories.select do |price_history|
 #        price_history.price_id == price.id
 #      end.max {|a, b| a.created_at <=> b.created_at}
-      if !last_price_history ||
+    if !last_price_history ||
         (last_price_history.value != price_value && last_price_history.created_at < 10.minutes.ago) then
-        price_histories.create(:value => price_value)
-      end
+      price_histories.create(:value => price_value)
+    end
   end
 
   def update_original_description(original_desc)

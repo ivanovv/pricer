@@ -36,10 +36,10 @@ class Item < ActiveRecord::Base
     end
   end
 
-  def get_history_data_for_javascript
+  def as_flot_data
     js_data = ""
     prices.each do |price|
-      js_data << price.get_history_data_for_javascript << ","
+      js_data << price.as_flot_data << ","
     end
     js_data.chop
   end
