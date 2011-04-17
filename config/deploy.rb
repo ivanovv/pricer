@@ -8,11 +8,11 @@ set :application, "pricer"
 set :repository,  "git://github.com/ivanovv/pricer.git"
 
 
-dpath = "/home/hosting_vivanov2/projects/pricer"
+deploy_path = "/home/hosting_vivanov2/projects/pricer"
 
 set :user, "hosting_vivanov2"
 set :use_sudo, false
-set :deploy_to, dpath
+set :deploy_to, deploy_path
 
 set :bundle_dir, "~/projects/pricer/shared/bundle"
 set :bundle_cmd, "/var/lib/gems/1.8/bin/bundle"
@@ -56,7 +56,7 @@ namespace :deploy do
   desc "Restart Application"
   task :restart, :roles => :app do
     run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || /var/lib/gems/1.8/bin/bundle exec #{unicorn_rails} -Dc #{unicorn_conf}"
-    thinking_sphinx.configure
+    thinking_sphinx.rebuild
   end
 end
 
