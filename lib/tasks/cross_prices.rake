@@ -13,7 +13,7 @@ namespace :app do
 
     client = Riddle::Client.new
     force = ENV.include?("force")
-    time_since_last_update = force ? 10.year.ago : 15.minutes.ago
+    time_since_last_update = force ? 10.year.ago : 60.minutes.ago
 
     Company.find_each do |company|
       ap company
@@ -73,13 +73,11 @@ namespace :app do
               else
                 cross_price2 = cross_price2[0]
               end
-              ap cross_price2
 
               if cross_price2 && cross_price2.size == 1
                 puts "\t disambiguished with #{cross_price2[0].description}"
                 price.add_alternative(cross_price2[0])
               end
-
             end
           end
         end

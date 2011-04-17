@@ -13,7 +13,7 @@ namespace :app do
 
     client = Riddle::Client.new
     time_since_last_update = ENV.include?("update_since") && ENV["update_since"]
-    time_since_last_update = time_since_last_update ? eval(time_since_last_update) : 15.minutes.ago
+    time_since_last_update = time_since_last_update ? eval(time_since_last_update) : 60.minutes.ago
 
     puts "time_since_last_update: #{time_since_last_update}"
     
@@ -50,7 +50,7 @@ namespace :app do
               items.each { |item| item.add_price(price) }
             else
               items2 = Item.search(price.original_description)
-              ap items2
+              
               if items2 && items2.size == 1
                 puts "\t disambiguished with #{items2.first.description}"
                 items2.first.add_price(price)

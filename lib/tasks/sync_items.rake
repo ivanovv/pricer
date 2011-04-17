@@ -13,7 +13,7 @@ namespace :app do
     Price.find_each(:conditions => conditions) do |price|
       item = Item.find_by_fcenter_code(price.warehouse_code)
       unless item
-        puts "#{price} added to items"
+        puts "sync_items:: <#{price}> added to items"
         Item.create_from_price(price)
       end
     end
