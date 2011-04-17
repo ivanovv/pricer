@@ -15,16 +15,34 @@
 # end
 
 
+set :output, "#{path}/log/cron_log.log"
+
 every 1.day, :at => '4:30 am' do
   command "#{path}/dl.sh"
 end
 
 every 1.day, :at => '5:00 am' do
-  command "#{path}/all.sh"
+  rake "app:citylink"
+end
+
+every 1.day, :at => '5:10 am' do
+  rake "app:fcenter"
+end
+
+every 1.day, :at => '5:20 am' do
+  rake "app:oldi"
+end
+
+every 1.day, :at => '5:30 am' do
+  rake "app:almer"
+end
+
+every 1.day, :at => '5:40 am' do
+  rake "app:all"
 end
 
 every 1.day, :at => '6:00 am' do
-rake "log:clear"
+  rake "log:clear"
 end
 
 every 6.hours do
