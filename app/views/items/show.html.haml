@@ -27,7 +27,7 @@
 
   %strong
     = t('.pricehistory_title')
-  #flot_placeholder{:style => "width:800px;height:300px;display:block;", "data-graph" =>"[#{@item.get_history_data_for_javascript}]"}
+  #flot_placeholder{"data-graph" =>"[#{@item.as_flot_data}]"}
   
 
 %p
