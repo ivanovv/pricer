@@ -41,9 +41,6 @@ every 1.day, :at => '5:40 am' do
   rake "app:all"
 end
 
-every 1.day, :at => '6:00 am' do
-  rake "log:clear"
-end
 
 every 6.hours do
   rake "thinking_sphinx:index"
