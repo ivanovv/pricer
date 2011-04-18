@@ -11,8 +11,10 @@
 -# fall back to local jQuery if necessary
 :javascript
   !window.jQuery && document.write(unescape('%3Cscript src="/pricer/javascripts/jquery.min.js"%3E%3C/script%3E'))
-  
-= javascript_include_tag 'rails', 'plugins', 'application', 'jquery.colorbox', 'jquery.flot.js', 'jquery-ui-min', 'jquery.tokeninput'
+- if Rails.env.production?
+  = javascript_include_tag 'rails', 'plugins', 'application', 'jquery.colorbox-min', 'jquery.flot.js', 'jquery-ui-min', 'jquery.tokeninput', :cache => "scripts"
+-else
+  = javascript_include_tag 'rails', 'plugins', 'application', 'jquery.colorbox', 'jquery.flot.js', 'jquery-ui-min', 'jquery.tokeninput'
 
 -# Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb
 /[if lt IE 7 ]

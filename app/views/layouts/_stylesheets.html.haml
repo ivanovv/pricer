@@ -1,5 +1,8 @@
 -# CSS: implied media="all"
-= stylesheet_link_tag 'style', 'formtastic', 'colorbox', 'jquery-ui', 'token-input', 'token-input-facebook', :media => 'all'
+-if Rails.env.production?
+  = stylesheet_link_tag 'style', 'formtastic', 'colorbox', 'jquery-ui', 'token-input', 'token-input-facebook', :media => 'all', :cache => "styles"
+-else
+  = stylesheet_link_tag 'style', 'formtastic', 'colorbox', 'jquery-ui', 'token-input', 'token-input-facebook', :media => 'all'
 
 -# Uncomment if you are specifically targeting less enabled mobile browsers
 -#= stylesheet_link_tag 'handheld', :media => 'handheld'
