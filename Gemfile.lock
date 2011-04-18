@@ -53,7 +53,7 @@ GEM
     hoptoad_notifier (2.4.9)
       activesupport
       builder
-    html5-boilerplate (0.3.2)
+    html5-boilerplate (0.3.3)
       compass (>= 0.10.0)
     i18n (0.5.0)
     jquery-rails (0.2.7)
@@ -104,7 +104,7 @@ GEM
     riddle (1.2.2)
     ruby-ole (1.2.11.1)
     russian (0.2.7)
-    spreadsheet (0.6.5.3)
+    spreadsheet (0.6.5.4)
       ruby-ole (>= 1.0)
     thinking-sphinx (2.0.3)
       activerecord (>= 3.0.3)
