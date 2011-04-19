@@ -93,8 +93,8 @@ class Price < ActiveRecord::Base
   end
 
   def sphinx_keywords(n = 3)
-    client = Riddle::Client.new "localhost", 33444
-    keywords = client.keywords description, "item_core", true
+    client = ThinkingSphinx::Search.new.client
+    keywords = client.keywords description, Item.sphinx_index_names.first, true
     keywords = keywords.sort { |x, y| y[:docs] <=> x[:docs] }
     keywords = keywords.first n
     keywords

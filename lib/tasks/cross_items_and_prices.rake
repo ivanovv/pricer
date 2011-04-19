@@ -11,7 +11,7 @@ namespace :app do
   desc "cross items and prices"
   task :cross_items => :environment do
 
-    client = Riddle::Client.new
+    client = ThinkingSphinx::Search.new.client
     time_since_last_update = ENV.include?("update_since") && ENV["update_since"]
     time_since_last_update = time_since_last_update ? eval(time_since_last_update) : 60.minutes.ago
 
@@ -35,7 +35,7 @@ namespace :app do
           items = Item.search(desc, without_hash2(existing_alternatives))
         end
 
-        keywords = client.keywords desc, "item_core", true
+        keywords = client.keywords desc, Item.sphinx_index_names.first, true
         keywords = keywords.sort { |x, y| x[:docs] <=> y[:docs] }.first
 
         if items.empty? && keywords

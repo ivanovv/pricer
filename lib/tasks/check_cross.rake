@@ -9,7 +9,7 @@ namespace :app do
     #words = YAML.load_file 'words.yml'
     #word_count = [6,5,4,3,2,1]
 
-    client = Riddle::Client.new
+    client = ThinkingSphinx::Search.new.client
 
     Company.find_each do |company|
       ap company
