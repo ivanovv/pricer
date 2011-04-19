@@ -39,13 +39,13 @@ class PriceParser
 #        price[search_term] == price_attributes[search_term]
 #      }
       if price
-        price.update_price_history(price_attributes[:price].to_i)
         price.update_original_description(price_attributes[:original_description].to_s)
         @updated_prices += 1
       else
-        company.prices.create(price_attributes)
+        price = company.prices.create(price_attributes)
         @created_prices += 1
       end
+      price.update_price_history(price_attributes[:price].to_i)
     end
 
 end
