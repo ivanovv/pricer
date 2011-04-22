@@ -40,7 +40,7 @@
 -else
   = render 'form'
 
-- if @price_that_can_be_linked > 0
+- if @price_that_can_be_linked && @price_that_can_be_linked.size > 0
   %table.selectable
     - @price_that_can_be_linked.each do |cross|
       = render :partial => "prices/price", :locals => {:price => cross}
