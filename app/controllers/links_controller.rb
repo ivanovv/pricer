@@ -11,6 +11,9 @@ class LinksController < ApplicationController
     @link = Link.new(:price_id => params[:price_id], :human=> true, :score => 10)
     if params[:price_id]
       @price = Price.find params[:price_id]
+      if @price.cross_prices.size > 0
+        @price_that_can_be_linked = @price.cross_prices.select {|p| p.links.size == 0}      
+      end
     end
   end
 
