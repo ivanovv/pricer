@@ -45,7 +45,7 @@ set :unicorn_pid, "/var/run/unicorn/pricer.vivanov2.pid"
 namespace :deploy do
   desc "Start application"
   task :start, :roles => :app do
-    run "/var/lib/gems/1.8/bin/bundle exec #{unicorn_rails} -Dc #{unicorn_conf}"
+    run "cd #{current_release}; /var/lib/gems/1.8/bin/bundle exec #{unicorn_rails} -Dc #{unicorn_conf}"
   end
 
   desc "Stop application"
@@ -55,7 +55,7 @@ namespace :deploy do
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || /var/lib/gems/1.8/bin/bundle exec #{unicorn_rails} -Dc #{unicorn_conf}"
+    run "cd #{current_release}; [ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || /var/lib/gems/1.8/bin/bundle exec #{unicorn_rails} -Dc #{unicorn_conf}"
     thinking_sphinx.rebuild
   end
 end
@@ -74,5 +74,4 @@ namespace :sass do
     invoke_command "cd #{current_release}; #{rake} sass:update RAILS_ENV=production"
   end
 end
-
 
