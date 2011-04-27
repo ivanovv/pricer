@@ -8,16 +8,12 @@
     #container
       %header#header
         = render "layouts/header"
-      #sidebar
-        %ul
-          %li
-            = link_to("Главная", root_path)
-          %li
-            = link_to("Поиск", searches_path)
-          %li
-            = link_to("Справочник", items_path)
-          %li
-            = link_to("Связи", links_path)
+      %nav
+        = button_group do
+          = button_link_to("Главная", root_path)
+          = button_link_to("Поиск", searches_path)
+          = button_link_to("Справочник", items_path)
+          = button_link_to("Связи", links_path)
 
       #main{ :role => 'main' }
         = render "layouts/flashes"

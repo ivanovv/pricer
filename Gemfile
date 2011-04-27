@@ -17,6 +17,7 @@ gem 'differ'
 gem "whenever"
 gem 'hoptoad_notifier'
 gem "awesome_print", :require => "ap"
+gem 'css3buttons'
 
 group :production do
   gem "unicorn"

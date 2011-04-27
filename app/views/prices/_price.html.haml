@@ -3,7 +3,7 @@
   %td= link_to(price.original_description, [price.company, price])
   %td= price.price
   - if price.links.size == 0
-    %td= link_to "Link", new_link_path(:price_id => price.id)
+    %td= button_link_to "Link", new_link_path(:price_id => price.id)
   - else
     - if defined?(link) && link
-      %td= link_to "Unlink", link, :confirm => 'Are you sure?', :method => :delete
+      %td= danger_button_link_to "Unlink", link, :confirm => 'Are you sure?', :method => :delete

@@ -6,12 +6,10 @@
   %tr
     %th Description
     %th Original description
-    %th Vendor code
   - for item in @items
     %tr
       %td= item.description
       %td= item.original_description
-      %td= item.vendor_code
       %td= link_to 'Show', item
       %td= link_to 'Edit', edit_item_path(item)
       %td= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete

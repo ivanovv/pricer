@@ -58,7 +58,8 @@ body {
 
 #container {
     background-color: white;
-    padding: 5px;
+    padding: 10px;
+    margin:10px;
 }
 
 header {
@@ -67,7 +68,9 @@ header {
     padding-left:100px;
 }
 
-#main {}
+#main {
+
+}
 
 footer {
     padding-top:50px;
@@ -87,7 +90,20 @@ table tr:hover {
 }
 
  #flot_placeholder {
- width: 800px;
+ width: 900px;
  height: 300px;
  display: block;
+ margin-top: 10px;
+ margin-bottom: 10px;
+ }
+
+ nav {
+ paddig-top: 0px;
+ padding-bottom: 15px;
+ float:right;
+ margin:auto;
+ }
+
+ nav, footer {
+ border-bottom: 1px solid #E5E5E5;
  }
