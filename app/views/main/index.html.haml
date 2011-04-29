@@ -1,7 +1,10 @@
-%p
-  Сейчас в системе #{@price_count} прайс
-  %br
-  - @companies.each do |company|
-    = link_to(company.name, company_prices_path(company))
-    = company.prices.count
-    %br
+.article.first.box
+  %h2
+    %a Прайсы
+  %h3 Сейчас в системе #{@price_count} прайс
+  %p
+    %ul
+      - @companies.each do |company|
+        %li
+          = link_to(company.name, company_prices_path(company))
+          = company.prices.count

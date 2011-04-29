@@ -9,6 +9,10 @@ class Link < ActiveRecord::Base
   belongs_to :item
 
 
+  validates :price_id, :presence => true, :on => :create
+
+  validates :item_id, :presence => true, :on => :create
+
 
   def update_other_parties
     self.price.many_items_found=false

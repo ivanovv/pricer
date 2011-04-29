@@ -9,7 +9,7 @@
 =link_to t('.sort_by_name'), params.merge(:sort=>'name', :page=> nil)
 %br
 
-%table
+%table.grid
   %tr
     %th= t('.warehouse_code')
     %th= t('.name')
@@ -19,6 +19,3 @@
     = render :partial => "price", :locals => {:price => price}
 
 = paginate @prices
-
-%br
-

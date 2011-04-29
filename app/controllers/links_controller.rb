@@ -1,10 +1,12 @@
 class LinksController < ApplicationController
+  respond_to :html, :js
+
   def index
-    @links = Link.includes(:price, :item).page(params[:page])
+    respond_with(@links = Link.includes(:price, :item).page(params[:page]))
   end
 
   def show
-    @link = Link.find(params[:id])
+    respond_with(@link = Link.find(params[:id]))
   end
 
   def new
@@ -15,6 +17,7 @@ class LinksController < ApplicationController
         @price_that_can_be_linked = @price.cross_prices.select {|p| p.links.size == 0}      
       end
     end
+    respond_with(@link)
   end
 
   def create
@@ -28,31 +31,26 @@ class LinksController < ApplicationController
         end
         flash[:notice] = "Successfully created links."
       end
-
-      redirect_to @link
-    else
-      render :action => 'new'
     end
+    respond_with(@link, :layout => !request.xhr?)
   end
 
   def edit
     @link = Link.find(params[:id])
+    respond_with(@link)
   end
 
   def update
     @link = Link.find(params[:id])
-    if @link.update_attributes(params[:link])
-      flash[:notice] = "Successfully updated link."
-      redirect_to link_url
-    else
-      render :action => 'edit'
-    end
+    flash[:notice] = "Successfully updated link." if @link.update_attributes(params[:link])
+    respond_with(@link) 
   end
 
   def destroy
     @link = Link.find(params[:id])
     @link.destroy
     flash[:notice] = "Successfully destroyed link."
-    redirect_to links_url
+    respond_with(:location => links_url)
   end
+  
 end

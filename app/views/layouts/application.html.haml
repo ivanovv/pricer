@@ -4,23 +4,35 @@
   %head
     = render "layouts/head", :stylesheet_partial => "layouts/stylesheets"
   
-  %body.bp.two-col{ :class => "#{controller.controller_name}" }
-    #container
-      %header#header
-        = render "layouts/header"
-      %nav
-        = button_group do
-          = button_link_to("Главная", root_path)
-          = button_link_to("Поиск", searches_path)
-          = button_link_to("Справочник", items_path)
-          = button_link_to("Связи", links_path)
-
+  -#%body.bp.two-col{ :class => "#{controller.controller_name}" }
+  %body.bp
+    #container.container_12
+      .grid_12
+        %header#header
+          = render "layouts/header"
+      .clear
+      .grid_12
+        %ul.nav.main
+          %li=link_to("Главная", root_path)
+          %li=link_to("Поиск", searches_path)
+          %li=link_to("Справочник", items_path)
+          %li=link_to("Связи", links_path)
+          
+      .clear
+      .grid_12
+        %h2#page-heading
+          Сравниваем "корзинки". С умом.
       #main{ :role => 'main' }
-        = render "layouts/flashes"
-        = yield
-        
-      %footer#footer
-        = render "layouts/footer"
+        .grid_12
+          = render "layouts/flashes"
+          = yield
+        .clear
+      #site_info.grid_12
+        .box
+          %footer#footer
+            = render "layouts/footer"
+      .clear
+
         
     -# Javascript at the bottom for fast page loading
     = render "layouts/javascripts"

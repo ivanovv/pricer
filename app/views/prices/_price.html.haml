@@ -1,5 +1,8 @@
 %tr
-  %td{"data-price_id" => price.id}= price.warehouse_code
+  %td{"data-price_id" => price.id}
+    = price.company.name
+    %span.small= price.warehouse_code
+
   %td= link_to(price.original_description, [price.company, price])
   %td= price.price
   - if price.links.size == 0

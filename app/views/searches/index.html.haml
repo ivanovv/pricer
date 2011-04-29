@@ -2,6 +2,14 @@
   :javascript
     $("#q").focus();
 
+.grid_4
+  .box
+    = form_tag(searches_path, :method => 'get') do
+      %p
+        = text_field_tag :q, params[:q], {:class=>"search text"}
+        = submit_tag t(:search), {:name => nil, :class=>"search button"}
+.clear
+
 %h1(style="display:inline") Найденные товары
 
 - if @prices
@@ -9,13 +17,9 @@
 
 %br
 %br
-= form_tag(searches_path, :method => 'get') do
-  %p
-    = text_field_tag :q, params[:q]
-    = submit_tag t(:search), :name => nil
 
 - if @prices
-  %table
+  %table.grid
     %tr
       %th Компания
       %th Складской код
@@ -46,7 +50,7 @@
     %br
 
     - if @items
-      %table
+      %table.grid
         %tr
           %th Наименование
           %th Прайсов

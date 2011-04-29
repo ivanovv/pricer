@@ -35,29 +35,33 @@
       });
     
 
--if @price
-  = render 'disambiguation_form'
--else
-  = render 'form'
+.box
+  -if @price
+    = render 'disambiguation_form'
+  -else
+    = render 'form'
 
 - if @price_that_can_be_linked && @price_that_can_be_linked.size > 0
   %table.selectable
     - @price_that_can_be_linked.each do |cross|
       = render :partial => "prices/price", :locals => {:price => cross}
 
+.box
+  %h2 Поиск синонимов
+  .grid_4.alpha
+    .box
+      = form_tag(searches_path, :method => 'get', :id => "items_search") do
+        %p
+          = text_field_tag :q, params[:q] || @price.most_likely_search, {:class=>"search text", :size =>100, "data-pre" => @price.most_likely_search_tokenised, "data-sphinx"=> @price.sphinx_keywords_for_javascript(10)}
+          = submit_tag t(:search), {:name => nil, :class=>"search button"}
+  .grid_8.omega
+    %br
+    #most_likely_slider
+    %br
+    #most_unlikely_slider
+  .clear
 
-= form_tag(searches_path, :method => 'get', :id => "items_search") do
-  %p
-    = text_field_tag :q, params[:q] || @price.most_likely_search, {:size =>100, "data-pre" => @price.most_likely_search_tokenised, "data-sphinx"=> @price.sphinx_keywords_for_javascript(10)}
-    = submit_tag t(:search), :name => nil
 
-%br
-#most_likely_slider
-
-%br
-#most_unlikely_slider
-
-%br
 
 #items_list
 
