@@ -50,7 +50,7 @@ class LinksController < ApplicationController
     @link = Link.find(params[:id])
     @link.destroy
     flash[:notice] = "Successfully destroyed link."
-    respond_with(:location => links_url)
+    respond_with(@link)
   end
   
 end
