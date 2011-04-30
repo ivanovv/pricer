@@ -14,3 +14,5 @@ tmp/**
 .sass-cache
 .idea
 
+/cross_items
+/config/production.sphinx.conf
