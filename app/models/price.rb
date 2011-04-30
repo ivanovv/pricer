@@ -69,7 +69,7 @@ class Price < ActiveRecord::Base
     end
     label = "#{original_description} (#{company.name})"
     js_data << "[#{Time.now.utc.to_i * 1000}, #{last_history_record.value}]," if last_history_record
-    "{\"data\": [#{js_data.chop}], \"label\": #{label.to_json}, \"color\":#{company_id}}"
+    "{\"data\": [#{js_data.chop}], \"label\": #{label.to_json}, \"color\":#{company_id}, \"price_id\":#{id}}"
   end
 
   def most_likely_search

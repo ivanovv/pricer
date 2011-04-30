@@ -1,14 +1,17 @@
 - if @items
   .box
     %h2 Найденые записи из справочника
-  %table.grid
-    %tbody{:id=>'selectable'}
-      %tr
-        %th Наименование
-        %th Прайсов
+    %table.grid
+      %tbody#selectable
+        %tr
+          %th Наименование
+          %th Прайсов
 
-        - @items.each do |item|
-          %tr
-            %td{:id=>"item-#{item.id}", :class=>'found_item'}
-              =link_to(item.original_description, item)
-            %td= item.prices.count
+          - @items.each do |item|
+            %tr
+              %td{:id => "#{dom_id(item)}", :class => 'item'}
+                =link_to(item.original_description, item)
+              %td= item.prices.count
+- else
+  .box
+    %h2 Записей не найдено

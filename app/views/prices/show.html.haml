@@ -32,7 +32,7 @@
   %strong
     =t('.item_record_title')
   %br
-  = @price.items[0]
+  =link_to @price.items[0], @price.items[0]
   %br
   =link_to("Link", @price.links[0])
   %br

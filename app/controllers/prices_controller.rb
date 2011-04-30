@@ -7,12 +7,13 @@ class PricesController < ApplicationController
               when "name"  then "original_description"
               when "recent" then "created_at desc"
            end
+    
     sort ||= "original_description"
 
     @prices = @company.prices.order(sort).page(params[:page])
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html 
       format.xml  { render :xml => @prices }
     end
   end
@@ -21,7 +22,7 @@ class PricesController < ApplicationController
     @price = @company.prices.find(params[:id])
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html 
       format.xml  { render :xml => @price }
     end
   end
@@ -30,7 +31,7 @@ class PricesController < ApplicationController
     @price = @company.prices.build
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html 
       format.xml  { render :xml => @price }
     end
   end

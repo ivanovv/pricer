@@ -1,0 +1,12 @@
+$('td[data-price_id="#{@link.price.id}"]').parent().children().addClass("removed");
+$('td[data-price_id="#{@link.price.id}"]').parent().hide("slow");
+\var data = $('#flot_placeholder').data("graph");
+\data = $.map(data, function(n){
+alert(n.price_id);
+\return n.price_id !=
+= @link.price.id
+\? n : null;
+});
+
+$('#flot_placeholder').data("graph", data);
+buildGraph();

@@ -35,5 +35,7 @@
 @import "blueprint/colors";
 @import "blueprint/scaffolding";
 
+@include blueprint-interaction;
+
 // Media should come last
 @import "partials/media";

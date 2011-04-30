@@ -9,4 +9,4 @@
     %td= button_link_to "Link", new_link_path(:price_id => price.id)
   - else
     - if defined?(link) && link
-      %td= danger_button_link_to "Unlink", link, :confirm => 'Are you sure?', :method => :delete
+      %td= danger_button_link_to "Unlink", link, :confirm => 'Удаляем?', :method => :delete, :remote => true  

@@ -34,7 +34,7 @@
   .box
     %h2
       = t('.pricehistory_title')
-    #flot_placeholder{"data-graph" =>"[#{@item.as_flot_data}]"}
+    #flot_placeholder{:data => {:graph =>"[#{@item.as_flot_data}]"}}
 
 
 %p

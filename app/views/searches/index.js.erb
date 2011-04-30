@@ -2,7 +2,7 @@ $('#items_list').html('<%= escape_javascript(render("items")) %>');
 $('#selectable').selectable({
     filter: 'td',
     stop: function() {
-            var $td = $(".ui-selected.found_item");
-            $("#link_item_id").val($td.attr('id').replace("item-", ""));
+            var $td = $(".item.ui-selected");
+            $("#link_item_id").val($td.attr('id').replace("item_", ""));
             }
 });
