@@ -4,6 +4,8 @@
 // Then we'll import the compass extension
 @import "html5-boilerplate";
 
+@include html5-boilerplate-reset;
+
 // Now, you can simply include everything
 // (except media) by uncommeting this line
 //@include html5-boilerplate;

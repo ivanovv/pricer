@@ -1,7 +1,6 @@
 @import "compass/css3";
 @import "compass/utilities/tables/scaffolding";
 
-@include html5-boilerplate-reset;
 
 @include html5-boilerplate-fonts($base-font-family, $base-font-size, $base-line-height);
 
