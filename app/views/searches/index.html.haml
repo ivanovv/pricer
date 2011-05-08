@@ -6,7 +6,7 @@
   .box
     = form_tag(searches_path, :method => 'get') do
       %p
-        = text_field_tag :q, params[:q], {:class=>"search text"}
+        = search_field_tag :q, params[:q], {:class=>"search text"}
         = submit_tag t(:search), {:name => nil, :class=>"search button"}
 .clear
 

@@ -1,9 +1,10 @@
 - title "New Link"
+-if @price
+  =content_for :javascripts do
+    :javascript
+      var search_terms = #{@price.sphinx_keywords_for_javascript(10)};
+      $(function() {
 
-=content_for :javascripts do
-  :javascript
-    var search_terms = #{@price.sphinx_keywords_for_javascript(10)};
-    $(function() {
         var $q = $("#q");
         $( "#most_likely_slider" ).slider({
           value:1, min: 1, max: 10, step: 1,
@@ -20,12 +21,16 @@
         });
 
         //$q.val(search_terms.slice(0, $( "#slider" ).slider( "value" )).join(" "));
-      
+
         $('.selectable').selectable({
           filter: 'tr',
           stop: function() {
             $("#link_other_prices").val($(".selectable .ui-selected td:first-child").map(function(){
+              $(this).parent().children().addClass("ui-selected");
               return $(this).data("price_id")}).get().join(","));
+            $(".selectable tr:not(.ui-selected)").each(function(){
+              $(this).children().removeClass("ui-selected");
+            });
           }
         });
         /*$("#q").tokenInput(#{@price.most_likely_search_tokenised}, {
@@ -42,9 +47,15 @@
     = render 'form'
 
 - if @price_that_can_be_linked && @price_that_can_be_linked.size > 0
-  %table.selectable
-    - @price_that_can_be_linked.each do |cross|
-      = render :partial => "prices/price", :locals => {:price => cross}
+
+  .box
+    %h2 Связанные прайсы
+    %p
+      Выделите один или несколько прайсов, чтобы связать их с данным элементом справочника.
+    %table.grid
+      %tbody.selectable
+        - @price_that_can_be_linked.each do |cross|
+          = render :partial => "prices/price", :locals => {:price => cross}
 
 .box
   %h2 Поиск синонимов
@@ -52,7 +63,10 @@
     .box
       = form_tag(searches_path, :method => 'get', :id => "items_search") do
         %p
-          = text_field_tag :q, params[:q] || @price.most_likely_search, {:class=>"search text", :size =>100, "data-pre" => @price.most_likely_search_tokenised, "data-sphinx"=> @price.sphinx_keywords_for_javascript(10)}
+          -if @price
+            = search_field_tag :q, params[:q] || @price.most_likely_search, {:class=>"search text", :size =>100, "data-pre" => @price.most_likely_search_tokenised, "data-sphinx"=> @price.sphinx_keywords_for_javascript(10)}
+          -else
+            = search_field_tag :q, params[:q] , {:class=>"search text", :size =>100}
           = submit_tag t(:search), {:name => nil, :class=>"search button"}
   .grid_8.omega
     %br

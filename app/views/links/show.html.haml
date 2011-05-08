@@ -7,6 +7,13 @@
   %strong Price:
   = @link.price
 %p
+  Difference
+  - Differ.format= :html
+  != Differ.diff_by_word(@link.price.to_s.downcase, @link.item.to_s.downcase)
+
+
+
+%p
   %strong Human:
   = @link.human?
 %p
