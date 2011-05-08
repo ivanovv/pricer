@@ -1,5 +1,9 @@
 Pricer::Application.routes.draw do
 
+  resources :configuration_lines
+
+  resources :scraped_configurations
+
   resources :links
 
   resources :price_histories

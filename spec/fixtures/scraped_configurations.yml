@@ -1,0 +1,13 @@
+one:
+  company_id: 1
+  name: MyString
+  url: MyString
+  assembly_price: 1
+  total_price: 1
+
+two:
+  company_id: 1
+  name: MyString
+  url: MyString
+  assembly_price: 1
+  total_price: 1

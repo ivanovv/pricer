@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110321224357) do
+ActiveRecord::Schema.define(:version => 20110507195654) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(:version => 20110321224357) do
     t.datetime "updated_at"
     t.string   "base_product_link"
     t.string   "home_link"
+  end
+
+  create_table "configuration_lines", :force => true do |t|
+    t.integer  "scraped_configuration_id"
+    t.integer  "price_id"
+    t.integer  "quantity"
+    t.integer  "price_value"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "cross_prices", :id => false, :force => true do |t|
@@ -76,5 +86,17 @@ ActiveRecord::Schema.define(:version => 20110321224357) do
   add_index "prices", ["company_id", "warehouse_code"], :name => "company_warehouse_code_index"
   add_index "prices", ["original_description"], :name => "original_description_index"
   add_index "prices", ["warehouse_code"], :name => "warehouse_code_index"
+
+  create_table "scraped_configurations", :force => true do |t|
+    t.integer  "company_id"
+    t.string   "name"
+    t.string   "url"
+    t.string   "comment"
+    t.string   "author"
+    t.integer  "assembly_price"
+    t.integer  "total_price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

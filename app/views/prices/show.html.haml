@@ -20,11 +20,8 @@
       %th= t(:warehouse_code)
       %th= t(:name)
       %th.numeric= t(:price)
+      %th 
     - @price.cross_prices.each do |cross|
-      %tr
-        %td(colspan="3" style="text-align:center")
-          %strong
-            = cross.company.name
       = render :partial => "price", :locals => {:price => cross}
 
 %br

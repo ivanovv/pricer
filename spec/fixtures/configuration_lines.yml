@@ -1,0 +1,11 @@
+one:
+  price_id: 1
+  quantity: 1
+  price: 1
+  description: MyString
+
+two:
+  price_id: 1
+  quantity: 1
+  price: 1
+  description: MyString

@@ -1,0 +1,50 @@
+- title "Scraped Configuration"
+
+%p
+  %strong Company:
+  = @scraped_configuration.company.name
+%p
+  %strong Name:
+  = @scraped_configuration.name
+%p
+  %strong Url:
+  = link_to @scraped_configuration.url, @scraped_configuration.url
+%p
+  %strong Assembly Price:
+  = @scraped_configuration.assembly_price
+%p
+  %strong Total Price:
+  = @scraped_configuration.total_price
+
+- if @scraped_configuration.configuration_lines.size > 0
+  .box
+    %table.grid
+      %tr
+        %th Price
+        %th Item
+        %th Quantity
+        %th Config Price
+        %th Current Price
+
+      - @scraped_configuration.configuration_lines.each do |line|
+        %tr
+          %td= link_to line.price, [@scraped_configuration.company, line.price]
+          -if ! line.price.items[0]
+            %td= button_link_to "Прайс не связан, создать связь", new_link_path(:price_id => line.price.id)
+          -else
+            %td= link_to line.price.items[0], line.price.items[0]
+          %td= line.quantity
+          %td= line.price_value
+          -if line.price && line.price.price_histories.last
+            %td= line.price.price_histories.last.value
+          -else
+            %td
+              N/A
+
+
+%p
+  = link_to "Edit", edit_scraped_configuration_path(@scraped_configuration)
+  |
+  = link_to "Destroy", @scraped_configuration, :confirm => 'Are you sure?', :method => :delete
+  |
+  = link_to "View All", scraped_configurations_path
