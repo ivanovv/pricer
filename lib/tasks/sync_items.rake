@@ -1,6 +1,6 @@
 # encoding: UTF-8
 #require_relative "../fcenter.rb"
-require File.join(File.dirname(__FILE__), '../fcenter.rb')
+require File.join(File.dirname(__FILE__), '../price_parsers/fcenter.rb')
 
 namespace :app do
 
