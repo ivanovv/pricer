@@ -4,7 +4,7 @@
 - if !google_api_key.blank?
   = javascript_include_tag "http://www.google.com/jsapi?key=#{google_api_key}"
   :javascript
-    google.load(#{ remote_jquery("1.6.0") });
+    google.load(#{ remote_jquery("1.6") });
 - else
   = javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/#{ local_jquery("1.6.0") }"
 
@@ -16,12 +16,6 @@
 -else
   = javascript_include_tag 'rails', 'plugins', 'application', 'jquery.colorbox', 'jquery.flot.min.js', 'jquery-ui-min', 'jquery.tokeninput'
 
--# Fix any <img> or .png_bg bg-images. Also, please read goo.gl/mZiyb
-/[if lt IE 7 ]
-  = javascript_include_tag 'dd_belatedpng.js'
-  :javascript
-    //DD_belatedPNG.fix('img, .png_bg');
-    
 -#  Append your own using content_for :javascripts
 = yield :javascripts
 
@@ -29,7 +23,8 @@
 -# Looks for google_account_id first in ENV['GOOGLE_ACCOUNT_ID'] then in config/google.yml
 - if !google_account_id.blank?
   :javascript
-    var _gaq=[["_setAccount","#{google_account_id}"],["_trackPageview"]];
+    var _gaq=[["_setAccount","#{google_account_id}"],["_trackPageview"],["_trackPageLoadTime"]];
     (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];g.async=1;
     g.src=("https:"==location.protocol?"//ssl":"//www")+".google-analytics.com/ga.js";
     s.parentNode.insertBefore(g,s)}(document,"script"));
+
