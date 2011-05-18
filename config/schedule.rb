@@ -42,7 +42,7 @@ every 1.day, :at => '5:40 am' do
 end
 
 
-every 6.hours do
+every 1.day, :at => '5:35 am' do
   rake "thinking_sphinx:index"
 end
 

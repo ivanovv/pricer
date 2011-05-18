@@ -6,7 +6,7 @@
 
 set :application, "pricer"
 set :repository,  "git://github.com/ivanovv/pricer.git"
-
+set :deploy_via, :remote_cache
 
 deploy_path = "/home/hosting_vivanov2/projects/pricer"
 
@@ -56,7 +56,6 @@ namespace :deploy do
   desc "Restart Application"
   task :restart, :roles => :app do
     run "cd #{current_release}; [ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || /var/lib/gems/1.8/bin/bundle exec #{unicorn_rails} -Dc #{unicorn_conf}"
-    thinking_sphinx.rebuild
   end
 end
 
