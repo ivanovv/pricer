@@ -12,9 +12,9 @@
 :javascript
   window.jQuery || document.write("<script src='/javascripts/jquery.min.js'>\x3C/script>")
 - if Rails.env.production?
-  = javascript_include_tag 'rails', 'plugins', 'application', 'jquery.colorbox-min', 'jquery.flot.min.js', 'jquery-ui-min', 'jquery.tokeninput', :cache => "scripts"
+  = javascript_include_tag 'jquery_ujs', 'plugins', 'application', 'jquery.colorbox-min', 'jquery.flot.min.js', 'jquery-ui-min', 'jquery.tokeninput', :cache => "scripts"
 -else
-  = javascript_include_tag 'rails', 'plugins', 'application', 'jquery.colorbox', 'jquery.flot.min.js', 'jquery-ui-min', 'jquery.tokeninput'
+  = javascript_include_tag 'jquery_ujs', 'plugins', 'application', 'jquery.colorbox', 'jquery.flot.min.js', 'jquery-ui-min', 'jquery.tokeninput'
 
 -#  Append your own using content_for :javascripts
 = yield :javascripts
