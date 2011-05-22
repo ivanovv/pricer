@@ -17,6 +17,7 @@ class PriceParserLoader
 
       desc "Parse #{excel_parser::COMPANY_NAME} price list"
       task name => :environment do
+         ActionController::Base.expire_page "/"
         file_name = File.expand_path(excel_parser::DEFAULT_FILE_PATH)
         if defined?(excel_parser::DEFAULT_ENCODING)
           excel_parser.parse_price(file_name, excel_parser::DEFAULT_ENCODING)
