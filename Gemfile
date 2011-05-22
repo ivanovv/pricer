@@ -18,6 +18,7 @@ gem "whenever"
 gem 'hoptoad_notifier'
 gem "awesome_print", :require => "ap"
 gem 'css3buttons'
+gem 'rake', '0.8.7'
 
 group :production do
   gem "unicorn"
