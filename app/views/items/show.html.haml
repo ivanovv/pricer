@@ -28,7 +28,7 @@
           %th Отвязать
       %tbody
         - @prices_links.each do |price_link_pair|
-          = render 'prices/price', :price => price_link_pair[:price], :link => price_link_pair[:link]
+          = render 'prices/price', :price => price_link_pair[:price], :item_link => price_link_pair[:link]
 
   .clear
   .box
@@ -43,3 +43,4 @@
   = link_to "Destroy", @item, :confirm => 'Are you sure?', :method => :delete
   |
   = link_to "View All", items_path
+

@@ -8,5 +8,6 @@
   - if price.links.size == 0
     %td= button_link_to "Link", new_link_path(:price_id => price.id)
   - else
-    - if defined?(link) && link
-      %td= danger_button_link_to "Unlink", link, :confirm => 'Удаляем?', :method => :delete, :remote => true  
+    - if defined?(item_link) && item_link
+      %td= danger_button_link_to "Unlink", item_link, :confirm => 'Удаляем?', :method => :delete, :remote => true
+
