@@ -1,6 +1,26 @@
 =content_for :javascripts do
   :javascript
-    $("#q").focus();
+    $('#q').focus();
+
+    $('table.prices, table.items').selectable({
+      filter: 'tr',
+      cancel: 'a',
+      stop: function() {
+        $("tr.ui-selected").each(function(){
+          $(this).children().addClass("ui-selected");
+          if ($(this).data("item_id") != null ) {
+            $("#link_item_id").val($(this).data("item_id"));
+          }
+          if ($(this).data("price_id") != null ) {
+            $("#link_price_id").val($(this).data("price_id"));
+          }
+        });
+        $("table.prices tr:not(.ui-selected), table.items tr:not(.ui-selected)").each(function(){
+          $(this).children().removeClass("ui-selected");
+        });
+      }
+    });
+    //$('table.items').selectable({filter:'tr', cancel: 'a'});
 
 .grid_4
   .box
@@ -19,7 +39,7 @@
 %br
 
 - if @prices
-  %table.grid
+  %table.grid.prices.selectable
     %tr
       %th Компания
       %th Складской код
@@ -30,7 +50,7 @@
 
     - @prices.each do |price|
       - if price
-        %tr
+        %tr{:data=>{:price_id=>price.id}}
           %td=link_to(price.company.name, company_prices_path(price.company))
           %td= price.warehouse_code
           %td= link_to(price.original_description, [price.company, price])
@@ -40,27 +60,35 @@
   = paginate @prices
 
   %br
+  .box
+    = semantic_form_for(Link.new(:human=>true, :score=>10), :url=> url_for(:action => "create", :controller => "links"), :method=>:post) do |f|
+      = f.inputs do
+        = f.input :item_id, :as => :hidden
+        = f.input :price_id, :as => :hidden
+        = f.input :human, :as => :hidden
+        = f.input :score, :as => :hidden
+      = positive_plus_button_submit_tag "Связать"
 
-    %h1(style="display:inline") Найденные items
+  %h1(style="display:inline") Найденные записи из справочника
 
-    - if @items
-      (#{@items.total_entries})
+  - if @items
+    (#{@items.total_entries})
+
+  %br
+  %br
+
+  - if @items
+    %table.grid.items.selectable
+      %tr
+        %th Наименование
+        %th Прайсов
+
+      - @items.each do |item|
+        - if item
+          %tr{:data=>{:item_id=>item.id}}
+            %td= link_to(item.original_description, item)
+            %td= item.prices.count
+
+    = paginate @items
 
     %br
-    %br
-
-    - if @items
-      %table.grid
-        %tr
-          %th Наименование
-          %th Прайсов
-
-        - @items.each do |item|
-          - if item
-            %tr
-              %td= link_to(item.original_description, item)
-              %td= item.prices.count
-
-      = paginate @items
-
-      %br
