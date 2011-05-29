@@ -14,8 +14,8 @@ module PriceParsers
       100
     end
 
-    def should_skip_row?(row)
-      !row[2].starts_with?('Материнские платы')
+    def initial_row?(row)
+      row[2].starts_with?('Материнские платы')
     end
 
     def should_stop?(row)
