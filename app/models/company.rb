@@ -4,8 +4,8 @@ class Company < ActiveRecord::Base
 
   def make_short_link(full_link)
     if full_link
-      full_link.sub(self.base_product_link, "")
-    end    
+      full_link.to_s.sub(self.base_product_link, "")
+    end
   end
 end
 

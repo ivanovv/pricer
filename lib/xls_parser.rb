@@ -34,7 +34,7 @@ class XLSParser < PriceParser
       break if should_stop?(row)
       next if row[indexes[:description]].blank?
 
-      desc = PriceDescriptionNormalizer.normalize_description(row[indexes[:description]])
+      desc = PriceDescriptionNormalizer.normalize_description(row[indexes[:description]].to_s)
       if should_parse_row(row)
         @parsed_rows += 1
         create_price(
