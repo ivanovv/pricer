@@ -1,8 +1,16 @@
-.grid_12
-  %ul.nav.main
-    %li= link_to("Главная", root_path)
-    %li= link_to("Поиск", searches_path)
-    %li= link_to("Справочник", items_path)
-    %li= link_to("Связи", links_path)
+.grid_12{:style=>"background: none repeat scroll 0 0 #666666; height:2.5em;"}
+  .grid_9
+    %ul.nav.main
+      %li= link_to("Главная", root_path)
+      %li= link_to("Поиск", searches_path)
+      %li= link_to("Справочник", items_path)
+      %li= link_to("Связи", links_path)
+
+
+  .grid_3
+    = search_box
 
 .clear
+
+  -#.grid_4.omega{:style=>"background: none repeat scroll 0 0 #666666; height:2.5em;"}
+  -#%div{:style => "float:right;position:relative;top:-2.3em; margin-right:10px;"}
