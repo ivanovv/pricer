@@ -27,16 +27,18 @@ class PriceDescriptionNormalizer
       break if should_break
     end
 
+    #TODO use regex here
     desc_words = desc.split
     last_word = desc_words[-1,1].to_s
     if RETAIL.index(last_word)
       desc_words[-1,1] = 'retail'
       desc = desc_words.join(" ")
     end
-    desc.sub( /(\d+)gb\s/iu, "\\1гб " ).
-         sub( /(\d+)tb\s/iu, "\\1тб " ).
-         sub( /(\d+)\.0 Gb\s/iu, "\\1гб " ).
+
+    desc.sub( /(\d+)\.0 Gb\s/iu, "\\1гб " ).
          sub( /(\d+)\sGb\s/iu, "\\1гб " ).
+         sub( /(\d+)tb\s/iu, "\\1тб " ).
+         sub( /(\d+)gb\s/iu, "\\1гб " ).
          sub( /western digital/iu, "wd" ).
          strip
   end
