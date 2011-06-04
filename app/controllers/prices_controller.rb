@@ -8,7 +8,7 @@ class PricesController < ApplicationController
               when "recent" then "created_at desc"
            end
     
-    sort ||= "original_description"
+    sort ||= "created_at desc"
 
     @prices = @company.prices.order(sort).page(params[:page])
 
