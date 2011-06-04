@@ -23,6 +23,10 @@ class XLSParser < PriceParser
     false
   end
 
+  def preprocess_price_attributes(price_attributes)
+    
+  end
+
   def parse_price(book_path, encoding = nil)
     book = Spreadsheet.open book_path
     book.encoding = encoding if encoding
@@ -37,15 +41,16 @@ class XLSParser < PriceParser
       desc = PriceDescriptionNormalizer.normalize_description(row[indexes[:description]].to_s)
       if should_parse_row(row)
         @parsed_rows += 1
-        create_price(
-            :company_id => company.id,
+        price_attributes = { :company_id => company.id,
             :warehouse_code => row[indexes[:warehouse]],
             :description => desc,
             :price => row[indexes[:price]],
             :original_description => row[indexes[:description]],
             :vendor_code => indexes[:vendor] ? row[indexes[:vendor]] : nil,
             :web_link => indexes[:web_link] ? row[indexes[:web_link]] : nil
-        )
+        }
+        preprocess_price_attributes(price_attributes)
+        create_price(price_attributes)
       end
     end
     puts stats

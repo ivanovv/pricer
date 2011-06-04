@@ -25,11 +25,24 @@ module PriceParsers
     end
 
     def should_parse_row(row)
-      row[warehouse_code_index].to_s =~ /\d+(\.\d)?/
+      if row[warehouse_code_index].to_s =~ /\d+(\.\d)?/
+        desc = row[indexes[:description]]
+        is_notebook = desc.is_a?(String) && (desc.starts_with?('Нетбук') || desc.starts_with?('Ноутбук') || desc.starts_with?('Планшет'))
+        !is_notebook
+      else
+        false
+      end
+
     end
 
     def indexes
       {:warehouse => 0, :description => 3, :vendor => nil, :price => 11, :web_link => 0}
+    end
+
+    def preprocess_price_attributes(price_attributes)
+      price_attributes[:web_link] = price_attributes[:web_link].to_i
+      price_attributes[:description].match(/\[([^\]]*)\]/)
+      price_attributes[:vendor_code] = $+ if ($+ != "OEM" && $+ != "BOX")
     end
 
   end
