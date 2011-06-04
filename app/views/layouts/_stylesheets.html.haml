@@ -1,9 +1,9 @@
 -# CSS: implied media="all"
 -if Rails.env.production?
-  = stylesheet_link_tag 'style', 'formtastic', 'colorbox', 'jquery-ui', 'token-input',
+  = stylesheet_link_tag 'style', 'formtastic', 'formtastic_changes', 'colorbox', 'jquery-ui', 'token-input',
   'token-input-facebook', 'layout', 'text', 'nav', 'grid', :media => 'all', :cache => "styles"
 -else
-  = stylesheet_link_tag 'style', 'formtastic', 'colorbox', 'jquery-ui', 'token-input',
+  = stylesheet_link_tag 'style', 'formtastic', 'formtastic_changes', 'colorbox', 'jquery-ui', 'token-input',
   'token-input-facebook', 'layout', 'text', 'nav', 'grid', :media => 'all'
 
 = css3buttons_stylesheets :include_reset => false
