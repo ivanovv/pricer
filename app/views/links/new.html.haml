@@ -4,8 +4,7 @@
     :javascript
       var search_terms = #{@price.sphinx_keywords_for_javascript(10)};
       $(function() {
-
-        var $q = $("#q");
+        var $q = $("#q[data-sphinx]");
         $( "#most_likely_slider" ).slider({
           value:1, min: 1, max: 10, step: 1,
           slide: function( event, ui ) {
