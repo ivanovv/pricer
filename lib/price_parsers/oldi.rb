@@ -22,7 +22,14 @@ module PriceParsers
       {:warehouse => 0, :description => 1, :vendor => 15, :price => 5, :web_link => 0}
     end
 
+    def should_stop?(row)
+      row[3].starts_with?('Мониторы')
+    end
 
+    def initial_row?(row)
+      row[2].starts_with?('Комплектующие для ПК')
+    end
+    
   end
 end
 

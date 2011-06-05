@@ -10,12 +10,16 @@ module PriceParsers
     DEFAULT_FILE_PATH = '~/tmp/CitilinkPrice_1.xls'
 
     def rows_to_skip
-      200
+      6
     end
 
     def should_parse_row(row)
       return false unless row[0]
       row[0].starts_with?('Компьютеры и комплекту') && !row[1].starts_with?("Компьютеры")
+    end
+
+    def initial_row?
+      row[1].starts_with? 'Процессоры'
     end
 
     def indexes

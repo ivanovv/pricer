@@ -20,7 +20,7 @@ class XLSParser < PriceParser
   end
 
   def initial_row?(row)
-    false
+    true
   end
 
   def preprocess_price_attributes(price_attributes)

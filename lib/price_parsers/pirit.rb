@@ -12,8 +12,8 @@ module PriceParsers
       5
     end
 
-    def should_skip_row(row)
-      !row[1].starts_with?('Комплектующие')
+    def initial_row?(row)
+      row[1].starts_with?('Комплектующие')
     end
 
     def should_stop(row)
