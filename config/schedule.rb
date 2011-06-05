@@ -33,16 +33,14 @@ every 1.day, :at => '5:20 am' do
   rake "app:oldi"
 end
 
-every 1.day, :at => '5:30 am' do
+every 1.day, :at => '5:25 am' do
   rake "app:almer"
 end
 
-every 1.day, :at => '5:40 am' do
-  rake "app:all"
+every 1.day, :at => '5:30 am' do
+  rake "app:justcom"
 end
-
 
 every 1.day, :at => '5:35 am' do
-  rake "thinking_sphinx:index"
+  rake "app:all"
 end
-
