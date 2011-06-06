@@ -1,0 +1,36 @@
+
+nav.pagination {
+  text-align:center;
+  padding: 7px;
+  margin: 3px;
+  a {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    border: 1px solid #000000;
+
+    text-decoration: none; /* no underline */
+    color: #000000;
+
+    &:hover, &:active {
+      border: 1px solid #000000;
+      background-color:#000000;
+      color: #fff;
+     }
+  }
+  span.current {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    border: 1px solid #000000;
+
+    font-weight: bold;
+    background-color: #000000;
+    color: #FFF;
+  }
+
+  span.disabled {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    border: 1px solid #EEE;
+    color: #DDD;
+  }
+}
