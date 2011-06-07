@@ -18,7 +18,7 @@ module PriceParsers
       row[0].starts_with?('Компьютеры и комплекту') && !row[1].starts_with?("Компьютеры")
     end
 
-    def initial_row?
+    def initial_row?(row)
       row[1].starts_with? 'Процессоры'
     end
 

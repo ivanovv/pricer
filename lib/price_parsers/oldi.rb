@@ -27,7 +27,8 @@ module PriceParsers
     end
 
     def initial_row?(row)
-      row[2].starts_with?('Комплектующие для ПК')
+      return false unless row[3]
+      row[3].starts_with?('Комплектующие для ПК')
     end
     
   end
