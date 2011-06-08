@@ -19,7 +19,7 @@ module PriceParsers
     end
 
     def initial_row?(row)
-      row[1].starts_with? 'Процессоры'
+      row[1] && row[1].starts_with?('Процессоры')
     end
 
     def indexes
