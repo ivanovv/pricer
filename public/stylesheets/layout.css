@@ -84,7 +84,7 @@ h2#page-heading {
 	padding:6px 12px;
 }
 .box h2 a,
-.box h2 a.visible {
+.box h2 a.visible-content {
 	color:#fff;
 	background:#333 url("../images/switch_minus.gif") 97% 50% no-repeat;
 	display:block;
@@ -103,8 +103,8 @@ h2#page-heading {
 }
 
 
-.box h2 a.hidden,
-.box h2 a.hidden:hover {
+.box h2 a.hidden-content,
+.box h2 a.hidden-content:hover {
 	background-image: url("../images/switch_plus.gif");
 }
 .box h2 a:hover {
@@ -466,55 +466,4 @@ input.search.button {
 
 #accordian-block {
 	padding-bottom:10px;
-}
-
-
-/* Mootools Kwicks
------------------------------------------------ */
-#kwick-box { 
-	padding:0;
-	overflow:hidden;
-}
-#kwick-box h2 { 
-	margin:0;
-}
-#kwick {
-	position: relative;
-}
-#kwick .kwicks {
-	display: block;
-	background: #999;
-	height: 120px;
-	list-style:none;
-	margin:0;
-	overflow:hidden;
-}
-#kwick li {
-	float: left;
-	margin:0;
-	padding:0;
-}
-#kwick .kwick {
-	display: block;
-	cursor: pointer;
-	overflow: hidden;
-	height: 100px;
-	width: 215px;
-	padding: 10px;
-	background: #fff;
-}
-#kwick .kwick span {
-	color:#fff;
-}
-#kwick .one {
-	background: #666;
-}
-#kwick .two {
-	background: #777;
-}
-#kwick .three {
-	background: #888;
-}
-#kwick .four {
-	background: #999;
 }

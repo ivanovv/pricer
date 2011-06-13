@@ -1,0 +1,5 @@
+.box
+  %h2
+    %a.hidden-content#toggle-iframe{:href=>"#"}=company_name
+  .iframe-content{:data => {:url => "#{search_url}#{params[:q]}"}}
+  %hr.light
