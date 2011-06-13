@@ -95,7 +95,7 @@ table tr:hover {
  margin-top: 10px;
  margin-bottom: 10px;
  background-color: white;
- 
+
  }
 
 nav {
@@ -103,8 +103,13 @@ nav {
  padding-bottom: 15px;
  float:left;
  margin:auto;
- }
+}
 
- nav, footer {
+nav, footer {
  //border-bottom: 1px solid #E5E5E5;
- }
+}
+
+nav-search {
+  padding-top: 2px;
+}
+
