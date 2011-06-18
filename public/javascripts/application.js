@@ -6,7 +6,7 @@ var fluid = {
         $("#loading").hide();
         $(".iframe-content").hide();
         
-        $("#toggle-iframe").bind("click", function(e) {
+        $(".toggle-iframe").bind("click", function(e) {
             var $div = $(this).parent().parent().find(".iframe-content");
             if ($(this).is(".hidden-content")) {
                 var existing_iframe = $div.find("iframe");

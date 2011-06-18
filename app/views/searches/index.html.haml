@@ -92,17 +92,5 @@
 
   -if params[:q]
     %h1 Поиск по фирмам
-    =render :partial => "search_iframe", :locals => {:company_name => "Oldi", :search_url => "http://www.oldi.ru/search/?x=38&y=14&q="}
-
-
-
-
-    -#%iframe.external-search{:src=>"http://www.oldi.ru/search/?x=38&y=14&q=#{params[:q]}"}
-    %hr.light
-    -#%iframe.external-search{:src=>"http://www.fcenter.ru/products.shtml?techpar/act=p:st:0:0:a:a:a:a&oper=::#{params[:q]}"}
-    %hr.light
-    -#%iframe.external-search{:src=>"http://www.citilink.ru/search/?text=#{params[:q]}"}
-    %hr.light
-    -#%iframe.external-search{:src=>"http://www.justcom.ru/search.php?q=#{params[:q]}&x=0&y=0"}
-    %hr.light
-    -#%iframe.external-search{:src=>"http://almer.ru/catalog/?action=searchprods&all_ptypes=all&product_name=#{params[:q]}&start=0"}
+    - Company.all.each do |company|
+      = render :partial => "search_iframe", :locals => {:company => company}
