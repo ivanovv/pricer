@@ -16,3 +16,6 @@ tmp/**
 
 /cross_items
 /config/production.sphinx.conf
+/public/stylesheets/print.css
+/public/stylesheets/ie.css
+/public/stylesheets/handheld.css
