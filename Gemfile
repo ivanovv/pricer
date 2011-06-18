@@ -19,6 +19,7 @@ gem 'hoptoad_notifier'
 gem "awesome_print", :require => "ap"
 gem 'css3buttons'
 gem 'rake', '0.8.7'
+gem 'compass-960-plugin'
 
 group :production do
   gem "unicorn"

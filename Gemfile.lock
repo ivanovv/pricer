@@ -43,6 +43,8 @@ GEM
       chunky_png (~> 1.1)
       fssm (>= 0.2.7)
       sass (~> 3.1)
+    compass-960-plugin (0.10.4)
+      compass (>= 0.10.0)
     css3buttons (0.9.5)
       actionpack (>= 3.0.0)
     differ (0.1.2)
@@ -134,6 +136,7 @@ DEPENDENCIES
   awesome_print
   capistrano
   compass (>= 0.10.2)
+  compass-960-plugin
   css3buttons
   differ
   formtastic

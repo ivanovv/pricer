@@ -1,6 +1,9 @@
 @import "compass/css3";
 @import "compass/utilities/tables/scaffolding";
 
+@import "960/grid.sass";
+
+@include grid-system-complete;
 
 @include html5-boilerplate-fonts($base-font-family, $base-font-size, $base-line-height);
 
@@ -111,5 +114,9 @@ nav, footer {
 
 .nav-search {
   padding-top: 2px;
+}
+
+.clear {
+  @include pie-clearfix;
 }
 
