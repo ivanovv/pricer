@@ -1,1 +1,23 @@
 %h1#branding Pricer 0.1
+.grid_2.push_10
+  #main.mainDiv{:style=>"width:200px;"}
+  .widgetHead{:style => "margin-bottom: 0px;"}
+    %a{:href => "http://vkontakte.ru/",  :target => "_blank", :style=>"margin: 0 5px -2px 0;", :title=>"Авторизация"}
+      %img{:src => "http://vkontakte.ru/images/widget_logo.gif"}
+    %span
+      Авторизация
+  -#userBlock.userDonation{:style => "padding: 4px 8px 8px 8px; background: #FFFFFF; border-bottom: 1px solid #CCCCCC;"}
+    .userPic
+      %img{:src => "http://cs654.vkontakte.ru/u5754774/e_7daec3b5.jpg"}
+
+    .userInfo
+      %a.name{:href=>"http://vkontakte.ru/id5754774", :target=>"_blank"}
+        Виктор Иванов
+      %a.logout{:style=>"display: inline;"}
+        сменить пользователя
+      %br.clear
+
+  .authBlock{:style => "padding-top: 5px;"}
+    #auth_button.button_yes
+      #auth_user.vk-button
+        Войти через ВКонтакте

@@ -1,5 +1,6 @@
 class LinksController < ApplicationController
   respond_to :html, :js
+  before_filter :authenticate_user!, :except => :index
 
   def index
     respond_with(@links = Link.includes(:price, :item).page(params[:page]))

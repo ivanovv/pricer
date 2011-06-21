@@ -1,6 +1,7 @@
 class PricesController < ApplicationController
 
   before_filter :get_company
+  before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
     sort = case params['sort']
