@@ -1,6 +1,9 @@
 @import "compass/css3";
 @import "compass/utilities/tables/scaffolding";
 
+@import "960/grid.sass";
+
+@include grid-system-complete;
 
 @include html5-boilerplate-fonts($base-font-family, $base-font-size, $base-line-height);
 
@@ -149,5 +152,8 @@ iframe.external-search {
         top: 1em;
         bottom: 0.5em;
     }
+}
+.clear {
+  @include pie-clearfix;
 }
 

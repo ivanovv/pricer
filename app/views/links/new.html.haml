@@ -37,13 +37,13 @@
           tokenDelimiter: " "
         });*/
       });
-    
 
-.box
-  -if @price
-    = render 'disambiguation_form'
-  -else
-    = render 'form'
+
+
+-if @price
+  = render 'disambiguation_form'
+-else
+  = render 'form'
 
 - if @price_that_can_be_linked && @price_that_can_be_linked.size > 0
 
@@ -58,7 +58,7 @@
 
 .box
   %h2 Поиск синонимов
-  .grid_4.alpha
+  .grid_8.alpha
     .box
       = form_tag(searches_path, :method => 'get', :id => "items_search") do
         %p
@@ -67,10 +67,8 @@
           -else
             = search_field_tag :q, params[:q] , {:class=>"search text", :size =>100}
           = submit_tag t(:search), {:name => nil, :class=>"search button"}
-  .grid_8.omega
-    %br
+  .grid_3.omega
     #most_likely_slider
-    %br
     #most_unlikely_slider
   .clear
 
@@ -79,3 +77,4 @@
 
 %br
 %p= link_to "Back to List", links_path
+

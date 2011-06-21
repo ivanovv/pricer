@@ -1,5 +1,5 @@
 .grid_12{:style=>"background: none repeat scroll 0 0 #666666; height:2.5em;"}
-  .grid_6
+  .grid_6.alpha
     %ul.nav.main
       %li= link_to("Главная", root_path)
       %li= link_to("Поиск", searches_path)
@@ -15,7 +15,7 @@
       - else
         %li= link_to('Login', signin_path)
 
-  .grid_3.nav-search
+  .grid_3.omega.nav-search
     = search_box
 
 .clear
