@@ -3,7 +3,6 @@ class MainController < ApplicationController
   caches_page :index
   
   def index
-    expires_in seconds_till_next_price_upload, :public => true
     @price_count = Price.count
     @companies = Company.all
   end
