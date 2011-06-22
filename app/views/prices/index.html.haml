@@ -14,6 +14,7 @@
     %th= t('.warehouse_code')
     %th= t('.name')
     %th= t('.price')
+    %th
 
   - @prices.each do |price|
     = render :partial => "price", :locals => {:price => price}

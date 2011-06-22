@@ -143,15 +143,15 @@ iframe.external-search {
 }
 
 .nav-search {
-  padding-top: 2px;
+  padding-top: 3px;
 }
 
 
 #most_likely_slider {
-    margin:{
-        top: 1em;
-        bottom: 0.5em;
-    }
+  margin:{
+    top: 1em;
+    bottom: 0.5em;
+  }
 }
 .clear {
   @include pie-clearfix;

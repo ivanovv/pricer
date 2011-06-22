@@ -1,4 +1,4 @@
-- title "Links"
+- title "Связи"
 
 -#Записей: #{@links.total_entries}
 
@@ -8,6 +8,8 @@
     %th Price
     %th Human
     %th Score
+    %th{:colspan=>3} Actions
+
   - for link in @links
     %tr
       %td= link_to link.item, link.item

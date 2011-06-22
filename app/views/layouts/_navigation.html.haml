@@ -18,9 +18,9 @@
           =image_tag(current_user.small_user_pic_url)
         = link_to('out', signout_path)
     - else
-      #main.mainDiv{:style=>"width:22px; margin-top:5px; margin-left:25px;"}
-        .widgetHead{:style => "margin-bottom: 0px; padding-left:3px"}
-          %a{:href => "#{signin_path}"}
-            %img{:src => "http://vkontakte.ru/images/widget_logo.gif"}
+      %a{:href => "#{signin_path}"}
+        #main.mainDiv{:style=>"width:22px; margin-top:5px; margin-left:25px;"}
+          .widgetHead{:style => "margin-bottom: 0px; padding-left:3px"}
+            %img{:src => "http://vk.com/images/widget_logo.gif"}
 
 .clear

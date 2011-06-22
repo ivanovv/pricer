@@ -1,3 +1,4 @@
+-title "Поиск"
 =content_for :javascripts do
   :javascript
     $('#q').focus();
@@ -27,15 +28,13 @@
     %p= search_box
 .clear
 
-%h1(style="display:inline") Найденные товары
-
 - if @prices
+  %h1(style="display:inline") Найденные товары
   (#{@prices.total_entries})
 
-%br
-%br
+  %br
+  %br
 
-- if @prices
   %table.grid.prices.selectable
     %tr
       %th Компания
@@ -90,7 +89,7 @@
 
     %br
 
-  -if params[:q]
-    %h1 Поиск по фирмам
-    - Company.all.each do |company|
-      = render :partial => "search_iframe", :locals => {:company => company}
+-if params[:q]
+  %h1 Поиск по фирмам
+  - Company.all.each do |company|
+    = render :partial => "search_iframe", :locals => {:company => company}

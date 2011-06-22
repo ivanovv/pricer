@@ -47,7 +47,7 @@ class PricesController < ApplicationController
 
     respond_to do |format|
       if @price.save
-        format.html { redirect_to(@price, :notice => 'Price was successfully created.') }
+        format.html { redirect_to([@company, @price], :notice => 'Price was successfully created.') }
         format.xml  { render :xml => @price, :status => :created, :location => @price }
       else
         format.html { render :action => "new" }
@@ -61,7 +61,7 @@ class PricesController < ApplicationController
 
     respond_to do |format|
       if @price.update_attributes(params[:price])
-        format.html { redirect_to(@price, :notice => 'Price was successfully updated.') }
+        format.html { redirect_to([@company, @price], :notice => 'Price was successfully updated.') }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -75,7 +75,7 @@ class PricesController < ApplicationController
     @price.destroy
 
     respond_to do |format|
-      format.html { redirect_to(prices_url) }
+      format.html { redirect_to(company_prices_url(@company)) }
       format.xml  { head :ok }
     end
   end
