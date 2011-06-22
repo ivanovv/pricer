@@ -13,7 +13,8 @@ class SessionsController < ApplicationController
   end
 
   def new
-    redirect_to '/pricer/auth/vkontakte'
+    redirect_to '/auth/vkontakte'
   end
 
 end
+
