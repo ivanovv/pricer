@@ -8,6 +8,7 @@ namespace :app do
     Rake::Task["thinking_sphinx:index"].invoke
     Rake::Task["app:cross"].execute
     Rake::Task["app:cross_items"].execute
+    Rake::Task["clear_index_cache"].execute
   end
 end
 
