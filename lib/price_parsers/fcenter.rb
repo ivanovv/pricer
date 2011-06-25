@@ -33,6 +33,7 @@ module PriceParsers
       def start_element(element, attributes)
         case element
           when 'tr' then
+            attributes = attributes[0] if (attributes && attributes.count > 0)
             @is_category_row = attributes[0] == 'class' && attributes[1] == 'e'
             @td_index = 0
             @row_data = {}
