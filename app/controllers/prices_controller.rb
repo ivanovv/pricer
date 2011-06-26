@@ -5,26 +5,33 @@ class PricesController < ApplicationController
 
   def index
     sort = case params['sort']
-              when "name"  then "original_description"
-              when "recent" then "created_at desc"
+             when "name" then
+               "original_description"
+             when "recent" then
+               "created_at desc"
            end
-    
+
     sort ||= "created_at desc"
 
     @prices = @company.prices.order(sort).page(params[:page])
 
     respond_to do |format|
-      format.html 
-      format.xml  { render :xml => @prices }
+      format.html
+      format.xml { render :xml => @prices }
     end
   end
 
+  
   def show
     @price = @company.prices.find(params[:id])
+    @price_value = if @price.price_histories && @price.price_histories.last
+                     @price.price_histories.last.value
+                   end
+    @price_value ||= @price.price
 
     respond_to do |format|
-      format.html 
-      format.xml  { render :xml => @price }
+      format.html
+      format.xml { render :xml => @price }
     end
   end
 
@@ -32,8 +39,8 @@ class PricesController < ApplicationController
     @price = @company.prices.build
 
     respond_to do |format|
-      format.html 
-      format.xml  { render :xml => @price }
+      format.html
+      format.xml { render :xml => @price }
     end
   end
 
@@ -48,10 +55,10 @@ class PricesController < ApplicationController
     respond_to do |format|
       if @price.save
         format.html { redirect_to([@company, @price], :notice => 'Price was successfully created.') }
-        format.xml  { render :xml => @price, :status => :created, :location => @price }
+        format.xml { render :xml => @price, :status => :created, :location => @price }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @price.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @price.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -62,10 +69,10 @@ class PricesController < ApplicationController
     respond_to do |format|
       if @price.update_attributes(params[:price])
         format.html { redirect_to([@company, @price], :notice => 'Price was successfully updated.') }
-        format.xml  { head :ok }
+        format.xml { head :ok }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @price.errors, :status => :unprocessable_entity }
+        format.xml { render :xml => @price.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -76,7 +83,7 @@ class PricesController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(company_prices_url(@company)) }
-      format.xml  { head :ok }
+      format.xml { head :ok }
     end
   end
 
