@@ -48,7 +48,7 @@ ru:
       title: "Компонент"
     index:
       add_component: "Добавить компонент"
-       title: "Компоненты"
+      title: "Компоненты"
   links:
     new:
       title: "Создать связь"
