@@ -1,4 +1,5 @@
 class ScrapedConfigurationsController < ApplicationController
+
   def index
     @scraped_configurations = ScrapedConfiguration.all
   end

@@ -13,12 +13,13 @@ module Scrapers
           matches = item.match(/(\d+)\:(\d+)/)
           price = company.prices.find_by_warehouse_code(matches[1])
           if price
-            puts "item :: #{price.original_description} quantity :: #{matches[2]} price :: #{price.price}"
-            prices << price
+            #puts "item :: #{price.original_description} quantity :: #{matches[2]} price :: #{price.price}"
+            #price_value = part_link.parent.parent.search(".price").text.gsub(/\D/,'')
+            prices << {:price => price, :value => 0} if price
           end
         end
       end
-      prices
+      {:title => "", :prices => prices}
     end
   end
 end
