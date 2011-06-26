@@ -43,8 +43,8 @@
 
 
 %p
-  = link_to "Edit", edit_scraped_configuration_path(@scraped_configuration)
+  = link_to t("edit"), edit_scraped_configuration_path(@scraped_configuration)
   |
-  = link_to "Destroy", @scraped_configuration, :confirm => 'Are you sure?', :method => :delete
+  = link_to t("destroy"), @scraped_configuration, :confirm => 'Are you sure?', :method => :delete
   |
   = link_to "View All", scraped_configurations_path

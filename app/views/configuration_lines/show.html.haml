@@ -1,4 +1,4 @@
-- title "Configuration Line"
+- title t('configuration_lines.show.title')
 
 %p
   %strong Price:
@@ -14,7 +14,7 @@
   = @configuration_line.description
 
 %p
-  = link_to "Edit", edit_configuration_line_path(@configuration_line)
+  = link_to t('edit'), edit_configuration_line_path(@configuration_line)
   |
   = link_to "Destroy", @configuration_line, :confirm => 'Are you sure?', :method => :delete
   |

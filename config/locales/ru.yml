@@ -6,6 +6,9 @@ ru:
   warehouse_code: "Складской код"
   name: "Наименование"
   price: Цена
+  edit: Редактировать
+  show: Подробно
+  destroy: Удалить
   
   views:
     pagination:
@@ -19,15 +22,45 @@ ru:
       warehouse_code: "Складской код"
       name: "Наименование"
       price: Цена
-
-
-
       sort_by_name: "по названию A-Z"
       sort_by_date: "по дате (свежие вперед)"
     show:
       item_record_title: "Запись из справочника:"
       pricehistory_title: "История цен"
       web_link: "Посмотреть страничку товара на сайте компании"
+
   items:
     show:
       pricehistory_title: "Общая история цен"
+    edit:
+      title: "Редактировать элемент справочника"
+    new:
+      title: "Новая запись в справочнике"
+
+  main:
+    index:
+      title: "Главная"
+
+  configuration_lines:
+    edit:
+      title: "Редактировать компонент"
+    show:
+      title: "Компонент"
+    index:
+      add_component: "Добавить компонент"
+       title: "Компоненты"
+  links:
+    new:
+      title: "Создать связь"
+  configutation_lines:
+    index:
+
+
+  searches:
+    index:
+      title: "Поиск"
+  scraped_configurations:
+    edit:
+      title: "Редактировать импортированную конфигурацию"
+    index:
+      title: "Импортированные конфигурации"

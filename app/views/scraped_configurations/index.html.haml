@@ -1,21 +1,21 @@
-- title "Scraped Configurations"
+- title t('.title')
 
 %table
   %tr
     %th Company
-    %th Name
-    %th Url
-    %th Assembly price
-    %th Total price
-  - for scraped_configuration in @scraped_configurations
+    %th Название
+    %th Ссылка
+    %th Цена сборки
+    %th Общая стоимость
+  - for scraped_config in @scraped_configurations
     %tr
-      %td= scraped_configuration.company_id
-      %td= scraped_configuration.name
-      %td= scraped_configuration.url
-      %td= scraped_configuration.assembly_price
-      %td= scraped_configuration.total_price
-      %td= link_to 'Show', scraped_configuration
-      %td= link_to 'Edit', edit_scraped_configuration_path(scraped_configuration)
-      %td= link_to 'Destroy', scraped_configuration, :confirm => 'Are you sure?', :method => :delete
+      %td= scraped_config.company_id
+      %td= scraped_config.name
+      %td= scraped_config.url
+      %td= scraped_config.assembly_price
+      %td= scraped_config.total_price
+      %td= link_to t('show'), scraped_config
+      %td= link_to t('edit'), edit_scraped_configuration_path(scraped_config)
+      %td= link_to t('destroy'), scraped_config, :confirm => 'Are you sure?', :method => :delete
 
 %p= link_to "New Scraped Configuration", new_scraped_configuration_path

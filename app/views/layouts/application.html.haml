@@ -4,7 +4,6 @@
   %head
     = render "layouts/head", :stylesheet_partial => "layouts/stylesheets"
   
-  -#%body.bp.two-col{ :class => "#{controller.controller_name}" }
   %body.bp
     #container.container_12
       .grid_12
@@ -15,6 +14,8 @@
       .grid_12
         %h2#page-heading
           Сравниваем "корзинки". С умом.
+
+        Данный сайт позволяет переносить "корзинки" из одного магазина в другой. Перейдите на главную и воспользуйтесь импортом конфигураций.
       #main{ :role => 'main' }
         .grid_12
           = render "layouts/flashes"

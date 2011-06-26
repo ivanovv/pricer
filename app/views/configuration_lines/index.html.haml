@@ -1,4 +1,4 @@
-- title "Configuration Lines"
+- title t('configutation_lines.index.title')
 
 %table
   %tr
@@ -13,7 +13,7 @@
       %td= configuration_line.price
       %td= configuration_line.description
       %td= link_to 'Show', configuration_line
-      %td= link_to 'Edit', edit_configuration_line_path(configuration_line)
+      %td= link_to t('edit'), edit_configuration_line_path(configuration_line)
       %td= link_to 'Destroy', configuration_line, :confirm => 'Are you sure?', :method => :delete
 
-%p= link_to "New Configuration Line", new_configuration_line_path
+%p= link_to t('configuration_lines.index.add_component'), new_configuration_line_path
