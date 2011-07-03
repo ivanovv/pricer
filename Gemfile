@@ -23,7 +23,7 @@ gem 'compass-960-plugin'
 gem 'omniauth'
 
 group :production do
-  gem "unicorn"
+  gem "unicorn", "3.7.0"
 end
 
 group :development do
