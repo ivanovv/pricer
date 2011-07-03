@@ -13,12 +13,8 @@ class Item < ActiveRecord::Base
   define_index do
     # fields
     indexes description
-    indexes original_description
+    indexes original_description, :sortable => true
     indexes vendor_code
-
-    #set_property :enable_star => true
-    #set_property :min_prefix_len => 3
-    #set_property :min_infix_len => 3
 
     # attributes
     has id
