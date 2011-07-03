@@ -8,7 +8,7 @@ class SearchesController < ApplicationController
 
       @prices = Price.search(params[:q], company_param,
                              :per_page => 25, :page => params[:page],
-                             :order => "company_id, original_description")
+                             :order => "company_id ASC, original_description ASC")
       @items = Item.search(params[:q],
                            :per_page => 25, :page => params[:page],
                            :order => :original_description)
