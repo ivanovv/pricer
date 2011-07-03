@@ -5,6 +5,7 @@ module Scrapers
     COMPANY_NAME = "F-Center"
 
     def scrape(url)
+      url = CGI::unescape(url)
       prices = []
       a = url.split "|"
 
