@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110507195654) do
+ActiveRecord::Schema.define(:version => 20110731200642) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(:version => 20110507195654) do
     t.datetime "updated_at"
     t.string   "base_product_link"
     t.string   "home_link"
+    t.string   "search_url"
   end
 
   create_table "configuration_lines", :force => true do |t|
@@ -60,6 +61,21 @@ ActiveRecord::Schema.define(:version => 20110507195654) do
 
   add_index "links", ["price_id", "item_id"], :name => "index_links_on_price_id_and_item_id", :unique => true
 
+  create_table "parsing_results", :force => true do |t|
+    t.integer  "company_id"
+    t.integer  "file_size"
+    t.datetime "started_at"
+    t.datetime "finished_at"
+    t.integer  "all_rows"
+    t.integer  "parsed_rows"
+    t.integer  "created_rows"
+    t.integer  "updated_rows"
+    t.string   "errors_text"
+    t.string   "extra_info"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "price_histories", :force => true do |t|
     t.integer  "price_id"
     t.datetime "created_at"
@@ -95,6 +111,29 @@ ActiveRecord::Schema.define(:version => 20110507195654) do
     t.string   "author"
     t.integer  "assembly_price"
     t.integer  "total_price"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "slugs", :force => true do |t|
+    t.string   "name"
+    t.integer  "sluggable_id"
+    t.integer  "sequence",                     :default => 1, :null => false
+    t.string   "sluggable_type", :limit => 40
+    t.string   "scope"
+    t.datetime "created_at"
+  end
+
+  add_index "slugs", ["name", "sluggable_type", "sequence", "scope"], :name => "index_slugs_on_n_s_s_and_s", :unique => true
+  add_index "slugs", ["sluggable_id"], :name => "index_slugs_on_sluggable_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "name"
+    t.string   "email"
+    t.string   "user_pic_url"
+    t.string   "small_user_pic_url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

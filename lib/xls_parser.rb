@@ -28,7 +28,9 @@ class XLSParser < PriceParser
   end
 
   def parse_price(book_path, encoding = nil)
+    @started_at = Time.now
     book = Spreadsheet.open book_path
+    @file_size = File.size(book_path)
     book.encoding = encoding if encoding
     sheet = book.worksheet 0
     @total_rows = sheet.row_count
@@ -64,6 +66,14 @@ class XLSParser < PriceParser
   end
 
   def stats
+    ParsingResult.create(:company => company,
+                         :file_size => @file_size,
+                         :all_rows => @total_rows,
+                         :parsed_rows => @parsed_rows,
+                         :created_rows => @created_prices,
+                         :updated_rows => @updated_prices,
+                         :started_at => @started_at,
+                         :finished_at => Time.now)
     "#{company_name}: Total rows in price-list: #{@total_rows} Parsed_rows: #{@parsed_rows} Created prices: #{@created_prices} Updated_prices: #{@updated_prices}"
   end
 
