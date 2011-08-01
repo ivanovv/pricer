@@ -1,0 +1,19 @@
+development:
+  :address: smtp.locum.ru
+  :port: 2525
+  :domain: vivanov2.locum.ru
+  :authentication: plain
+  :user_name: support@pricer.vivanov2.locum.ru
+  :password: ****
+  :enable_starttls_auto: false
+  :raise_delivery_errors: true
+
+production:
+  :address: smtp.locum.ru
+  :port: 2525
+  :domain: vivanov2.locum.ru
+  :authentication: plain
+  :user_name: support@pricer.vivanov2.locum.ru
+  :password: ****
+  :enable_starttls_auto: false
+  :raise_delivery_errors: true

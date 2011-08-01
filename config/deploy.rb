@@ -29,11 +29,16 @@ require "bundler/capistrano"
 require "thinking_sphinx/deploy/capistrano"
 require "whenever/capistrano"
 
-after "deploy:update_code", :copy_database_config
+after "deploy:update_code", :copy_database_config, :copy_email_config
 
 task :copy_database_config, roles => :app do
   db_config = "#{shared_path}/database.yml"
   run "cp #{db_config} #{release_path}/config/database.yml"
+end
+
+task :copy_email_config, roles => :app do
+  mail_config = "#{shared_path}/email.yml"
+  run "cp #{mail_config} #{release_path}/config/email.yml"
 end
 
 set :unicorn_rails, "/var/lib/gems/1.8/bin/unicorn_rails"

@@ -1,12 +1,6 @@
-ActionMailer::Base.smtp_settings = {
-  :address              => "smtp.locum.ru",
-  :port                 => 2525,
-  :domain               => "vivanov2.locum.ru",
-  :user_name            => "support@pricer.vivanov2.locum.ru",
-  :password             => "******",
-  :authentication       => "plain",
-  :enable_starttls_auto => false,
-  :raise_delivery_errors => true
-}
+#ActionMailer::Base.default_url_options[:host] = "pricer.vivanov2.locum.ru"
 
-ActionMailer::Base.default_url_options[:host] = "pricer.vivanov2.locum.ru"
+unless Rails.env.test?
+  email_settings = YAML::load(File.open(Rails.root.join("config","email.yml")))
+  ActionMailer::Base.smtp_settings = email_settings[Rails.env] unless email_settings[Rails.env].nil?
+end

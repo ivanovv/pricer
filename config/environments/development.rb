@@ -20,5 +20,7 @@ Pricer::Application.configure do
 
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
+
+  ActionMailer::Base.default_url_options[:host] = "localhost/pricer"
 end
 

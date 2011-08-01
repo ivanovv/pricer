@@ -46,5 +46,7 @@ Pricer::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  ActionMailer::Base.default_url_options[:host] = "pricer.vivanov2.locum.ru"
 end
 
