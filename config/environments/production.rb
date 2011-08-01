@@ -36,6 +36,7 @@ Pricer::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.default_url_options = {:host => "pricer.vivanov2.locum.ru"}
 
   # Enable threaded mode
   # config.threadsafe!
@@ -46,7 +47,5 @@ Pricer::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
-
-  ActionMailer::Base.default_url_options[:host] = "pricer.vivanov2.locum.ru"
 end
 
