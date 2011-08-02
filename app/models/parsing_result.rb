@@ -11,8 +11,8 @@ class ParsingResult < ActiveRecord::Base
 
   def to_s
     "#{company.name}:
-    Всего строк: #{all_rows} Обработано строк: #{parsed_rows}
-    Создано прайсов: #{created_rows} Обновлено цен: #{updated_rows}
+    Всего: #{all_rows} Обработано : #{parsed_rows}
+    Создано: #{created_rows} Обновлено: #{updated_rows}
     Начато: #{started_at.to_s(:short)} Завершено: #{finished_at.to_s(:short)}"
   end
 
