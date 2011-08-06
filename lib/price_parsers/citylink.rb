@@ -22,6 +22,10 @@ module PriceParsers
       row[1] && row[1].starts_with?('Процессоры')
     end
 
+    def should_stop?(row)
+      row[0].starts_with?('Монитор')
+    end
+
     def indexes
       {:warehouse => 3, :description => 5, :vendor => 4, :price => 6}
     end
