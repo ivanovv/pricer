@@ -3,5 +3,5 @@
 require File.join(File.dirname(__FILE__), '../price_parser_loader.rb')
 
 namespace :app do
-  PriceParserLoader.load_parser "fcenter"
+  PriceParserLoader.load_parser "oldi", "citylink", "almer", "fcenter", "justcom"
 end

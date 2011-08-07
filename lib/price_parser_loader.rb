@@ -1,14 +1,16 @@
 class PriceParserLoader
-  def self.load_parser(file)
+  def self.load_parser(*files)
 
     #require_relative "../lib/#{file}.rb"
-    require File.join(File.dirname(__FILE__), "../lib/price_parsers/#{file}.rb")
+    files.each do |file|
+      require File.join(File.dirname(__FILE__), "../lib/price_parsers/#{file}.rb")
+    end
 
     #TODO rewrite with just compiling class name instead of searching for class name
     ObjectSpace.each_object(Class) do |excel_parser|
       next unless [PriceParser, XLSParser].include?(excel_parser.superclass)
       next if excel_parser == XLSParser
-      next if !excel_parser.name.downcase.include?(file.downcase)
+      next if self.check_parser_filename(excel_parser.name, files)
       next if !defined?(excel_parser::COMPANY_NAME)
 
       string_to_cut_out = excel_parser.superclass == XLSParser ? XLSParser.name : "Parser"
@@ -25,6 +27,12 @@ class PriceParserLoader
           excel_parser.parse_price(file_name)
         end
       end
+    end
+  end
+
+  def self.check_parser_filename(class_name, files)
+    files.none? do |file|
+      class_name.downcase.include?(file.downcase)
     end
   end
 end
