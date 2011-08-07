@@ -9,7 +9,6 @@ module PriceParsers
     DEFAULT_FILE_PATH = '~/tmp/almer.xls'
     DEFAULT_ENCODING = 'windows-1251'
 
-
     def rows_to_skip
       100
     end
@@ -19,7 +18,7 @@ module PriceParsers
     end
 
     def should_stop?(row)
-      row[2].starts_with?('Источники бесперебойного питания, сетевые фильтры')
+      row[2].starts_with?('Источники бесперебойн')
     end
 
     def should_parse_row(row)

@@ -74,13 +74,13 @@ class Price < ActiveRecord::Base
 
   def most_likely_search_tokenised
     i = 1
-    keywords = pretty_keywords(4).map { |k| i += 1; {:id => i, :name => k} }
+    keywords = pretty_keywords(4).map { |keyword| i += 1; {:id => i, :name => keyword} }
     keywords.to_json
   end
 
   def most_unlikely_search_tokenised
-    i=1
-    keywords = most_unlikely_search(10).map { |k| i += 1; {:id => i, :name => k} }
+    i = 1
+    keywords = most_unlikely_search(10).map { |keyword| i += 1; {:id => i, :name => keyword} }
     keywords.to_json
   end
 
@@ -111,12 +111,12 @@ class Price < ActiveRecord::Base
 
   def update_price_history(price_value)
     last_price_history = price_histories.order(:created_at).last
-#      last_price_history = @price_histories.select do |price_history|
-#        price_history.price_id == price.id
-#      end.max {|a, b| a.created_at <=> b.created_at}
     if !last_price_history ||
         (last_price_history.value != price_value && last_price_history.created_at < 10.minutes.ago) then
       price_histories.create(:value => price_value)
+      true
+    else
+      false
     end
   end
 
@@ -127,6 +127,9 @@ class Price < ActiveRecord::Base
       self.original_description = original_desc
       save
       Rails.logger.debug("update original description:: old #{old_original_description} new #{original_desc}")
+      true
+    else
+      false
     end
   end
 

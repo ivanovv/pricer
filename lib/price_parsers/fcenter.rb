@@ -37,6 +37,7 @@ module PriceParsers
             @is_category_row = attributes[0] == 'class' && attributes[1] == 'e'
             @td_index = 0
             @row_data = {}
+            price_parser.total_rows += 1
           when 'td'
             @in_td = true
             @td_index += 1
@@ -94,12 +95,13 @@ module PriceParsers
     end
 
     def self.parse_price(path, encoding = 'windows-1251')
+      paring_started_at = DateTime.now
       document = FCenterPriceDocument.new
       document.price_parser = new
       parser = Nokogiri::HTML::SAX::Parser.new(document, encoding)
       parser.parse_file(path, encoding)
+      ParsingResult.create_from_parser(document.price_parser, paring_started_at, File.size(path))
     end
-
   end
 end
 #namespace :app do

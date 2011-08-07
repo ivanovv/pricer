@@ -6,7 +6,6 @@ class XLSParser < PriceParser
   def initialize
     super
     @parsed_rows = 0
-    @total_rows = 0
     @initial_row_found = false
   end
 
@@ -66,14 +65,7 @@ class XLSParser < PriceParser
   end
 
   def stats
-    ParsingResult.create(:company => company,
-                         :file_size => @file_size,
-                         :all_rows => @total_rows,
-                         :parsed_rows => @parsed_rows,
-                         :created_rows => @created_prices,
-                         :updated_rows => @updated_prices,
-                         :started_at => @started_at,
-                         :finished_at => Time.now)
+    ParsingResult.create_from_parser(self, @started_at, @file_size)
     "#{company_name}: Total rows in price-list: #{@total_rows} Parsed_rows: #{@parsed_rows} Created prices: #{@created_prices} Updated_prices: #{@updated_prices}"
   end
 
