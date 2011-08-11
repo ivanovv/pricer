@@ -17,7 +17,7 @@ gem 'differ'
 gem "whenever"
 gem 'hoptoad_notifier'
 gem "awesome_print", :require => "ap"
-gem 'css3buttons'
+gem 'css3buttons', "0.9.5"
 gem 'rake', '0.8.7'
 gem 'compass-960-plugin'
 gem 'omniauth'

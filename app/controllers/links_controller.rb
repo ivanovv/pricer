@@ -27,10 +27,8 @@ class LinksController < ApplicationController
       flash[:notice] = "Successfully created link."
       if params[:link][:other_prices]
         other_prices = params[:link][:other_prices]
-        other_prices.split(",").each do |price_id|
-          Link.create(:price_id => price_id, :item_id => params[:link][:item_id], :human => true, :score => 10)
-        end
-        flash[:notice] = "Successfully created links."
+        Link.create_many_links(other_prices, params[:link][:item_id])
+        flash[:notice] = "Successfully created several links."
       end
     end
     respond_with(@link, :layout => !request.xhr?)

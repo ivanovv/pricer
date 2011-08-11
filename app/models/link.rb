@@ -8,16 +8,20 @@ class Link < ActiveRecord::Base
   belongs_to :price
   belongs_to :item
 
-
   validates :price_id, :presence => true, :on => :create
-
   validates :item_id, :presence => true, :on => :create
-
 
   def update_other_parties
     self.price.many_items_found=false
     self.price.save
   end
+
+  def self.create_many_links(price_ids, item_id)
+    price_ids.split(",").each do |price_id|
+      Link.create(:price_id => price_id, :item_id => item_id, :human => true, :score => 10)
+    end
+  end
+
 
   def link_crossed_prices
     self.price.cross_prices.each do |cross_price|

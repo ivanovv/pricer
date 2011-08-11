@@ -2,20 +2,43 @@
 =content_for :javascripts do
   :javascript
     $('#q').focus();
+    function clearHiddenFields(){
+      $("#link_price_id").val("");
+      $("#link_item_id").val("");
+      $("#link_other_prices").val("");
+    }
 
     $('table.prices, table.items').selectable({
       filter: 'tr',
       cancel: 'a',
       stop: function() {
+
+        clearHiddenFields();
+
         $("tr.ui-selected").each(function(){
+
+          // select children for highlighting
           $(this).children().addClass("ui-selected");
+
+          // save item id
           if ($(this).data("item_id") != null ) {
             $("#link_item_id").val($(this).data("item_id"));
           }
+
+          // save all price id
           if ($(this).data("price_id") != null ) {
-            $("#link_price_id").val($(this).data("price_id"));
+            if ($("#link_price_id").val() != "") {
+              var existing_data = $("#link_other_prices").val();
+              if (existing_data.length > 0)
+                existing_data = existing_data + ",";
+              $("#link_other_prices").val(existing_data + $(this).data("price_id"));
+            }
+            else
+              $("#link_price_id").val($(this).data("price_id"));
           }
+          
         });
+        // remove selection from deselected items
         $("table.prices tr:not(.ui-selected), table.items tr:not(.ui-selected)").each(function(){
           $(this).children().removeClass("ui-selected");
         });
@@ -69,6 +92,7 @@
         = f.input :price_id, :as => :hidden
         = f.input :human, :as => :hidden
         = f.input :score, :as => :hidden
+        = f.hidden_field :other_prices
       = add_button_submit_tag "Связать"
 
   %h1(style="display:inline") Найденные записи из справочника
