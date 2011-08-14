@@ -1,0 +1,25 @@
+%p
+  %strong Item:
+  = link.item
+%p
+  %strong Price:
+  = link.price
+%p
+  Difference
+  - Differ.format= :html
+  != Differ.diff_by_word(link.price.to_s.downcase, link.item.to_s.downcase)
+
+
+
+%p
+  %strong Human:
+  = link.human?
+%p
+  %strong Score:
+  = link.score
+
+%p
+  = link_to "Edit", edit_link_path(link)
+  |
+  = link_to "Destroy", link, :confirm => 'Are you sure?', :method => :delete
+  

@@ -7,7 +7,8 @@ class LinksController < ApplicationController
   end
 
   def show
-    respond_with(@link = Link.find(params[:id]))
+    @links = Array(Link.find(params[:id].split('+')))
+    respond_with(@links)
   end
 
   def new
@@ -22,16 +23,19 @@ class LinksController < ApplicationController
   end
 
   def create
+    @links = []
+    other_prices = params[:link][:other_prices]
     @link = Link.new(params[:link])
     if @link.save
       flash[:notice] = "Successfully created link."
-      if params[:link][:other_prices]
-        other_prices = params[:link][:other_prices]
-        Link.create_many_links(other_prices, params[:link][:item_id])
+      if other_prices && !other_prices.blank?
+        @links << Link.create_many_links(other_prices, params[:link][:item_id])
         flash[:notice] = "Successfully created several links."
+        redirect_to :action => 'index', :id => @links.map{ |link| link.id}.join('+')
+      else
+        respond_with(@link, :layout => !request.xhr?)
       end
     end
-    respond_with(@link, :layout => !request.xhr?)
   end
 
   def edit
