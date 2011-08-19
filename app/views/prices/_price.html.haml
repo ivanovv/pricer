@@ -1,4 +1,4 @@
-%tr
+%tr{:class => price.links.size == 0 && "not-linked"}
   %td{"data-price_id" => price.id}
     = price.company.name
     %span.small= price.warehouse_code

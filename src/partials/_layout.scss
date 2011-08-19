@@ -231,6 +231,12 @@ tbody {
     border-top: 1px solid #bbb;
     border-bottom: 1px solid #bbb;
     background: #eee; }
+
+  tr.not-linked td {
+    border-top: 1px solid #bbb;
+    border-bottom: 1px solid #bbb;
+    background: #f3eeee;
+  }
   tr.odd {
     th, td {
       background: #fff; } } }
