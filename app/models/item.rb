@@ -20,6 +20,10 @@ class Item < ActiveRecord::Base
     has id
   end
 
+  def as_json(options = {})
+    super(options.merge(:only => [ :id, :original_description, :vendor_code, :created_at, :fcenter_code ]))
+  end
+
   def to_s
     original_description
   end

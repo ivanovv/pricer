@@ -18,6 +18,7 @@ gem "awesome_print", :require => "ap"
 gem 'rake'
 gem 'omniauth'
 gem 'css3buttons'
+gem 'backbone-rails'
 
 group :production do
   gem "unicorn", "3.7.0"

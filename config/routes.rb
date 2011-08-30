@@ -4,21 +4,24 @@ Pricer::Application.routes.draw do
   match '/signout' => 'sessions#destroy', :as => :signout
   match '/signin' => 'sessions#new', :as => :signin
 
-  resources :configuration_lines
-
-  resources :scraped_configurations
+  
+  resources :scraped_configurations do
+    resources :configuration_lines
+  end
 
   resources :links
-
-  resources :price_histories
 
   resources :items
 
   resources :companies do
-    resources :prices
+    resources :prices do
+      resources :price_histories
+    end
   end
 
   resources :searches
+
+  resources :prices
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

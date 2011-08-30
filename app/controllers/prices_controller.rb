@@ -1,5 +1,7 @@
 class PricesController < ApplicationController
 
+  respond_to :html, :js, :json
+  
   before_filter :get_company
   before_filter :authenticate_user!, :except => [:index, :show]
 
@@ -13,79 +15,51 @@ class PricesController < ApplicationController
 
     sort ||= "created_at desc"
 
-    @prices = @company.prices.order(sort).page(params[:page])
-
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @prices }
+    if !@company
+      @prices = Price.search(params[:q], :order => "company_id ASC, original_description ASC")
+    else
+      @prices = @company.prices.order(sort).page(params[:page])
     end
+
+    respond_with @prices
   end
 
 
   def show
     @price = @company.prices.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @price }
-    end
+    respond_with @price
   end
 
   def new
-    @price = @company.prices.build
-
-    respond_to do |format|
-      format.html
-      format.xml { render :xml => @price }
-    end
+    respond_with(@price = @company.prices.build)
   end
 
 
   def edit
-    @price = @company.prices.find(params[:id])
+    respond_with(@price = @company.prices.find(params[:id]))
   end
 
   def create
-    @price = Price.new(params[:price])
-
-    respond_to do |format|
-      if @price.save
-        format.html { redirect_to([@company, @price], :notice => 'Price was successfully created.') }
-        format.xml { render :xml => @price, :status => :created, :location => @price }
-      else
-        format.html { render :action => "new" }
-        format.xml { render :xml => @price.errors, :status => :unprocessable_entity }
-      end
-    end
+    respond_with(@price = Price.new(params[:price]))
   end
 
   def update
     @price = @company.prices.find(params[:id])
-
-    respond_to do |format|
-      if @price.update_attributes(params[:price])
-        format.html { redirect_to([@company, @price], :notice => 'Price was successfully updated.') }
-        format.xml { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml { render :xml => @price.errors, :status => :unprocessable_entity }
-      end
-    end
+    flash[:notice] = "Successfully updated price." if @price.update_attributes(params[:price])
+    respond_with(@price)
   end
 
   def destroy
     @price = @company.prices.find(params[:id])
     @price.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(company_prices_url(@company)) }
-      format.xml { head :ok }
-    end
+    flash[:notice] = "Successfully destroyed price."
+    respond_with(@price)
   end
 
   private
 
   def get_company
-    @company = Company.find params[:company_id] || Company.first
+    @company = Company.find params[:company_id]
   end
 
   def sort_column

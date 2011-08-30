@@ -1,6 +1,6 @@
 class SearchesController < ApplicationController
 
-  respond_to :html, :js
+  respond_to :html, :js, :json
 
   def index
     if params[:q]

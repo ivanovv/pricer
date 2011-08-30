@@ -1,8 +1,16 @@
 class ItemsController < ApplicationController
+
+  respond_to :html, :json
+
   before_filter :authenticate_user!, :except => :index
 
   def index
-    @items = Item.order(:original_description).page(params[:page])
+    if params[:q]
+      @items = Item.search(params[:q], :order => :original_description)
+    else
+      @items = Item.order(:original_description).page(params[:page])
+    end
+    respond_with(@items)
   end
 
   def show
@@ -12,40 +20,33 @@ class ItemsController < ApplicationController
       link = Link.find_by_item_id_and_price_id(@item.id, price.id)
       @prices_links << {:price => price, :link => link}
     end
+    respond_with(@item, @prices_links)
   end
 
   def new
-    @item = Item.new
+    respond_with(@item = Item.new)
   end
 
   def create
     @item = Item.new(params[:item])
-    if @item.save
-      flash[:notice] = "Successfully created item."
-      redirect_to @item
-    else
-      render :action => 'new'
-    end
+    flash[:notice] = "Successfully created item." if @item.save
+    respond_with(@item)
   end
 
   def edit
-    @item = Item.find(params[:id])
+    respond_with(@item = Item.find(params[:id]))
   end
 
   def update
     @item = Item.find(params[:id])
-    if @item.update_attributes(params[:item])
-      flash[:notice] = "Successfully updated item."
-      redirect_to item_url
-    else
-      render :action => 'edit'
-    end
+    flash[:notice] = "Successfully updated item." if @item.update_attributes(params[:item])
+    respond_with(@item)
   end
 
   def destroy
     @item = Item.find(params[:id])
     @item.destroy
     flash[:notice] = "Successfully destroyed item."
-    redirect_to items_url
+    respond_with @item
   end
 end

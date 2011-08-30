@@ -11,6 +11,10 @@ class Link < ActiveRecord::Base
   validates :price_id, :presence => true, :on => :create
   validates :item_id, :presence => true, :on => :create
 
+  def as_json(options = {})
+    super(options.merge(:only => [ :id, :item_id, :price_id, :created_at]))
+  end
+
   def update_other_parties
     self.price.many_items_found=false
     self.price.save

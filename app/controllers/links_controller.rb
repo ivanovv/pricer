@@ -1,5 +1,7 @@
 class LinksController < ApplicationController
-  respond_to :html, :js
+
+  respond_to :html, :js, :json
+
   before_filter :authenticate_user!, :except => :index
 
   def index

@@ -48,6 +48,10 @@ class Price < ActiveRecord::Base
     end
   end
 
+  def as_json(options = {})
+    super(options.merge(:only => [ :id, :company_id, :original_description, :vendor_code, :created_at ]))
+  end
+
   def to_s
     original_description
   end

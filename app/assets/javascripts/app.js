@@ -77,9 +77,9 @@ function buildGraph() {
 
                     $("#tooltip").remove();
                     var x = item.datapoint[0].toFixed(2),
-                            y = item.datapoint[1].toFixed(2);
+                        price = item.datapoint[1].toFixed(2);
 
-                    showTooltip(item.pageX, item.pageY - 40, y + " р.");
+                    showTooltip(item.pageX, item.pageY - 40, price + " р.");
                 }
             } else {
                 $("#tooltip").remove();
@@ -104,5 +104,4 @@ $(function() {
     buildGraph();
 
     fluid.Ajax();
-
 });

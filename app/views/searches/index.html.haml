@@ -69,8 +69,8 @@
 
     - @prices.each do |price|
       - if price
-        %tr{:data=>{:price_id=>price.id}}
-          %td=link_to(price.company.name, company_prices_path(price.company))
+        %tr{:data => {:price_id=>price.id}}
+          %td= link_to(price.company.name, company_prices_path(price.company))
           %td= price.warehouse_code
           %td= link_to(price.original_description, [price.company, price])
           %td= price.price
