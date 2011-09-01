@@ -1,8 +1,6 @@
 -# CSS: implied media="all"
 -if Rails.env.production?
-  = stylesheet_link_tag 'auth', 'style', 'formtastic', 'formtastic_changes', 'colorbox',
-  'jquery-ui', 'token-input',
-  'token-input-facebook', 'text', :media => 'all', :cache => "styles"
+  = stylesheet_link_tag    "application"
 -else
   = stylesheet_link_tag 'auth', 'style', 'formtastic', 'formtastic_changes', 'colorbox',
   'jquery-ui', 'token-input',

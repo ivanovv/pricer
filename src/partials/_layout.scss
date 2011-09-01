@@ -63,14 +63,14 @@ h2#page-heading {
     padding: 6px 12px;
     a {
       color: #fff;
-      background: #333333 url("../images/switch_minus.gif") 97% 50% no-repeat;
+      background: #333333 url("../assets/switch_minus.gif") 97% 50% no-repeat;
       display: block;
       padding: 6px 12px;
       margin: -6px -12px;
       border: none;
       &.visible {
         color: #fff;
-        background: #333333 url("../images/switch_minus.gif") 97% 50% no-repeat;
+        background: #333333 url("../assets/switch_minus.gif") 97% 50% no-repeat;
         display: block;
         padding: 6px 12px;
         margin: -6px -12px;
@@ -87,9 +87,9 @@ h2#page-heading {
 
 .box h2 a {
   &.hidden {
-    background-image: url("../images/switch_plus.gif");
+    background-image: url("../assets/switch_plus.gif");
     &:hover {
-      background-image: url("../images/switch_plus.gif"); } }
+      background-image: url("../assets/switch_plus.gif"); } }
   &:hover {
     background-color: #111; } }
 

@@ -1,26 +1,24 @@
 source :gemcutter
 
-gem "rails", "3.0.10"
+gem "rails", "3.1.0"
 gem 'spreadsheet'
-gem 'mysql2', "0.2.7"
+gem 'mysql2'
 gem "haml"
 gem 'thinking-sphinx'
 #gem "will_paginate", "~> 3.0.pre2"
 gem 'mechanize'
-gem "compass", ">= 0.10.2"
 gem "russian"
 gem "jquery-rails"
 gem "formtastic"
 gem 'kaminari'
-gem 'html5-boilerplate'
 gem 'differ'
 gem "whenever"
 gem 'hoptoad_notifier'
 gem "awesome_print", :require => "ap"
-gem 'css3buttons', "0.9.5"
-gem 'rake', '0.8.7'
-gem 'compass-960-plugin'
+gem 'rake'
 gem 'omniauth'
+gem 'coffee-script'
+gem 'css3buttons'
 
 group :production do
   gem "unicorn", "3.7.0"
@@ -30,7 +28,20 @@ group :development do
   gem "nifty-generators"
   gem "hirb"
   gem "capistrano"
+  gem "mustang"
 end
 
 gem "mocha", :group => :test
+
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails', "~> 3.1.0.rc"
+  gem 'coffee-rails', "~> 3.1.0.rc"
+  gem 'uglifier'
+  gem 'compass', :git => 'git://github.com/chriseppstein/compass.git', :branch => 'rails31'
+  gem 'compass-960-plugin'
+  gem 'compass-html5', :git => 'git://github.com/sporkd/compass-html5.git'
+
+end
 
