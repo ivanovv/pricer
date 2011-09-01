@@ -13,6 +13,8 @@ Pricer::Application.routes.draw do
 
   resources :items
 
+  resources :companies
+
   resources :companies do
     resources :prices do
       resources :price_histories

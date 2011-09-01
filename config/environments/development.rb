@@ -21,6 +21,8 @@ Pricer::Application.configure do
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
+  config.active_record.include_root_in_json = false
+
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
 

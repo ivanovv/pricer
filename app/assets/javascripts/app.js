@@ -102,6 +102,17 @@ $(function() {
     $(".colorbox").colorbox({width:"80%", height:"80%", iframe:true});
 
     buildGraph();
-
     fluid.Ajax();
+
+    window.Pricer = Backbone.Router.extend({
+        routes: {
+                '' : 'home'
+            },
+        home: function(){
+            
+        }
+    });
+    window.App = new Pricer();
+    Backbone.history.start({ pushState: true });
+
 });
