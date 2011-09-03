@@ -4,7 +4,7 @@ development:
   :domain: vivanov2.locum.ru
   :authentication: plain
   :user_name: support@pricer.vivanov2.locum.ru
-  :password: ****
+  :password: "****"
   :enable_starttls_auto: false
   :raise_delivery_errors: true
 
@@ -14,6 +14,6 @@ production:
   :domain: vivanov2.locum.ru
   :authentication: plain
   :user_name: support@pricer.vivanov2.locum.ru
-  :password: ****
+  :password: "****"
   :enable_starttls_auto: false
   :raise_delivery_errors: true
