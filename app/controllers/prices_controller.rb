@@ -59,7 +59,7 @@ class PricesController < ApplicationController
   private
 
   def get_company
-    @company = Company.find params[:company_id]
+    @company = begin Company.find params[:company_id] rescue nil end
   end
 
   def sort_column

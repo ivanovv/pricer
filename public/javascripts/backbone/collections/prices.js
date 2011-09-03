@@ -1,11 +1,16 @@
 window.Prices = Backbone.Collection.extend({
     model: Price,
-    url: function(){
-       return  "/pricer/companies/" + this.company.id + "/prices";
+    url: function() {
+        if (this.company)
+            return  "/pricer/companies/" + this.company.id + "/prices";
+        else
+            return  "/pricer/prices";
     },
 
-    initialize: function(models, options){
-        this.company = options.company;
+    initialize: function(models, options) {
+        if (options) {
+            this.company = options.company;
+        }
     }
-    
+
 });

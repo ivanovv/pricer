@@ -121,3 +121,29 @@
   %h1 Поиск по фирмам
   - Company.all.each do |company|
     = render :partial => "search_iframe", :locals => {:company => company}
+
+:plain
+  <script type="text/template" id="price-template">
+  <tr>
+  <td><%= company.name %>
+  <span class="small"><%= warehouse_code %></span>
+  </td>
+  <td> <a href="pricer/companies/"> <%= original_description %> </a></td>
+  <td><%= price %></td>
+  </tr>
+  </script>
+
+  <script type="text/template" id="prices-template">
+    <table class="grid prices selectable">
+    <tr>
+      <th> Компания </th>
+      <th> Складской код </th>
+      <th> Наименование </th>
+      <th> Цена </th>
+      <th> Альтернатив </th>
+      <th> Связан? </th>
+      </tr>
+      <tbody>
+      </tbody>
+      </table>
+  </script>

@@ -1,1 +1,3 @@
-window.Company = Backbone.Model.extend({});
+window.Company = Backbone.Model.extend({
+    
+});
