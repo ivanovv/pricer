@@ -5,7 +5,7 @@ var fluid = {
     Ajax : function() {
         $("#loading").hide();
         $(".iframe-content").hide();
-        
+
         $(".toggle-iframe").bind("click", function(e) {
             var $div = $(this).parent().parent().find(".iframe-content");
             if ($(this).is(".hidden-content")) {
@@ -109,10 +109,20 @@ $(function() {
                 '' : 'home'
             },
         home: function(){
-            
+
         }
     });
     window.App = new Pricer();
     Backbone.history.start({ pushState: true });
 
+    companies = new Companies();
+    companies.fetch();
+    prices = new Prices();
+    prices.fetch({data: {q: "2400s"}});
+
+    /*priceView = new PriceListView({collection: prices});
+$('#new_prices').empty().append(priceView.render().el)*/
+
+
 });
+

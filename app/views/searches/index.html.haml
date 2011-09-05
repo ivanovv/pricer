@@ -82,6 +82,8 @@
 
   = paginate @prices
 
+  #new_prices
+
   %br
   .box
     = semantic_form_for(Link.new(:human=>true, :score=>10), :url=> url_for(:action => "create", :controller => "links"), :method=>:post) do |f|
@@ -124,26 +126,22 @@
 
 :plain
   <script type="text/template" id="price-template">
-  <tr>
-  <td><%= company.name %>
-  <span class="small"><%= warehouse_code %></span>
-  </td>
-  <td> <a href="pricer/companies/"> <%= original_description %> </a></td>
-  <td><%= price %></td>
-  </tr>
+    <td> <a href="companies/<%= company_id %>/prices"> <%= company.name %> </a></td>
+    <td> <%= warehouse_code %> </td>
+    <td> <a href="companies/<%= company_id %>/prices/<%= id %>"> <%= original_description %> </a></td>
+    <td> <%= price %></td>
+    <td> <%= linked %></td>
   </script>
 
   <script type="text/template" id="prices-template">
-    <table class="grid prices selectable">
-    <tr>
-      <th> Компания </th>
-      <th> Складской код </th>
-      <th> Наименование </th>
-      <th> Цена </th>
-      <th> Альтернатив </th>
-      <th> Связан? </th>
-      </tr>
-      <tbody>
-      </tbody>
-      </table>
+      <thead>
+        <tr>
+          <th> Компания </th>
+          <th> Складской код </th>
+          <th> Наименование </th>
+          <th> Цена </th>
+          <th> Связан? </th>
+        </tr>
+      </thead>
+      <tbody></tbody>
   </script>

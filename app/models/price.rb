@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class Price < ActiveRecord::Base
 
   belongs_to :company
@@ -49,7 +50,8 @@ class Price < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(options.merge(:only => [ :id, :company_id, :original_description, :vendor_code, :created_at ]))
+    #super(options.merge(:only => [ :id, :company_id, :original_description, :vendor_code, :created_at, :name ], :include => :company ))
+    super(options.merge(:include => :company, :methods => [:linked, :company_name, :price_value]))
   end
 
   def to_s
@@ -61,6 +63,13 @@ class Price < ActiveRecord::Base
                      price_histories.last.value
                    end
     price_value || price
+
+  def linked
+    links.size != 0 ? "Да" : "Нет"
+  end
+
+  def company_name
+    company.name
   end
 
   def product_web_link

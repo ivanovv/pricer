@@ -3,26 +3,37 @@ window.PriceView = Backbone.View.extend({
     className: "price",
     template : _.template($("#price-template").html()),
 
+    events : {
+                'click' : 'select'
+            },
+
     initialize: function() {
-        _.bindAll(this, "render");
+        _.bindAll(this, "render", "select");
         this.model.bind("change", this.render);
     },
 
     render: function() {
-        var renderedContent = this.template(this.model.toJSON());
-        $(this.el).html(renderedContent);
+        $(this.el).html(this.template(this.model.toJSON()));
+        var selected = this.model.get("selected");
+        $(this.el).toggleClass('ui-selected', selected);
+        this.$("*").toggleClass('ui-selected', selected);
         return this;
+    },
+
+    select: function() {
+        this.model.set({selected : !this.model.get("selected")});
     }
 });
 
 window.PriceListView = Backbone.View.extend({
-    tagName: "div",
-    className: "prices",
+    tagName: "table",
+    className: "grid prices selectable",
+    template: _.template($("#prices-template").html()),
+
 
     initialize: function() {
         _.bindAll(this, "render");
         this.collection.bind('reset', this.render);
-        this.template = _.template($("#prices-template").html());
     },
 
     render: function() {
@@ -30,9 +41,9 @@ window.PriceListView = Backbone.View.extend({
         var collection = this.collection;
 
         $(this.el).html(this.template({}));
-        $prices = this.$(".prices");
+        $prices = this.$("tbody");
         collection.each(function(price) {
-            var view = new LibraryAlbumView({model:album, collection: collection});
+            var view = new PriceView({model:price, collection: collection});
             $prices.append(view.render().el);
         });
         return this;
