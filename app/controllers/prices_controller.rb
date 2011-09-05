@@ -21,14 +21,9 @@ class PricesController < ApplicationController
     end
   end
 
-  
+
   def show
     @price = @company.prices.find(params[:id])
-    @price_value = if @price.price_histories && @price.price_histories.last
-                     @price.price_histories.last.value
-                   end
-    @price_value ||= @price.price
-
     respond_to do |format|
       format.html
       format.xml { render :xml => @price }

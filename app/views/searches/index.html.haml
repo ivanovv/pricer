@@ -64,7 +64,6 @@
       %th Складской код
       %th Наименование
       %th Цена
-      %th Альтернатив
       %th Связан?
 
 
@@ -75,7 +74,6 @@
           %td= price.warehouse_code
           %td= link_to(price.original_description, [price.company, price])
           %td= price.price
-          %td= price.cross_prices.count
           %td
             -if price.items.count > 0
               Да

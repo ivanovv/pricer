@@ -52,6 +52,13 @@ class Price < ActiveRecord::Base
     original_description
   end
 
+  def price_value
+    price_value = if price_histories && price_histories.last
+                     price_histories.last.value
+                   end
+    price_value || price
+  end
+
   def product_web_link
     company.base_product_link + web_link if web_link
   end

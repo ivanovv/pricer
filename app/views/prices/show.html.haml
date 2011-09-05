@@ -1,7 +1,7 @@
 %h4= t(:company) + ": #{@price.company.name}"
 #{@price.original_description}
 %br
-= t(:price) + ": #{@price_value}"
+= t(:price) + ": #{@price.price_value}"
 %br
 -if @price.vendor_code
   = t(:warehouse_code) + ": #{@price.vendor_code}"
