@@ -21,6 +21,10 @@ every 1.day, :at => '4:30 am' do
   command "#{path}/dl.sh"
 end
 
+every 1.day, :at => '3:00 am' do
+  rake "app:update_vendor_code"
+end
+
 every 1.day, :at => '5:00 am' do
   rake "app:citylink"
 end
