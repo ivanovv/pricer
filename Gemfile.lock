@@ -171,7 +171,7 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     riddle (1.4.0)
-    ruby-ole (1.2.11.1)
+    ruby-ole (1.2.11.2)
     ruby-openid (2.1.8)
     ruby-openid-apps-discovery (1.2.0)
       ruby-openid (>= 2.1.7)
