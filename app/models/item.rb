@@ -21,7 +21,7 @@ class Item < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(options.merge(:only => [ :id, :original_description, :vendor_code, :created_at, :fcenter_code ],
+    super((options ||{}).merge(:only => [ :id, :original_description, :vendor_code, :created_at, :fcenter_code ],
                         :methods => :prices_count))
   end
 

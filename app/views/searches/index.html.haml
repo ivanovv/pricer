@@ -1,6 +1,26 @@
 - title t('.title')
 =content_for :javascripts do
+  :coffeescript
+    window.App = new SearchRouter()
+    Backbone.history.start( )
+
+
+    # priceView = new PriceListView({collection: prices});
+    # $('#new_prices').empty().append(priceView.render().el)
+
+    $(".search.button").click (e)->
+      window.App.navigate('search/' + $('#q').val(), true)
+      e.preventDefault()
+
   :javascript
+    window.items.reset(#{@items.to_json});
+    window.prices.reset(#{@prices.to_json});
+    pricesView = new PricesView({collection: prices});
+    $('#new_prices').empty().append(pricesView.render().el);
+
+    itemsView = new ItemsView({collection: items});
+    $('#new_items').empty().append(itemsView.render().el);
+    
     $('#q').focus();
     function clearHiddenFields(){
       $("#link_price_id").val("");

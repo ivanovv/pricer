@@ -103,26 +103,5 @@ $(function() {
 
     buildGraph();
     fluid.Ajax();
-
-    window.Pricer = Backbone.Router.extend({
-        routes: {
-                '' : 'home'
-            },
-        home: function(){
-        }
-    });
-    window.App = new Pricer();
-    Backbone.history.start({ pushState: true });
-
-    companies = new Companies();
-    companies.fetch();
-    prices = new Prices();
-    prices.find("2400s");
-    items = new Items();
-    items.find("2400s");
-
-    /*priceView = new PriceListView({collection: prices});
-    $('#new_prices').empty().append(priceView.render().el)*/
-    
 });
 

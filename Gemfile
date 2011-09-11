@@ -19,6 +19,9 @@ gem 'rake'
 gem 'omniauth'
 gem 'css3buttons'
 gem 'backbone-rails'
+gem 'barista'
+gem 'json'
+gem 'therubyracer', :require => nil
 
 group :production do
   gem "unicorn", "3.7.0"

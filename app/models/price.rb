@@ -51,7 +51,7 @@ class Price < ActiveRecord::Base
 
   def as_json(options = {})
     #super(options.merge(:only => [ :id, :company_id, :original_description, :vendor_code, :created_at, :name ], :include => :company ))
-    super(options.merge(:include => :company, :methods => [:linked, :company_name, :price_value]))
+    super((options||{}).merge(:include => :company, :methods => [:linked, :company_name, :price_value]))
   end
 
   def to_s
