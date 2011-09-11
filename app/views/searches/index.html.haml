@@ -117,6 +117,8 @@
 
     = paginate @items
 
+    #new_items
+      
     %br
 
 -if params[:q]
@@ -124,24 +126,42 @@
   - Company.all.each do |company|
     = render :partial => "search_iframe", :locals => {:company => company}
 
-:plain
-  <script type="text/template" id="price-template">
-    <td> <a href="companies/<%= company_id %>/prices"> <%= company.name %> </a></td>
-    <td> <%= warehouse_code %> </td>
-    <td> <a href="companies/<%= company_id %>/prices/<%= id %>"> <%= original_description %> </a></td>
-    <td> <%= price %></td>
-    <td> <%= linked %></td>
-  </script>
+%script#price-template{:type=>"text/template"}
+  %td
+    %a{:href=>"companies/<%= company_id %>/prices"}
+      <%= company.name %>
+  %td
+    <%= warehouse_code %>
+  %td
+    %a{:href=>"companies/<%= company_id %>/prices/<%= id %>"}
+      <%= original_description %>
+  %td
+    <%= price %>
+  %td
+    <%= linked %>
+  
 
-  <script type="text/template" id="prices-template">
-      <thead>
-        <tr>
-          <th> Компания </th>
-          <th> Складской код </th>
-          <th> Наименование </th>
-          <th> Цена </th>
-          <th> Связан? </th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-  </script>
+%script#prices-template{:type=>"text/template"}
+  %thead
+    %tr
+      %th Компания
+      %th Складской код
+      %th Наименование
+      %th Цена
+      %th Связан?
+  %tbody
+
+%script#item-template{:type=>"text/template"}
+  %td
+    %a{:href=>"items/<%= id %>"}
+      <%= original_description %>
+  %td
+    <%= prices_count %>
+
+
+%script#items-template{:type=>"text/template"}
+  %thead
+    %tr
+      %th Наименование
+      %th Прайсов
+  %tbody

@@ -63,6 +63,7 @@ class Price < ActiveRecord::Base
                      price_histories.last.value
                    end
     price_value || price
+  end
 
   def linked
     links.size != 0 ? "Да" : "Нет"

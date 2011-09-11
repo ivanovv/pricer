@@ -109,7 +109,6 @@ $(function() {
                 '' : 'home'
             },
         home: function(){
-
         }
     });
     window.App = new Pricer();
@@ -118,11 +117,12 @@ $(function() {
     companies = new Companies();
     companies.fetch();
     prices = new Prices();
-    prices.fetch({data: {q: "2400s"}});
+    prices.find("2400s");
+    items = new Items();
+    items.find("2400s");
 
     /*priceView = new PriceListView({collection: prices});
-$('#new_prices').empty().append(priceView.render().el)*/
-
-
+    $('#new_prices').empty().append(priceView.render().el)*/
+    
 });
 

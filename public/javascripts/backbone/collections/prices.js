@@ -11,6 +11,11 @@ window.Prices = Backbone.Collection.extend({
         if (options) {
             this.company = options.company;
         }
-    }
+    },
 
+    selected: function() {
+        return this.select(function(model){
+            return model.get('selected');
+        });
+    }
 });
