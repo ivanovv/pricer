@@ -9,5 +9,6 @@ window.SearchRouter = Backbone.Router.extend
     window.items = new Items()
 
   search: (q)->
+    #home() if not window.items
     window.items.find q
     window.prices.find q

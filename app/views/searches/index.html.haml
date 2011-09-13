@@ -4,13 +4,12 @@
     window.App = new SearchRouter()
     Backbone.history.start( )
 
-
     # priceView = new PriceListView({collection: prices});
     # $('#new_prices').empty().append(priceView.render().el)
 
     $(".search.button").click (e)->
-      window.App.navigate('search/' + $('#q').val(), true)
-      e.preventDefault()
+      window.App.navigate('search/' + $(e.target).prev().val(), true)
+      false
 
   :javascript
     window.items.reset(#{@items.to_json});
