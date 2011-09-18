@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "rails", "3.1.0"
+gem "rails", "3.1.1.rc1"
 gem 'spreadsheet'
 gem 'mysql2'
 gem "haml"
@@ -17,16 +17,13 @@ gem 'hoptoad_notifier'
 gem "awesome_print", :require => "ap"
 gem 'rake'
 gem 'omniauth'
-gem 'coffee-script'
-gem 'css3buttons'
-gem 'compass-html5', :git => 'git://github.com/sporkd/compass-html5.git'
-gem 'compass', :git => 'git://github.com/chriseppstein/compass.git', :branch => 'rails31'
-gem 'compass-960-plugin'
 gem 'sass-rails'
-gem 'coffee-rails'
-gem 'uglifier'
-gem 'compass', :git => 'git://github.com/chriseppstein/compass.git', :branch => 'rails31'
-
+gem "compass", "~> 0.12.alpha.0"
+gem 'css3buttons'
+#gem 'html5-boilerplate', :git => 'git://github.com/sporkd/compass-html5-boilerplate.git'
+gem 'compass-html5', :git => 'git://github.com/sporkd/compass-html5.git'
+gem 'html5-rails', :git => 'git://github.com/sporkd/html5-rails.git'
+gem 'compass-960-plugin', :require => 'ninesixty'
 
 group :production do
   gem "unicorn", "3.7.0"
@@ -44,9 +41,7 @@ gem "mocha", :group => :test
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
-  gem 'compass', :git => 'git://github.com/chriseppstein/compass.git', :branch => 'rails31'
 end
 

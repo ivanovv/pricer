@@ -1,0 +1,45 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree .
+*/
+// Here's where we define some default constants
+@import "partials/base";
+
+// Then we'll import the compass extension
+@import "html5/boilerplate";
+@include html5-boilerplate-reset;
+
+@import "compass/css3";
+@import "compass/utilities/general/float";
+@import "compass/typography/lists/inline-block-list";
+@import "compass/layout";
+@import "compass/typography/text/ellipsis";
+@import "compass/utilities/tables/scaffolding";
+
+@import "960/grid";
+
+@import "blueprint";
+@import "blueprint/colors";
+@import "blueprint/scaffolding";
+
+@import "partials/fonts";
+@import "partials/page";
+@import "partials/_layout";
+@import "partials/_nav";
+@import "partials/headers";
+@import "partials/pagination";
+
+@include html5-boilerplate-styles;
+@include html5-boilerplate-helpers;
+
+// Finally, put your own styles in these partials
+// and add more as needed (i.e. forms, tables, nav)
+
+@include blueprint-interaction;
+
+// Media should come last
+@import "partials/media";
+

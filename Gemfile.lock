@@ -1,28 +1,27 @@
 GIT
-  remote: git://github.com/chriseppstein/compass.git
-  revision: 22e2458b77519e8eb8463170c1a1fe4bab105f3e
-  branch: rails31
-  specs:
-    compass (0.12.0.alpha.0.22e2458)
-      chunky_png (~> 1.2)
-      fssm (>= 0.2.7)
-      sass (~> 3.1)
-
-GIT
   remote: git://github.com/sporkd/compass-html5.git
   revision: b9cf4f9133b939bcc92b3282c092d6f4fc8d0c50
   specs:
     compass-html5 (0.0.1)
 
+GIT
+  remote: git://github.com/sporkd/html5-rails.git
+  revision: 3eed64e1076b6e0fe9958b516100d20c8446f8ad
+  specs:
+    html5-rails (0.0.1)
+      compass-html5 (~> 0.0.1)
+      railties (~> 3.1.0.rc)
+      thor (~> 0.14)
+
 GEM
   remote: http://rubygems.org/
   specs:
-    actionmailer (3.1.0)
-      actionpack (= 3.1.0)
+    actionmailer (3.1.1.rc1)
+      actionpack (= 3.1.1.rc1)
       mail (~> 2.3.0)
-    actionpack (3.1.0)
-      activemodel (= 3.1.0)
-      activesupport (= 3.1.0)
+    actionpack (3.1.1.rc1)
+      activemodel (= 3.1.1.rc1)
+      activesupport (= 3.1.1.rc1)
       builder (~> 3.0.0)
       erubis (~> 2.7.0)
       i18n (~> 0.6)
@@ -31,25 +30,23 @@ GEM
       rack-mount (~> 0.8.2)
       rack-test (~> 0.6.1)
       sprockets (~> 2.0.0)
-    activemodel (3.1.0)
-      activesupport (= 3.1.0)
-      bcrypt-ruby (~> 3.0.0)
+    activemodel (3.1.1.rc1)
+      activesupport (= 3.1.1.rc1)
       builder (~> 3.0.0)
       i18n (~> 0.6)
-    activerecord (3.1.0)
-      activemodel (= 3.1.0)
-      activesupport (= 3.1.0)
+    activerecord (3.1.1.rc1)
+      activemodel (= 3.1.1.rc1)
+      activesupport (= 3.1.1.rc1)
       arel (~> 2.2.1)
       tzinfo (~> 0.3.29)
-    activeresource (3.1.0)
-      activemodel (= 3.1.0)
-      activesupport (= 3.1.0)
-    activesupport (3.1.0)
+    activeresource (3.1.1.rc1)
+      activemodel (= 3.1.1.rc1)
+      activesupport (= 3.1.1.rc1)
+    activesupport (3.1.1.rc1)
       multi_json (~> 1.0)
     addressable (2.2.4)
     arel (2.2.1)
     awesome_print (0.4.0)
-    bcrypt-ruby (3.0.1)
     builder (3.0.0)
     capistrano (2.8.0)
       highline
@@ -58,7 +55,7 @@ GEM
       net-ssh (>= 2.0.14)
       net-ssh-gateway (>= 1.1.0)
     chronic (0.6.4)
-    chunky_png (1.2.1)
+    chunky_png (1.2.4)
     coffee-rails (3.1.1)
       coffee-script (>= 2.2.0)
       railties (~> 3.1.0)
@@ -66,6 +63,10 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.1.2)
+    compass (0.12.alpha.0)
+      chunky_png (~> 1.2)
+      fssm (>= 0.2.7)
+      sass (~> 3.1)
     compass-960-plugin (0.10.4)
       compass (>= 0.10.0)
     css3buttons (1.0.1)
@@ -166,7 +167,7 @@ GEM
       oa-openid (= 0.2.6)
     polyglot (0.3.2)
     pyu-ruby-sasl (0.0.3.3)
-    rack (1.3.2)
+    rack (1.3.3)
     rack-cache (1.0.3)
       rack (>= 0.4)
     rack-mount (0.8.3)
@@ -178,17 +179,17 @@ GEM
       rack
     rack-test (0.6.1)
       rack (>= 1.0)
-    rails (3.1.0)
-      actionmailer (= 3.1.0)
-      actionpack (= 3.1.0)
-      activerecord (= 3.1.0)
-      activeresource (= 3.1.0)
-      activesupport (= 3.1.0)
+    rails (3.1.1.rc1)
+      actionmailer (= 3.1.1.rc1)
+      actionpack (= 3.1.1.rc1)
+      activerecord (= 3.1.1.rc1)
+      activeresource (= 3.1.1.rc1)
+      activesupport (= 3.1.1.rc1)
       bundler (~> 1.0)
-      railties (= 3.1.0)
-    railties (3.1.0)
-      actionpack (= 3.1.0)
-      activesupport (= 3.1.0)
+      railties (= 3.1.1.rc1)
+    railties (3.1.1.rc1)
+      actionpack (= 3.1.1.rc1)
+      activesupport (= 3.1.1.rc1)
       rack-ssl (~> 1.3.2)
       rake (>= 0.8.7)
       rdoc (~> 3.4)
@@ -205,10 +206,11 @@ GEM
     rubyntlm (0.1.1)
     russian (0.2.7)
     sass (3.1.7)
-    sass-rails (3.1.1)
+    sass-rails (3.1.2)
       actionpack (~> 3.1.0)
       railties (~> 3.1.0)
       sass (>= 3.1.4)
+      sprockets (~> 2.0.0)
       tilt (~> 1.3.2)
     spreadsheet (0.6.5.9)
       ruby-ole (>= 1.0)
@@ -244,8 +246,7 @@ DEPENDENCIES
   awesome_print
   capistrano
   coffee-rails
-  coffee-script
-  compass!
+  compass (~> 0.12.alpha.0)
   compass-960-plugin
   compass-html5!
   css3buttons
@@ -254,6 +255,7 @@ DEPENDENCIES
   haml
   hirb
   hoptoad_notifier
+  html5-rails!
   jquery-rails
   kaminari
   mechanize
@@ -262,7 +264,7 @@ DEPENDENCIES
   mysql2
   nifty-generators
   omniauth
-  rails (= 3.1.0)
+  rails (= 3.1.1.rc1)
   rake
   russian
   sass-rails

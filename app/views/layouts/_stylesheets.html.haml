@@ -1,15 +1,11 @@
 -# CSS: implied media="all"
--if Rails.env.production?
-  = stylesheet_link_tag    "application"
--else
-  = stylesheet_link_tag 'auth', 'style', 'formtastic', 'formtastic_changes', 'colorbox',
-  'jquery-ui', 'token-input',
-  'token-input-facebook', 'text',  :media => 'all'
 
-= css3buttons_stylesheets :include_reset => false
+= stylesheet_link_tag    "application"
+-#= css3buttons_stylesheets :include_reset => false
 
 -# Uncomment if you are specifically targeting less enabled mobile browsers
 -#= stylesheet_link_tag 'handheld', :media => 'handheld'
 
 -# Append your own using content_for :stylesheets
 = yield :stylesheets
+

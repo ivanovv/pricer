@@ -1,0 +1,42 @@
+
+nav.pagination {
+  text-align:center;
+  padding: 7px;
+  margin: 3px;
+  a {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    border: 1px solid #333;
+
+    text-decoration: none; /* no underline */
+    color: #000000;
+
+    &:hover, &:active {
+      border: 1px solid #333;
+      background-color: #333;
+      color: #fff;
+     }
+  }
+  span.current {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    border: 1px solid #333;
+
+    font-weight: bold;
+    background-color: #333;
+    color: #FFF;
+  }
+
+  span.last, span.first, span.next, span.prev {
+    a {
+      border: none;
+    }
+  }
+
+  span.disabled {
+    padding: 2px 5px 2px 5px;
+    margin: 2px;
+    border: 1px solid #EEE;
+    color: #DDD;
+  }
+}

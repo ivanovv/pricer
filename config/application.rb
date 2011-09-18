@@ -44,6 +44,22 @@ module Pricer
     config.assets.enabled = true
 
     config.generators.stylesheet_engine = :scss
+
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
+
+    stylesheets_directory = "#{Rails.root}/app/assets/stylesheets"
+    config.assets.precompile += Dir.glob("#{stylesheets_directory}/**/*.s[ac]ss*").
+                            map{|f| f[stylesheets_directory.size+1..-1]}.
+                            select do |file|
+                              if config.assets.precompile.include?(file)
+                                false
+                              elsif File.basename(file)[0...1] == "_"
+                                false
+                              else
+                                true
+                              end
+                            end
   end
 end
 
