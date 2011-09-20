@@ -73,7 +73,7 @@ GEM
       actionpack (>= 3.0.0)
     differ (0.1.2)
     erubis (2.7.0)
-    execjs (1.2.6)
+    execjs (1.2.7)
       multi_json (~> 1.0)
     faraday (0.6.1)
       addressable (~> 2.2.4)
