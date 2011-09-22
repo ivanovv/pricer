@@ -1,16 +1,16 @@
 GIT
   remote: git://github.com/sporkd/compass-html5.git
-  revision: b9cf4f9133b939bcc92b3282c092d6f4fc8d0c50
+  revision: 73c5dcc7c6e6080ae752d08c845b27b1c998b271
   specs:
-    compass-html5 (0.0.1)
+    compass-html5 (0.0.2)
 
 GIT
   remote: git://github.com/sporkd/html5-rails.git
-  revision: 3eed64e1076b6e0fe9958b516100d20c8446f8ad
+  revision: bf578ff4660d3a36270926a701bfead8911abcf1
   specs:
-    html5-rails (0.0.1)
+    html5-rails (0.0.2)
       compass-html5 (~> 0.0.1)
-      railties (~> 3.1.0.rc)
+      railties (~> 3.1.0)
       thor (~> 0.14)
 
 GEM
@@ -73,7 +73,7 @@ GEM
       actionpack (>= 3.0.0)
     differ (0.1.2)
     erubis (2.7.0)
-    execjs (1.2.7)
+    execjs (1.2.8)
       multi_json (~> 1.0)
     faraday (0.6.1)
       addressable (~> 2.2.4)
