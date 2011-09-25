@@ -91,6 +91,7 @@ GEM
     kaminari (0.12.4)
       rails (>= 3.0.0)
     kgio (2.6.0)
+    libv8 (3.3.10.2)
     log4r (1.1.9)
     macaddr (1.4.0)
       systemu (~> 2.2.0)
