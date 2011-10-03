@@ -21,8 +21,8 @@ gem 'sass-rails'
 gem "compass", "~> 0.12.alpha.0"
 gem 'css3buttons'
 #gem 'html5-boilerplate', :git => 'git://github.com/sporkd/compass-html5-boilerplate.git'
-gem 'compass-html5', :git => 'git://github.com/sporkd/compass-html5.git'
-gem 'html5-rails', :git => 'git://github.com/sporkd/html5-rails.git'
+gem 'compass-html5', '0.0.2'
+gem 'html5-rails', '0.0.2'
 gem 'compass-960-plugin', :require => 'ninesixty'
 
 group :production do
