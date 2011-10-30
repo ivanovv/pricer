@@ -1,11 +1,13 @@
 /*
- * This is a manifest file that'll automatically include all the stylesheets available in this directory
- * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
- * the top of the compiled file, but it's generally better to create a new file per style scope.
- *= require_self
- *= require_tree .
+*= require colorbox.css
+*= require formtastic.css
+*= require token-input.css
+*= require token-input-facebook.css
+*= require css3buttons/without-reset
+*= require auth
+*= require formtastic_changes
 */
-// Here's where we define some default constants
+
 @import "partials/base";
 
 // Then we'll import the compass extension
@@ -27,16 +29,14 @@
 
 @import "partials/fonts";
 @import "partials/page";
-@import "partials/_layout";
-@import "partials/_nav";
+@import "partials/layout";
+@import "partials/nav";
 @import "partials/headers";
 @import "partials/pagination";
+@import "partials/form";
 
 @include html5-boilerplate-styles;
 @include html5-boilerplate-helpers;
-
-// Finally, put your own styles in these partials
-// and add more as needed (i.e. forms, tables, nav)
 
 @include blueprint-interaction;
 

@@ -4,7 +4,12 @@ require 'rails/all'
 
 # If you have a Gemfile, require the gems listed there, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env) if defined?(Bundler)
+if defined?(Bundler)
+  # If you precompile assets before deploying to production, use this line
+  Bundler.require(*Rails.groups(:assets => %w(development test)))
+  # If you want your assets lazily compiled in production, use this line
+  # Bundler.require(:default, :assets, Rails.env)
+end
 
 module Pricer
   class Application < Rails::Application
@@ -28,10 +33,7 @@ module Pricer
 
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
-    # config.i18n.default_locale = :de
-
-    # JavaScript files you want as :defaults (application.js is always included).
-    # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
+    config.i18n.default_locale = :ru
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
@@ -43,23 +45,13 @@ module Pricer
     # Enable the asset pipeline
     config.assets.enabled = true
 
-    config.generators.stylesheet_engine = :scss
-
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    stylesheets_directory = "#{Rails.root}/app/assets/stylesheets"
-    config.assets.precompile += Dir.glob("#{stylesheets_directory}/**/*.s[ac]ss*").
-                            map{|f| f[stylesheets_directory.size+1..-1]}.
-                            select do |file|
-                              if config.assets.precompile.include?(file)
-                                false
-                              elsif File.basename(file)[0...1] == "_"
-                                false
-                              else
-                                true
-                              end
-                            end
+    #config.generators.stylesheet_engine = :scss
+
+    #config.assets.precompile << /(^[^_]|\/[^_])[^\/]*/
+    config.assets.precompile << /(^[^_]|\/[^_])[^\/]*$/
   end
 end
 

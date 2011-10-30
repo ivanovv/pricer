@@ -1,4 +1,6 @@
 class PriceParserLoader
+  extend Rake::DSL
+
   def self.load_parser(*files)
 
     #require_relative "../lib/#{file}.rb"
@@ -36,3 +38,4 @@ class PriceParserLoader
     end
   end
 end
+

@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "rails", "3.1.1.rc1"
+gem "rails", "3.1.1"
 gem 'spreadsheet'
 gem 'mysql2'
 gem "haml"
@@ -17,13 +17,7 @@ gem 'hoptoad_notifier'
 gem "awesome_print", :require => "ap"
 gem 'rake'
 gem 'omniauth'
-gem 'sass-rails'
-gem "compass", "~> 0.12.alpha.0"
 gem 'css3buttons'
-#gem 'html5-boilerplate', :git => 'git://github.com/sporkd/compass-html5-boilerplate.git'
-gem 'compass-html5', '0.0.2'
-gem 'html5-rails', '0.0.2'
-gem 'compass-960-plugin', :require => 'ninesixty'
 
 group :production do
   gem "unicorn", "3.7.0"
@@ -41,7 +35,13 @@ gem "mocha", :group => :test
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'coffee-rails'
-  gem 'uglifier'
+  gem 'sass-rails', '~> 3.1.4'
+  gem 'coffee-rails', '~> 3.1.1'
+  gem 'uglifier', '>= 1.0.3'
+  gem 'compass', '~> 0.12.alpha'
+  # include other compass plugins here. E.g.:
+  gem 'compass-960-plugin', :require => 'ninesixty'
+  gem 'compass-html5'
+  gem 'html5-rails'
 end
 
