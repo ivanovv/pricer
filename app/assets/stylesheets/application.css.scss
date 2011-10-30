@@ -1,4 +1,5 @@
 /*
+*= require_self
 *= require colorbox.css
 *= require formtastic.css
 *= require token-input.css
@@ -6,11 +7,11 @@
 *= require css3buttons/without-reset
 *= require auth
 *= require formtastic_changes
+*= require text
 */
 
 @import "partials/base";
 
-// Then we'll import the compass extension
 @import "html5/boilerplate";
 @include html5-boilerplate-reset;
 
@@ -20,7 +21,6 @@
 @import "compass/layout";
 @import "compass/typography/text/ellipsis";
 @import "compass/utilities/tables/scaffolding";
-
 @import "960/grid";
 
 @import "blueprint";
@@ -31,15 +31,13 @@
 @import "partials/page";
 @import "partials/layout";
 @import "partials/nav";
-@import "partials/headers";
+//@import "partials/headers";
 @import "partials/pagination";
 @import "partials/form";
 
 @include html5-boilerplate-styles;
 @include html5-boilerplate-helpers;
-
 @include blueprint-interaction;
 
 // Media should come last
 @import "partials/media";
-
