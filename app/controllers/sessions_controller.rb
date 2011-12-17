@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
   end
 
   def new
-    redirect_to '/auth/vkontakte'
+    redirect_to "/#{Rails.env.production? ? '' :'pricer/'}auth/vkontakte"
   end
 
 end

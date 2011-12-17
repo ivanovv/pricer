@@ -1,5 +1,7 @@
 # encoding: UTF-8
+require 'company_info'
 class PriceParser
+  include ::CompanyInfo
 
   attr_accessor :created_prices, :updated_prices, :total_prices, :total_rows
 
@@ -8,19 +10,6 @@ class PriceParser
     @updated_prices = 0
     @total_prices = 0
     @total_rows = 0
-  end
-
-  def company_name
-    self.class::COMPANY_NAME
-  end
-
-  def company
-    @company ||= Company.find_or_create_by_name company_name
-    #@prices ||= @company.prices.all
-    #TODO select only one price_history record (to get rid of max)
-    #@price_histories ||= PriceHistory.from("`price_histories`, `prices`").where("price_histories.price_id = prices.id and prices.company_id = ?", [@company.id]).all
-
-    @company
   end
 
   def create_price(price_attributes)

@@ -7,3 +7,4 @@ Pricer::Application.initialize!
 ActiveRecord::Base.include_root_in_json = false
 
 Haml::Template.options[:escape_attrs] = false
+

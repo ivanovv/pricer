@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class ScrapedConfigurationsController < ApplicationController
 
   def index
@@ -13,12 +14,11 @@ class ScrapedConfigurationsController < ApplicationController
   end
 
   def create
-    params[:scraped_configuration] ||= {}
-    params[:scraped_configuration][:url] ||= params.try(:[], :url)
-    
-    @scraped_configuration = ScrapedConfiguration.new(params[:scraped_configuration])
-    if @scraped_configuration.save
-      redirect_to @scraped_configuration, :notice => "Successfully created scraped configuration."
+    url = params.try(:[], :url) || params[:scraped_configuration][:url]
+
+    @scraped_configuration, valid = ScrapedConfiguration.create_from_config_url(url)
+    if valid
+      redirect_to @scraped_configuration, :notice => "Конфигурация сохранена."
     else
       render :action => 'new'
     end
@@ -43,3 +43,4 @@ class ScrapedConfigurationsController < ApplicationController
     redirect_to scraped_configurations_url, :notice => "Successfully destroyed scraped configuration."
   end
 end
+
