@@ -20,3 +20,4 @@ tmp/**
 /public/stylesheets/ie.css
 /public/stylesheets/handheld.css
 /public/javascripts/backbone
+bin/

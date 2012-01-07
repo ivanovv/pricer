@@ -1,2 +1,2 @@
 window.Link = Backbone.Model.extend
-  url: "/links"
+  url: "/pricer/links"

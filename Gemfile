@@ -8,7 +8,7 @@ gem "thinking-sphinx"
 #gem "will_paginate", "~> 3.0.pre2"
 gem "mechanize"
 gem "russian"
-gem "jquery-rails"
+gem "jquery-rails", "= 1.0.19"
 gem "formtastic"
 gem "kaminari"
 gem "differ"
@@ -31,9 +31,13 @@ group :development do
   gem "nifty-generators"
   gem "hirb"
   gem "capistrano"
+  gem "pry"
 end
 
-gem "mocha", :group => :test
+group :test do
+  gem "mocha"
+  gem "rspec-rails"
+end
 
 # Gems used only for assets and not required
 # in production environments by default.

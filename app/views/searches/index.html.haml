@@ -1,76 +1,44 @@
 - title t('.title')
+
 =content_for :javascripts do
-  :coffeescript
-    window.App = new SearchRouter()
-    Backbone.history.start( )
-
-    # priceView = new PriceListView({collection: prices});
-    # $('#new_prices').empty().append(priceView.render().el)
-
-    $(".search.button").click (e)->
-      window.App.navigate('search/' + $(e.target).prev().val(), true)
-      false
-
   :javascript
-    window.items.reset(#{@items.to_json});
-    window.prices.reset(#{@prices.to_json});
-    pricesView = new PricesView({collection: prices});
-    $('#new_prices').empty().append(pricesView.render().el);
+    $(function() {
+      window.App = new window.SearchRouter();
+      Backbone.history.start();
 
-    itemsView = new ItemsView({collection: items});
-    $('#new_items').empty().append(itemsView.render().el);
-    
-    $('#q').focus();
-    function clearHiddenFields(){
-      $("#link_price_id").val("");
-      $("#link_item_id").val("");
-      $("#link_other_prices").val("");
-    }
+      $(".search.button").click(function (e) {
+          var value = $(e.target).prev().val();
+          $("#q").val(value);
+          window.App.navigate('search/' + value, true);
+          return false;
+      });
 
-    $('table.prices, table.items').selectable({
-      filter: 'tr',
-      cancel: 'a',
-      stop: function() {
+      window.items.reset(#{@items.to_json});
+      window.prices.reset(#{@prices.to_json});
+      pricesView = new PricesView({el: $('#new_prices'), collection: prices});
+      itemsView = new ItemsView({el: $('#new_items'), collection: items});
 
-        clearHiddenFields();
-
-        $("tr.ui-selected").each(function(){
-
-          // select children for highlighting
-          $(this).children().addClass("ui-selected");
-
-          // save item id
-          if ($(this).data("item_id") != null ) {
-            $("#link_item_id").val($(this).data("item_id"));
+      $('#q').focus();
+      $("#link_btn").click(function(){
+          var selected_prices = prices.selected();
+          if (selected_prices.length == 0) {
+            alert("No prices selected!");
+            return false;
           }
-
-          // save all price id
-          if ($(this).data("price_id") != null ) {
-            if ($("#link_price_id").val() != "") {
-              var existing_data = $("#link_other_prices").val();
-              if (existing_data.length > 0)
-                existing_data = existing_data + ",";
-              $("#link_other_prices").val(existing_data + $(this).data("price_id"));
-            }
-            else
-              $("#link_price_id").val($(this).data("price_id"));
-          }
-          
-        });
-        // remove selection from deselected items
-        $("table.prices tr:not(.ui-selected), table.items tr:not(.ui-selected)").each(function(){
-          $(this).children().removeClass("ui-selected");
-        });
-      }
+          items.first().link_items(selected_prices, true, 10);
+          selected_prices.each(function(price){
+            price.set({selected:false});
+          });
+          return false;
+      });
     });
-    //$('table.items').selectable({filter:'tr', cancel: 'a'});
 
 .grid_4
   .box
     %p= search_box
 .clear
 
-- if @prices
+- if @prices && @prices.count > 0
   %h1(style="display:inline") Найденные товары
   (#{@prices.total_entries})
 
@@ -100,8 +68,6 @@
               Нет
 
   = paginate @prices
-
-  #new_prices
 
   %br
   .box
@@ -136,9 +102,29 @@
 
     = paginate @items
 
-    #new_items
-      
     %br
+
+#new_prices_div
+  %table.grid.prices.selectable
+    %thead
+      %tr
+        %th Компания
+        %th Складской код
+        %th Наименование
+        %th Цена
+        %th Связан?
+      %tbody(id="new_prices")
+
+#link_button
+  =safe_button_link_to("Связать!", {:href => "#"}, :id => "link_btn", :href => "#")
+
+#new_items_div
+  %table.grid.items.selectable
+    %thead
+      %tr
+        %th Наименование
+        %th Прайсов
+    %tbody(id="new_items")
 
 -if params[:q]
   %h1 Поиск по фирмам
@@ -158,17 +144,7 @@
     <%= price %>
   %td
     <%= linked %>
-  
 
-%script#prices-template{:type=>"text/template"}
-  %thead
-    %tr
-      %th Компания
-      %th Складской код
-      %th Наименование
-      %th Цена
-      %th Связан?
-  %tbody
 
 %script#item-template{:type=>"text/template"}
   %td
@@ -177,10 +153,3 @@
   %td
     <%= prices_count %>
 
-
-%script#items-template{:type=>"text/template"}
-  %thead
-    %tr
-      %th Наименование
-      %th Прайсов
-  %tbody

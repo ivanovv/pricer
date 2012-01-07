@@ -33,7 +33,7 @@ class LinksController < ApplicationController
       if other_prices && !other_prices.blank?
         @links << Link.create_many_links(other_prices, params[:link][:item_id])
         flash[:notice] = "Successfully created several links."
-        redirect_to :action => 'index', :id => @links.map{ |link| link.id}.join('+')
+        redirect_to :action => 'index', :id => @links.join('+')
       else
         respond_with(@link, :layout => !request.xhr?)
       end

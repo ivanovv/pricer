@@ -1,0 +1,1 @@
+window.Price = SelectableModel.extend {}
