@@ -113,12 +113,10 @@ class Price < ActiveRecord::Base
     client = ThinkingSphinx::Search.new.client
     keywords = client.keywords description, Item.sphinx_index_names.first, true
     keywords = keywords.sort { |x, y| y[:docs] <=> x[:docs] }
-    keywords = keywords.first n
-    keywords
+    keywords.first n
   end
 
   def sphinx_keywords_for_javascript(n = 3)
-    #pretty_keywords(n)
     {:likely => pretty_keywords(n), :unlikely => most_unlikely_search(n)}.to_json
   end
 

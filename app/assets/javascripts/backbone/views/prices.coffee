@@ -4,7 +4,12 @@ window.PricesView = SelectablesView.extend
 
     initElement: (options) ->
         new PriceView
-          model:options.model
+          model: options.model
           collection: options.collection
+
+    render: ->
+        SelectablesView.prototype.render.apply(@, arguments)
+        $("#prices_count").text(@collection.length)
+        @
 
 

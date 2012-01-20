@@ -13,10 +13,11 @@
           return false;
       });
 
-      window.items.reset(#{@items.to_json});
-      window.prices.reset(#{@prices.to_json});
       pricesView = new PricesView({el: $('#new_prices'), collection: prices});
       itemsView = new ItemsView({el: $('#new_items'), collection: items});
+
+      window.items.reset(#{@items.to_json});
+      window.prices.reset(#{@prices.to_json});
 
       $('#q').focus();
       $("#link_btn").click(function(){
@@ -24,6 +25,10 @@
           if (selected_prices.length == 0) {
             alert("No prices selected!");
             return false;
+          }
+          if (!items.first()) {
+              alert("No item selected!");
+              return false;
           }
           items.first().link_items(selected_prices, true, 10);
           selected_prices.each(function(price){
@@ -37,74 +42,78 @@
   .box
     %p= search_box
 .clear
-
-- if @prices && @prices.count > 0
-  %h1(style="display:inline") Найденные товары
-  (#{@prices.total_entries})
-
-  %br
-  %br
-
-  %table.grid.prices.selectable
-    %tr
-      %th Компания
-      %th Складской код
-      %th Наименование
-      %th Цена
-      %th Связан?
-
-
-    - @prices.each do |price|
-      - if price
-        %tr{:data => {:price_id=>price.id}}
-          %td= link_to(price.company.name, company_prices_path(price.company))
-          %td= price.warehouse_code
-          %td= link_to(price.original_description, [price.company, price])
-          %td= price.price
-          %td
-            -if price.items.count > 0
-              Да
-            -else
-              Нет
-
-  = paginate @prices
-
-  %br
-  .box
-    = semantic_form_for(Link.new(:human=>true, :score=>10), :url=> url_for(:action => "create", :controller => "links"), :method=>:post) do |f|
-      = f.inputs do
-        = f.input :item_id, :as => :hidden
-        = f.input :price_id, :as => :hidden
-        = f.input :human, :as => :hidden
-        = f.input :score, :as => :hidden
-        = f.hidden_field :other_prices
-      = add_button_submit_tag "Связать"
-
-  %h1(style="display:inline") Найденные записи из справочника
-
-  - if @items
-    (#{@items.total_entries})
-
-  %br
-  %br
-
-  - if @items
-    %table.grid.items.selectable
-      %tr
-        %th Наименование
-        %th Прайсов
-
-      - @items.each do |item|
-        - if item
-          %tr{:data => {:item_id => item.id}}
-            %td= link_to(item.original_description, item)
-            %td= item.prices.count
-
-    = paginate @items
+%noscript
+  - if @prices && @prices.count > 0
+    %h1(style="display:inline") Найденные товары
+    (#{@prices.total_entries})
 
     %br
+    %br
+
+    %table.grid.prices.selectable
+      %tr
+        %th Компания
+        %th Складской код
+        %th Наименование
+        %th Цена
+        %th Связан?
+
+
+      - @prices.each do |price|
+        - if price
+          %tr{:data => {:price_id=>price.id}}
+            %td= link_to(price.company.name, company_prices_path(price.company))
+            %td= price.warehouse_code
+            %td= link_to(price.original_description, [price.company, price])
+            %td= price.price
+            %td
+              -if price.items.count > 0
+                Да
+              -else
+                Нет
+
+    = paginate @prices
+
+    %br
+    .box
+      = semantic_form_for(Link.new(:human=>true, :score=>10), :url=> url_for(:action => "create", :controller => "links"), :method=>:post) do |f|
+        = f.inputs do
+          = f.input :item_id, :as => :hidden
+          = f.input :price_id, :as => :hidden
+          = f.input :human, :as => :hidden
+          = f.input :score, :as => :hidden
+          = f.hidden_field :other_prices
+        = add_button_submit_tag "Связать"
+
+    %h1(style="display:inline") Найденные записи из справочника
+
+    - if @items
+      (#{@items.total_entries})
+
+    %br
+    %br
+
+    - if @items
+      %table.grid.items.selectable
+        %tr
+          %th Наименование
+          %th Прайсов
+
+        - @items.each do |item|
+          - if item
+            %tr{:data => {:item_id => item.id}}
+              %td= link_to(item.original_description, item)
+              %td= item.prices.count
+
+      = paginate @items
+
+      %br
 
 #new_prices_div
+  %h1(style="display:inline") Найденные товары
+  (
+  %span#prices_count
+  )
   %table.grid.prices.selectable
     %thead
       %tr
@@ -119,6 +128,10 @@
   =safe_button_link_to("Связать!", {:href => "#"}, :id => "link_btn", :href => "#")
 
 #new_items_div
+  %h1(style="display:inline") Найденные записи из справочника
+  (
+  %span#items_count
+  )
   %table.grid.items.selectable
     %thead
       %tr

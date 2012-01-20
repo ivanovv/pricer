@@ -4,5 +4,10 @@ window.ItemsView = SelectablesView.extend
 
   initElement: (options) ->
     new ItemView
-      model:options.model
+      model: options.model
       collection: options.collection
+
+  render: ->
+    SelectablesView.prototype.render.apply(@, arguments)
+    $("#items_count").text(@collection.length)
+    @

@@ -7,14 +7,14 @@ window.SelectablesView = Backbone.View.extend
         @collection.bind('reset', @render)
 
     render: ->
+        $(@el).empty()
         collection = @collection;
         collection.each((element) ->
-            view = @initElement {model:element, collection:collection}
-            $(@el).append(view.render().el)
+            @addOne element
         , @)
         @
 
     addOne: (element) ->
         view = @initElement {model: element, collection: @collection}
-        $(@el).append view.render().el
+        $(@el).append(view.render().el)
 
