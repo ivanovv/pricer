@@ -72,6 +72,7 @@ after "deploy:setup", "thinking_sphinx:shared_sphinx_folder"
 
 # Build the SASS Stylesheets
 before "deploy:restart" do
+  rails_env = fetch(:rails_env, "production")
   rake = fetch(:rake, "rake")
-  run "cd #{current_path} && #{rake} sass:build"
+  run "if [ -d #{release_path} ]; then cd #{release_path}; else cd #{current_path}; fi; #{rake} RAILS_ENV=#{rails_env} sass:build"
 end
