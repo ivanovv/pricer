@@ -22,6 +22,7 @@ gem "css3buttons"
 gem "rails-backbone"
 gem "json"
 gem "therubyracer", :require => nil
+gem "html5-rails"
 
 group :production do
   gem "unicorn", "3.7.0"
@@ -49,6 +50,5 @@ group :assets do
   # include other compass plugins here. E.g.:
   gem "compass-960-plugin", :require => "ninesixty"
   gem "compass-html5"
-  gem "html5-rails"
 end
 
