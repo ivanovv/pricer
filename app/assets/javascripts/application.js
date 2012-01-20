@@ -12,3 +12,7 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/pricer
+//= require jquery.colorbox-min.js
+//= require jquery.flot.min.js
+//= require app.js
+
