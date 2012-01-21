@@ -95,10 +95,6 @@ $(function() {
         return false;
     });
 
-    $(".item").live("click", function() {
-        $("#link_item_id").val($(this).attr('id').replace("item_", ""));
-    });
-
     $(".colorbox").colorbox({width:"80%", height:"80%", iframe:true});
 
     buildGraph();

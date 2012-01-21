@@ -22,15 +22,16 @@
       $('#q').focus();
       $("#link_btn").click(function(){
           var selected_prices = prices.selected();
-          if (selected_prices.length == 0) {
+          var selected_items = items.selected();
+          if (selected_prices.size() == 0) {
             alert("No prices selected!");
             return false;
           }
-          if (!items.first()) {
-              alert("No item selected!");
+          if (selected_items.size() === 0 || selected_items.size() > 1) {
+              alert("Select one item (only)!");
               return false;
           }
-          items.first().link_items(selected_prices, true, 10);
+          selected_items.first().link_items(selected_prices, true, 10);
           selected_prices.each(function(price){
             price.set({selected:false});
           });

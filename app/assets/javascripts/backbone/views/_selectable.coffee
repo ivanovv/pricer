@@ -7,6 +7,7 @@ window.SelectableView = Backbone.View.extend
         _.bindAll @, "render", "select", "setSelected"
         @model.bind "change:selected", @setSelected
 
+
     render: ->
         $(@el).html(@template(@model.toJSON()))
         @setSelected()
