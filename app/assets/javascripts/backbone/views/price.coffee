@@ -1,6 +1,6 @@
 window.PriceView = SelectableView.extend
     className: "price"
-    template : _.template $("#price-template").html()
+    template : _.template(if $("#price-template").length > 0 then  $("#price-template").html() else "")
 
     initialize: ->
       SelectableView.prototype.initialize.apply(@, arguments)

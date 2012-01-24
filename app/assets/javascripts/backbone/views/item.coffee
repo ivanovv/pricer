@@ -1,6 +1,6 @@
 window.ItemView = SelectableView.extend
     className: "item"
-    template : _.template $("#item-template").html()
+    template : _.template(if $("#item-template").length > 0 then $("#item-template").html() else "")
 
     initialize: ->
       SelectableView.prototype.initialize.apply(@, arguments)

@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "rails", "3.1.3"
+gem "rails", "3.2.0"
 gem "spreadsheet"
 gem "mysql2"
 gem "haml"
@@ -13,7 +13,7 @@ gem "formtastic"
 gem "kaminari"
 gem "differ"
 gem "whenever"
-gem "hoptoad_notifier"
+gem "hoptoad_notifier"  #TODO switch to airbrake gem
 gem "awesome_print", :require => "ap"
 gem "rake"
 gem "omniauth"
@@ -22,7 +22,7 @@ gem "css3buttons"
 gem "rails-backbone"
 gem "json"
 gem "therubyracer", :require => nil
-gem "html5-rails"
+gem "html5-rails", :git => "git://github.com/sporkd/html5-rails.git"
 
 group :production do
   gem "unicorn", "3.7.0"
@@ -36,15 +36,14 @@ group :development do
 end
 
 group :test do
-  gem "mocha"
   gem "rspec-rails"
 end
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem "sass-rails", "~> 3.1.4"
-  gem "coffee-rails", "~> 3.1.1"
+  gem "sass-rails", "~> 3.2.3"
+  gem "coffee-rails", "~> 3.2.1"
   gem "uglifier", ">= 1.0.3"
   gem "compass", "> 0.12.alpha"
   # include other compass plugins here. E.g.:
