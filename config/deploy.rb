@@ -1,9 +1,3 @@
-# _your_login_ - Поменять на ваш логин в панели управления
-# _your_project_ - Поменять на имя вашего проекта
-# _your_server_ - Поменять на имя вашего сервера (Указано на вкладке "FTP и SSH" вашей панели управления)
-# set :repository - Установить расположение вашего репозитория
-# У вас должна быть настроена авторизация ssh по сертификатам
-
 set :application, "pricer"
 set :repository,  "git://github.com/ivanovv/pricer.git"
 set :deploy_via, :remote_cache
@@ -14,16 +8,17 @@ set :user, "hosting_vivanov2"
 set :use_sudo, false
 set :deploy_to, deploy_path
 
-set :bundle_dir, "~/projects/pricer/shared/bundle"
-set :bundle_cmd, "/var/lib/gems/1.8/bin/bundle"
-
-set :whenever_command, "/var/lib/gems/1.8/bin/bundle exec whenever"
+set :whenever_command, "rvm use 1.9.3 do bundle exec whenever"
 
 set :scm, :git
 
 role :web, "lithium.locum.ru"                          # Your HTTP server, Apache/etc
 role :app, "lithium.locum.ru"                          # This may be the same as your `Web` server
 role :db,  "lithium.locum.ru", :primary => true # This is where Rails migrations will run
+
+$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
+require "rvm/capistrano"                  # Load RVM's capistrano plugin.
+set :rvm_ruby_string, '1.9.3'        # Or whatever env you want it to run in.
 
 require "bundler/capistrano"
 require "thinking_sphinx/deploy/capistrano"
@@ -41,8 +36,7 @@ task :copy_email_config, roles => :app do
   run "cp #{mail_config} #{release_path}/config/email.yml"
 end
 
-set :unicorn_rails, "/var/lib/gems/1.8/bin/unicorn_rails"
-#set :unicorn_rails, "unicorn_rails"
+set :unicorn_start_cmd, "(cd #{deploy_to}/current; rvm use 1.9.3 do bundle exec unicorn_rails -Dc #{unicorn_conf})"
 set :unicorn_conf, "/etc/unicorn/pricer.vivanov2.rb"
 set :unicorn_pid, "/var/run/unicorn/pricer.vivanov2.pid"
 
@@ -50,7 +44,7 @@ set :unicorn_pid, "/var/run/unicorn/pricer.vivanov2.pid"
 namespace :deploy do
   desc "Start application"
   task :start, :roles => :app do
-    run "cd #{current_release}; /var/lib/gems/1.8/bin/bundle exec #{unicorn_rails} -Dc #{unicorn_conf}"
+    run unicorn_start_cmd
   end
 
   desc "Stop application"
@@ -60,19 +54,15 @@ namespace :deploy do
 
   desc "Restart Application"
   task :restart, :roles => :app do
-    run "cd #{current_release}; [ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || /var/lib/gems/1.8/bin/bundle exec #{unicorn_rails} -Dc #{unicorn_conf}"
+    run "[ -f #{unicorn_pid} ] && kill -USR2 `cat #{unicorn_pid}` || #{unicorn_start_cmd}"
   end
 end
 
 after "deploy:setup", "thinking_sphinx:shared_sphinx_folder"
 
-#require './config/boot'
-#require 'hoptoad_notifier/capistrano'
-
-
 # Build the SASS Stylesheets
 before "deploy:restart" do
   rails_env = fetch(:rails_env, "production")
   rake = fetch(:rake, "rake")
-  run "if [ -d #{release_path} ]; then cd #{release_path}; else cd #{current_path}; fi; #{rake} RAILS_ENV=#{rails_env} sass:build"
+  run "if [ -d #{release_path} ]; then cd #{release_path}; else cd #{current_path}; fi; rvm use 1.9.3 do bundle exec #{rake} RAILS_ENV=#{rails_env} sass:build"
 end
