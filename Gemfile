@@ -1,6 +1,6 @@
 source :gemcutter
 
-gem "rails", "3.2.0"
+gem "rails", "3.2.1"
 gem "spreadsheet"
 gem "mysql2"
 gem "haml"
@@ -22,7 +22,7 @@ gem "css3buttons"
 gem "rails-backbone"
 gem "json"
 gem "therubyracer", :require => nil
-gem "html5-rails", :git => "git://github.com/sporkd/html5-rails.git"
+gem "html5-rails"
 
 group :production do
   gem "unicorn", "3.7.0"

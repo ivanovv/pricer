@@ -14,11 +14,7 @@ set :scm, :git
 
 role :web, "lithium.locum.ru"                          # Your HTTP server, Apache/etc
 role :app, "lithium.locum.ru"                          # This may be the same as your `Web` server
-role :db,  "lithium.locum.ru", :primary => true # This is where Rails migrations will run
-
-$:.unshift(File.expand_path('./lib', ENV['rvm_path'])) # Add RVM's lib directory to the load path.
-require "rvm/capistrano"                  # Load RVM's capistrano plugin.
-set :rvm_ruby_string, '1.9.3'        # Or whatever env you want it to run in.
+role :db,  "lithium.locum.ru", :primary => true        # This is where Rails migrations will run
 
 require "bundler/capistrano"
 require "thinking_sphinx/deploy/capistrano"
@@ -36,9 +32,12 @@ task :copy_email_config, roles => :app do
   run "cp #{mail_config} #{release_path}/config/email.yml"
 end
 
-set :unicorn_start_cmd, "(cd #{deploy_to}/current; rvm use 1.9.3 do bundle exec unicorn_rails -Dc #{unicorn_conf})"
 set :unicorn_conf, "/etc/unicorn/pricer.vivanov2.rb"
 set :unicorn_pid, "/var/run/unicorn/pricer.vivanov2.pid"
+set :unicorn_start_cmd, "(cd #{deploy_to}/current; rvm use 1.9.3 do bundle exec unicorn_rails -Dc #{unicorn_conf})"
+
+set :bundle_cmd, "rvm use 1.9.3 do bundle"
+
 
 # - for unicorn - #
 namespace :deploy do
@@ -59,10 +58,3 @@ namespace :deploy do
 end
 
 after "deploy:setup", "thinking_sphinx:shared_sphinx_folder"
-
-# Build the SASS Stylesheets
-before "deploy:restart" do
-  rails_env = fetch(:rails_env, "production")
-  rake = fetch(:rake, "rake")
-  run "if [ -d #{release_path} ]; then cd #{release_path}; else cd #{current_path}; fi; rvm use 1.9.3 do bundle exec #{rake} RAILS_ENV=#{rails_env} sass:build"
-end
