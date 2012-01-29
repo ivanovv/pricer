@@ -21,11 +21,10 @@ gem "omniauth-vkontakte"
 gem "css3buttons"
 gem "rails-backbone"
 gem "json"
-gem "therubyracer", :require => nil
 gem "html5-rails"
 
 group :production do
-  gem "unicorn", "3.7.0"
+  gem "therubyracer", :require => nil
 end
 
 group :development do

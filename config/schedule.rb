@@ -16,6 +16,7 @@
 
 
 set :output, "#{path}/log/cron_log.log"
+job_type :rake, "cd :path && RAILS_ENV=:environment rvm use 1.9.3 do bundle exec rake :task --silent :output"
 
 every 1.day, :at => '4:30 am' do
   command "#{path}/dl.sh"
