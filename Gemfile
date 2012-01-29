@@ -24,6 +24,7 @@ gem "json"
 gem "html5-rails"
 
 group :production do
+  gem "unicorn"
   gem "therubyracer", :require => nil
 end
 
