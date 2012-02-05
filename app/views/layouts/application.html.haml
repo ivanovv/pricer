@@ -3,28 +3,23 @@
 -html_tag :class => 'no-js', :lang => 'ru' do
   = render "head"
   
-  %body.bp
-    #container.container_12
-      .grid_12
+  %body
+    = render "layouts/navigation"
+
+    .container
+      -#.span12
         %header#header
           = render "layouts/header"
-      .clear
-      = render "layouts/navigation"
-      .grid_12
-        %h2#page-heading
-          Сравниваем "корзинки". С умом.
 
-        Данный сайт позволяет переносить "корзинки" из одного магазина в другой. Перейдите на главную и воспользуйтесь импортом конфигураций.
-      #main{ :role => 'main' }
-        .grid_12
-          = render "layouts/flashes"
-          = yield
-        .clear
-      #site_info.grid_12
-        .box
-          %footer#footer
-            = render "layouts/footer"
-      .clear
+
+      #main
+        .row
+          .span12
+            = render "layouts/flashes"
+        = yield
+      %hr
+      %footer
+        = render "layouts/footer"
         
     -# Javascript at the bottom for fast page loading
     = render "layouts/javascripts"

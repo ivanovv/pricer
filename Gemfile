@@ -9,7 +9,7 @@ gem "thinking-sphinx"
 gem "mechanize"
 gem "russian"
 gem "jquery-rails", "= 1.0.19"
-gem "formtastic"
+#gem "formtastic"
 gem "kaminari"
 gem "differ"
 gem "whenever"
@@ -18,10 +18,10 @@ gem "awesome_print", :require => "ap"
 gem "rake"
 gem "omniauth"
 gem "omniauth-vkontakte"
-gem "css3buttons"
 gem "rails-backbone"
 gem "json"
 gem "html5-rails"
+gem "formtastic", "~>2.1"
 
 group :production do
   gem "unicorn"
@@ -42,8 +42,10 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem "sass-rails", "~> 3.2.3"
-  gem "coffee-rails", "~> 3.2.1"
+  gem "bootstrap-sass", "~> 2.0"
+  gem "formtastic-plus-bootstrap"
+  gem "sass-rails", "~> 3.2"
+  gem "coffee-rails", "~> 3.2"
   gem "uglifier", ">= 1.0.3"
   gem "compass", "> 0.12.alpha"
   # include other compass plugins here. E.g.:

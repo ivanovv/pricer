@@ -1,42 +1,40 @@
 /*
 *= require_self
 *= require colorbox.css
-*= require formtastic.css
 *= require token-input.css
 *= require token-input-facebook.css
-*= require css3buttons/without-reset
 *= require auth
-*= require formtastic_changes
-*= require text
+*= require bootstrap-without-forms
+*= require formtastic-plus-bootstrap
 */
 
-@import "partials/base";
+// require formtastic.css
+// require text
 
-@import "h5bp";
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
 
+#flot_placeholder {
+  width: 100%;
+  height: 300px;
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  background-color: white;
+}
 
-@import "compass/css3";
-@import "compass/utilities/general/float";
-@import "compass/typography/lists/inline-block-list";
-@import "compass/layout";
-@import "compass/typography/text/ellipsis";
-@import "compass/utilities/tables/scaffolding";
-@import "960/grid";
+#selectable, .selectable {
+  .ui-selecting { background: #FECA40 !important; }
+  .ui-selected { background: #F39814 !important; color: white;}
+}
 
-@import "blueprint";
-@import "blueprint/colors";
-@import "blueprint/scaffolding";
+.nav-collapse .nav a img {
+padding-top: 10px;
+}
 
-@import "partials/page";
-@import "partials/layout";
-@import "partials/nav";
-//@import "partials/headers";
-@import "partials/pagination";
-@import "partials/form";
-
-@include h5bp-normalize;
-@include blueprint-interaction;
-
-// Media should come last
-@include h5bp-helpers;
-@include h5bp-media;
+iframe.external-search {
+    width:100%;
+    height:500px;
+}

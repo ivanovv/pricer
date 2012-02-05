@@ -1,39 +1,6 @@
 // Place your application-specific JavaScript functions and classes here
 // This file is automatically included by javascript_include_tag :defaults
 
-var fluid = {
-    Ajax : function() {
-        $("#loading").hide();
-        $(".iframe-content").hide();
-
-        $(".toggle-iframe").bind("click", function(e) {
-            var $div = $(this).parent().parent().find(".iframe-content");
-            if ($(this).is(".hidden-content")) {
-                var existing_iframe = $div.find("iframe");
-                if (existing_iframe.length == 0) {
-                    $("#loading").show();
-                    $('<iframe />', {
-                        'class':   'external-search'
-                    })
-                    .attr('src', $div.data("url"))
-                    .appendTo($div);
-                }
-                $div.slideDown();
-            }
-            else {
-                $div.slideUp();
-            }
-            if ($(this).hasClass('hidden-content')) {
-                $(this).removeClass('hidden-content').addClass('visible-content');
-            }
-            else {
-                $(this).removeClass('visible-content').addClass('hidden-content');
-            }
-            e.preventDefault();
-        });
-    }
-};
-
 function buildGraph() {
 
     var $flot_placeholder = $("#flot_placeholder");
@@ -104,7 +71,7 @@ Pricer.Selector.mouseup = function() {
     if (userSelection.text) selectedText = userSelection.text;
 
     if (selectedText != '') {
-        $("#q").each(function(){
+        $("#q").each(function() {
             $(this).val(selectedText);
         });
     }
@@ -119,7 +86,6 @@ $(function() {
     $(".colorbox").colorbox({width:"80%", height:"80%", iframe:true});
 
     buildGraph();
-    fluid.Ajax();
     $(document).bind("mouseup", Pricer.Selector.mouseup);
 });
 

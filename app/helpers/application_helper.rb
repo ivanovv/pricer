@@ -1,3 +1,4 @@
+# encoding: UTF-8
 module ApplicationHelper
 
   def current_url(overwrite={})
@@ -11,10 +12,10 @@ module ApplicationHelper
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
-  def search_box
-    form_tag(searches_path, :method => 'get') do
-      search_field_tag(:q, params[:q], {:class=>"search text"})+
-          submit_tag(t(:search), {:name => nil, :class=>"search button"})
+  def search_box(form_class = nil)
+    form_tag(searches_path, :method => 'get', :class => form_class) do
+      search_field_tag(:q, params[:q], {:class => "search-query", :placeholder => "Поиск"})
+      # +submit_tag(t(:search), {:name => nil, :class => "btn btn-small"})
     end
   end
 

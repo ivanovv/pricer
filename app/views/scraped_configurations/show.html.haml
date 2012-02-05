@@ -18,33 +18,33 @@
 
 - if @scraped_configuration.configuration_lines.size > 0
   .box
-    %table.grid
-      %tr
-        %th Price
-        %th Item
-        %th Quantity
-        %th Config Price
-        %th Current Price
-
-      - @scraped_configuration.configuration_lines.each do |line|
+    %table.table.table-striped.table-bordered.table-condensed
+      %thead
         %tr
-          %td= link_to line.price, [@scraped_configuration.company, line.price]
-          -if ! line.price.items[0]
-            %td= button_link_to "Прайс не связан, создать связь", new_link_path(:price_id => line.price.id)
-          -else
-            %td= link_to line.price.items[0], line.price.items[0]
-          %td= line.quantity
-          %td= line.price_value
-          -if line.price && line.price.price_histories.last
-            %td= line.price.price_histories.last.value
-          -else
-            %td
-              N/A
-
+          %th Price
+          %th Item
+          %th Quantity
+          %th Config Price
+          %th Current Price
+      %tbody
+        - @scraped_configuration.configuration_lines.each do |line|
+          %tr
+            %td= link_to line.price, [@scraped_configuration.company, line.price]
+            -if ! line.price.items[0]
+              %td= link_to "Прайс не связан, создать связь", new_link_path(:price_id => line.price.id), :class => "btn btn-primary"
+            -else
+              %td= link_to line.price.items[0], line.price.items[0]
+            %td= line.quantity
+            %td= line.price_value
+            -if line.price && line.price.price_histories.last
+              %td= line.price.price_histories.last.value
+            -else
+              %td
+                N/A
 
 %p
-  = link_to t("edit"), edit_scraped_configuration_path(@scraped_configuration)
-  |
-  = link_to t("destroy"), @scraped_configuration, :confirm => 'Are you sure?', :method => :delete
-  |
-  = link_to "View All", scraped_configurations_path
+  = link_to t("edit"), edit_scraped_configuration_path(@scraped_configuration), :class => "btn"
+  = link_to t("destroy"), @scraped_configuration, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
+  %p
+    or
+    = link_to "View All", scraped_configurations_path

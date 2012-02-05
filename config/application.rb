@@ -54,6 +54,7 @@ module Pricer
 
     #config.assets.precompile << /(^[^_]|\/[^_])[^\/]*/
     config.assets.precompile << /(^[^_]|\/[^_])[^\/]*$/
+
     config.generators do |g|
       g.test_framework :rspec
     end

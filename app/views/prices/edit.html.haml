@@ -1,8 +1,18 @@
 %h1 Editing price
 
-= semantic_form_for([@company, @price]) do |f|
-  = f.inputs
-  = f.buttons
+.row
+  .span8
+    = semantic_form_for([@company, @price]) do |f|
+      = f.inputs do
+        = f.input :company
+        = f.input :description, :input_html => {:class => "input-xlarge"}
+        = f.input :original_description, :input_html => {:class => "input-xlarge"}
+        = f.input :warehouse_code
+        = f.input :vendor_code
+        = f.input :price
+        = f.input :web_link
+
+      = f.actions :submit, :cancel
 
 = link_to 'Show', [@company, @price]
 = link_to 'Back', company_prices_path(@company)

@@ -2,7 +2,7 @@
 
 -#Записей: #{@items.total_entries}
 
-%table
+%table.table.table-striped.table-bordered.table-condensed
   %tr
     %th Description
     %th Original description
@@ -12,9 +12,9 @@
     %tr
       %td= item.description
       %td= item.original_description
-      %td= link_to 'Show', item
-      %td= link_to 'Edit', edit_item_path(item)
-      %td= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete
+      %td= link_to 'Show', item, :class => "btn"
+      %td= link_to 'Edit', edit_item_path(item), :class => "btn"
+      %td= link_to 'Destroy', item, :confirm => 'Are you sure?', :method => :delete, :class => "btn"
 
 = paginate @items
 

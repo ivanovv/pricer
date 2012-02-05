@@ -16,4 +16,4 @@
     %a Импорт конфигурации
   = form_tag(scraped_configurations_path, :method => :post) do
     = url_field_tag :url, params[:url], {:placeholder => "Ссылка на конфигурацию", :class => "search text"}
-    = submit_tag "Импортировать", {:name => nil, :class=>"search button"}
+    = submit_tag "Импортировать", {:name => nil, :class=>"search button btn"}

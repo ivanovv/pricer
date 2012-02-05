@@ -1,20 +1,22 @@
 - title t('configutation_lines.index.title')
 
-%table
-  %tr
-    %th Price
-    %th Quantity
-    %th Price
-    %th Description
-  - for configuration_line in @configuration_lines
+%table.table.table-striped.table-bordered.table-condensed
+  %thead
     %tr
-      %td= configuration_line.price_id
-      %td= configuration_line.quantity
-      %td= configuration_line.price
-      %td= configuration_line.description
-      %td= link_to 'Show', configuration_line
-      %td= link_to t('edit'), edit_configuration_line_path(configuration_line)
-      %td= link_to 'Destroy', configuration_line, :confirm => 'Are you sure?', :method => :delete
+      %th Price
+      %th Quantity
+      %th Price
+      %th Description
+  %tbody
+    - for configuration_line in @configuration_lines
+      %tr
+        %td= configuration_line.price_id
+        %td= configuration_line.quantity
+        %td= configuration_line.price
+        %td= configuration_line.description
+        %td= link_to 'Show', configuration_line, :class => "btn"
+        %td= link_to t('edit'), edit_configuration_line_path(configuration_line), :class => "btn"
+        %td= link_to 'Destroy', configuration_line, :confirm => 'Are you sure?', :method => :delete, :class => "btn"
 
 = paginate @configuration_lines
 

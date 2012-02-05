@@ -1,24 +1,28 @@
-.grid_12{:style=>"background: none repeat scroll 0 0 #666666; height:2.5em;"}
-  .grid_8.alpha
-    %ul.nav.main
-      %li= link_to("Главная", root_path)
-      %li= link_to("Поиск", searches_path)
-      %li= link_to("Справочник", items_path)
-      %li= link_to("Связи", links_path)
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar{:data => {:toggle => "collapse", :target => ".nav-collapse"} }
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{:href=>"#"} Pricer
+      .nav-collapse
+        %ul.nav
+          %li= link_to("Главная", root_path)
+          %li= link_to("Поиск", searches_path)
+          %li= link_to("Справочник", items_path)
+          %li= link_to("Связи", links_path)
 
-  .grid_3.nav-search
-    = search_box
+        %ul.nav.pull-right
+          -if user_signed_in?
+            #userBlock.userDonation
+              .userPic
+                =image_tag(current_user.small_user_pic_url)
+              = link_to('out', signout_path)
+          - else
+            %a{:href => "#{signin_path}"}
+              =image_tag("vkontakte.png")
 
-  .grid_1.omega
-    -if user_signed_in?
-      #userBlock.userDonation
-        .userPic
-          =image_tag(current_user.small_user_pic_url)
-        = link_to('out', signout_path)
-    - else
-      %a{:href => "#{signin_path}"}
-        #main.mainDiv{:style=>"width:22px; margin-top:5px; margin-left:25px;"}
-          .widgetHead{:style => "margin-bottom: 0px; padding-left:3px"}
-            %img{:src => "http://vk.com/images/widget_logo.gif"}
+        = search_box("navbar-search pull-right")
 
-.clear
+

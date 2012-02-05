@@ -14,5 +14,6 @@
 //= require backbone/pricer
 //= require jquery.colorbox-min.js
 //= require jquery.flot.min.js
+//= require bootstrap-collapse.js
 //= require app.js
 

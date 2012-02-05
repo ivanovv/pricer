@@ -37,12 +37,18 @@
           });
           return false;
       });
+      $('#accordion').on('show', function (evt) {
+        var $toggler = $(evt.target);
+        var url = $toggler.data("url");
+        $div = $(".accordion-inner", $toggler);
+        $('<iframe class="external-search"/>').attr('src', url).appendTo($div);
+      })
     });
+.row
+  .span4
+    .box
+      %p= search_box("form-search")
 
-.grid_4
-  .box
-    %p= search_box
-.clear
 %noscript
   - if @prices && @prices.count > 0
     %h1(style="display:inline") Найденные товары
@@ -51,27 +57,28 @@
     %br
     %br
 
-    %table.grid.prices.selectable
-      %tr
-        %th Компания
-        %th Складской код
-        %th Наименование
-        %th Цена
-        %th Связан?
+    %table.table.table-striped.table-bordered.table-condensed.prices.selectable
+      %thead
+        %tr
+          %th Компания
+          %th Складской код
+          %th Наименование
+          %th Цена
+          %th Связан?
 
-
-      - @prices.each do |price|
-        - if price
-          %tr{:data => {:price_id=>price.id}}
-            %td= link_to(price.company.name, company_prices_path(price.company))
-            %td= price.warehouse_code
-            %td= link_to(price.original_description, [price.company, price])
-            %td= price.price
-            %td
-              -if price.items.count > 0
-                Да
-              -else
-                Нет
+      %tbody
+        - @prices.each do |price|
+          - if price
+            %tr{:data => {:price_id=>price.id}}
+              %td= link_to(price.company.name, company_prices_path(price.company))
+              %td= price.warehouse_code
+              %td= link_to(price.original_description, [price.company, price])
+              %td= price.price
+              %td
+                -if price.items.count > 0
+                  Да
+                -else
+                  Нет
 
     = paginate @prices
 
@@ -84,9 +91,9 @@
           = f.input :human, :as => :hidden
           = f.input :score, :as => :hidden
           = f.hidden_field :other_prices
-        = add_button_submit_tag "Связать"
+        = f.actions :submit
 
-    %h2(style="display:inline") Найденные записи из справочника
+    %h1(style="display:inline") Найденные записи из справочника
 
     - if @items
       (#{@items.total_entries})
@@ -95,55 +102,60 @@
     %br
 
     - if @items
-      %table.grid.items.selectable
-        %tr
-          %th Наименование
-          %th Прайсов
-
-        - @items.each do |item|
-          - if item
-            %tr{:data => {:item_id => item.id}}
-              %td= link_to(item.original_description, item)
-              %td= item.prices.count
+      %table.table.table-striped.table-bordered.table-condensed.items.selectable
+        %thead
+          %tr
+            %th Наименование
+            %th Прайсов
+        %tbody
+          - @items.each do |item|
+            - if item
+              %tr{:data => {:item_id => item.id}}
+                %td= link_to(item.original_description, item)
+                %td= item.prices.count
 
       = paginate @items
 
       %br
-
-#new_prices_div
-  %h2(style="display:inline") Найденные товары
-  (
-  %span#prices_count
-  )
-  %table.grid.prices.selectable
-    %thead
-      %tr
-        %th Компания
-        %th Складской код
-        %th Наименование
-        %th Цена
-        %th Связан?
-      %tbody(id="new_prices")
+.row
+  .span12
+    #new_prices_div
+      %h1(style="display:inline") Найденные товары
+      (
+      %span#prices_count
+      )
+      %table.table.table-striped.table-bordered.table-condensed.grid.prices.selectable
+        %thead
+          %tr
+            %th Компания
+            %th Складской код
+            %th Наименование
+            %th Цена
+            %th Связан?
+          %tbody(id="new_prices")
 
 #link_button
-  =safe_button_link_to("Связать!", {:href => "#"}, :id => "link_btn", :href => "#")
+  = button_to("Связать!", {:href => "#"}, :id => "link_btn", :href => "#", :class => "btn btn-primary")
 
-#new_items_div
-  %h2(style="display:inline") Найденные записи из справочника
-  (
-  %span#items_count
-  )
-  %table.grid.items.selectable
-    %thead
-      %tr
-        %th Наименование
-        %th Прайсов
-    %tbody(id="new_items")
+.row
+  .span12
+    #new_items_div
+      %h1(style="display:inline") Найденные записи из справочника
+      (
+      %span#items_count
+      )
+      %table.table.table-striped.table-bordered.table-condensed.grid.items.selectable
+        %thead
+          %tr
+            %th Наименование
+            %th Прайсов
+        %tbody(id="new_items")
 
 -if params[:q]
-  %h2 Поиск по фирмам
-  - Company.all.each do |company|
-    = render :partial => "search_iframe", :locals => {:company => company}
+  %h1 Поиск по фирмам
+  #accordion.accordion
+    - Company.all.each do |company|
+      = render :partial => "search_iframe", :locals => {:company => company}
 
 %script#price-template{:type=>"text/template"}
   %td

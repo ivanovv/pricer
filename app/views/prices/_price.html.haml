@@ -6,10 +6,10 @@
   %td= link_to(price.original_description, [price.company, price])
   %td= price.price
   - if price.links.size == 0
-    %td= button_link_to "Link", new_link_path(:price_id => price.id)
+    %td= link_to "Link", new_link_path(:price_id => price.id), :class => "btn"
   - else
     - if defined?(item_link) && item_link
-      %td= danger_button_link_to "Unlink", item_link, :confirm => 'Удаляем?', :method => :delete, :remote => true
+      %td= link_to "Unlink", item_link, :confirm => 'Удаляем?', :method => :delete, :remote => true, :class => "btn btn-danger"
     -else
       %td &nbsp;
 

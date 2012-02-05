@@ -1,7 +1,7 @@
 = semantic_form_for @item do |f|
   = f.inputs do
-    = f.input :description
-    = f.input :original_description
+    = f.input :description, :input_html => {:class => "input-xlarge"}
+    = f.input :original_description, :input_html => {:class => "input-xlarge"}
     = f.input :vendor_code
     = f.input :fcenter_code
-  = f.buttons
+  = f.actions :submit, :cancel

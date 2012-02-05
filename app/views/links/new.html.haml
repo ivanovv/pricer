@@ -51,23 +51,23 @@
     %h2 Связанные прайсы
     %p
       Выделите один или несколько прайсов, чтобы связать их с данным элементом справочника.
-    %table.grid
+    %table.table.table-striped.table-bordered.table-condensed
       %tbody.selectable
         - @price_that_can_be_linked.each do |cross|
           = render :partial => "prices/price", :locals => {:price => cross}
 
 .box
   %h2 Поиск синонимов
-  .grid_8.alpha
+  .span8.alpha
     .box
       = form_tag(searches_path, :method => 'get', :id => "items_search") do
         %p
           -if @price
             = search_field_tag :q, params[:q] || @price.most_likely_search, {:class=>"search text", :size =>100, "data-pre" => @price.most_likely_search_tokenised, "data-sphinx"=> @price.sphinx_keywords_for_javascript(10)}
           -else
-            = search_field_tag :q, params[:q] , {:class=>"search text", :size =>100}
-          = submit_tag t(:search), {:name => nil, :class=>"search button"}
-  .grid_3.omega
+            = search_field_tag :q, params[:q] , {:class => "search text", :size => 100}
+          = submit_tag t(:search), {:name => nil, :class  => "search button"}
+  .span3.omega
     #most_likely_slider
     #most_unlikely_slider
   .clear

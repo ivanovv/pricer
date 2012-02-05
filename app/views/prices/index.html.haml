@@ -4,19 +4,20 @@
 -#Записей: #{@prices.total_entries}
 
 Сортировать
-=link_to t('.sort_by_date'), params.merge(:sort=>'recent', :page=> nil)
+=link_to t('.sort_by_date'), params.merge(:sort => 'recent', :page => nil)
 |
-=link_to t('.sort_by_name'), params.merge(:sort=>'name', :page=> nil)
+=link_to t('.sort_by_name'), params.merge(:sort => 'name', :page => nil)
 %br
 
-%table.grid
-  %tr
-    %th= t('.warehouse_code')
-    %th= t('.name')
-    %th= t('.price')
-    %th
-
-  - @prices.each do |price|
-    = render :partial => "price", :locals => {:price => price}
+%table.table.table-striped.table-bordered.table-condensed
+  %thead
+    %tr
+      %th= t('.warehouse_code')
+      %th= t('.name')
+      %th= t('.price')
+      %th
+  %tbody
+    - @prices.each do |price|
+      = render :partial => "price", :locals => {:price => price}
 
 = paginate @prices

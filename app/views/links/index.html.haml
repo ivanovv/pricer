@@ -2,23 +2,24 @@
 
 -#Записей: #{@links.total_entries}
 
-%table
-  %tr
-    %th Item
-    %th Price
-    %th Human
-    %th Score
-    %th{:colspan=>3} Actions
-
-  - for link in @links
+%table.table.table-striped.table-bordered.table-condensed
+  %thead
     %tr
-      %td= link_to link.item, link.item
-      %td= link_to link.price, [link.price.company, link.price]
-      %td= link.human
-      %td= link.score
-      %td= link_to 'Show', link
-      %td= link_to 'Edit', edit_link_path(link)
-      %td= link_to 'Destroy', link, :confirm => 'Are you sure?', :method => :delete
+      %th Item
+      %th Price
+      %th Human
+      %th Score
+      %th{:colspan=>3} Actions
+  %tbody
+    - for link in @links
+      %tr
+        %td= link_to link.item, link.item
+        %td= link_to link.price, [link.price.company, link.price]
+        %td= link.human
+        %td= link.score
+        %td= link_to 'Show', link, :class => "btn"
+        %td= link_to 'Edit', edit_link_path(link), :class => "btn"
+        %td= link_to 'Destroy', link, :confirm => 'Are you sure?', :method => :delete, :class => "btn"
 
 = paginate @links
 

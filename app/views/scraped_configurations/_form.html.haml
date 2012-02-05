@@ -1,8 +1,8 @@
 = semantic_form_for @scraped_configuration do |f|
   = f.inputs do
     = f.input :company
-    = f.input :name
-    = f.input :url
+    = f.input :name, :input_html => {:class => "input-xlarge"}
+    = f.input :url, :input_html => {:class => "input-xlarge"}
     = f.input :assembly_price
     = f.input :total_price
-  = f.buttons
+  = f.actions :submit, :cancel
