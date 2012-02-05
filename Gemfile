@@ -13,7 +13,7 @@ gem "formtastic"
 gem "kaminari"
 gem "differ"
 gem "whenever"
-gem "hoptoad_notifier"  #TODO switch to airbrake gem
+gem "airbrake"
 gem "awesome_print", :require => "ap"
 gem "rake"
 gem "omniauth"
