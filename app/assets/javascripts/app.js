@@ -89,6 +89,27 @@ function buildGraph() {
     }
 }
 
+Pricer.Selector = {};
+
+Pricer.Selector.mouseup = function() {
+    var userSelection;
+    if (window.getSelection) {
+        userSelection = window.getSelection();
+    }
+    else if (document.selection) {
+        userSelection = document.selection.createRange();
+    }
+
+    var selectedText = userSelection;
+    if (userSelection.text) selectedText = userSelection.text;
+
+    if (selectedText != '') {
+        $(".search-query").each(function(){
+            $(this).val(selectedText);
+        });
+    }
+}
+
 $(function() {
     $('#items_search').submit(function () {
         $.get(this.action, $(this).serialize(), null, 'script');
@@ -99,5 +120,6 @@ $(function() {
 
     buildGraph();
     fluid.Ajax();
+    $(document).bind("mouseup", Pricer.Selector.mouseup);
 });
 
