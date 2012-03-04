@@ -13,13 +13,13 @@ class PriceParserLoader
       next unless [PriceParser, XLSParser].include?(excel_parser.superclass)
       next if excel_parser == XLSParser
       next if self.check_parser_filename(excel_parser.name, files)
-      next if !defined?(excel_parser::COMPANY_NAME)
+      next if !excel_parser.company_name
 
       string_to_cut_out = excel_parser.superclass == XLSParser ? XLSParser.name : "Parser"
       name = excel_parser.name.sub(/.*::/, '')
       name = name.sub(string_to_cut_out, '').downcase.to_sym
 
-      desc "Parse #{excel_parser::COMPANY_NAME} price list"
+      desc "Parse #{excel_parser.company_name} price list"
       task name => :environment do
          ActionController::Base.expire_page "/"
         file_name = File.expand_path(excel_parser::DEFAULT_FILE_PATH)

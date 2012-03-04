@@ -6,24 +6,24 @@ module PriceParsers
 
   class CityLinkXLSParser < XLSParser
 
-    COMPANY_NAME = "CityLink"
+    belongs_to_company "CityLink"
     DEFAULT_FILE_PATH = '~/tmp/CitilinkPrice_1.xls'
 
     def rows_to_skip
       6
     end
 
-    def should_parse_row(row)
-      return false unless row[0]
-      row[0].starts_with?('Компьютеры и комплекту') && !row[1].starts_with?("Компьютеры")
+    def should_parse_row
+      return false unless @row[0]
+      @row[0].starts_with?('Компьютеры и комплекту') && !@row[1].starts_with?("Компьютеры")
     end
 
-    def initial_row?(row)
-      row[1] && row[1].starts_with?('Процессоры')
+    def initial_row?
+      @row[1] && @row[1].starts_with?('Процессоры')
     end
 
-    def should_stop?(row)
-      row[0].starts_with?('Монитор')
+    def should_stop?
+      @row[0].starts_with?('Монитор')
     end
 
     def indexes

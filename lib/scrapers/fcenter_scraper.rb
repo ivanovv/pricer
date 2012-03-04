@@ -2,7 +2,7 @@ module Scrapers
 
   class FcenterScraper < ConfigurationScraper
 
-    COMPANY_NAME = "F-Center"
+    belongs_to_company "F-Center"
 
     def scrape(url)
       url = CGI::unescape(url)

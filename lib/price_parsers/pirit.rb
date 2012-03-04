@@ -4,8 +4,9 @@ require 'xls_parser'
 module PriceParsers
 
   class PiritXLSParser < XLSParser
-    
-    COMPANY_NAME = "Pirit"
+
+    belongs_to_company "Pirit"
+
     DEFAULT_FILE_PATH = '~/tmp/pirit_price.xls'
 
     def rows_to_skip

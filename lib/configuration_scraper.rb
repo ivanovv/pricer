@@ -2,14 +2,18 @@ class ConfigurationScraper
 
   include ::CompanyInfo
 
-  def parse(url, page = nil)
-    scraped_configuration = get_config(url, page)
+  def parse(url_or_page)
+    scraped_configuration = get_configuration(url_or_page)
     scraped_configuration[:company_id] = company.id
     scraped_configuration
   end
 
-  def get_config(url, page)
-    page == nil ? scrape(url) : parse_page(page)
+  def get_configuration(resource)
+    if resource.is_a? String then
+      scrape(resource)
+    else
+      parse_page(resource)
+    end
   end
 
   def scrape(url)

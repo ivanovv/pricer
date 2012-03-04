@@ -5,7 +5,8 @@ module PriceParsers
 
   class AlmerXLSParser < XLSParser
 
-    COMPANY_NAME = "Almer"
+    belongs_to_company "Almer"
+
     DEFAULT_FILE_PATH = '~/tmp/almer.xls'
     DEFAULT_ENCODING = 'windows-1251'
 
@@ -13,16 +14,16 @@ module PriceParsers
       100
     end
 
-    def initial_row?(row)
-      row[2].starts_with?('Материнские платы')
+    def initial_row?
+      description.starts_with?('Материнские платы')
     end
 
-    def should_stop?(row)
-      row[2].starts_with?('Источники бесперебойн')
+    def should_stop?
+      description.starts_with?('Источники бесперебойн')
     end
 
-    def should_parse_row(row)
-      row[0].blank?
+    def should_parse_row
+      @row[0].blank?
     end
 
     def indexes

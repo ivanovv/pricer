@@ -6,29 +6,34 @@ module PriceParsers
 
   class OldiXLSParser < XLSParser
 
-    COMPANY_NAME = "Oldi"
+    belongs_to_company "Oldi"
+
     DEFAULT_FILE_PATH = '~/tmp/oldiprr.xls'
 
     def rows_to_skip
       800
     end
 
-    def should_parse_row(row)
-      return false unless row[3]
-      row[3].starts_with? 'Комплектующие для ПК'
+    def should_parse_row
+      return false unless category_name
+      category_name.starts_with? 'Комплектующие для ПК'
     end
 
     def indexes
       {:warehouse => 0, :description => 1, :vendor => 15, :price => 5, :web_link => 0}
     end
 
-    def should_stop?(row)
-      row[3].starts_with?('Мониторы')
+    def should_stop?
+      category_name.starts_with?('Мониторы')
     end
 
-    def initial_row?(row)
-      return false unless row[3]
-      row[3].starts_with?('Комплектующие для ПК')
+    def initial_row?
+      return false unless category_name
+      category_name.starts_with?('Комплектующие для ПК')
+    end
+
+    def category_name
+      @row[3]
     end
     
   end

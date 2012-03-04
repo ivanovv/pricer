@@ -1,7 +1,7 @@
 module Scrapers
   class OldiScraper < ConfigurationScraper
 
-    COMPANY_NAME = "Oldi"
+    belongs_to_company "Oldi"
 
     def parse_page(page)
       prices = []

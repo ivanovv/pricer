@@ -7,7 +7,8 @@ module PriceParsers
 
   class FCenterParser < PriceParser
 
-    COMPANY_NAME = "F-Center"
+    belongs_to_company "F-Center"
+
     DEFAULT_FILE_PATH = '~/tmp/price.html'
 
     class FCenterPriceDocument < Nokogiri::XML::SAX::Document

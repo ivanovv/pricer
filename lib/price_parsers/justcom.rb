@@ -5,7 +5,8 @@ module PriceParsers
 
   class JustcomXLSParser < XLSParser
 
-    COMPANY_NAME = "Just-Com"
+    belongs_to_company "Just-Com"
+
     DEFAULT_FILE_PATH = '~/tmp/justcom.xls'
     #DEFAULT_ENCODING = 'windows-1251'
 
@@ -15,17 +16,17 @@ module PriceParsers
     end
 
     def initial_row?(row)
-      desc = row[indexes[:warehouse]]      
+      desc = warehouse_code
       desc && desc.is_a?(String) && desc.starts_with?('[2716] Процессоры :: Процессоры Intel')
     end
 
-    def should_stop?(row)
-      desc = row[indexes[:warehouse]]
+    def should_stop?
+      desc = warehouse_code
       desc.is_a?(String) && desc.starts_with?('[15849] Программное обеспечение')
     end
 
     def should_parse_row(row)
-      if row[warehouse_code_index].to_s =~ /\d+(\.\d)?/
+      if warehouse_code.to_s =~ /\d+(\.\d)?/
         desc = row[indexes[:description]]
         is_notebook = desc.is_a?(String) && (desc.starts_with?('Нетбук') || desc.starts_with?('Ноутбук') || desc.starts_with?('Планшет'))
         !is_notebook

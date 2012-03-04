@@ -34,27 +34,48 @@ class XLSParser < PriceParser
     sheet = book.worksheet 0
     @total_rows = sheet.row_count
     sheet.each rows_to_skip do |row|
+      @row = row
 
-      next if !initial_row_found?(row)
-      break if should_stop?(row)
-      next if row[indexes[:description]].blank?
+      next if !initial_row_found?
+      break if should_stop?
+      next if description.blank?
 
-      desc = PriceDescriptionNormalizer.normalize_description(row[indexes[:description]].to_s)
+      desc = PriceDescriptionNormalizer.normalize_description(description.to_s)
       if should_parse_row(row)
         @parsed_rows += 1
         price_attributes = { :company_id => company.id,
-            :warehouse_code => row[indexes[:warehouse]],
+            :warehouse_code => warehouse_code,
             :description => desc,
-            :price => row[indexes[:price]],
-            :original_description => row[indexes[:description]],
-            :vendor_code => indexes[:vendor] ? row[indexes[:vendor]] : nil,
-            :web_link => indexes[:web_link] ? row[indexes[:web_link]] : nil
+            :price => price,
+            :original_description => description,
+            :vendor_code => vendor_code,
+            :web_link => web_link
         }
         preprocess_price_attributes(price_attributes)
         create_price(price_attributes)
       end
     end
     puts stats
+  end
+
+  def description
+    @row[indexes[:description]]
+  end
+
+  def web_link
+    indexes[:web_link] ? @row[indexes[:web_link]] : nil
+  end
+
+  def vendor_code
+    indexes[:vendor] ? @row[indexes[:vendor]] : nil
+  end
+
+  def price
+    @row[indexes[:price]]
+  end
+
+  def warehouse_code
+    @row[indexes[:warehouse]]
   end
 
   def initial_row_found?(row)
