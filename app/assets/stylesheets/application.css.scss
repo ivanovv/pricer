@@ -12,8 +12,8 @@
 
 @import "partials/base";
 
-@import "html5/boilerplate";
-@include html5-boilerplate-reset;
+@import "h5bp";
+
 
 @import "compass/css3";
 @import "compass/utilities/general/float";
@@ -27,7 +27,6 @@
 @import "blueprint/colors";
 @import "blueprint/scaffolding";
 
-@import "partials/fonts";
 @import "partials/page";
 @import "partials/layout";
 @import "partials/nav";
@@ -35,9 +34,9 @@
 @import "partials/pagination";
 @import "partials/form";
 
-@include html5-boilerplate-styles;
-@include html5-boilerplate-helpers;
+@include h5bp-normalize;
 @include blueprint-interaction;
 
 // Media should come last
-@import "partials/media";
+@include h5bp-helpers;
+@include h5bp-media;

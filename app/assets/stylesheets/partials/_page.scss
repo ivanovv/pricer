@@ -1,7 +1,5 @@
 @include grid-system-complete;
 
-@include html5-boilerplate-fonts($base-font-family, $base-font-size, $base-line-height);
-
 //-----------------------------------------------
 // The following html5-boilerplate styles should
 // probably be customized for each site
@@ -30,7 +28,7 @@ strong, th {
 small {
   // Use font-size mixin to convert to percentage for YUI
   // http://developer.yahoo.com/yui/3/cssfonts/#fontsize
-  @include font-size(11px);  // approx 85% when base-font-size eq 13px
+  //@include font-size(11px);  // approx 85% when base-font-size eq 13px
 }
 
 // Add the 'required' attribute on your

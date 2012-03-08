@@ -48,6 +48,7 @@ group :assets do
   gem "compass", "> 0.12.alpha"
   # include other compass plugins here. E.g.:
   gem "compass-960-plugin", :require => "ninesixty"
-  gem "compass-html5"
+  gem "compass-rails"
+  gem "compass-h5bp"
 end
 
