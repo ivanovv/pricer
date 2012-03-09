@@ -8,7 +8,7 @@ class ConfigurationSaver
   def initialize(record_or_url, config)
     raise("Record can't be nil") if !record_or_url
     raise("Config can't be nil") if !config
-    if record_or_url.is_a? string then
+    if record_or_url.is_a? String then
       @record = ScrapedConfiguration.new(:url => record_or_url)
     else
       @record = record_or_url
