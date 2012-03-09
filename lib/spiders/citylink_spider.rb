@@ -47,7 +47,7 @@ module Spiders
       if no_configuration_in_db(url)
         config_page = mechanize_link.click
         config_record = ScrapedConfiguration.new(:url => url)
-        config = scraper.parse(config_page)
+        config = scraper(url).parse(config_page)
         ConfigurationSaver.save(config_record, config)
       end
     end
@@ -58,7 +58,7 @@ module Spiders
       !ScrapedConfiguration.find_by_url(url)
     end
 
-    def scraper
+    def scraper(url)
       @scraper ||= ConfigurationScraperFactory.create_scraper(url)
     end
 
