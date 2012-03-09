@@ -104,7 +104,7 @@ Pricer.Selector.mouseup = function() {
     if (userSelection.text) selectedText = userSelection.text;
 
     if (selectedText != '') {
-        $(".search-query").each(function(){
+        $("#q").each(function(){
             $(this).val(selectedText);
         });
     }
