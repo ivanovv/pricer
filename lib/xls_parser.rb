@@ -78,9 +78,9 @@ class XLSParser < PriceParser
     @row[indexes[:warehouse]]
   end
 
-  def initial_row_found?(row)
+  def initial_row_found?
     if !@initial_row_found
-      @initial_row_found = initial_row?(row)      
+      @initial_row_found = initial_row?
     end
     @initial_row_found
   end
