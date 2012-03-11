@@ -41,7 +41,7 @@ class XLSParser < PriceParser
       next if description.blank?
 
       desc = PriceDescriptionNormalizer.normalize_description(description.to_s)
-      if should_parse_row(row)
+      if should_parse_row
         @parsed_rows += 1
         price_attributes = { :company_id => company.id,
             :warehouse_code => warehouse_code,

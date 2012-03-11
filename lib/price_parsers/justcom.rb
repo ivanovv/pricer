@@ -15,7 +15,7 @@ module PriceParsers
       25
     end
 
-    def initial_row?(row)
+    def initial_row?
       desc = warehouse_code
       desc && desc.is_a?(String) && desc.starts_with?('[2716] Процессоры :: Процессоры Intel')
     end
@@ -25,7 +25,7 @@ module PriceParsers
       desc.is_a?(String) && desc.starts_with?('[15849] Программное обеспечение')
     end
 
-    def should_parse_row(row)
+    def should_parse_row
       if warehouse_code.to_s =~ /\d+(\.\d)?/
         desc = row[indexes[:description]]
         is_notebook = desc.is_a?(String) && (desc.starts_with?('Нетбук') || desc.starts_with?('Ноутбук') || desc.starts_with?('Планшет'))

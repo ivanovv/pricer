@@ -15,6 +15,7 @@ module Scrapers
         if part_link.text =~ /(\d+)\s.+/
           price = company.prices.find_by_warehouse_code($1)
           price ||= company.prices.find_by_warehouse_code($1 + ".0")
+          #TODO import goods from config if not found in our database
           price_value = part_link.parent.parent.search(".price").text.gsub(/\D/,'')
           prices << {:price => price, :value => price_value.to_i} if price
         end
