@@ -10,7 +10,6 @@ module PriceParsers
     DEFAULT_FILE_PATH = '~/tmp/justcom.xls'
     #DEFAULT_ENCODING = 'windows-1251'
 
-
     def rows_to_skip
       25
     end
@@ -27,8 +26,8 @@ module PriceParsers
 
     def should_parse_row
       if warehouse_code.to_s =~ /\d+(\.\d)?/
-        desc = row[indexes[:description]]
-        is_notebook = desc.is_a?(String) && (desc.starts_with?('Нетбук') || desc.starts_with?('Ноутбук') || desc.starts_with?('Планшет'))
+        is_notebook = description.is_a?(String) &&
+            (%w(Нетбук Планшет Ноутбук).any?{|word| description.starts_with? word})
         !is_notebook
       else
         false
