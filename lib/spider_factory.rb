@@ -4,7 +4,7 @@ class SpiderFactory
     if company == "CityLink"
       return Spiders::CitylinkSpider.new
     end
-    raise "Unknown spider for company named '#{company}'."
+    raise "Unknown spider for company '#{company}'."
   end
 
 end

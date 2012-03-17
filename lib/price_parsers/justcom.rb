@@ -32,19 +32,19 @@ module PriceParsers
       else
         false
       end
-
     end
 
     def indexes
       {:warehouse => 0, :description => 3, :vendor => nil, :price => 11, :web_link => 0}
     end
 
-    def preprocess_price_attributes(price_attributes)
+    def create_price_attributes
+      price_attributes = super
       price_attributes[:web_link] = price_attributes[:web_link].to_i
       price_attributes[:description].match(/\[([^\]]*)\]/)
       price_attributes[:vendor_code] = $+ if ($+ != "OEM" && $+ != "BOX")
+      price_attributes
     end
-
   end
 end
 

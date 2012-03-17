@@ -3,59 +3,69 @@ require 'price_parser'
 
 class XLSParser < PriceParser
 
-  def initialize
-    super
+  def initialize(book_path, encoding)
+    super()
     @parsed_rows = 0
     @initial_row_found = false
+    @encoding = endcoding
+    @book_path = book_path
   end
 
   def self.parse_price(book_path, encoding = nil)
-    parser = new
-    parser.parse_price(book_path, encoding)
+    parser = new(book_path, encoding)
+    parser.parse_price()
   end
 
-  def should_stop?(row)
+  def should_stop?
     false
   end
 
-  def initial_row?(row)
+  def initial_row?
     true
   end
 
-  def preprocess_price_attributes(price_attributes)
-    
-  end
-
-  def parse_price(book_path, encoding = nil)
-    @started_at = Time.now
-    book = Spreadsheet.open book_path
-    @file_size = File.size(book_path)
-    book.encoding = encoding if encoding
-    sheet = book.worksheet 0
-    @total_rows = sheet.row_count
-    sheet.each rows_to_skip do |row|
+  def each_price_row &block
+    @sheet.each rows_to_skip do |row|
       @row = row
-
-      next if !initial_row_found?
+      next unless initial_row_found?
       break if should_stop?
       next if description.blank?
-
-      desc = PriceDescriptionNormalizer.normalize_description(description.to_s)
-      if should_parse_row
-        @parsed_rows += 1
-        price_attributes = { :company_id => company.id,
-            :warehouse_code => warehouse_code,
-            :description => desc,
-            :price => price,
-            :original_description => description,
-            :vendor_code => vendor_code,
-            :web_link => web_link
-        }
-        preprocess_price_attributes(price_attributes)
-        create_price(price_attributes)
-      end
+      block.call(row) if should_parse_row
     end
-    puts stats
+  end
+
+  def open_book
+    @started_at = Time.now
+    @book = Spreadsheet.open @book_path
+    @file_size = File.size(@book_path)
+    @book.encoding = @encoding if @encoding
+    @sheet = @book.worksheet 0
+    @total_rows = @sheet.row_count
+    @sheet
+  end
+
+  def parse_price
+    open_book
+    each_price_row do
+      @parsed_rows += 1
+      price_attributes = create_price_attributes()
+      create_price(price_attributes)
+    end
+    create_stats
+  end
+
+  def create_price_attributes
+    {
+        :warehouse_code => warehouse_code,
+        :price => price,
+        :original_description => description,
+        :vendor_code => vendor_code,
+        :web_link => web_link
+    }
+  end
+
+  def normalized_description
+    PriceDescriptionNormalizer.normalize_description(description.to_s)
   end
 
   def description
@@ -85,7 +95,7 @@ class XLSParser < PriceParser
     @initial_row_found
   end
 
-  def stats
+  def create_stats
     ParsingResult.create_from_parser(self, @started_at, @file_size)
     "#{company_name}: Total rows in price-list: #{@total_rows} Parsed_rows: #{@parsed_rows} Created prices: #{@created_prices} Updated_prices: #{@updated_prices}"
   end
