@@ -75,7 +75,7 @@ class Price < ActiveRecord::Base
 
   def product_web_link
     return unless web_link
-    return web_link if web_link.starts_with "http://"
+    return web_link if web_link.start_with? "http://"
     company.base_product_link + web_link
   end
 

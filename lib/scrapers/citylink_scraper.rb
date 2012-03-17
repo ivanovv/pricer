@@ -8,6 +8,7 @@ module Scrapers
       prices = []
       title = page.search("div.txt-block h1").text
       total_price = page.search(".price nobr").text.gsub(/\D/, '').to_i
+      author = page.search(".conf-link-center a").text
       assembly_price = 0
 
       part_links = page.search('td.l h2')
@@ -18,7 +19,7 @@ module Scrapers
           web_link = part_link.search("a").first['href']
           price = company.prices.find_by_warehouse_code(warehouse_code)
           price ||= company.prices.find_by_warehouse_code(warehouse_code + ".0")
-          #TODO import goods from config if not found in our database
+
           price_value = part_link.parent.parent.search(".price").text.gsub(/\D/, '')
 
           price ||= import_price_from_config(warehouse_code, description, web_link, price_value)
@@ -27,7 +28,13 @@ module Scrapers
         end
       end
 
-      {:title => title, :prices => prices, :assembly_price => assembly_price, :total_price => total_price}
+      {
+          :title => title,
+          :author => author,
+          :prices => prices,
+          :assembly_price => assembly_price,
+          :total_price => total_price
+      }
     end
 
     def import_price_from_config(code, desc, link, price)

@@ -32,6 +32,7 @@ class ConfigurationSaver
     @record.name = @config.try(:[], :title)
     @record.total_price = @config.try(:[], :total_price)
     @record.assembly_price = @config.try(:[], :assembly_price)
+    @record.author = @config.try(:[], :author)
     @record.company_id = @config[:company_id]
   end
 end
