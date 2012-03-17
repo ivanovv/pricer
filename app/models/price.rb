@@ -74,7 +74,9 @@ class Price < ActiveRecord::Base
   end
 
   def product_web_link
-    company.base_product_link + web_link if web_link
+    return unless web_link
+    return web_link if web_link.starts_with "http://"
+    company.base_product_link + web_link
   end
 
   def as_flot_data
