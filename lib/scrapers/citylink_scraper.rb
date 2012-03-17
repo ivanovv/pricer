@@ -15,7 +15,7 @@ module Scrapers
         if part_link.text =~ /(\d+)\s(.+)/
           warehouse_code = $1
           description = $2.strip
-          web_link = part_link.search("a")['href']
+          web_link = part_link.search("a").first['href']
           price = company.prices.find_by_warehouse_code(warehouse_code)
           price ||= company.prices.find_by_warehouse_code(warehouse_code + ".0")
           #TODO import goods from config if not found in our database
@@ -32,12 +32,12 @@ module Scrapers
 
     def import_price_from_config(code, desc, link, price)
       price_saver = PriceSaver.new company
-      price, action = price_saver.create_price {
+      price, action = price_saver.create_price( {
         :warehouse_code => code,
         :price => price,
         :original_description => desc,
         :web_link => link
-      }
+      })
       price
     end
   end
