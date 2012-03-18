@@ -21,3 +21,4 @@ tmp/**
 /public/stylesheets/handheld.css
 /public/javascripts/backbone
 bin/
+public/assets
