@@ -7,7 +7,7 @@ class XLSParser < PriceParser
     super()
     @parsed_rows = 0
     @initial_row_found = false
-    @encoding = endcoding
+    @encoding = encoding
     @book_path = book_path
   end
 

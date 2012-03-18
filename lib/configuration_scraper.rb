@@ -1,3 +1,4 @@
+
 class ConfigurationScraper
 
   include ::CompanyInfo
@@ -6,6 +7,10 @@ class ConfigurationScraper
     scraped_configuration = get_configuration(url_or_page)
     scraped_configuration[:company_id] = company.id
     scraped_configuration
+  end
+
+  def parse_page
+    raise "Not implemented"
   end
 
   def get_configuration(resource)
