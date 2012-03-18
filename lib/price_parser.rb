@@ -10,12 +10,12 @@ class PriceParser
     @updated_prices = 0
     @total_prices = 0
     @total_rows = 0
-    price_saver = PriceSaver.new(company)
+    @price_saver = PriceSaver.new(company)
   end
 
   def create_price(price_attributes)
     @total_prices += 1
-    price, action_taken = price_saver.create_price(price_attributes)
+    price, action_taken = @price_saver.create_price(price_attributes)
     if action_taken = :create
       @created_prices +=1
     end
