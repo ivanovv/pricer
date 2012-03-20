@@ -41,7 +41,7 @@ module PriceParsers
     def create_price_attributes
       price_attributes = super
       price_attributes[:web_link] = price_attributes[:web_link].to_i
-      price_attributes[:description].match(/\[([^\]]*)\]/)
+      price_attributes[:original_description].match(/\[([^\]]*)\]/)
       price_attributes[:vendor_code] = $+ if ($+ != "OEM" && $+ != "BOX")
       price_attributes
     end
