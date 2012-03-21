@@ -35,7 +35,7 @@ class PriceSaver
     end
     history_updated = price.update_price_history(price_attributes[:price].to_i)
     if (price_was_updated || history_updated) && (action == :none) then
-      actionn = :update
+      action = :update
     end
     [price, action]
   end
