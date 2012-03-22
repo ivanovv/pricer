@@ -20,12 +20,11 @@ class PriceSaver
   end
 
   def create_or_update_price_history(search_term, price_attributes)
-    action = :none
     price = @company.prices.where(search_term => price_attributes[search_term]).first
 
     if price
       price_was_updated = price.update_original_description(price_attributes[:original_description].to_s)
-      if (price_attributes[:web_link] && !price.web_link)
+      if price_attributes[:web_link] && !price.web_link
         price.update_attribute(:web_link, price_attributes[:web_link])
         price_was_updated = true
       end
@@ -34,7 +33,7 @@ class PriceSaver
       action = :create
     end
     history_updated = price.update_price_history(price_attributes[:price].to_i)
-    if (price_was_updated || history_updated) && (action == :none) then
+    if (price_was_updated || history_updated) && action != :create then
       action = :update
     end
     [price, action]

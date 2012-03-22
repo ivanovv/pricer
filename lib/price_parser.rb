@@ -16,12 +16,8 @@ class PriceParser
   def create_price(price_attributes)
     @total_prices += 1
     price, action_taken = @price_saver.create_price(price_attributes)
-    if action_taken == :create
-      @created_prices +=1
-    end
-    if action_taken == :update
-      @updated_prices +=1
-    end
+    @created_prices +=1 if action_taken == :create
+    @updated_prices +=1 if action_taken == :update
   end
 end
 
