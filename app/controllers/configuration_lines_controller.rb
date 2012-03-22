@@ -1,10 +1,12 @@
 class ConfigurationLinesController < ApplicationController
+  respond_to :html
+
   def index
-    @configuration_lines = ConfigurationLine.all
+    respond_with(@configuration_lines = ConfigurationLine.page params[:page])
   end
 
   def show
-    @configuration_line = ConfigurationLine.find(params[:id])
+    @configuration_line = ConfigurationLine.find params[:id]
   end
 
   def new
