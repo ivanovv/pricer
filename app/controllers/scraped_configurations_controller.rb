@@ -5,7 +5,7 @@ class ScrapedConfigurationsController < ApplicationController
 
 
   def index
-    respond_with(@scraped_configurations = ScrapedConfiguration.all.page(params[:page]))
+    respond_with(@scraped_configurations = ScrapedConfiguration.order(:created_at).page(params[:page]))
   end
 
   def show
