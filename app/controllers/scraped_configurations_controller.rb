@@ -1,8 +1,11 @@
 # encoding: UTF-8
 class ScrapedConfigurationsController < ApplicationController
 
+  respond_to :html
+
+
   def index
-    @scraped_configurations = ScrapedConfiguration.all
+    respond_with(@scraped_configurations = ScrapedConfiguration.all.page(params[:page]))
   end
 
   def show

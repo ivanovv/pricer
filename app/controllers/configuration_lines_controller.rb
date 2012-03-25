@@ -2,7 +2,7 @@ class ConfigurationLinesController < ApplicationController
   respond_to :html
 
   def index
-    respond_with(@configuration_lines = ConfigurationLine.page params[:page])
+    respond_with(@configuration_lines = ConfigurationLine.all)
   end
 
   def show

@@ -7,8 +7,8 @@ module CompanyInfo
 
   module ClassMethods
 
-    def belongs_to_company(company)
-      @company_name = company
+    def belongs_to_company(company_name)
+      @company_name = company_name
     end
   end
 
