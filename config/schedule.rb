@@ -50,7 +50,7 @@ every 1.day, :at => '5:35 am' do
   rake "app:all"
 end
 
-every 1.hour do
-  rake "app:spider"
-end
+#every 1.hour do
+#  rake "app:spider"
+#end
 
