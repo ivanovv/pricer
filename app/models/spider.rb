@@ -3,6 +3,7 @@ class Spider < ActiveRecord::Base
   belongs_to :company
 
   def parse_next_page
+    return unless enabled?
     spider = SpiderFactory.create_spider(company.name)
     page_number = last_page + 1
     spider.parse_page(page_number)

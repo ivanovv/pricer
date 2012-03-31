@@ -6,7 +6,7 @@ namespace :app do
   desc "Parse next Citilink configurator page"
   task :spider => :environment do
     spider = Spider.first
-    spider.parse_next_page
+    spider.parse_next_page if spider.enabled?
   end
 
 end
