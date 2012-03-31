@@ -46,7 +46,7 @@ class PricesController < ApplicationController
   def update
     @price = @company.prices.find(params[:id])
     flash[:notice] = "Successfully updated price." if @price.update_attributes(params[:price])
-    respond_with(@price)
+    respond_with(@company, @price)
   end
 
   def destroy
