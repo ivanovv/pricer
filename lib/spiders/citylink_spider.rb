@@ -11,10 +11,12 @@ module Spiders
 
     HTTP_PREFIX = "http://"
     CITILINK_DOMAIN = "www.citilink.ru"
+    UBUNTU_USER_AGENT = "Mozilla/5.0 (Ubuntu; X11; Linux x86_64; rv:8.0) Gecko/20100101 Firefox/8.0"
+    MAC_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.52.7 (KHTML, like Gecko) Version/5.1.2 Safari/534.52.7"
 
     def initialize
       @agent = Mechanize.new
-      @agent.user_agent = "Mozilla/5.0 (Ubuntu; X11; Linux x86_64; rv:8.0) Gecko/20100101 Firefox/8.0"
+      @agent.user_agent = [UBUNTU_USER_AGENT, MAC_USER_AGENT].sample
       @agent.cookie_jar << Mechanize::Cookie.new("conf_arc", "1", :domain => CITILINK_DOMAIN, :path => "/")
       @sleep_time = 7
     end
