@@ -6,11 +6,11 @@
       window.App = new window.SearchRouter();
       Backbone.history.start();
 
-      $(".search.button").click(function (e) {
-          var value = $(e.target).prev().val();
-          $("#q").val(value);
-          window.App.navigate('search/' + value, true);
-          return false;
+      $(".form-search").submit(function(event){
+        var value = $("#q", $(event.target)).val();
+        $("#q").val(value);
+        window.App.navigate('search/' + value, true);
+        return false;
       });
 
       pricesView = new PricesView({el: $('#new_prices'), collection: prices});
@@ -44,14 +44,15 @@
         $('<iframe class="external-search"/>').attr('src', url).appendTo($div);
       })
     });
+
 .row
   .span4
-    .box
-      %p= search_box("form-search")
+    .bootstrap-forms
+      %p= search_box("form-search", true)
 
 %noscript
   - if @prices && @prices.count > 0
-    %h1(style="display:inline") Найденные товары
+    %h2(style="display:inline") Найденные товары
     (#{@prices.total_entries})
 
     %br
@@ -93,7 +94,7 @@
           = f.hidden_field :other_prices
         = f.actions :submit
 
-    %h1(style="display:inline") Найденные записи из справочника
+    %h2(style="display:inline") Найденные записи из справочника
 
     - if @items
       (#{@items.total_entries})
@@ -120,7 +121,7 @@
 .row
   .span12
     #new_prices_div
-      %h1(style="display:inline") Найденные товары
+      %h2(style="display:inline") Найденные товары
       (
       %span#prices_count
       )
@@ -140,7 +141,7 @@
 .row
   .span12
     #new_items_div
-      %h1(style="display:inline") Найденные записи из справочника
+      %h2(style="display:inline") Найденные записи из справочника
       (
       %span#items_count
       )
@@ -152,7 +153,7 @@
         %tbody(id="new_items")
 
 -if params[:q]
-  %h1 Поиск по фирмам
+  %h2 Поиск по фирмам
   #accordion.accordion
     - Company.all.each do |company|
       = render :partial => "search_iframe", :locals => {:company => company}

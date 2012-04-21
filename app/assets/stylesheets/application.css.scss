@@ -8,8 +8,14 @@
 *= require formtastic-plus-bootstrap
 */
 
-// require formtastic.css
-// require text
+@import "bootstrap/mixins";
+@import "bootstrap/variables";
+
+.bootstrap-forms {
+
+
+  @import "bootstrap/forms";
+}
 
 body {
   padding-top: 60px;
