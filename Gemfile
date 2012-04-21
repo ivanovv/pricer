@@ -21,7 +21,7 @@ gem "omniauth-vkontakte"
 gem "rails-backbone"
 gem "json"
 gem "html5-rails"
-gem "formtastic", "~>2.1"
+gem "formtastic", "~>2.2"
 
 group :production do
   gem "unicorn"
@@ -48,8 +48,6 @@ group :assets do
   gem "coffee-rails", "~> 3.2"
   gem "uglifier", ">= 1.0.3"
   gem "compass", "> 0.12.alpha"
-  # include other compass plugins here. E.g.:
-  gem "compass-960-plugin", :require => "ninesixty"
   gem "compass-rails"
   gem "compass-h5bp"
 end
