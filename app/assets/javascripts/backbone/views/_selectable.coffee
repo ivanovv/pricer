@@ -4,19 +4,19 @@ window.SelectableView = Backbone.View.extend
       'click' : 'select'
 
     initialize: ->
-        _.bindAll @, "render", "select", "setSelected"
-        @model.bind "change:selected", @setSelected
+        _.bindAll @, "render", "select", "updateSelectedStatus"
+        @model.bind "change:selected", @updateSelectedStatus
 
 
     render: ->
         $(@el).html(@template(@model.toJSON()))
-        @setSelected()
+        @updateSelectedStatus()
         @
 
     select: ->
         @model.set {selected : !@model.get "selected"}
 
-    setSelected: ->
+    updateSelectedStatus: ->
         selected = @model.get "selected"
         $(@el).toggleClass 'ui-selected', selected
         @$("*").toggleClass 'ui-selected', selected
