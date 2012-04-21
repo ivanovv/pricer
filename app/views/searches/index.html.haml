@@ -86,7 +86,7 @@
           = f.hidden_field :other_prices
         = add_button_submit_tag "Связать"
 
-    %h1(style="display:inline") Найденные записи из справочника
+    %h2(style="display:inline") Найденные записи из справочника
 
     - if @items
       (#{@items.total_entries})
@@ -111,7 +111,7 @@
       %br
 
 #new_prices_div
-  %h1(style="display:inline") Найденные товары
+  %h2(style="display:inline") Найденные товары
   (
   %span#prices_count
   )
@@ -129,7 +129,7 @@
   =safe_button_link_to("Связать!", {:href => "#"}, :id => "link_btn", :href => "#")
 
 #new_items_div
-  %h1(style="display:inline") Найденные записи из справочника
+  %h2(style="display:inline") Найденные записи из справочника
   (
   %span#items_count
   )
@@ -141,7 +141,7 @@
     %tbody(id="new_items")
 
 -if params[:q]
-  %h1 Поиск по фирмам
+  %h2 Поиск по фирмам
   - Company.all.each do |company|
     = render :partial => "search_iframe", :locals => {:company => company}
 
