@@ -1,12 +1,16 @@
 - title(t('.title', :company_name => @company.name))
-%h1= t('.title', :company_name => @company.name)
+
+.page-header
+  %h1= t('.title', :company_name => @company.name)
 
 -#Записей: #{@prices.total_entries}
 
 Сортировать
-=link_to t('.sort_by_date'), params.merge(:sort => 'recent', :page => nil)
-|
-=link_to t('.sort_by_name'), params.merge(:sort => 'name', :page => nil)
+%ul.nav.nav-pills
+  %li.{:class => params['sort']=="recent" && "active"}
+    =link_to t('.sort_by_date'), params.merge(:sort => 'recent', :page => nil)
+  %li.{:class => params['sort']=="name" && "active"}
+    =link_to t('.sort_by_name'), params.merge(:sort => 'name', :page => nil)
 %br
 
 %table.table.table-striped.table-bordered.table-condensed
