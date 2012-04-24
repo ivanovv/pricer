@@ -4,6 +4,13 @@ module Scrapers
 
     belongs_to_company "CityLink"
 
+    HTTP_PREFIX = "http://"
+    CITILINK_DOMAIN = "www.citilink.ru"
+
+    def absolute_url(relative_link)
+      HTTP_PREFIX + CITILINK_DOMAIN + relative_link
+    end
+
     def parse_page(page)
       prices = []
       title = page.search("div.txt-block h1").text
@@ -16,7 +23,7 @@ module Scrapers
         if part_link.text =~ /(\d+)\s(.+)/
           warehouse_code = $1
           description = $2.strip
-          web_link = part_link.search("a").first['href']
+          web_link = absolute_url(part_link.search("a").first['href'])
           price = company.prices.find_by_warehouse_code(warehouse_code)
           price ||= company.prices.find_by_warehouse_code(warehouse_code + ".0")
 
