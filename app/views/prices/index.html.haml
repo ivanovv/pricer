@@ -7,9 +7,9 @@
 
 Сортировать
 %ul.nav.nav-pills
-  %li.{:class =>("active" if params['sort']=="recent")}
+  %li{:class =>("active" if params['sort'] == "recent" || params['sort'] == nil)}
     =link_to t('.sort_by_date'), params.merge(:sort => 'recent', :page => nil)
-  %li.{:class =>("active" if params['sort']=="name")}
+  %li{:class =>("active" if params['sort']=="name")}
     =link_to t('.sort_by_name'), params.merge(:sort => 'name', :page => nil)
 %br
 
