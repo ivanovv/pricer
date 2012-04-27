@@ -1,13 +1,13 @@
 window.LinkView = Backbone.View.extend
   tagName: "a"
-  className: "btn btn-primary"
+  className: "btn btn-primary invisible"
   id: "link_btn"
   template: "<i class='icon-magnet icon-white'></i>  Связать!"
   events :
     'click' : 'link'
 
   initialize: (options) ->
-    _.bindAll @, "render"
+    _.bindAll @, "render", "updateSelectionStatus"
     @prices = options.prices
     @items = options.items
     @prices.bind "change:selected", @updateSelectionStatus, @
@@ -15,15 +15,11 @@ window.LinkView = Backbone.View.extend
 
   render: ->
     $(@el).html(@template)
-    $(@el).hide()
     @
 
   updateSelectionStatus: ->
     setTimeout ( =>
-      if @prices.selected().size() > 0 && @items.selected().size() > 0
-        $(@el).fadeIn 300
-      else
-        $(@el).fadeOut 300
+      $(@el).toggleClass("invisible", !(@prices.selected().size() > 0 && @items.selected().size() > 0))
     ), 100
 
   link : ->
