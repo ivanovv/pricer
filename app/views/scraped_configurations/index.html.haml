@@ -11,12 +11,11 @@
   %tbody
     - for scraped_config in @scraped_configurations
       %tr
-        %td= scraped_config.company_id
-        %td= scraped_config.name
-        %td= scraped_config.url
+        %td= scraped_config.company.name
+        %td= link_to scraped_config.name, scraped_config
+        %td= link_to scraped_config.url.split("/").last, scraped_config.url
         %td= scraped_config.assembly_price
         %td= scraped_config.total_price
-        %td= link_to t('show'), scraped_config, :class => "btn"
         %td= link_to t('edit'), edit_scraped_configuration_path(scraped_config), :class => "btn"
         %td= link_to t('destroy'), scraped_config, :confirm => 'Are you sure?', :method => :delete, :class => "btn"
 
