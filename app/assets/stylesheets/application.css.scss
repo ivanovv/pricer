@@ -10,10 +10,9 @@
 
 @import "bootstrap/mixins";
 @import "bootstrap/variables";
+@import "bootstrap-responsive";
 
 .bootstrap-forms {
-
-
   @import "bootstrap/forms";
 }
 
@@ -37,10 +36,11 @@ body {
 }
 
 .nav-collapse .nav a img {
-padding-top: 10px;
+  padding-top: 10px;
 }
 
 iframe.external-search {
-    width:100%;
-    height:500px;
+  width: 100%;
+  height: 600px;
+  border: none;
 }
