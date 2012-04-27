@@ -33,7 +33,7 @@
     });
 
 .row
-  .span4
+  .span5
     .bootstrap-forms
       %p= search_box("form-search", true)
 
@@ -152,7 +152,7 @@
     <%= warehouse_code %>
   %td
     %a{:href=>"companies/<%= company_id %>/prices/<%= id %>"}
-      <%= original_description %>
+      <%- original_description %>
   %td
     <%= price %>
   %td
