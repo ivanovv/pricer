@@ -71,22 +71,16 @@
 .authBlock {
   padding:3px 3px 6px 3px;
 }
-.friendsCount {
-  padding:0px 10px 0px 10px;
-  text-align: center;
-  margin: -5px 0px 5px 0px;
-}
-.friendsList {
-  background: #FFFFFF;
-  border-top: 1px solid #ccd3da;
-  padding: 4px 8px 8px 8px;
-}
-.friend {
-  margin-right: 5px;
-}
+
 #userBlock {
   height: 29px;
 }
+
+#userBlock a {
+    padding-left: 10px;
+    line-height: 30px;
+}
+
 
 .mainDiv #userBlock a, .mainDiv #userBlock span.link, .mainDiv #userBlock span.linkover {
   color: #2B587A;

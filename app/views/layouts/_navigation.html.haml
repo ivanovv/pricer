@@ -16,10 +16,10 @@
 
         %ul.nav.pull-right
           -if user_signed_in?
-            #userBlock.userDonation
+            #userBlock
               .userPic
                 =image_tag(current_user.small_user_pic_url)
-              = link_to('out', signout_path)
+              = link_to('logout', signout_path, :confirm => "Are you sure?")
           - else
             %a{:href => "#{signin_path}"}
               =image_tag("vkontakte.png")
