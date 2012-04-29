@@ -1,16 +1,12 @@
 !!! 5
 -# http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither
 -html_tag :class => 'no-js', :lang => 'ru' do
-  = render "head"
+  = render "layouts/head"
   
   %body
     = render "layouts/navigation"
 
     .container
-      -#.span12
-        %header#header
-          = render "layouts/header"
-
 
       #main
         .row

@@ -1,27 +1,26 @@
 %head
   %meta{ :charset => "utf-8" }/
 
-
   -# Always force latest IE rendering engine (even in intranet) & Chrome Frame
   -# Remove this if you use the .htaccess
   %meta{ "http-equiv" => "X-UA-Compatible", :content => "IE=edge,chrome=1" }/
 
   %title
-    Pricer
     - if content_for? :title
       = yield :title
     - else
       ="#{ controller.controller_name.titleize } - #{ controller.action_name.titleize }"
+    | Pricer
 
 
-  %meta{ :name => "description", :content => "" }/
+  %meta{ :name => "description", :content => "price comparison" }/
   %meta{ :content => "Victor Ivanov", :name => "author" }/
   -# Mobile viewport optimized: j.mp/bplateviewport
-  %meta {:name => "viewport", :content => "width=device-width"}/
+  %meta{ :name => "viewport", :content => "width=device-width"}/
 
   -# Place favicon.ico and apple-touch-icon.png in the root directory: mathiasbynens.be/notes/touch-icons
 
-  = render "stylesheets"
+  = render "layouts/stylesheets"
 
   -# More ideas for your <head> here: h5bp.com/d/head-Tips
 
