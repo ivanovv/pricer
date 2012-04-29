@@ -1,5 +1,4 @@
-#flash
-  - flash.each do |key, value|
-    .wrapper
-      %div{ :title => key.to_s.humanize, :class => key }
-        %p= value
+- flash.each do |key, value|
+  %div{ :title => key.to_s.humanize, :class => "alert #{tbs_flash_class(key)}" }
+    %a.close{:data => {:dismiss => "alert"}, :href=>"#" }= "&times;".html_safe
+    =value

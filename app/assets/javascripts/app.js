@@ -87,5 +87,10 @@ $(function() {
 
     buildGraph();
     $(document).bind("mouseup", Pricer.Selector.mouseup);
+    $(".alert").alert();
+    $(".search-icon").click(function(event){
+        $(event.target).parent().parent().submit();
+
+    });
 });
 

@@ -12,11 +12,13 @@ module ApplicationHelper
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
 
-  def search_box(form_class = nil, search_button = false)
+  def search_box(form_class = nil)
     form_tag(searches_path, :method => 'get', :class => form_class) do
-      result = search_field_tag(:q, params[:q], {:class => "search-query", :placeholder => "Поиск"})
-      result = result.concat(submit_tag(t(:search), {:name => nil, :class => "btn btn-small"})) if search_button
-      result
+      content_tag :span, "", {"class" => "search-icon js-search-action"} do
+        content_tag :i, "", {"class" => "icon-search"}
+      end.concat(
+        search_field_tag(:q, params[:q], {:class => "search-query", :placeholder => "Поиск"})
+      )
     end
   end
 

@@ -19,4 +19,13 @@ module LayoutHelper
   def javascript(*args)
     content_for(:head) { javascript_include_tag(*args) }
   end
+
+  def tbs_flash_class(flash_type)
+    case flash_type
+      when :notice then "info"
+      when :alert then "warning"
+      else
+        flash_type.to_s
+    end
+  end
 end

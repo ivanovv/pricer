@@ -44,3 +44,15 @@ iframe.external-search {
   height: 600px;
   border: none;
 }
+
+
+.form-search, .navbar-search {
+  position: relative;
+
+  .search-icon {
+    position: absolute;
+    top: 7px;
+    left: 204px;
+    cursor: pointer;
+  }
+}

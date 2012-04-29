@@ -15,6 +15,7 @@
 //= require jquery.colorbox.js
 //= require jquery.flot.js
 //= require bootstrap-collapse.js
+//= require bootstrap-alert.js
 //= require app.js
 
 
