@@ -1,20 +1,21 @@
 /*
-*= require_self
 *= require colorbox.css
 *= require token-input.css
 *= require token-input-facebook.css
 *= require auth
 *= require bootstrap-without-forms
 *= require formtastic-plus-bootstrap
+*= require_self
 */
 
 @import "bootstrap/mixins";
 @import "bootstrap/variables";
-@import "bootstrap-responsive";
 
 .bootstrap-forms {
   @import "bootstrap/forms";
 }
+
+@import "bootstrap-responsive";
 
 body {
   padding-top: 60px;
@@ -56,3 +57,4 @@ iframe.external-search {
     cursor: pointer;
   }
 }
+

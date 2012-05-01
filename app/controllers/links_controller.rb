@@ -30,7 +30,7 @@ class LinksController < ApplicationController
     @link = Link.new(params[:link])
     if @link.save
       flash[:notice] = "Successfully created link."
-      if other_prices && !other_prices.blank?
+      if !other_prices.blank?
         @links << Link.create_many_links(other_prices, params[:link][:item_id])
         flash[:notice] = "Successfully created several links."
         redirect_to :action => 'index', :id => @links.join('+')
