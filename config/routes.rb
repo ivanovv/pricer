@@ -19,6 +19,9 @@ Pricer::Application.routes.draw do
     resources :prices do
       resources :price_histories
     end
+    resources :scraped_configurations do
+      resources :configuration_lines
+    end
   end
 
   resources :searches

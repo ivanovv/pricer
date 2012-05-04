@@ -1,4 +1,5 @@
 class PricesController < ApplicationController
+  include Sortable
 
   respond_to :html, :js, :json
   
@@ -6,19 +7,11 @@ class PricesController < ApplicationController
   before_filter :authenticate_user!, :except => [:index, :show]
 
   def index
-    sort = case params['sort']
-             when "name" then
-               "original_description"
-             when "recent" then
-               "created_at desc"
-           end
-
-    sort ||= "created_at desc"
 
     if !@company
       @prices = Price.search(params[:q], :order => "company_id ASC, original_description ASC")
     else
-      @prices = @company.prices.order(sort).page(params[:page])
+      @prices = @company.prices.order(get_sort_settings_from_params).page(params[:page])
     end
 
     respond_with @prices

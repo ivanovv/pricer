@@ -161,6 +161,9 @@
 
 %script#item-template{:type=>"text/template"}
   %td
+    %span.label
+      <%= fcenter_code %>
+
     %a{:href=>"items/<%= id %>"}
       <%= original_description %>
   %td

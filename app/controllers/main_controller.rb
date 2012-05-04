@@ -4,6 +4,7 @@ class MainController < ApplicationController
   
   def index
     @price_count = Price.count
+    @config_count = ScrapedConfiguration.count
     @companies = Company.all
   end
 

@@ -9,6 +9,9 @@ ru:
   edit: Редактировать
   show: Подробно
   destroy: Удалить
+  sort_by_name: "по названию A-Z"
+  sort_by_date: "по дате (свежие вперед)"
+
   
   views:
     pagination:
@@ -22,8 +25,6 @@ ru:
       warehouse_code: "Складской код"
       name: "Наименование"
       price: Цена
-      sort_by_name: "по названию A-Z"
-      sort_by_date: "по дате (свежие вперед)"
     show:
       item_record_title: "Запись из справочника:"
       pricehistory_title: "История цен"

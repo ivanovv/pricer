@@ -3,6 +3,8 @@
 %br
 = t(:price) + ": #{@price.price_value}"
 %br
+= t(:warehouse_code) + ": #{@price.warehouse_code}"
+%br
 -if @price.vendor_code
   = t(:warehouse_code) + ": #{@price.vendor_code}"
 

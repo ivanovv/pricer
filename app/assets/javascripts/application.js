@@ -16,6 +16,7 @@
 //= require jquery.flot.js
 //= require bootstrap-collapse.js
 //= require bootstrap-alert.js
+//= require bootstrap-dropdown.js
 //= require app.js
 
 

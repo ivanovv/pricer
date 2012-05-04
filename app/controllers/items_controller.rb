@@ -1,4 +1,5 @@
 class ItemsController < ApplicationController
+  include Sortable
 
   respond_to :html, :json
 
@@ -8,7 +9,7 @@ class ItemsController < ApplicationController
     if params[:q]
       @items = Item.search(params[:q], :order => :original_description)
     else
-      @items = Item.order(:original_description).page(params[:page])
+      @items = Item.order(get_sort_settings_from_params).page(params[:page])
     end
     respond_with(@items)
   end
