@@ -1,9 +1,14 @@
+require 'uri'
+require 'cgi'
+
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :layout
   helper_method :current_user
   helper_method :user_signed_in?
   helper_method :correct_user?
+
+  before_filter :check_yandex_referrer
 
   private
   def current_user
@@ -32,4 +37,19 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def check_yandex_referrer
+    referer = request.headers["HTTP_REFERER"]
+    se = {
+        :google => {:regexp => /^http:\/\/(www\.)?google.*/, :query_string => 'q'},
+        :yandex => {:regexp => /^http:\/\/(www\.)?yandex.*/, :query_string => 'text'}
+    }
+    uri = URI.parse referer
+    if (search_engine = se.detect { |v| referer.match(v[1][:regexp]) })
+      se2 = search_engine[0].to_s
+      keywords = CGI.parse(uri.query)[search_engine[1][:query_string]][0]
+      if !request.url.to_s.match /\/searches/
+        redirect_to({:controller => :searches, :action => :index, :q => keywords})
+      end
+    end
+  end
 end
