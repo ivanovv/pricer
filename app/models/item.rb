@@ -4,6 +4,9 @@ class Item < ActiveRecord::Base
 
   has_many :links
 
+  validates :description, :presence => true
+  validates :original_description, :presence => true
+
   has_many :prices, :through => :links do
     def average_price
       all.average(:price)
@@ -15,6 +18,7 @@ class Item < ActiveRecord::Base
     indexes description
     indexes original_description, :sortable => true
     indexes vendor_code
+    indexes fcenter_code
 
     # attributes
     has id

@@ -1,0 +1,6 @@
+<%- if @item.errors.blank? %>
+    $('#new_item .modal-body').html('<div class="alert alert-success fade in"><%= escape_javascript(flash[:notice]) %></div>');
+    $("#new_item .modal-footer .btn-primary").hide();
+<%- else %>
+    $('#new_item .modal-body').html('<%= escape_javascript(render("form")) %>');
+<%- end %>

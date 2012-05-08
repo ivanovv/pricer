@@ -17,6 +17,7 @@
 //= require bootstrap-collapse.js
 //= require bootstrap-alert.js
 //= require bootstrap-dropdown.js
+//= require bootstrap-modal.js
 //= require app.js
 
 

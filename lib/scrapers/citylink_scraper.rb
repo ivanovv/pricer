@@ -44,16 +44,7 @@ module Scrapers
       }
     end
 
-    def import_price_from_config(code, desc, link, price)
-      price_saver = PriceSaver.new company
-      price, action = price_saver.create_price( {
-        :warehouse_code => code,
-        :price => price,
-        :original_description => desc,
-        :web_link => link
-      })
-      price
-    end
+
   end
 
 end

@@ -1,6 +1,6 @@
 class MainController < ApplicationController
 
-  caches_action :index, :layout => false
+  #caches_action :index, :layout => false
   
   def index
     @price_count = Price.count

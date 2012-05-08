@@ -1,24 +1,18 @@
 # encoding: UTF-8
 require 'company_info'
+require 'config_spider'
 
 module Spiders
 
-  class CitylinkSpider
+  class CitylinkSpider < ConfigSpider
     include ::CompanyInfo
+
     belongs_to_company "CityLink"
-
-    attr_accessor :sleep_time
-
-    HTTP_PREFIX = "http://"
-    CITILINK_DOMAIN = "www.citilink.ru"
-    UBUNTU_USER_AGENT = "Mozilla/5.0 (Ubuntu; X11; Linux x86_64; rv:8.0) Gecko/20100101 Firefox/8.0"
-    MAC_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.52.7 (KHTML, like Gecko) Version/5.1.2 Safari/534.52.7"
+    set_domain "www.citilink.ru"
 
     def initialize
-      @agent = Mechanize.new
-      @agent.user_agent = [UBUNTU_USER_AGENT, MAC_USER_AGENT].sample
-      @agent.cookie_jar << Mechanize::Cookie.new("conf_arc", "1", :domain => CITILINK_DOMAIN, :path => "/")
-      @sleep_time = 7
+      super
+      @agent.cookie_jar << Mechanize::Cookie.new("conf_arc", "1", :domain => self.class.domain, :path => "/")
     end
 
     def get_page(page_number)
@@ -42,6 +36,7 @@ module Spiders
         scrap_config(link)
         sleep @sleep_time
       end
+      page_number
     end
 
     def scrap_config(mechanize_link)
@@ -53,29 +48,5 @@ module Spiders
         ConfigurationSaver.save(config_record, config)
       end
     end
-
-    private
-
-    def no_configuration_in_db(url)
-      !ScrapedConfiguration.find_by_url(url)
-    end
-
-    def scraper(url)
-      @scraper ||= ConfigurationScraperFactory.create_scraper(url)
-    end
-
-    def absolute_url(relative_link)
-      HTTP_PREFIX + CITILINK_DOMAIN + relative_link
-    end
-
-    def create_cookie
-      cookie = Mechanize::Cookie.new("conf_arc", "1")
-      cookie.domain = CITILINK_DOMAIN
-      cookie.secure = false
-      cookie.path = "/"
-      cookie.version = 0
-      cookie
-    end
-
   end
 end

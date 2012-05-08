@@ -1,7 +1,8 @@
-= semantic_form_for @item do |f|
+= semantic_form_for @item, :remote => request.xhr? do |f|
   = f.inputs do
     = f.input :description, :input_html => {:class => "input-xlarge"}
     = f.input :original_description, :input_html => {:class => "input-xlarge"}
     = f.input :vendor_code
     = f.input :fcenter_code
-  = f.actions :submit, :cancel
+  - if !request.xhr?
+    = f.actions :submit, :cancel

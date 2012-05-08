@@ -1,4 +1,4 @@
-window.LinkView = Backbone.View.extend
+window.LinkerView = Backbone.View.extend
   tagName: "a"
   className: "btn btn-primary invisible"
   id: "link_btn"

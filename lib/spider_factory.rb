@@ -1,10 +1,11 @@
 class SpiderFactory
 
   def self.create_spider(company)
-    if company == "CityLink"
-      return Spiders::CitylinkSpider.new
+    case company
+      when "CityLink" then Spiders::CitylinkSpider.new
+      when "Oldi" then Spiders::OldiSpider.new
+      else
+        raise "Unknown spider for company '#{company}'."
     end
-    raise "Unknown spider for company '#{company}'."
   end
-
 end

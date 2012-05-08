@@ -3,7 +3,12 @@
 .hero-unit
   %h1 Pricer
   %p
-    Вы собрали конфигурацию своего будущего компьютера, и хотите узнать, сколько она будет стоить в другом компьютерном магазине? Или может быть, хотите узнать, насколько популярными выбранные Вами компоненты? Или какие еще есть похожие конфигурации?
+    Вы собрали конфигурацию своего будущего компьютера, и хотите узнать, сколько она будет стоить в другом компьютерном магазине?
+  %p
+    Или может быть, хотите узнать, насколько популярными выбранные Вами компоненты?
+  %p
+    Или какие еще есть похожие конфигурации?
+
   %p
     На все эти вопросы Вам ответит система Pricer :)
   %p
@@ -11,32 +16,34 @@
       Узнать подробности »
 
 .row
-  .span6
+  .span4
     %h2
       Прайсы
-    %h3 Сейчас в системе #{@price_count} прайс
+      %small= @price_count
+
     %p
-      %ul
+      %ul.unstyled
         - @companies.each do |company|
           %li
-            = link_to(company.name, company_prices_path(company))
-            = company.prices.count
+            %h4
+              = link_to(company.name, company_prices_path(company))
+              %small= company.prices.count
 
-  .span6
+  .span4
     %h2
       Конфигурации
-    %h3 Сейчас в системе #{@config_count} конфиг
+      %small= @config_count
     %p
-      %ul
+      %ul.unstyled
         - @companies.each do |company|
           %li
-            = link_to(company.name, company_scraped_configurations_path(company))
-            = company.scraped_configurations.count
+            %h4
+              = link_to(company.name, company_scraped_configurations_path(company))
+              %small= company.scraped_configurations.count
 
-.row
-  .span12
-    %h2
-      %a Импорт конфигурации
-    = form_tag(scraped_configurations_path, :method => :post) do
-      = url_field_tag :url, params[:url], {:placeholder => "Ссылка на конфигурацию", :class => "search text"}
-      = submit_tag "Импортировать", {:name => nil, :class=>"search button btn"}
+  .span4
+    %h2 Импорт своей конфигурации
+    .bootstrap-forms
+      = form_tag(scraped_configurations_path, :method => :post, :class => "form-inline") do
+        = url_field_tag :url, params[:url], {:placeholder => "Ссылка на конфигурацию", :class => "span3"}
+        = submit_tag "Импортировать", {:name => nil, :class=>"search button btn"}

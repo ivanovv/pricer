@@ -13,16 +13,27 @@
         return false;
       });
 
-      pricesView = new PricesView({el: $('#new_prices'), collection: prices});
-      itemsView = new ItemsView({el: $('#new_items'), collection: items});
+      var pricesView = new PricesView({el: $('#new_prices'), collection: prices});
+      var itemsView = new ItemsView({el: $('#new_items'), collection: items});
 
       items.reset(#{@items.to_json});
       prices.reset(#{@prices.to_json});
 
-      linkView = new LinkView({items: items, prices: prices});
-      $("#link_button").append(linkView.render().el);
+      var linkerView = new LinkerView({items: items, prices: prices});
+      $("#link_button").append(linkerView.render().el);
+      var itemCreatorView = new ItemCreatorView({ prices: prices });
+      $("#link_button").append(itemCreatorView.render().el);
 
       $('#q').focus();
+
+      $("#new_item .modal-footer a.btn.btn-primary").on("click", function(){
+        $form = $("#new_item .modal-body form");
+        $form.submit();
+      });
+
+      $("#new_item .modal-footer a.btn:not(.btn-primary)").on("click", function(){
+        $("#new_item").modal("hide");
+      });
 
       $('#accordion').on('show', function (evt) {
         var $toggler = $(evt.target);
@@ -144,6 +155,18 @@
     - Company.all.each do |company|
       = render :partial => "search_iframe", :locals => {:company => company}
 
+
+#new_item.modal.hide
+  .modal-header
+    %button.close{ :data => { :dismiss => "modal"} } ×
+
+    %h3 Новый элемент справочника
+  .modal-body
+    %p One fine body…
+  .modal-footer
+    %a.btn{:href => "#"} Закрыть
+    %a.btn.btn-primary{:href => "#"} Создать
+
 %script#price-template{:type=>"text/template"}
   %td
     %a{:href=>"companies/<%= company_id %>/prices"}
@@ -168,4 +191,5 @@
       <%= original_description %>
   %td
     <%= prices_count %>
+
 

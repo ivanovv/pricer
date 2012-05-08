@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   include Sortable
 
-  respond_to :html, :json
+  respond_to :html, :json, :js
 
   before_filter :authenticate_user!, :except => :index
 
@@ -25,7 +25,10 @@ class ItemsController < ApplicationController
   end
 
   def new
-    respond_with(@item = Item.new)
+    respond_with(@item = Item.new) do |format|
+      format.js { render :layout => false }
+      format.html { render :layout => !request.xhr? }
+    end
   end
 
   def create
