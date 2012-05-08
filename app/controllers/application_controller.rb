@@ -39,6 +39,7 @@ class ApplicationController < ActionController::Base
 
   def check_yandex_referrer
     referer = request.headers["HTTP_REFERER"]
+    return if referer.blank?
     se = {
         :google => {:regexp => /^http:\/\/(www\.)?google.*/, :query_string => 'q'},
         :yandex => {:regexp => /^http:\/\/(www\.)?yandex.*/, :query_string => 'text'}
