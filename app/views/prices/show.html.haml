@@ -17,7 +17,7 @@
 %br
 
 - if @price.cross_prices.count > 0
-  %table{:style => "width:100%"}
+  %table.table.table-striped.table-bordered.table-condensed{:style => "width:100%"}
     %tr
       %th= t(:warehouse_code)
       %th= t(:name)

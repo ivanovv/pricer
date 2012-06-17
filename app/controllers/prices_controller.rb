@@ -51,10 +51,6 @@ class PricesController < ApplicationController
 
   private
 
-  def get_company
-    @company = begin Company.find params[:company_id] rescue nil end
-  end
-
   def sort_column
     Price.column_names.include?(params[:sort]) ? params[:sort] : "original_description"
   end

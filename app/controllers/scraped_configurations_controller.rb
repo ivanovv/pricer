@@ -3,9 +3,16 @@ class ScrapedConfigurationsController < ApplicationController
 
   respond_to :html
 
+  before_filter :get_company
+
 
   def index
-    respond_with(@scraped_configurations = ScrapedConfiguration.order(:created_at).page(params[:page]))
+    if !@company
+      @scraped_configurations = ScrapedConfiguration.order(:created_at).page(params[:page])
+    else
+      @scraped_configurations = @company.scraped_configurations.order(:created_at).page(params[:page])
+    end
+    respond_with(@scraped_configurations)
   end
 
   def show
