@@ -2,7 +2,7 @@ source :gemcutter
 
 gem "rails", "3.2.3"
 gem "spreadsheet"
-gem "mysql2"
+gem "pg"
 gem "haml"
 gem "thinking-sphinx"
 #gem "will_paginate", "~> 3.0.pre2"
