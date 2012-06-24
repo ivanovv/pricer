@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120330064917) do
+ActiveRecord::Schema.define(:version => 20120624125819) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(:version => 20120330064917) do
     t.integer  "value"
   end
 
-  add_index "price_histories", ["price_id", "created_at"], :name => "index_price_histories_on_price_id_and_created_at"
+  add_index "price_histories", ["price_id", "id"], :name => "index_price_histories_on_price_id_and_id"
 
   create_table "prices", :force => true do |t|
     t.integer  "company_id"

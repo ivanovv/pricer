@@ -265,6 +265,7 @@ DEPENDENCIES
   rake
   rspec-rails
   russian
+  sass
   sass-rails (~> 3.2)
   spreadsheet
   therubyracer
