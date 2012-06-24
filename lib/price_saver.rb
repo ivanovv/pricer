@@ -20,7 +20,7 @@ class PriceSaver
   end
 
   def create_or_update_price_history(search_term, price_attributes)
-    price = @company.prices.where(search_term => price_attributes[search_term]).first
+    price = @company.prices.where(search_term => price_attributes[search_term].to_s).first
 
     if price
       price_was_updated = price.update_original_description(price_attributes[:original_description].to_s)
