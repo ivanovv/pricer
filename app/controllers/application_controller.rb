@@ -38,24 +38,30 @@ class ApplicationController < ActionController::Base
   end
 
   def get_company
-    @company = begin Company.find params[:company_id] rescue nil end
+    @company = begin
+      Company.find params[:company_id] rescue nil
+    end
   end
 
   def check_yandex_referrer
-    referer = request.headers["HTTP_REFERER"]
-    return if referer.blank?
+    begin
+      referer = request.headers["HTTP_REFERER"]
+      return if referer.blank?
 
-    se = {
-        :google => {:regexp => /^http:\/\/(www\.)?google.*/, :query_string => 'q'},
-        :yandex => {:regexp => /^http:\/\/(www\.)?yandex.*/, :query_string => 'text'}
-    }
-    uri = URI.parse referer
-    if (search_engine = se.detect { |v| referer.match(v[1][:regexp]) })
-      se2 = search_engine[0].to_s
-      keywords = CGI.parse(uri.query)[search_engine[1][:query_string]][0]
-      if request.fullpath.match(/\/prices\?page\=/) && !request.url.to_s.match( /\/searches/)
-        redirect_to({:controller => :searches, :action => :index, :q => keywords})
+      se = {
+          :google => {:regexp => /^http:\/\/(www\.)?google.*/, :query_string => 'q'},
+          :yandex => {:regexp => /^http:\/\/(www\.)?yandex.*/, :query_string => 'text'}
+      }
+      uri = URI.parse referer
+      if (search_engine = se.detect { |v| referer.match(v[1][:regexp]) })
+        se2 = search_engine[0].to_s
+        keywords = CGI.parse(uri.query)[search_engine[1][:query_string]][0]
+        if request.fullpath.match(/\/prices\?page\=/) && !request.url.to_s.match(/\/searches/)
+          redirect_to({:controller => :searches, :action => :index, :q => keywords})
+        end
       end
     end
+  rescue
   end
+
 end
