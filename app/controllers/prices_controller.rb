@@ -19,7 +19,7 @@ class PricesController < ApplicationController
 
 
   def show
-    @price = @company.prices.find(params[:id])
+    @price = Price.find(params[:id])
     respond_with @price
   end
 

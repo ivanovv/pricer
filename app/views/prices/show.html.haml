@@ -56,6 +56,6 @@
 
 
 %br
-= link_to 'Edit', [:edit, @company, @price]
+= link_to 'Edit', [:edit, @price.company, @price]
 |
-= link_to 'Back', company_prices_path(@company)
+= link_to 'Back', company_prices_path(@price.company)
