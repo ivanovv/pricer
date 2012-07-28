@@ -267,7 +267,7 @@ DEPENDENCIES
   mechanize
   nifty-generators
   omniauth (= 1.0.2)
-  omniauth-vkontakte
+  omniauth-vkontakte (= 1.0.6)
   pg
   pry
   rails (= 3.2.7)
