@@ -1,9 +1,9 @@
 source :gemcutter
 
-gem "rails", "3.2.6"
+gem "rails", "3.2.7"
 gem "spreadsheet"
 gem "pg"
-gem "haml"
+gem "haml", :git => "https://github.com/haml/haml.git"
 gem "sass"
 gem "thinking-sphinx"
 #gem "will_paginate", "~> 3.0.pre2"
