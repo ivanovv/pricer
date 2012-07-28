@@ -141,15 +141,15 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    omniauth (1.1.0)
+    omniauth (1.0.2)
       hashie (~> 1.2)
       rack
     omniauth-oauth2 (1.1.0)
       oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    omniauth-vkontakte (1.0.9)
+    omniauth-vkontakte (1.0.6)
       multi_json
-      omniauth (~> 1.1.0)
+      omniauth (~> 1.0)
       omniauth-oauth2 (~> 1.0)
     pg (0.14.0)
     polyglot (0.3.3)
@@ -266,7 +266,7 @@ DEPENDENCIES
   kaminari
   mechanize
   nifty-generators
-  omniauth
+  omniauth (= 1.0.2)
   omniauth-vkontakte
   pg
   pry
