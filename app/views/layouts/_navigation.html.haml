@@ -31,6 +31,12 @@
             %a{:href => "#{signin_path}"}
               =image_tag("vkontakte.png")
 
-        = search_box("bootstrap-forms navbar-search pull-right")
+        -#= search_box("bootstrap-forms navbar-search pull-right")
+        =form_tag(searches_path, :method => 'get', :class => "bootstrap-forms navbar-search pull-right") do
+          .input-append
+            %input#q{:name => "q", :type => "text", :placeholder => "Поиск..."}
+            %button.btn.search-icon{:type => "button"}
+              %i.icon-search
+
 
 

@@ -50,11 +50,11 @@ every 1.day, :at => '5:35 am' do
   rake "app:all"
 end
 
-every 20.minutes do
+every 6.hour do
   rake "app:spider company=CityLink"
 end
 
-every 10.minute do
+every 8.hour do
   rake "app:spider company=Oldi"
 end
 

@@ -46,7 +46,11 @@
 .row
   .span5
     .bootstrap-forms
-      %p= search_box("form-search")
+      =form_tag(searches_path, :method => 'get') do
+        .input-append
+          %input#q{:name => "q", :type => "text", :placeholder => "Поиск..."}
+          %button.btn.search-icon{:type => "button"}
+            %i.icon-search
 
 %noscript
   - if @prices && @prices.count > 0
