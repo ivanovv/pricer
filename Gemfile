@@ -23,6 +23,7 @@ gem "omniauth-vkontakte"
 gem "rails-backbone"
 gem "json"
 gem "html5-rails"
+gem "rack-mini-profiler"
 
 
 group :production do

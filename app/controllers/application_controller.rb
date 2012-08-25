@@ -9,8 +9,16 @@ class ApplicationController < ActionController::Base
   helper_method :correct_user?
 
   before_filter :check_yandex_referrer
+  before_filter :enable_mini_profiler
 
   private
+
+  def enable_mini_profiler
+    if Rails.env.development? || (current_user && current_user.uid.to_s == "5754774")
+      Rack::MiniProfiler.authorize_request
+    end
+  end
+
   def current_user
     begin
       @current_user ||= User.find(session[:user_id]) if session[:user_id]
