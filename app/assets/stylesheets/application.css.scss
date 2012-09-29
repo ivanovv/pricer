@@ -5,9 +5,11 @@
 *= require auth
 *= require bootstrap-without-forms
 *= require formtastic-plus-bootstrap
+*= require formtastic-plus-bootstrap/responsive
 *= require_self
 */
 
+/*
 @import "bootstrap/mixins";
 @import "bootstrap/variables";
 
@@ -16,6 +18,7 @@
 }
 
 @import "bootstrap-responsive";
+*/
 
 body {
   padding-top: 60px;
