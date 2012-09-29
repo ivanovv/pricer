@@ -17,8 +17,8 @@ gem "whenever"
 gem "airbrake"
 gem "awesome_print", :require => "ap"
 gem "rake"
-gem "oauth2",  "= 0.6.1"
-gem "omniauth", "= 1.0.2"
+gem "oauth2"
+gem "omniauth"
 gem "omniauth-vkontakte"
 gem "rails-backbone"
 gem "json"
@@ -45,7 +45,7 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem "bootstrap-sass", "~> 2.0"
+  gem "bootstrap-sass", "2.1"
   gem "formtastic-plus-bootstrap"
   gem "sass-rails", "~> 3.2"
   gem "coffee-rails", "~> 3.2"
