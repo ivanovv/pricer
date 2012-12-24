@@ -9,6 +9,7 @@ class PriceDescriptionNormalizer
   WORD_COUNT = [5,4,3,2,1]
 
   def self.normalize_description(desc)
+    return desc.to_s unless desc.is_a?(String)
     desc = desc.dup.mb_chars.downcase.to_s
 
     ['мат. плата', 'материнская плата', 'мат.плата'].each {|mb| desc.sub!(/#{mb}\s(.+?)\s<.+?>/iu, "\\1")}
