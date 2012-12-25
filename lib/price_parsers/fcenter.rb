@@ -99,7 +99,7 @@ module PriceParsers
       paring_started_at = DateTime.now
       document = FCenterPriceDocument.new
       document.price_parser = new
-      parser = Nokogiri::HTML::SAX::Parser.new(document, encoding)
+      parser = Nokogiri::HTML::SAX::Parser.new(document)
       parser.parse_file(path, encoding)
       ParsingResult.create_from_parser(document.price_parser, paring_started_at, File.size(path))
     end
