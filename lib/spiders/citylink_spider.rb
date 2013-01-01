@@ -20,6 +20,7 @@ module Spiders
       page = @agent.get(url)
       active_nav_links = page.search(".b .active")
       if active_nav_links.respond_to? :first
+        raise "First element in navigation links is empty" unless active_nav_links.first
         actual = active_nav_links.first.text
         raise "Wrong page number after fetching page. Expected #{page_number}. Got #{actual}" if actual != page_number.to_s
       else

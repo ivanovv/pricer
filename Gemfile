@@ -28,7 +28,7 @@ gem "rack-mini-profiler"
 
 group :production do
   gem "unicorn"
-  gem "therubyracer", :require => nil
+  gem "therubyracer", "= 0.10.2", :require => nil
 end
 
 group :development do

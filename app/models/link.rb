@@ -1,4 +1,5 @@
 class Link < ActiveRecord::Base
+
   attr_accessible :item_id, :price_id, :item, :price, :human, :score, :other_prices
 
   after_save :update_other_parties
@@ -11,6 +12,8 @@ class Link < ActiveRecord::Base
   validates :price_id, :presence => true, :on => :create
   validates :item_id, :presence => true, :on => :create
   validates_associated :price, :item
+
+  scope :with_multiple_items, where("price_id in (SELECT price_id FROM links GROUP BY price_id HAVING count(*) > 1)")
 
   def as_json(options = {})
     super(options.merge(:only => [:id, :item_id, :price_id, :created_at]))
@@ -28,7 +31,6 @@ class Link < ActiveRecord::Base
       Link.create(:price_id => price_id, :item_id => item_id, :human => true, :score => 10)
     end
   end
-
 
   def link_crossed_prices
     self.price.cross_prices.each do |cross_price|

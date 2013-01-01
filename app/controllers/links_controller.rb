@@ -5,7 +5,11 @@ class LinksController < ApplicationController
   before_filter :authenticate_user!, :except => :index
 
   def index
-    respond_with(@links = Link.includes(:price, :item).page(params[:page]))
+    if params[:invalid]
+      respond_with(@links = Link.with_multiple_items.includes(:price, :item).page(params[:page]))
+    else
+      respond_with(@links = Link.includes(:price, :item).page(params[:page]))
+    end
   end
 
   def show
