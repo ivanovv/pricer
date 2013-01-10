@@ -1,11 +1,11 @@
 source :gemcutter
 
-gem "rails", "3.2.9"
+gem "rails", "3.2.11"
 gem "spreadsheet"
 gem "pg"
 gem "haml"
 gem "sass"
-gem "thinking-sphinx"
+gem "thinking-sphinx", "2.0.14"
 #gem "will_paginate", "~> 3.0.pre2"
 gem "mechanize"
 gem "russian"

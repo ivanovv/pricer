@@ -37,6 +37,7 @@ module Spiders
         scrap_config(link)
         sleep @sleep_time
       end
+      page_number = page_number - 1 if links.count < 15
       page_number
     end
 
