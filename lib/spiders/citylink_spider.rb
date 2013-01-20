@@ -31,21 +31,32 @@ module Spiders
 
     def parse_page(page_number)
       page = get_page(page_number)
-      links = page.links_with(:href => /configurator\/q/)
+      links = get_links(page)
       sleep @sleep_time
       links.each do |link|
-        scrap_config(link)
+        scrap_config(link.link, link.date)
         sleep @sleep_time
       end
       page_number = page_number - 1 if links.count < 15
       page_number
     end
 
-    def scrap_config(mechanize_link)
+    def get_links(page)
+      configurations = page.search("table.conf")
+      link_plus_date = Struct.new(:link, :date)
+      configurations.map do |c|
+        link = c.css("a.trigger").first
+        date = c.css("td.r2").first.text
+        date = Date.strptime(date, "%d.%m.%y")
+        link_plus_date.new(link, date)
+      end
+    end
+
+    def scrap_config(mechanize_link, date)
       url = absolute_url(mechanize_link.href)
       if no_configuration_in_db(url)
         config_page = mechanize_link.click
-        config_record = ScrapedConfiguration.new(:url => url)
+        config_record = ScrapedConfiguration.new(:url => url, :created_at => date)
         config = scraper(url).parse(config_page)
         ConfigurationSaver.save(config_record, config)
       end

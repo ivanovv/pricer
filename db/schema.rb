@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120624125819) do
+ActiveRecord::Schema.define(:version => 20120825170621) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(:version => 20120624125819) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "configuration_lines", ["scraped_configuration_id"], :name => "index_configuration_lines_on_scraped_configuration_id"
 
   create_table "cross_prices", :id => false, :force => true do |t|
     t.integer "price_id",       :null => false
