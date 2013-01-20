@@ -45,7 +45,7 @@ module Spiders
       configurations = page.search("table.conf")
       link_plus_date = Struct.new(:link, :date)
       configurations.map do |c|
-        link = Mechanize::Page::Link.new(c, @agent, page)
+        link = Mechanize::Page::Link.new(c.css("a.trigger").first, @agent, page)
         date = c.css("td.r2").first.text
         date = Date.strptime(date, "%d.%m.%y")
         link_plus_date.new(link, date)
