@@ -37,8 +37,26 @@ module Spiders
         scrap_config(link.link, link.date)
         sleep @sleep_time
       end
+      update_created_at(page_number - 4650)
       page_number = page_number - 1 if links.count < 15
       page_number
+    end
+
+    def update_created_at(page_number)
+      page = get_page(page_number)
+      links = get_links(page)
+      links.each do |link|
+        update_single_created_at(link.link, link.date)
+      end
+    end
+
+    def update_single_created_at(mechanize_link, config_date)
+      url = absolute_url(mechanize_link.href)
+      sc = ScrapedConfiguration.find_by_url(url)
+      if sc
+        sc.created_at = config_date
+        sc.save
+      end
     end
 
     def get_links(page)
