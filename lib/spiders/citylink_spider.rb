@@ -65,7 +65,7 @@ module Spiders
       configurations.map do |c|
         link = Mechanize::Page::Link.new(c.css("a.trigger").first, @agent, page)
         config_date = c.css("td.r2").first.text
-        config_date = Date.strptime(config_date, "%d.%m.%y")
+        config_date = Date.strptime(config_date, "%d.%m.%y") + 12.hours
         link_plus_date.new(link, config_date)
       end
     end
