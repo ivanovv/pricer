@@ -1,5 +1,5 @@
 class ScrapedConfiguration < ActiveRecord::Base
-  attr_accessible :company_id, :name, :url, :assembly_price, :total_price
+  attr_accessible :company_id, :name, :url, :assembly_price, :total_price, :created_at
 
   belongs_to :company
   validates :company_id, :presence => true

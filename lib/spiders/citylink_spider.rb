@@ -46,17 +46,17 @@ module Spiders
       link_plus_date = Struct.new(:link, :date)
       configurations.map do |c|
         link = Mechanize::Page::Link.new(c.css("a.trigger").first, @agent, page)
-        date = c.css("td.r2").first.text
-        date = Date.strptime(date, "%d.%m.%y")
-        link_plus_date.new(link, date)
+        config_date = c.css("td.r2").first.text
+        config_date = Date.strptime(config_date, "%d.%m.%y")
+        link_plus_date.new(link, config_date)
       end
     end
 
-    def scrap_config(mechanize_link, date)
+    def scrap_config(mechanize_link, config_date)
       url = absolute_url(mechanize_link.href)
       if no_configuration_in_db(url)
         config_page = mechanize_link.click
-        config_record = ScrapedConfiguration.new(:url => url, :created_at => date)
+        config_record = ScrapedConfiguration.new(:url => url, :created_at => config_date)
         config = scraper(url).parse(config_page)
         ConfigurationSaver.save(config_record, config)
       end

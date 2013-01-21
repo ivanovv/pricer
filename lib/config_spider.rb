@@ -31,4 +31,9 @@ class ConfigSpider
   def absolute_url(relative_link)
     HTTP_PREFIX + self.class.domain + relative_link
   end
+
+  def parse_page(page_number)
+    raise "Implement parse_page(page_number) in your spider!"
+  end
+
 end
