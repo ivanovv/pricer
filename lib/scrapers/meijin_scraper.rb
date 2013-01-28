@@ -20,7 +20,7 @@ module Scrapers
         if !warehouse_code.empty?
           price = company.prices.find_by_warehouse_code(warehouse_code)
           price_value = comp.search('.cmpprc .price2').text.gsub(/\D/, '').to_i
-          puts "#{category} #{link.text}"
+          #puts "#{category} #{link.text}"
           description = "#{category} #{link.text}"
           web_link = warehouse_code
           quantity = comp.at_css(".qty").text.gsub(/\D/, '').to_i
@@ -47,6 +47,7 @@ module Scrapers
       {
           :title => upper_block.at_css(".subj").text.strip,
           :total_price => page.search(".glrlft .tvprcno").xpath("p/child::text()").to_s.gsub(/\D/, '').to_i,
+          :assembly_price => 0,
           :author => auth_block.at_css("b").text,
           :comment => upper_block.css(".txtd").text.strip,
           :created_at => DateTime.strptime(date_span.text, "%d.%m.%Y %H:%M:%S").change(:offset => "+0400")
