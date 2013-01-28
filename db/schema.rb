@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120825170621) do
+ActiveRecord::Schema.define(:version => 20130128065416) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -110,7 +110,7 @@ ActiveRecord::Schema.define(:version => 20120825170621) do
     t.integer  "company_id"
     t.string   "name"
     t.string   "url"
-    t.string   "comment"
+    t.text     "comment"
     t.string   "author"
     t.integer  "assembly_price"
     t.integer  "total_price"

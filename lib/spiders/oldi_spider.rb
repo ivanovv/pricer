@@ -39,7 +39,7 @@ module Spiders
         config = scraper(url).parse(config_page)
         ConfigurationSaver.save(config_record, config)
       end
-      @page_number
+      @page_number + 1
     end
   end
 end

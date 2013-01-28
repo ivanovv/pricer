@@ -18,6 +18,11 @@ class ConfigurationScraperFactory
       return Scrapers::CitylinkScraper.new
     end
 
+    #http://www.meijin.ru/glrproddscr?baseid=1020959
+    if url =~ /http:\/\/www.meijin.ru\/glrproddscr\?baseid=\d+/
+      return Scrapers::MeijinScraper.new
+    end
+
     raise "Unknown configuration!"
 
   end

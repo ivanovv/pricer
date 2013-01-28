@@ -29,10 +29,12 @@ class ConfigurationSaver
   end
 
   def copy_config_to_record()
-    @record.name = @config.try(:[], :title)
-    @record.total_price = @config.try(:[], :total_price)
-    @record.assembly_price = @config.try(:[], :assembly_price)
-    @record.author = @config.try(:[], :author)
+    @record.name = @config[:title]
+    @record.total_price = @config[:total_price]
+    @record.assembly_price = @config[:assembly_price]
+    @record.author ||= @config[:author]
     @record.company_id = @config[:company_id]
+    @record.comment ||= @config[:comment]
+    @record.created_at ||= @config[:created_at]
   end
 end

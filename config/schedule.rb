@@ -54,6 +54,10 @@ every 10.minutes do
   rake "app:spider company=CityLink"
 end
 
+every 10.minutes do
+  rake "app:spider company=Meijin"
+end
+
 every 6.hour do
   rake "app:spider company=Oldi"
 end

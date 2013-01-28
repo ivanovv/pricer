@@ -38,7 +38,7 @@ module Spiders
         sleep @sleep_time
       end
       update_created_at(page_number - 4650)
-      page_number = page_number - 1 if links.count < 15
+      page_number += 1 if links.count >= 15
       page_number
     end
 
