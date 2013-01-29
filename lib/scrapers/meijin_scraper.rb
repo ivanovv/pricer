@@ -17,7 +17,7 @@ module Scrapers
 
         #http://www.meijin.ru/shopanlgdflt?goodsid=82747
         warehouse_code = link ? (link[:href].to_s.match /\?goodsid\=(\d+)/)[1] : nil
-        if !warehouse_code.empty?
+        if warehouse_code && !warehouse_code.empty?
           price = company.prices.find_by_warehouse_code(warehouse_code)
           price_value = comp.search('.cmpprc .price2').text.gsub(/\D/, '').to_i
           #puts "#{category} #{link.text}"
