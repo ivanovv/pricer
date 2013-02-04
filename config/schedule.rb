@@ -26,9 +26,9 @@ every 1.day, :at => '3:00 am' do
   rake "app:update_vendor_code"
 end
 
-every 1.day, :at => '5:00 am' do
-  rake "app:citylink"
-end
+#every 1.day, :at => '5:00 am' do
+#  rake "app:citylink"
+#end
 
 every 1.day, :at => '5:10 am' do
   rake "app:fcenter"
@@ -50,7 +50,7 @@ every 1.day, :at => '5:35 am' do
   rake "app:all"
 end
 
-every 10.minutes do
+every 30.minutes do
   rake "app:spider company=CityLink"
 end
 
@@ -58,7 +58,7 @@ every 10.minutes do
   rake "app:spider company=Meijin"
 end
 
-every 6.hour do
+every 1.hour do
   rake "app:spider company=Oldi"
 end
 

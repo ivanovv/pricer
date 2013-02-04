@@ -5,30 +5,14 @@ module Scrapers
 
     def parse_page(page)
       prices = []
-      config_info = get_config_info(page)
+      config_info = get_configuration_info(page)
 
       links = page.links_with :href => /portal\/pls\/portal\/pcconfiginit/
       link = links.first if links && links.count > 0
       price_page = link.click
 
-      each_component_row(price_page) do |comp|
-        link = comp.at_css('.tdinfo .divnote .goodsname a')
-        category = comp.at_css('.tdinfo .divnote .propname').text
-
-        #http://www.meijin.ru/shopanlgdflt?goodsid=82747
-        warehouse_code = link ? (link[:href].to_s.match /\?goodsid\=(\d+)/)[1] : nil
-        if warehouse_code && !warehouse_code.empty?
-          price = company.prices.find_by_warehouse_code(warehouse_code)
-          price_value = comp.search('.cmpprc .price2').text.gsub(/\D/, '').to_i
-          #puts "#{category} #{link.text}"
-          description = "#{category} #{link.text}"
-          web_link = warehouse_code
-          quantity = comp.at_css(".qty").text.gsub(/\D/, '').to_i
-          price ||= import_price_from_config(warehouse_code, description, web_link, price_value)
-          if price
-            quantity.times { prices << {:price => price, :value => price_value} }
-          end
-        end
+      each_component_row(price_page) do |component|
+        prices.concat(get_configuration_row(component))
       end
 
       config_info.merge :prices => prices
@@ -36,11 +20,35 @@ module Scrapers
 
     def each_component_row(page, &block)
       page.search("table.cmptab tr").each do |component|
-        block.call(component) unless component.search(".tdinfo .divnote .propname").empty?
+        prop_name_is_empty = component.search(".tdinfo .divnote .propname").empty?
+        unless prop_name_is_empty
+          link = component.at_css('.tdinfo .divnote .goodsname a')
+          #http://www.meijin.ru/shopanlgdflt?goodsid=82747
+          warehouse_code = link ? (link[:href].to_s.match /\?goodsid\=(\d+)/)[1] : nil
+          block.call(component) if warehouse_code && !warehouse_code.empty?
+        end
       end
     end
 
-    def get_config_info(page)
+    def get_configuration_row(comp)
+      result = []
+      link = comp.at_css('.tdinfo .divnote .goodsname a')
+      category = comp.at_css('.tdinfo .divnote .propname').text
+      warehouse_code = (link[:href].to_s.match /\?goodsid\=(\d+)/)[1]
+
+      price_value = comp.search('.cmpprc .price2').text.gsub(/\D/, '').to_i
+      description = "#{category} #{link.text}"
+      web_link = warehouse_code
+
+      price = company.prices.find_by_warehouse_code(warehouse_code)
+      price ||= import_price_from_config(warehouse_code, description, web_link, price_value)
+
+      quantity = comp.at_css(".qty").text.gsub(/\D/, '').to_i
+      quantity.times { result << {:price => price, :value => price_value} }
+      result
+    end
+
+    def get_configuration_info(page)
       upper_block = page.search(".frst")
       auth_block = upper_block.at_css(".auth")
       date_span = auth_block.at_css("span")
