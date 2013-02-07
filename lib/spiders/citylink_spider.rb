@@ -7,6 +7,7 @@ module Spiders
   class CitylinkSpider < ConfigSpider
     include ::CompanyInfo
 
+
     belongs_to_company "CityLink"
     set_domain "www.citilink.ru"
 
@@ -34,11 +35,11 @@ module Spiders
       links = get_links(page)
       sleep @sleep_time
       links.each do |link|
-        scrap_config(link.link, link.date)
+        scrap_config(link[:link], link[:date])
         sleep @sleep_time
       end
-      update_created_at(page_number - 4650)
-      page_number += 1 if links.count >= 15
+      update_created_at(page_number - 4650) if page_number - 4650 < 4650
+      page_number += 1 if links.count == 15
       page_number
     end
 
@@ -46,7 +47,7 @@ module Spiders
       page = get_page(page_number)
       links = get_links(page)
       links.each do |link|
-        update_single_created_at(link.link, link.date)
+        update_single_created_at(link[:link], link[:date])
       end
     end
 
@@ -61,12 +62,11 @@ module Spiders
 
     def get_links(page)
       configurations = page.search("table.conf")
-      link_plus_date = Struct.new(:link, :date)
       configurations.map do |c|
-        link = Mechanize::Page::Link.new(c.css("a.trigger").first, @agent, page)
-        config_date = c.css("td.r2").first.text
+        link = Mechanize::Page::Link.new(c.at_css("a.trigger"), @agent, page)
+        config_date = c.at_css("td.r2").text
         config_date = Date.strptime(config_date, "%d.%m.%y") + 12.hours
-        link_plus_date.new(link, config_date)
+        {:link => link, :date => config_date}
       end
     end
 
