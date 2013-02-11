@@ -14,6 +14,7 @@
 //= require backbone/pricer
 //= require jquery.colorbox.js
 //= require jquery.flot.js
+//= require jquery.flot.time.js
 //= require bootstrap-collapse.js
 //= require bootstrap-alert.js
 //= require bootstrap-dropdown.js

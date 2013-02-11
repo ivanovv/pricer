@@ -1,9 +1,14 @@
-%h4= t(:company) + ": #{@price.company.name}"
-#{@price.original_description}
-%br
-= t(:price) + ": #{@price.price_value}"
-%br
-= t(:warehouse_code) + ": #{@price.warehouse_code}"
+%h4
+  %span.label{:class => "label-#{@price.company.name.downcase}" }
+    #{@price.company.name}
+  %span.label{:class => "label-#{@price.company.name.downcase}" }
+    #{@price.warehouse_code}
+  %span.price-title
+    #{@price.original_description}
+
+
+%h3= "#{@price.price_value} ₷"
+
 %br
 -if @price.vendor_code
   = t(:warehouse_code) + ": #{@price.vendor_code}"

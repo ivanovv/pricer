@@ -1,7 +1,5 @@
 /*
 *= require colorbox.css
-*= require token-input.css
-*= require token-input-facebook.css
 *= require auth
 *= require bootstrap-without-forms
 *= require formtastic-plus-bootstrap
@@ -9,16 +7,6 @@
 *= require_self
 */
 
-/*
-@import "bootstrap/mixins";
-@import "bootstrap/variables";
-
-.bootstrap-forms {
-  @import "bootstrap/forms";
-}
-
-@import "bootstrap-responsive";
-*/
 
 body {
   padding-top: 60px;
@@ -55,15 +43,43 @@ iframe.external-search {
   border: none;
 }
 
-
 .form-search, .navbar-search {
   position: relative;
-
-  /*.search-icon {
-    position: absolute;
-    top: 7px;
-    left: 204px;
-    cursor: pointer;
-  } */
 }
 
+
+.label-citylink {
+  background-color: #e85222;
+}
+
+.label-f-center {
+  background-color: #0F6F02;
+}
+
+.label-oldi {
+  background-color: #1b56a2;
+}
+
+.label-meijin {
+  background-image: url('/assets/meijin_bg.jpg');
+}
+
+.label-just-com {
+  background-color: #e9eae4;
+}
+
+.label-almer {
+  background-image: url('/assets/almer_bg.jpg');
+}
+
+.price-title {
+  padding-left: 10px;
+}
+
+form.formtastic input.button, form.formtastic.button.button {
+  height: 25px;
+  padding: 0.2em 1em 0.2em 2.5em;
+  font-family: sans-serif;
+  font-size: 11px;
+  margin-left: 5px;
+}
