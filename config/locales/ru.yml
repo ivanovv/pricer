@@ -4,6 +4,7 @@ ru:
   company: "Компания"
   price: "Цена"
   warehouse_code: "Складской код"
+  vendor_code: "Код производителя"
   name: "Наименование"
   price: Цена
   edit: Редактировать

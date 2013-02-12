@@ -11,11 +11,11 @@
 
 %br
 -if @price.vendor_code
-  = t(:warehouse_code) + ": #{@price.vendor_code}"
+  = t(:vendor_code) + ": #{@price.vendor_code}"
 
 -if @price.web_link
   %br
-  %a{:href=>"#{@price.product_web_link}", :class => "colorbox"}
+  %a.colorbox{:href=>"#{@price.product_web_link}"}
     = t('.web_link')
 
 %br
