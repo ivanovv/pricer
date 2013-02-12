@@ -24,8 +24,9 @@ module Scrapers
       assembly_price = 0
 
       each_component_row(page) do |part_link|
-        warehouse_code = $1
-        description = $2.strip
+        matches = part_link.text.match /(\d+)\s(.+)/
+        warehouse_code = matches[1]
+        description = matches[2]
         web_link = absolute_url(part_link.search("a").first['href'])
         price = company.prices.find_by_warehouse_code(warehouse_code)
         price ||= company.prices.find_by_warehouse_code(warehouse_code + ".0")
