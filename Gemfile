@@ -1,4 +1,4 @@
-source :gemcutter
+source 'https://rubygems.org'
 
 gem "rails", "3.2.12"
 gem "spreadsheet"
@@ -9,7 +9,7 @@ gem "thinking-sphinx", "2.0.14"
 #gem "will_paginate", "~> 3.0.pre2"
 gem "mechanize"
 gem "russian"
-gem "jquery-rails"
+gem "jquery-rails", "~> 2.1.3"
 gem "formtastic"
 gem "kaminari"
 gem "differ"
@@ -20,7 +20,7 @@ gem "rake"
 gem "oauth2"
 gem "omniauth"
 gem "omniauth-vkontakte"
-gem "rails-backbone"
+gem "rails-backbone", ">= 0.9.10"
 gem "json"
 gem "html5-rails"
 gem "rack-mini-profiler"
@@ -32,7 +32,6 @@ group :production do
 end
 
 group :development do
-  gem "nifty-generators"
   gem "hirb"
   gem "capistrano"
   gem "pry"

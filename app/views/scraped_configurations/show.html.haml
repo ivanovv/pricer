@@ -1,20 +1,18 @@
-- title "Scraped Configuration"
+- title "Конфигурация << #{@scraped_configuration.name} >> "
 
+%h3
+  %span.label{ :class=> "label-#{@scraped_configuration.company.name.downcase}"}
+    =@scraped_configuration.company.name
+  =link_to @scraped_configuration.name, @scraped_configuration.url
+
+
+- if @scraped_configuration.assembly_price && @scraped_configuration.assembly_price > 0
+  %p
+    %strong Цена сборки:
+    = "#{@scraped_configuration.assembly_price} ₷"
 %p
-  %strong Company:
-  = @scraped_configuration.company.name
-%p
-  %strong Name:
-  = @scraped_configuration.name
-%p
-  %strong Url:
-  = link_to @scraped_configuration.url, @scraped_configuration.url
-%p
-  %strong Assembly Price:
-  = @scraped_configuration.assembly_price
-%p
-  %strong Total Price:
-  = @scraped_configuration.total_price
+  %strong Полная стоимость конфигурации на момент создания:
+  = "#{@scraped_configuration.total_price} ₷"
 
 - if @scraped_configuration.configuration_lines.size > 0
   .box

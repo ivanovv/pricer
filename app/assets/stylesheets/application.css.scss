@@ -8,6 +8,14 @@
 */
 
 
+@import "bootstrap/mixins";
+@import "bootstrap/variables";
+
+.bootstrap-forms {
+  @import "bootstrap/forms";
+}
+
+
 body {
   padding-top: 60px;
   padding-bottom: 40px;
@@ -50,30 +58,46 @@ iframe.external-search {
 
 .label-citylink {
   background-color: #e85222;
+  font-size: 18.5px;
+  line-height: 22px;
 }
 
 .label-f-center {
   background-color: #0F6F02;
+  font-size: 18.5px;
+  line-height: 22px;
 }
 
 .label-oldi {
   background-color: #1b56a2;
+  font-size: 18.5px;
+  line-height: 22px;
 }
 
 .label-meijin {
   background-image: image-url('meijin_bg.jpg');
+  font-size: 18.5px;
+  line-height: 22px;
 }
 
 .label-just-com {
   background-color: #e9eae4;
+  font-size: 18.5px;
+  line-height: 22px;
 }
 
 .label-almer {
   background-image: image-url('almer_bg.jpg');
+  font-size: 18.5px;
+  line-height: 22px;
 }
 
 .price-title {
   padding-left: 10px;
+}
+
+.navbar .nav.pull-right {
+  margin-left: 10px;
 }
 
 form.formtastic input.button, form.formtastic.button.button {

@@ -1,5 +1,5 @@
 GEM
-  remote: http://rubygems.org/
+  remote: https://rubygems.org/
   specs:
     actionmailer (3.2.12)
       actionpack (= 3.2.12)
@@ -65,7 +65,7 @@ GEM
     differ (0.1.2)
     domain_name (0.5.7)
       unf (~> 0.0.3)
-    ejs (1.0.0)
+    ejs (1.1.1)
     erubis (2.7.0)
     execjs (1.4.0)
       multi_json (~> 1.0)
@@ -78,7 +78,8 @@ GEM
       formtastic (~> 2.2)
       railties (>= 3.1.0)
       sass-rails
-    haml (3.1.8)
+    haml (4.0.0)
+      tilt
     hashie (1.2.0)
     highline (1.6.15)
     hike (1.2.1)
@@ -90,7 +91,7 @@ GEM
     httpauth (0.2.0)
     i18n (0.6.1)
     journey (1.0.4)
-    jquery-rails (2.2.1)
+    jquery-rails (2.1.4)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.7.7)
@@ -116,7 +117,7 @@ GEM
       webrobots (~> 0.0, >= 0.0.9)
     method_source (0.8.1)
     mime-types (1.21)
-    multi_json (1.6.0)
+    multi_json (1.6.1)
     multipart-post (1.1.5)
     net-http-digest_auth (1.2.1)
     net-http-persistent (2.8)
@@ -127,7 +128,6 @@ GEM
     net-ssh (2.6.5)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
-    nifty-generators (0.4.6)
     nokogiri (1.5.6)
     ntlm-http (0.1.1)
     oauth2 (0.8.0)
@@ -136,7 +136,7 @@ GEM
       jwt (~> 0.1.4)
       multi_json (~> 1.0)
       rack (~> 1.2)
-    omniauth (1.1.2)
+    omniauth (1.1.3)
       hashie (~> 1.2)
       rack
     omniauth-oauth2 (1.1.1)
@@ -169,9 +169,10 @@ GEM
       activesupport (= 3.2.12)
       bundler (~> 1.0)
       railties (= 3.2.12)
-    rails-backbone (0.7.2)
+    rails-backbone (0.9.10)
       coffee-script (~> 2.2.0)
-      ejs (~> 1.0.0)
+      ejs (~> 1.1.1)
+      jquery-rails (~> 2.1.3)
       railties (>= 3.1.0)
     railties (3.2.12)
       actionpack (= 3.2.12)
@@ -229,12 +230,12 @@ GEM
       multi_json (~> 1.0, >= 1.0.2)
     unf (0.0.5)
       unf_ext
-    unf_ext (0.0.5)
+    unf_ext (0.0.6)
     unicorn (4.6.0)
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    webrobots (0.0.13)
+    webrobots (0.1.0)
     whenever (0.8.2)
       activesupport (>= 2.3.4)
       chronic (>= 0.6.3)
@@ -257,11 +258,10 @@ DEPENDENCIES
   haml
   hirb
   html5-rails
-  jquery-rails
+  jquery-rails (~> 2.1.3)
   json
   kaminari
   mechanize
-  nifty-generators
   oauth2
   omniauth
   omniauth-vkontakte
@@ -269,7 +269,7 @@ DEPENDENCIES
   pry
   rack-mini-profiler
   rails (= 3.2.12)
-  rails-backbone
+  rails-backbone (>= 0.9.10)
   rake
   rspec-rails
   russian

@@ -17,7 +17,7 @@
 
 .row
   .span4
-    %h2
+    %h3
       Прайсы
       %small= @price_count
 
@@ -30,7 +30,7 @@
               %small= company.prices.count
 
   .span4
-    %h2
+    %h3
       Конфигурации
       %small= @config_count
     %p
@@ -42,7 +42,7 @@
               %small= company.scraped_configurations.count
 
   .span4
-    %h2 Импорт своей конфигурации
+    %h3 Импорт своей конфигурации
     .bootstrap-forms
       = form_tag(scraped_configurations_path, :method => :post, :class => "form-inline") do
         = url_field_tag :url, params[:url], {:placeholder => "Ссылка на конфигурацию", :class => "span3"}
