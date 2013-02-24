@@ -10,20 +10,21 @@
   %p
     %strong Цена сборки:
     = "#{@scraped_configuration.assembly_price} ₷"
-%p
-  %strong Полная стоимость конфигурации на момент создания:
-  = "#{@scraped_configuration.total_price} ₷"
+- if @scraped_configuration.total_price && @scraped_configuration.total_price > 0
+  %p
+    %strong Полная стоимость конфигурации на момент создания:
+    = "#{@scraped_configuration.total_price} ₷"
 
 - if @scraped_configuration.configuration_lines.size > 0
   .box
     %table.table.table-striped.table-bordered.table-condensed
       %thead
         %tr
-          %th Price
-          %th Item
-          %th Quantity
-          %th Config Price
-          %th Current Price
+          %th Запись в прайс-листе
+          %th Запись в справочнике
+          %th Количество
+          %th Стоимость на сайте
+          %th Текущая стоимость
       %tbody
         - @scraped_configuration.configuration_lines.each do |line|
           %tr
@@ -40,9 +41,14 @@
               %td
                 N/A
 
+.btn-group
+  = link_to edit_scraped_configuration_path(@scraped_configuration), :class => "btn" do
+    %i.icon-pencil
+    =t("edit")
+
+  = link_to @scraped_configuration, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" do
+    %i.icon-trash
+    =t("destroy")
+
 %p
-  = link_to t("edit"), edit_scraped_configuration_path(@scraped_configuration), :class => "btn"
-  = link_to t("destroy"), @scraped_configuration, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger"
-  %p
-    or
-    = link_to "View All", scraped_configurations_path
+  = link_to t("view_all"), scraped_configurations_path

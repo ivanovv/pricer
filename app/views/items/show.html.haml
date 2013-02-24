@@ -1,12 +1,11 @@
-- title "Запись из справочника"
+- title t('.title')
 
 %p
-  %h3= @item.original_description
+  %h3
+    %span.label{:class => "label-f-center" }
+      #{@item.fcenter_code}
+    =@item.original_description
 
-%br
-%p
-  F-Center code:
-  #{@item.fcenter_code}
 
 %br
 
@@ -17,7 +16,9 @@
 
 - unless @prices_links.empty?
   .box
-    %h2 Связанные элементы
+    %h3
+      Связанные элементы
+      %small= @prices_links.count
 
     %table.table.table-striped.table-bordered.table-condensed{:style => "width:100%"}
       %thead
@@ -32,15 +33,15 @@
 
   .clear
   .box
-    %h2
+    %h3
       = t('.pricehistory_title')
     #flot_placeholder{:data => {:graph =>"[#{@item.as_flot_data}]"}}
 
 
 %p
-  = link_to "Edit", edit_item_path(@item), :class => "btn"
-  |
-  = link_to "Destroy", @item, :confirm => 'Are you sure?', :method => :delete, :class => "btn"
-  |
-  = link_to "View All", items_path
+  = link_to t("edit"), edit_item_path(@item), :class => "btn"
+  = link_to t("destroy"), @item, :confirm => 'Are you sure?', :method => :delete, :class => "btn"
+  %p
+    or
+    =link_to "View All", items_path
 

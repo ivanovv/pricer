@@ -1,4 +1,4 @@
-%h1 Editing price
+%h1= t('.title')
 
 .row
   .span8
@@ -14,6 +14,6 @@
 
       = f.actions :submit, :cancel
 
-= link_to 'Show', [@company, @price]
-= link_to 'Back', company_prices_path(@company)
+= link_to t('show'), [@company, @price]
+= link_to t('back'), company_prices_path(@company)
 

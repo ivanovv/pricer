@@ -1,19 +1,60 @@
 ru:
   search: Искать!
-  in_detail: "Подробно"
-  company: "Компания"
-  price: "Цена"
+  in_detail: Подробно
+  company: Компания
+  price: Цена
   warehouse_code: "Складской код"
   vendor_code: "Код производителя"
-  name: "Наименование"
+  name: Наименование
   price: Цена
   edit: Редактировать
+  back: Назад
   show: Подробно
   destroy: Удалить
   sort_by_name: "по названию A-Z"
   sort_by_date: "по дате (свежие вперед)"
+  actions: Действия
+  description: Название
+  original_description: Полное название
+  link: Связать
+  unlink: Отвязать
+  view_all: Показать список
 
-  
+  activerecord:
+    models:
+      scraped_configuration: Конфигурация
+      item: Запись в справочнике
+      price: Запись в прайсе
+      link: Связь
+    attributes:
+      item:
+        description: Название
+        original_description: Полное название
+        vendor_code: Код производителя
+        fcenter_code: Код F-Center
+      price:
+        company: Компания
+        description: Название
+        original_description: Полное название
+        vendor_code: Код производителя
+        warehouse_code: Внутренний код
+        fcenter_code: Код F-Center
+        price: Цена
+        web_link: Сссылка
+      link:
+        price: Запись из прайса
+        item: Запись из правочника
+        score: Балы
+        human: Создана человеком?
+      scraped_configuration:
+        company: Компания
+        name: Название
+        url:  Ссылка
+        assembly_price: Стоимость сборки
+        total_price: Полная стоимость
+
+
+
   views:
     pagination:
       previous: "&lt;&lt;"
@@ -30,10 +71,13 @@ ru:
       item_record_title: "Запись из справочника:"
       pricehistory_title: "История цен"
       web_link: "Посмотреть страничку товара на сайте компании"
+    edit:
+      title: Редактирование записи из прайс-листа
 
   items:
     show:
       pricehistory_title: "Общая история цен"
+      title: "Запись из справочника"
     edit:
       title: "Редактировать элемент справочника"
     new:
@@ -51,9 +95,20 @@ ru:
     index:
       add_component: "Добавить компонент"
       title: "Компоненты"
+
   links:
+    link:
+      are_you_sure: "Точно удаляем связь?"
     new:
       title: "Создать связь"
+    edit:
+      title: "Редактирование связи"
+    show:
+      title: Связь
+    index:
+      title: Связи
+
+
   configutation_lines:
     index:
 
@@ -61,6 +116,10 @@ ru:
   searches:
     index:
       title: "Поиск"
+      external_search: Поиск по фирмам
+      found_prices_title: Найденные товары
+      found_items_title: Найденные записи из справочника
+
   scraped_configurations:
     edit:
       title: "Редактировать импортированную конфигурацию"

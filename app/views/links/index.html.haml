@@ -1,4 +1,4 @@
-- title "Связи"
+- title t(".title")
 
 -#Записей: #{@links.total_entries}
 
@@ -9,7 +9,7 @@
       %th В прайсе
       %th Человеком?
       %th Балы
-      %th{:colspan=>3} Действия
+      %th Действия
   %tbody
     - for link in @links
       %tr
@@ -20,9 +20,15 @@
           =link_to link.price, [link.price.company, link.price]
         %td= link.human
         %td= link.score
-        %td= link_to 'Показать', link, :class => "btn"
-        %td= link_to 'Править', edit_link_path(link), :class => "btn"
-        %td= link_to 'Удалить', link, :confirm => 'Are you sure?', :method => :delete, :class => "btn"
+        %td
+          .btn-group
+            = link_to link, :class => "btn" do
+              %i.icon-search
+              Показать
+            = link_to edit_link_path(link), :class => "btn" do
+              %i.icon-pencil
+            = link_to link, :confirm => 'Are you sure?', :method => :delete, :class => "btn" do
+              %i.icon-trash
 
 = paginate @links
 

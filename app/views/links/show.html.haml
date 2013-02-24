@@ -1,7 +1,7 @@
-- title "Link"
+- title t(".title")
 
 - @links.each do |link|
   = render link
 
 %p
-  = link_to "View All", links_path
+  = link_to t("view_all"), links_path

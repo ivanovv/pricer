@@ -1,25 +1,24 @@
-%p
-  %strong Item:
+%h3
   = link.item
-%p
-  %strong Price:
+%h4
+  %span.label{ :class => "label-#{link.price.company.name.downcase}" }
+    = link.price.company.name
   = link.price
 %p
   Difference
-  - Differ.format= :html
-  != Differ.diff_by_word(link.price.to_s.downcase, link.item.to_s.downcase)
-
-
+  %p
+    - Differ.format= :html
+    != Differ.diff_by_word(link.price.to_s.downcase, link.item.to_s.downcase)
 
 %p
-  %strong Human:
-  = link.human?
+  %strong Создана роботом:
+  = !link.human?
 %p
-  %strong Score:
+  %strong Баллы:
   = link.score
 
-%p
-  = link_to "Edit", edit_link_path(link)
-  |
-  = link_to "Destroy", link, :confirm => 'Are you sure?', :method => :delete
+%br
+.btn-group
+  = link_to t('edit'), edit_link_path(link), :class => 'btn'
+  = link_to t('destroy'), link, :confirm => t('.are_you_sure'), :method => :delete, :class => 'btn'
   

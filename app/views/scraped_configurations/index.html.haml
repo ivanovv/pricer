@@ -3,22 +3,28 @@
 %table.table.table-striped.table-bordered.table-condensed
   %thead
     %tr
-      %th Company
       %th Название
       %th Ссылка
+      %th Дата
       %th Цена сборки
       %th Общая стоимость
   %tbody
     - for scraped_config in @scraped_configurations
       %tr
-        %td= scraped_config.company.name
-        %td= link_to scraped_config.name, scraped_config
+        %td
+          %span.label{:class => "label-#{scraped_config.company.name.downcase}" }
+            #{scraped_config.company.name}
+          = link_to scraped_config.name.empty? ? "Без названия" : scraped_config.name, scraped_config
+
         %td= link_to scraped_config.url.split("/").last, scraped_config.url
+        %td= l(scraped_config.created_at.to_date)
         %td= scraped_config.assembly_price
         %td= scraped_config.total_price
-        %td= link_to t('edit'), edit_scraped_configuration_path(scraped_config), :class => "btn"
-        %td= link_to t('destroy'), scraped_config, :confirm => 'Are you sure?', :method => :delete, :class => "btn"
+        %td
+          .btn-group
+            =link_to edit_scraped_configuration_path(scraped_config), :class => "btn" do
+              %i.icon-pencil
+            =link_to scraped_config, :confirm => 'Are you sure?', :method => :delete, :class => "btn" do
+              %i.icon-trash
 
 = paginate @scraped_configurations
-
-%p= link_to "New Scraped Configuration", new_scraped_configuration_path

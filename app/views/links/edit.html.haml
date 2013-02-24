@@ -1,10 +1,10 @@
-- title "Edit Link"
+- title t(".title")
 
 .row
   .span8
     = render 'form'
 
 %p
-  = link_to "Show", @link
+  = link_to t("show"), @link
   |
-  = link_to "View All", links_path
+  = link_to t("view_all"), links_path

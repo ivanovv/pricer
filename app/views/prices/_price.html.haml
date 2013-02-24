@@ -1,17 +1,19 @@
 %tr{:class => price.links.size == 0 && "not-linked"}
   %td{"data-price_id" => price.id}
-    = price.company.name
-    %span.small= price.warehouse_code
+    %span.label{ :class => "label-#{price.company.name.downcase}" }
+      = price.company.name
+    %span.label
+      = price.warehouse_code
 
   %td
     =price.original_description
     =link_to("Перейти >>", [price.company, price])
   %td= price.price
   - if price.links.size == 0
-    %td= link_to "Link", new_link_path(:price_id => price.id), :class => "btn"
+    %td= link_to t("link"), new_link_path(:price_id => price.id), :class => "btn"
   - else
     - if defined?(item_link) && item_link
-      %td= link_to "Unlink", item_link, :confirm => 'Удаляем?', :method => :delete, :remote => true, :class => "btn btn-danger"
+      %td= link_to t("unlink"), item_link, :confirm => 'Удаляем?', :method => :delete, :remote => true, :class => "btn btn-danger"
     -else
       %td &nbsp;
 
