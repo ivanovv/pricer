@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class LinksController < ApplicationController
 
   respond_to :html, :js, :json
@@ -33,10 +34,10 @@ class LinksController < ApplicationController
     other_prices = params[:link][:other_prices]
     @link = Link.new(params[:link])
     if @link.save
-      flash[:notice] = "Successfully created link."
+      flash[:notice] = "Связь создана."
       if !other_prices.blank?
         @links << Link.create_many_links(other_prices, params[:link][:item_id])
-        flash[:notice] = "Successfully created several links."
+        flash[:notice] = "Несколько связей создано."
         redirect_to :action => 'index', :id => @links.join('+')
       else
         respond_with(@link, :layout => !request.xhr?)
@@ -51,14 +52,14 @@ class LinksController < ApplicationController
 
   def update
     @link = Link.find(params[:id])
-    flash[:notice] = "Successfully updated link." if @link.update_attributes(params[:link])
+    flash[:notice] = "Связь обновлена." if @link.update_attributes(params[:link])
     respond_with(@link) 
   end
 
   def destroy
     @link = Link.find(params[:id])
     @link.destroy
-    flash[:notice] = "Successfully destroyed link."
+    flash[:notice] = "Связь разорвана."
     respond_with(@link)
   end
   

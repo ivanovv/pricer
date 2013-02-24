@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class CompaniesController < ApplicationController
   respond_to :json
 

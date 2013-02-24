@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class ItemsController < ApplicationController
   include Sortable
 

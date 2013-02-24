@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class PriceHistoriesController < ApplicationController
   respond_to :html
   

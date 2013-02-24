@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class MainController < ApplicationController
 
   #caches_action :index, :layout => false
