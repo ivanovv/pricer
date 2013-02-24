@@ -11,7 +11,7 @@ class PriceHistory < ActiveRecord::Base
   end
 
   def as_flot_data
-    "[#{created_at_as_flot_date}, #{value}]"
+    [created_at_as_flot_date, value]
   end
 
   def to_s

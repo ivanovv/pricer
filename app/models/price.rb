@@ -80,15 +80,15 @@ class Price < ActiveRecord::Base
   end
 
   def as_flot_data
-    js_data = ""
-    last_history_record = nil
-    price_histories.each do |history_record|
-      js_data << history_record.as_flot_data << ","
-      last_history_record = history_record
-    end
-    label = "#{original_description} (#{company.name})"
-    js_data << "[#{Time.now.utc.to_i * 1000}, #{last_history_record.value}]," if last_history_record
-    "{\"data\": [#{js_data.chop}], \"label\": #{label.to_json}, \"color\":#{company_id}, \"price_id\":#{id}}"
+    js_data = price_histories.select {|ph| ph.value > 0}.map {|ph| ph.as_flot_data}
+    last_history_record = js_data.last
+    js_data << [Time.now.utc.to_i * 1000, last_history_record.last] if last_history_record
+    {
+        :data => js_data,
+        :label => "#{original_description} (#{company.name})",
+        :color => company_id,
+        :price_id =>id
+    }.to_json
   end
 
   def most_likely_search
