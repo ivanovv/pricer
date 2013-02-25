@@ -9,22 +9,22 @@
       %th Цена сборки
       %th Общая стоимость
   %tbody
-    - for scraped_config in @scraped_configurations
+    - for config in @scraped_configurations
       %tr
         %td
-          %span.label{:class => "label-#{scraped_config.company.name.downcase}" }
-            #{scraped_config.company.name}
-          = link_to scraped_config.name.empty? ? "Без названия" : scraped_config.name, scraped_config
+          %span.label{:class => "label-#{config.company.name.downcase}" }
+            #{config.company.name}
+          = link_to !config.name || config.name.empty? ? "Без названия" : config.name, config
 
-        %td= link_to scraped_config.url.split("/").last, scraped_config.url
-        %td= l(scraped_config.created_at.to_date)
-        %td= scraped_config.assembly_price
-        %td= scraped_config.total_price
+        %td= link_to config.url.split("/").last, config.url
+        %td= l(config.created_at.to_date)
+        %td= number_to_currency(config.assembly_price, :unit => "₷", :precision => 0)
+        %td= number_to_currency(config.total_price, :unit => "₷", :precision => 0)
         %td
           .btn-group
-            =link_to edit_scraped_configuration_path(scraped_config), :class => "btn" do
+            =link_to edit_scraped_configuration_path(config), :class => "btn" do
               %i.icon-pencil
-            =link_to scraped_config, :confirm => 'Are you sure?', :method => :delete, :class => "btn" do
+            =link_to config, :confirm => 'Are you sure?', :method => :delete, :class => "btn" do
               %i.icon-trash
 
 = paginate @scraped_configurations

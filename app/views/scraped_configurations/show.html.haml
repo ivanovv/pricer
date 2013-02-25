@@ -8,12 +8,15 @@
 
 - if @scraped_configuration.assembly_price && @scraped_configuration.assembly_price > 0
   %p
-    %strong Цена сборки:
-    = "#{@scraped_configuration.assembly_price} ₷"
+    %h5
+      Цена сборки:
+      = number_to_currency(@scraped_configuration.assembly_price, :unit => '₷', :precision => 0)
+
 - if @scraped_configuration.total_price && @scraped_configuration.total_price > 0
   %p
-    %strong Полная стоимость конфигурации на момент создания:
-    = "#{@scraped_configuration.total_price} ₷"
+    %h5
+      Полная стоимость конфигурации на момент создания:
+      = number_to_currency(@scraped_configuration.total_price, :unit => '₷', :precision => 0)
 
 - if @scraped_configuration.configuration_lines.size > 0
   .box
@@ -29,24 +32,25 @@
         - @scraped_configuration.configuration_lines.each do |line|
           %tr
             %td= link_to line.price, [@scraped_configuration.company, line.price]
-            -if ! line.price.items[0]
-              %td= link_to "Прайс не связан, создать связь", new_link_path(:price_id => line.price.id), :class => "btn btn-primary"
-            -else
+            - if ! line.price.items[0]
+              %td= link_to 'Прайс не связан, создать связь', new_link_path(:price_id => line.price.id), :class => 'btn btn-primary'
+            - else
               %td= link_to line.price.items[0], line.price.items[0]
             %td= line.quantity
-            %td= line.price_value
-            -if line.price && line.price.price_histories.last
-              %td= line.price.price_histories.last.value
-            -else
+            %td= number_to_currency(line.price_value, :unit => '₷', :precision => 0)
+            - recent_price = line.price && line.price.price_histories.last.value
+            - if recent_price
+              %td= number_to_currency(recent_price, :unit => '₷', :precision => 0)
+            - else
               %td
                 N/A
 
 .btn-group
-  = link_to edit_scraped_configuration_path(@scraped_configuration), :class => "btn" do
+  = link_to edit_scraped_configuration_path(@scraped_configuration), :class => 'btn' do
     %i.icon-pencil
     =t("edit")
 
-  = link_to @scraped_configuration, :confirm => 'Are you sure?', :method => :delete, :class => "btn btn-danger" do
+  = link_to @scraped_configuration, :confirm => 'Are you sure?', :method => :delete, :class => 'btn btn-danger' do
     %i.icon-trash
     =t("destroy")
 

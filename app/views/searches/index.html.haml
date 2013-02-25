@@ -157,10 +157,16 @@
         %tbody#new_items
 
 -if params[:q]
-  %h2= t('external_search')
+  - yandex_search = OpenStruct.new
+  - yandex_search.name = "YandexMarket" #Яндекс.Маркет
+  - yandex_search.search_url = "http://market.yandex.ru/search.xml?hid=91018&text="
+
+
+  %h2= t('.external_search')
   #accordion.accordion
     - Company.all.each do |company|
       = render :partial => "search_iframe", :locals => {:company => company}
+    = render :partial => "search_iframe", :locals => {:company => yandex_search}
 
 
 #new_item.modal.hide

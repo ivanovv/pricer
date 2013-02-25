@@ -8,7 +8,7 @@
   %td
     =price.original_description
     =link_to("Перейти >>", [price.company, price])
-  %td= price.price
+  %td= number_to_currency(price.price, :unit => "₷", :precision => 0)
   - if price.links.size == 0
     %td= link_to t("link"), new_link_path(:price_id => price.id), :class => "btn"
   - else
