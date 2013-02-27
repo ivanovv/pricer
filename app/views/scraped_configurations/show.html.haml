@@ -38,9 +38,9 @@
               %td= link_to line.price.items[0], line.price.items[0]
             %td= line.quantity
             %td= number_to_currency(line.price_value, :unit => '₷', :precision => 0)
-            - recent_price = line.price && line.price.price_histories.last.value
+            - recent_price = line.price && line.price.price_histories.last
             - if recent_price
-              %td= number_to_currency(recent_price, :unit => '₷', :precision => 0)
+              %td= number_to_currency(recent_price.value, :unit => '₷', :precision => 0)
             - else
               %td
                 N/A
