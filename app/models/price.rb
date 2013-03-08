@@ -125,20 +125,17 @@ class Price < ActiveRecord::Base
   def pretty_keywords(n = 3)
     sphinx_keywords(n).map do |k|
       pretty_key = k[:tokenised]
-      pretty_key = pretty_key.force_encoding("UTF-8") if "".respond_to?(:force_encoding)
+      pretty_key = pretty_key.force_encoding('UTF-8') if ''.respond_to?(:force_encoding)
       pretty_key
     end
   end
 
-  def update_price_history(price_value)
+  def add_price_history(price_value)
     last_price_history = price_histories.order(:created_at).last
-    if !last_price_history ||
-        (last_price_history.value != price_value && last_price_history.created_at < 10.minutes.ago) then
-      price_histories.create(:value => price_value)
-      true
-    else
-      false
-    end
+    should_add = !last_price_history || (last_price_history.value != price_value && last_price_history.created_at < 10.minutes.ago)
+
+    price_histories.create(:value => price_value) if should_add
+    should_add
   end
 
   def update_original_description(original_desc)

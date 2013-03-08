@@ -27,7 +27,8 @@ module PriceParsers
     def should_parse_row
       if warehouse_code.to_s =~ /\d+(\.\d)?/
         is_notebook = description.is_a?(String) &&
-            (%w(Нетбук Планшет Ноутбук).any?{|word| description.starts_with? word})
+            ((%w(Нетбук Планшет Ноутбук Моноблок Неттоп).any? {|word| description.starts_with? word})
+            || description.starts_with? 'Системный блок')
         !is_notebook
       else
         false
@@ -35,7 +36,7 @@ module PriceParsers
     end
 
     def indexes
-      {:warehouse => 0, :description => 3, :vendor => nil, :price => 11, :web_link => 0}
+      {:warehouse => 0, :description => 3, :vendor => nil, :price => 17, :web_link => 0}
     end
 
     def create_price_attributes

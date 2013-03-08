@@ -1,3 +1,4 @@
+# encoding: UTF-8
 class PriceSaver
 
   def initialize(company)
@@ -32,7 +33,7 @@ class PriceSaver
       price = @company.prices.create(price_attributes)
       action = :create
     end
-    history_updated = price.update_price_history(price_attributes[:price].to_i)
+    history_updated = price.add_price_history(price_attributes[:price].to_i)
     if (price_was_updated || history_updated) && action != :create then
       action = :update
     end
