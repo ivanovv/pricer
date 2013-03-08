@@ -8,24 +8,24 @@ module Spiders
     include ::CompanyInfo
 
 
-    belongs_to_company "CityLink"
-    set_domain "www.citilink.ru"
+    belongs_to_company 'CityLink'
+    set_domain 'www.citilink.ru'
 
     def initialize
       super
-      @agent.cookie_jar << Mechanize::Cookie.new("conf_arc", "1", :domain => self.class.domain, :path => "/")
+      @agent.cookie_jar << Mechanize::Cookie.new('conf_arc', '1', :domain => self.class.domain, :path => '/')
     end
 
     def get_page(page_number)
       url = absolute_url("/configurator/?p=#{page_number}&showOrder=0222&showType=0")
       page = @agent.get(url)
-      active_nav_links = page.search(".b .active")
+      active_nav_links = page.search('.b .active')
       if active_nav_links.respond_to? :first
-        raise "First element in navigation links is empty" unless active_nav_links.first
+        raise 'First element in navigation links is empty' unless active_nav_links.first
         actual = active_nav_links.first.text
         raise "Wrong page number after fetching page. Expected #{page_number}. Got #{actual}" if actual != page_number.to_s
       else
-        raise "No nav links found"
+        raise 'No nav links found'
       end
       page
     end
@@ -61,11 +61,11 @@ module Spiders
     end
 
     def get_links(page)
-      configurations = page.search("table.conf")
+      configurations = page.search('table.conf')
       configurations.map do |c|
-        link = Mechanize::Page::Link.new(c.at_css("a.trigger"), @agent, page)
-        config_date = c.at_css("td.r2").text
-        config_date = Date.strptime(config_date, "%d.%m.%y") + 12.hours
+        link = Mechanize::Page::Link.new(c.at_css('a.trigger'), @agent, page)
+        config_date = c.at_css('td.r2').text
+        config_date = Date.strptime(config_date, '%d.%m.%y') + 12.hours
         {:link => link, :date => config_date}
       end
     end

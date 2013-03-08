@@ -1,9 +1,11 @@
 class ConfigSpider
 
-  HTTP_PREFIX = "http://"
+  HTTP_PREFIX = 'http://'
 
-  UBUNTU_USER_AGENT = "Mozilla/5.0 (Ubuntu; X11; Linux x86_64; rv:8.0) Gecko/20100101 Firefox/8.0"
-  MAC_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.52.7 (KHTML, like Gecko) Version/5.1.2 Safari/534.52.7"
+  UBUNTU_USER_AGENT = 'Mozilla/5.0 (Ubuntu; X11; Linux x86_64; rv:8.0) Gecko/20100101 Firefox/8.0'
+  MAC_USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_2) AppleWebKit/534.52.7 (KHTML, like Gecko) Version/5.1.2 Safari/534.52.7'
+  MAC_USER_AGENT2 = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_5) AppleWebKit/536.26.17 (KHTML, like Gecko) Version/6.0.2 Safari/536.26.17'
+
 
 
   class << self; attr_accessor :domain;  end
@@ -16,7 +18,7 @@ class ConfigSpider
 
   def initialize
     @agent = Mechanize.new
-    @agent.user_agent = [UBUNTU_USER_AGENT, MAC_USER_AGENT].sample
+    @agent.user_agent = [UBUNTU_USER_AGENT, MAC_USER_AGENT, MAC_USER_AGENT2].sample
     @sleep_time = 7
   end
 
@@ -33,7 +35,7 @@ class ConfigSpider
   end
 
   def parse_page(page_number)
-    raise "Implement parse_page(page_number) in your spider!"
+    raise 'Implement parse_page(page_number) in your spider!'
   end
 
 end

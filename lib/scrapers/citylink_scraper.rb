@@ -15,11 +15,11 @@ module Scrapers
 
     def parse_page(page)
       prices = []
-      title = page.search("div.txt-block h1").text
-      total_price = page.search(".price nobr").text.gsub(/\D/, '').to_i
-      author = page.search(".conf-link-center a").text
-      comment = page.search(".column-right div:nth-child(4)").try(:text)
-      comment.tr!("Комментарий автора к конфигурации:", "") if comment
+      title = page.search('div.txt-block h1').text
+      total_price = page.search('.price nobr').text.gsub(/\D/, '').to_i
+      author = page.search('.conf-link-center a').text
+      comment = page.search('.column-right div:nth-child(4)').try(:text)
+      comment.tr!('Комментарий автора к конфигурации:', '') if comment
 
       assembly_price = 0
 
@@ -27,11 +27,11 @@ module Scrapers
         matches = part_link.text.match /(\d+)\s(.+)/
         warehouse_code = matches[1]
         description = matches[2]
-        web_link = absolute_url(part_link.search("a").first['href'])
+        web_link = absolute_url(part_link.search('a').first['href'])
         price = company.prices.find_by_warehouse_code(warehouse_code)
-        price ||= company.prices.find_by_warehouse_code(warehouse_code + ".0")
+        price ||= company.prices.find_by_warehouse_code(warehouse_code + '.0')
 
-        price_value = part_link.parent.parent.search(".price").text.gsub(/\D/, '')
+        price_value = part_link.parent.parent.search('.price').text.gsub(/\D/, '')
 
         price ||= import_price_from_config(warehouse_code, description, web_link, price_value)
 
@@ -49,7 +49,7 @@ module Scrapers
     end
 
     def each_component_row(page, &block)
-      page.search('td.l h2').each do |component|
+      page.search('.column-center-wide .column-center-wide div td.l h2').each do |component|
         block.call(component) if component.text =~ /(\d+)\s(.+)/
       end
     end
