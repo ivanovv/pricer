@@ -18,8 +18,8 @@
 
         %td= link_to config.url.split("/").last, config.url
         %td= l(config.created_at.to_date)
-        %td= number_to_currency(config.assembly_price, :unit => "₷", :precision => 0)
-        %td= number_to_currency(config.total_price, :unit => "₷", :precision => 0)
+        %td= format_price(config.assembly_price)
+        %td= format_price(config.total_price)
         %td
           .btn-group
             =link_to edit_scraped_configuration_path(config), :class => "btn" do

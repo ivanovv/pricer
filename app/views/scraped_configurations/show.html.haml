@@ -10,13 +10,13 @@
   %p
     %h5
       Цена сборки:
-      = number_to_currency(@scraped_configuration.assembly_price, :unit => '₷', :precision => 0)
+      = format_price(@scraped_configuration.assembly_price)
 
 - if @scraped_configuration.total_price && @scraped_configuration.total_price > 0
   %p
     %h5
       Полная стоимость конфигурации на момент создания:
-      = number_to_currency(@scraped_configuration.total_price, :unit => '₷', :precision => 0)
+      = format_price(@scraped_configuration.total_price)
 
 - if @scraped_configuration.configuration_lines.size > 0
   .box
@@ -37,10 +37,10 @@
             - else
               %td= link_to line.price.items[0], line.price.items[0]
             %td= line.quantity
-            %td= number_to_currency(line.price_value, :unit => '₷', :precision => 0)
+            %td= format_price(line.price_value)
             - recent_price = line.price && line.price.price_histories.last
             - if recent_price
-              %td= number_to_currency(recent_price.value, :unit => '₷', :precision => 0)
+              %td= format_price(recent_price.value)
             - else
               %td
                 N/A

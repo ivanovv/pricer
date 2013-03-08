@@ -23,14 +23,14 @@ class ConfigurationSaver
     @record.save
   end
 
-  def build_configuration_lines()
+  def build_configuration_lines
     @config[:prices].each do |price|
       @record.configuration_lines.build(:price_id => price[:price].id, :quantity => 1, :price_value => price[:value])
       price[:price].add_price_history(price[:value])
     end
   end
 
-  def copy_config_to_record()
+  def copy_config_to_record
     @record.name = @config[:title]
     @record.total_price = @config[:total_price]
     @record.assembly_price = @config[:assembly_price]

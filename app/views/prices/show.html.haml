@@ -7,7 +7,7 @@
     #{@price.original_description}
 
 
-%h3= number_to_currency(@price.price_value, :unit => "₷", :precision => 0)
+%h3= format_price(@price.price_value)
 
 %br
 -if @price.vendor_code
