@@ -36,7 +36,7 @@ module PriceParsers
     end
 
     def indexes
-      {:warehouse => 0, :description => 3, :vendor => nil, :price => 17, :web_link => 0}
+      {:warehouse => 0, :description => 3, :vendor => nil, :price => 16, :web_link => 0}
     end
 
     def create_price_attributes
