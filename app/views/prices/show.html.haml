@@ -1,3 +1,5 @@
+-title t('.title', :price_name => "#{@price.company.name} #{@price.original_description}")
+
 %h4
   %span.label{:class => "label-#{@price.company.name.downcase}" }
     #{@price.company.name}

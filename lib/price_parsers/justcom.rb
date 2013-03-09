@@ -5,10 +5,11 @@ module PriceParsers
 
   class JustcomXLSParser < XLSParser
 
-    belongs_to_company "Just-Com"
+    belongs_to_company 'Just-Com'
 
     DEFAULT_FILE_PATH = '~/tmp/justcom.xls'
     #DEFAULT_ENCODING = 'windows-1251'
+    ITEMS_TO_SKIP = ['Нетбук', 'Планшет', 'Ноутбук', 'Моноблок', 'Неттоп', 'Системный блок']
 
     def rows_to_skip
       25
@@ -27,8 +28,7 @@ module PriceParsers
     def should_parse_row
       if warehouse_code.to_s =~ /\d+(\.\d)?/
         is_notebook = description.is_a?(String) &&
-            ((%w(Нетбук Планшет Ноутбук Моноблок Неттоп).any? {|word| description.starts_with? word})
-            || description.starts_with? 'Системный блок')
+            (ITEMS_TO_SKIP.any? {|item_title| description.starts_with? item_title})
         !is_notebook
       else
         false
@@ -43,7 +43,7 @@ module PriceParsers
       price_attributes = super
       price_attributes[:web_link] = price_attributes[:web_link].to_i
       price_attributes[:original_description].match(/\[([^\]]*)\]/)
-      price_attributes[:vendor_code] = $+ if ($+ != "OEM" && $+ != "BOX")
+      price_attributes[:vendor_code] = $+ if ($+ != 'OEM' && $+ != 'BOX')
       price_attributes
     end
   end

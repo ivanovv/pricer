@@ -11,8 +11,8 @@ ru:
   back: Назад
   show: Подробно
   destroy: Удалить
-  sort_by_name: "по названию A-Z"
-  sort_by_date: "по дате (свежие вперед)"
+  sort_by_name: "по названию (А-Я)"
+  sort_by_date: "по дате (сначала новинки)"
   actions: Действия
   description: Название
   original_description: Полное название
@@ -68,6 +68,7 @@ ru:
       name: "Наименование"
       price: Цена
     show:
+      title: "%{price_name}"
       item_record_title: "Запись из справочника:"
       pricehistory_title: "История цен"
       web_link: "Посмотреть страничку товара на сайте компании"

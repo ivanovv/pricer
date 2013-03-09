@@ -30,12 +30,13 @@ class ConfigurationScraper
   def import_price_from_config(code, desc, link, price)
     raise 'Price should be present!' if price.nil? || price.blank?
     price_saver = PriceSaver.new company
-    price, action = price_saver.create_price({
-                                                 :warehouse_code => code,
-                                                 :price => price,
-                                                 :original_description => desc,
-                                                 :web_link => link
-                                             })
+    price_attributes = {
+        :warehouse_code => code,
+        :price => price,
+        :original_description => desc,
+        :web_link => link
+    }
+    price, action = price_saver.create_price(price_attributes)
     price
   end
 end
