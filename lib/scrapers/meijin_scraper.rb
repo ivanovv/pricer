@@ -15,8 +15,8 @@ module Scrapers
         prices.concat(get_configuration_row(component))
       end
 
-      calculated_total = prices.sum { |p| p[:value] }
-      raise 'Meijin: Calculated total is not equal to page total!' if calculated_total != config_info[:total_price]
+      #calculated_total = prices.sum { |p| p[:value] }
+      #raise 'Meijin: Calculated total is not equal to page total!' if calculated_total != config_info[:total_price]
 
       config_info.merge :prices => prices
     end
