@@ -1,5 +1,4 @@
-= form_for @configuration_line do |f|
-  = f.error_messages
+= form_for @configuration_line, :url => url_for([@configuration, @configuration_line]) do |f|
   %p
     = f.label :price_id
     %br

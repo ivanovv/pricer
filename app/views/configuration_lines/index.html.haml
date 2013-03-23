@@ -14,10 +14,9 @@
         %td= configuration_line.quantity
         %td= configuration_line.price
         %td= configuration_line.description
-        %td= link_to 'Show', configuration_line, :class => "btn"
-        %td= link_to t('edit'), edit_configuration_line_path(configuration_line), :class => "btn"
-        %td= link_to 'Destroy', configuration_line, :confirm => 'Are you sure?', :method => :delete, :class => "btn"
+        %td= link_to t('show'), [@configuration, configuration_line], :class => 'btn'
+        %td= link_to t('edit'), [:edit, @configuration, configuration_line], :class => 'btn'
+        %td= link_to t('destroy'), [@configuration, configuration_line], :confirm => 'Are you sure?', :method => :delete, :class => 'btn'
 
-= paginate @configuration_lines
 
-%p= link_to t('configuration_lines.index.add_component'), new_configuration_line_path
+-#%p= link_to t('configuration_lines.index.add_component'), new_configuration_line_path

@@ -5,6 +5,6 @@
     = render 'form'
 
 %p
-  = link_to "Show", @configuration_line
+  = link_to t('show'), [@configuration, @configuration_line]
   |
-  = link_to "View All", configuration_lines_path
+  = link_to t('view_all'), @configuration
