@@ -14,8 +14,8 @@
   = @configuration_line.description
 
 %p
-  = link_to t('edit'), edit_configuration_line_path(@configuration_line)
+  = link_to t('edit'), [:edit, @configuration, @configuration_line]
   |
-  = link_to "Destroy", @configuration_line, :confirm => 'Are you sure?', :method => :delete
+  = link_to t('destroy'), [@configuration, @configuration_line], :confirm => 'Are you sure?', :method => :delete
   |
-  = link_to "View All", configuration_lines_path
+  = link_to t('view_all'), @configuration

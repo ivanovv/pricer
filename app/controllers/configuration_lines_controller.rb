@@ -8,6 +8,7 @@ class ConfigurationLinesController < ApplicationController
   end
 
   def show
+    @configuration = ScrapedConfiguration.find params[:scraped_configuration_id]
     @configuration_line = ConfigurationLine.find params[:id]
   end
 
