@@ -96,6 +96,8 @@ ru:
     index:
       add_component: "Добавить компонент"
       title: "Компоненты"
+    new:
+      ctitle: "Добавить компонент"
 
   links:
     link:
