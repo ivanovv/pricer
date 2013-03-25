@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem "rails", "3.2.12"
+gem "rails", "3.2.13"
 gem "spreadsheet"
 gem "pg"
 gem "haml"
@@ -35,6 +35,10 @@ group :development do
   gem "hirb"
   gem "capistrano"
   gem "pry"
+  gem "guard-rspec"
+  gem "rb-inotify", :require => false
+  gem "rb-fsevent", :require => false
+  gem "rb-fchange", :require => false
 end
 
 group :test do
