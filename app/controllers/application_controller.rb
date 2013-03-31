@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate_user!
-    #return if Rails.env.development?
+    return if Rails.env.development?
     if !current_user || current_user.uid.to_s != '5754774'
       if request.format == 'json'
           render :json => {:error => 'Для данного действия необходимо залогиниться через ВКонтакте.'}, :status => 500
