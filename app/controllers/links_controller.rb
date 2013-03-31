@@ -34,11 +34,10 @@ class LinksController < ApplicationController
     other_prices = params[:link][:other_prices]
     @link = Link.new(params[:link])
     if @link.save
-      flash[:notice] = "Связь создана."
+      flash[:notice] = 'Связь создана.'
       if !other_prices.blank?
         @links << Link.create_many_links(other_prices, params[:link][:item_id])
-        flash[:notice] = "Несколько связей создано."
-        redirect_to :action => 'index', :id => @links.join('+')
+        redirect_to :action => 'index', :id => @links.join('+'), :notice => 'Несколько связей создано.'
       else
         respond_with(@link, :layout => !request.xhr?)
       end
@@ -52,14 +51,14 @@ class LinksController < ApplicationController
 
   def update
     @link = Link.find(params[:id])
-    flash[:notice] = "Связь обновлена." if @link.update_attributes(params[:link])
+    flash[:notice] = 'Связь обновлена.' if @link.update_attributes(params[:link])
     respond_with(@link) 
   end
 
   def destroy
     @link = Link.find(params[:id])
     @link.destroy
-    flash[:notice] = "Связь разорвана."
+    flash[:notice] = 'Связь разорвана.'
     respond_with(@link)
   end
   

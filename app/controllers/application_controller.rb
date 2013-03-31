@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'uri'
 require 'cgi'
 
@@ -14,7 +16,7 @@ class ApplicationController < ActionController::Base
   private
 
   def enable_mini_profiler
-    if Rails.env.development? || (current_user && current_user.uid.to_s == "5754774")
+    if Rails.env.development? || (current_user && current_user.uid.to_s == '5754774')
       Rack::MiniProfiler.authorize_request
     end
   end
@@ -34,14 +36,18 @@ class ApplicationController < ActionController::Base
   def correct_user?
     @user = User.find(params[:id])
     unless current_user == @user
-      redirect_to root_url, :alert => "Access denied."
+      redirect_to root_url, :alert => 'Доступ запрещен.'
     end
   end
 
   def authenticate_user!
-    return if Rails.env.development?
-    if !current_user || current_user.uid.to_s != "5754774"
-      redirect_to root_url, :alert => 'You need to sign in for access to this page.'
+    #return if Rails.env.development?
+    if !current_user || current_user.uid.to_s != '5754774'
+      if request.format == 'json'
+          render :json => {:error => 'Для данного действия необходимо залогиниться через ВКонтакте.'}, :status => 500
+        else
+          redirect_to root_url, :alert => 'You need to sign in for access to this page.'
+      end
     end
   end
 
@@ -53,7 +59,7 @@ class ApplicationController < ActionController::Base
 
   def check_yandex_referrer
     begin
-      referer = request.headers["HTTP_REFERER"]
+      referer = request.headers['HTTP_REFERER']
       return if referer.blank?
 
       se = {
