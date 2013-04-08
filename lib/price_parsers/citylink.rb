@@ -32,11 +32,3 @@ module PriceParsers
 
   end
 end
-#namespace :app do
-#
-#  desc "Parse #{CityLinkXLSParser::COMPANY_NAME} price list"
-#  task :citylink => :environment do
-#    CityLinkXLSParser.parse_price CityLinkXLSParser::DEFAULT_FILE_PATH
-#  end
-#end
-

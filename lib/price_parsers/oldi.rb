@@ -38,12 +38,3 @@ module PriceParsers
     
   end
 end
-
-#namespace :app do
-#
-#  desc "Parse #{OldiXLSParser::COMPANY_NAME} price list"
-#  task :oldi => :environment do
-#    OldiXLSParser.parse_price OldiXLSParser::DEFAULT_FILE_PATH
-#  end
-#end
-

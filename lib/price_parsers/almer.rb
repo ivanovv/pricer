@@ -32,11 +32,3 @@ module PriceParsers
 
   end
 end
-#namespace :app do
-#
-#  desc "Parse #{AlmerXLSParser::COMPANY_NAME} price list"
-#  task :almer => :environment do
-#    AlmerXLSParser.parse_price AlmerXLSParser::DEFAULT_FILE_PATH, AlmerXLSParser::DEFAULT_ENCODING
-#  end
-#end
-

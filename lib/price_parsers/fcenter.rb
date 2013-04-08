@@ -105,11 +105,3 @@ module PriceParsers
     end
   end
 end
-#namespace :app do
-#
-#  desc "Parse #{FCenterParser::COMPANY_NAME} price list"
-#  task :fcenter => :environment do
-#    FCenterParser.parse_price '/home/vic/tmp/price.html'
-#  end
-#end
-
