@@ -19,7 +19,8 @@ class ConfigurationScraperFactory
     end
 
     #http://www.meijin.ru/glrproddscr?baseid=1020959
-    if url =~ /http:\/\/www.meijin.ru\/glrproddscr\?baseid=\d+/
+    #http://www.meijin.ru/pcconfig?baseid=1010367&tab=cfg
+    if url =~ /http:\/\/www.meijin.ru\/pcconfig\?baseid=\d+&tab=cfg/
       return Scrapers::MeijinScraper.new
     end
 
