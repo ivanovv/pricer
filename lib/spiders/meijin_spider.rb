@@ -15,7 +15,7 @@ module Spiders
       @page_number = page_number
       @next_page_number = 0
 
-      url = absolute_url("/glrproddscr?baseid=#{page_number}")
+      url = absolute_url("/pcconfig?baseid=#{page_number}&tab=cfg")
       page = @agent.get(url)
 
       @next_page_number = get_next_page_number(page)
