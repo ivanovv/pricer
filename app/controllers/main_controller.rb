@@ -7,6 +7,8 @@ class MainController < ApplicationController
     @price_count = Price.count
     @config_count = ScrapedConfiguration.count
     @companies = Company.all
+    @config_counts = ScrapedConfiguration.group(:company_id).count
+    @price_counts = Price.group(:company_id).count
   end
 
   def about

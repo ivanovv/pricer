@@ -27,7 +27,7 @@
           %li
             %h4
               = link_to(company.name, company_prices_path(company))
-              %small= company.prices.count
+              %small= @price_counts[company.id]
 
   .span4
     %h3
@@ -39,7 +39,7 @@
           %li
             %h4
               = link_to(company.name, company_scraped_configurations_path(company))
-              %small= company.scraped_configurations.count
+              %small= @config_counts[company.id]
 
   .span4
     %h3 Импорт своей конфигурации
