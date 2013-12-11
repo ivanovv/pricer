@@ -4,7 +4,7 @@ gem 'rails', '3.2.15'
 gem 'spreadsheet'
 gem 'pg'
 gem 'haml'
-gem 'sass'
+gem 'sass', '3.2.12'
 gem 'thinking-sphinx', '2.0.14'
 #gem "will_paginate", "~> 3.0.pre2"
 gem 'mechanize'
@@ -57,11 +57,11 @@ end
 group :assets do
   gem 'bootstrap-sass'
   gem 'formtastic-plus-bootstrap'
-  gem 'sass-rails', '~> 3.2'
   gem 'coffee-rails', '~> 3.2'
   gem 'uglifier', '>= 1.0.3'
   gem 'compass', '> 0.12.alpha'
-  gem 'compass-rails'
+  #gem 'compass-rails'
+  #gem 'sass-rails'
   gem 'compass-h5bp'
 end
 
