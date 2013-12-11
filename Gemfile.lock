@@ -71,6 +71,8 @@ GEM
       sass (~> 3.2.5)
     compass-h5bp (0.1.2)
       compass
+    compass-rails (1.1.2)
+      compass (>= 0.12.2)
     diff-lcs (1.2.5)
     differ (0.1.2)
     domain_name (0.5.15)
@@ -305,6 +307,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2)
   compass (> 0.12.alpha)
   compass-h5bp
+  compass-rails
   differ
   formtastic
   formtastic-plus-bootstrap
@@ -333,6 +336,7 @@ DEPENDENCIES
   rspec-rails
   russian
   sass (= 3.2.12)
+  sass-rails
   spreadsheet
   therubyracer
   thinking-sphinx (= 2.0.14)

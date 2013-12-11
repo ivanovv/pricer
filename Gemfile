@@ -23,7 +23,7 @@ gem 'omniauth-vkontakte'
 gem 'json'
 gem 'html5-rails'
 gem 'rack-mini-profiler'
-
+gem 'rails-backbone', '>= 0.9.10'
 
 group :production do
   gem 'unicorn'
@@ -45,7 +45,6 @@ group :development do
   gem 'rb-fsevent', :require => false
   gem 'rb-fchange', :require => false
   gem 'better_errors'
-  gem 'rails-backbone', '>= 0.9.10'
 end
 
 group :test do
@@ -60,8 +59,8 @@ group :assets do
   gem 'coffee-rails', '~> 3.2'
   gem 'uglifier', '>= 1.0.3'
   gem 'compass', '> 0.12.alpha'
-  #gem 'compass-rails'
-  #gem 'sass-rails'
+  gem 'compass-rails'
+  gem 'sass-rails'
   gem 'compass-h5bp'
 end
 
